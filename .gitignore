@@ -5,8 +5,6 @@
 .metadata
 .settings
 .gradle
-.classpath
-.project
 .recommenders
 tmp/
 *.tmp
