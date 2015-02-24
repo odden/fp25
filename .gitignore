@@ -9,6 +9,7 @@
 .classpath
 .recommenders
 tmp/
+bin/
 *.tmp
 *.bak
 *.swp
