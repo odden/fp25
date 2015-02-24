@@ -18,9 +18,9 @@ public class LoggInnController {
 	@FXML
 	public void validateUser(ActionEvent event) {
 		/*
-		Sjekk om passord og bruker stemmer overens med database
-		hvis ja: åpne kalenderen til denne brukeren og lukk logg inn vindu 
-		hvis nei: gi tilbakemelding om en feil
+		If passord og bruker stemmer overens med database
+			åpne kalenderen til denne brukeren og lukk logg inn vindu 
+		else gi tilbakemelding om en feil
 		*/
 	}
 	

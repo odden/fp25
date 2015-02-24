@@ -442,9 +442,8 @@ public class DBConnector {
 		}
 		System.out.println();
 		
-		printResultSet(dbc.getQuery("user"));
+		printResultSet(dbc.getQuery("bruker"));
 		
-		printResultSet(dbc.getQuery("user"));
 		
 		int i = 1;
 		Object x = (Object) i;
