@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class DBConnector {
-	private Core CoreClass;
+	private SCore CoreClass;
 
 	final static String DBhostAddress = "jdbc:mysql://r.saggau.no:3306/KalenderDB";
 	final static String DBUserName = "gruppe25";
@@ -30,7 +30,7 @@ public class DBConnector {
 	Map<String, String>              tablePrimaryKey;
 	Map<String, String>              tablePrimaryKeyType;
 	
-	public DBConnector(Core CoreClass) throws SQLException {
+	public DBConnector(SCore CoreClass) throws SQLException {
 		this.CoreClass = CoreClass;
 		ResultSet res = null;
 		try {
@@ -409,7 +409,7 @@ public class DBConnector {
 	}
 	
 	public static void main(String[] args) throws SQLException {
-		DBConnector dbc = new DBConnector(new Core());		
+		DBConnector dbc = new DBConnector(new SCore());		
 		System.out.println("Primary Keys:");
 		for (String key : dbc.tablePrimaryKey.keySet()) {
 			System.out.printf(" %-14s"+dbc.tablePrimaryKey.get(key) + "\n", key+": ");

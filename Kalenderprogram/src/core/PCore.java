@@ -2,7 +2,7 @@ package core;
 
 import gui.Gui;
 
-public class Core {
+public class PCore {
 	private Gui gui;
 	public void init(){
 		gui = new Gui();
