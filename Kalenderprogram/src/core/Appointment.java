@@ -1,15 +1,39 @@
 package core;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Appointment {
 	
 	private Date date;
 	private String rom;
+	private ArrayList<Person> participants;
+	private Person host;
 	
-	public void init(Date date, String rom){
+	public void init(Date date, String rom, Person host){
 		this.rom = rom;
 		this.date = date;
+		this.host = host;
+	}
+
+	public ArrayList<Person> getParticipants() {
+		return participants;
+	}
+
+	public void addParticipant(Person participant) {
+		this.participants.add(participant);
+	}
+	
+	public void removeParticipant(Person participant){
+		this.participants.remove(participant);
+	}
+
+	public Person getHost() {
+		return host;
+	}
+
+	public void setHost(Person host) {
+		this.host = host;
 	}
 
 	public Date getDate() {
