@@ -371,7 +371,7 @@ public class DBConnector {
 	}
 	
 
-	private ResultSet executeSQL(String SQLString) throws SQLException { 
+	ResultSet executeSQL(String SQLString) throws SQLException { 
 		Statement statement = null;
 		ResultSet result = null;
 		
