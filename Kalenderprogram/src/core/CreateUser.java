@@ -1,4 +1,4 @@
-package gui;
+package core;
 
 public class CreateUser {
 	//Det er her brukeren registrerer seg første gang, 
