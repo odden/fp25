@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.embed.swing.*?>
 <?import javafx.scene.control.*?>
@@ -70,7 +71,7 @@
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="241.0" text="Uke 9" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
-                        <GridPane layoutX="45.0" layoutY="362.0" prefHeight="131.0" prefWidth="327.0">
+                        <GridPane layoutX="45.0" layoutY="375.0" prefHeight="118.0" prefWidth="324.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="10.0" prefWidth="76.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="251.0" minWidth="10.0" prefWidth="251.0" />
@@ -88,8 +89,40 @@
                               <Label text="Slutt:" GridPane.rowIndex="3" />
                               <Label text="-" GridPane.columnIndex="1" />
                               <Label text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label text="-" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Label text="-" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <children>
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="-" />
+                                          <Label text="Dato:" GridPane.columnIndex="1" />
+                                          <Label text="-" GridPane.columnIndex="2" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </HBox>
+                              <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="-" />
+                                    <Label text="Dato:" GridPane.columnIndex="1" />
+                                    <Label text="-" GridPane.columnIndex="2" />
+                                 </children>
+                              </GridPane>
                            </children>
                         </GridPane>
                         <Label layoutX="38.0" layoutY="346.0" text="Informasjon om hendelse">
@@ -104,6 +137,17 @@
                         </Label>
                         <ListView layoutX="392.0" layoutY="369.0" prefHeight="172.0" prefWidth="113.0" />
                         <Button layoutX="527.0" layoutY="369.0" mnemonicParsing="false" text="Se kalender" />
+                        <Button layoutX="527.0" layoutY="408.0" mnemonicParsing="false" text="Fjern kalender" />
+                        <ImageView fitHeight="27.0" fitWidth="37.0" layoutX="38.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../Desktop/Skjermbilde%202015-02-25%20kl.%2013.50.50.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="27.0" fitWidth="37.0" layoutX="706.0" layoutY="312.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                           <image>
+                              <Image url="@../../../../../../Desktop/Skjermbilde%202015-02-25%20kl.%2013.50.50.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
             </content>
