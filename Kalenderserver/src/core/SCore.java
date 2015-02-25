@@ -25,8 +25,37 @@ public class SCore {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(d.toString());
-		System.out.println(getRoom(8,d,java.sql.Time.valueOf("11:00:00"),java.sql.Time.valueOf("13:00:00")));
+		
+		//System.out.println(getRoom(8,d,java.sql.Time.valueOf("11:00:00"),java.sql.Time.valueOf("13:00:00")));
+		//System.out.println(logIn("stefanborg","stefanPW"));
+		//createUser("herman","hpw","HP PLLLL","emmmm",423423);
+	}
+	public List<Object> logIn(String username, String password){
+		
+		ResultSet login;
+		try {
+			login = dbc.executeSQL("SELECT brukernavn,navn,epost,tlfnr FROM bruker WHERE brukernavn = '"+username+"' AND passord = '"+password+"'");
+			List<Object> user = resToList(login).get(0);
+			return user;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public Boolean createUser(String username,String password,String name,String email,int tlf){
+		try {
+			dbc.insertRow("bruker", username,password,name,email,tlf);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public Boolean createAppointment(String title,String dato,String start, String slutt, ArrayList<String> invited){
+		return false;
 	}
 	
 	public ArrayList<List<Object>> getRoom(int size,Date dato,Time start, Time slutt){
@@ -58,7 +87,6 @@ public class SCore {
 				}
 			}
 			potentialRooms.removeAll(tobeRemoved);
-			System.out.println(potentialRooms);
 			return potentialRooms;
 		} catch (SQLException e) {
 			e.printStackTrace();

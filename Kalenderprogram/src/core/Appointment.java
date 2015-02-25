@@ -6,7 +6,10 @@ import java.util.Date;
 public class Appointment {
 	
 	private Date date;
+	private String start;
+	private String slutt;
 	private String rom;
+	private String title;
 	private ArrayList<Person> participants;
 	private Person host;
 	
