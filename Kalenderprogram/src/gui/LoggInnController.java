@@ -17,6 +17,7 @@ public class LoggInnController {
 	
 	@FXML
 	public void validateUser(ActionEvent event) {
+		System.out.println("hei");
 		/*
 		If passord og bruker stemmer overens med database
 			åpne kalenderen til denne brukeren og lukk logg inn vindu 
