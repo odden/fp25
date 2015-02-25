@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="261.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane layoutX="29.0" layoutY="77.0">
@@ -26,15 +25,15 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" GridPane.rowIndex="3" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Telefonnr:" GridPane.rowIndex="4" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Passord:" GridPane.rowIndex="2" />
-            <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="name" GridPane.columnIndex="1" />
+            <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="phoneNumber" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <Text layoutX="82.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer bruker" />
-      <Button layoutX="147.0" layoutY="247.0" mnemonicParsing="false" text="Lag bruker" />
+      <Button layoutX="147.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Lag bruker" />
       <Button layoutX="82.0" layoutY="248.0" mnemonicParsing="false" text="Avbryt" />
    </children>
 </Pane>
