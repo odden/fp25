@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="610.0" prefWidth="763.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="610.0" prefWidth="763.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CalendarViewController">
    <children>
       <TabPane layoutX="-5.0" prefHeight="610.0" prefWidth="770.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -156,7 +155,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane layoutX="151.0" layoutY="114.0" prefHeight="312.0" prefWidth="468.0">
+                        <GridPane layoutX="151.0" layoutY="25.0" prefHeight="312.0" prefWidth="468.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="101.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="367.0" />
@@ -227,13 +226,128 @@
                               <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
+                        <GridPane layoutX="251.0" layoutY="356.0" prefHeight="99.0" prefWidth="369.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ListView prefHeight="77.0" prefWidth="123.0" GridPane.rowSpan="5" />
+                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowSpan="5" />
+                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Legg til -&gt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="&lt;- Fjern" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                           </children>
+                        </GridPane>
+                        <Button layoutX="341.0" layoutY="485.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="168.0" text="Legg til hendelse" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
             <Tab text="Møter">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ListView layoutX="53.0" layoutY="74.0" prefHeight="404.0" prefWidth="152.0" />
+                        <Label layoutX="68.0" layoutY="43.0" prefHeight="16.0" prefWidth="117.0" text="Møteinnkallinger" />
+                        <GridPane layoutX="237.0" layoutY="14.0" prefHeight="312.0" prefWidth="468.0">
+                           <children>
+                              <Label text="Tittel:" GridPane.rowIndex="1" />
+                              <Label text="Beskrivelse:" GridPane.rowIndex="2" />
+                              <Label text="Rom:" GridPane.rowIndex="3" />
+                              <Label text="Starttid (tt:mm)" GridPane.rowIndex="4" />
+                              <Label text="Sluttid (tt:mm)" GridPane.rowIndex="5" />
+                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="388.0" text="Fyll inn informasjon" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <children>
+                                    <Label text="-" />
+                                    <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="89.0" text="Finn rom" GridPane.columnIndex="1" />
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="121.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="246.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <children>
+                                    <TextField />
+                                    <Label alignment="CENTER_RIGHT" prefHeight="16.0" prefWidth="159.0" text="Dato (dd.mm.åå)  " GridPane.columnIndex="1" />
+                                    <TextField GridPane.columnIndex="2" />
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <children>
+                                    <Label alignment="CENTER_RIGHT" prefHeight="16.0" prefWidth="132.0" text="Dato (dd.mm.åå)  " GridPane.columnIndex="1" />
+                                    <TextField />
+                                    <TextField GridPane.columnIndex="2" />
+                                 </children>
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                              </GridPane>
+                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="101.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="367.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                        <Pane layoutX="236.0" layoutY="326.0" prefHeight="241.0" prefWidth="485.0">
+                           <children>
+                              <Button layoutX="273.0" layoutY="208.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="116.0" text="Lagre endring" />
+                              <ListView layoutX="113.0" prefHeight="165.0" prefWidth="218.0" />
+                              <Label layoutX="46.0" layoutY="24.0" text="Status" />
+                              <ListView layoutX="365.0" prefHeight="142.0" prefWidth="105.0" />
+                              <Button layoutX="388.0" layoutY="142.0" mnemonicParsing="false" text="Inviter" />
+                              <Button layoutX="121.0" layoutY="165.0" mnemonicParsing="false" prefHeight="5.0" prefWidth="199.0" text="Slett" />
+                              <Button layoutX="113.0" layoutY="208.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="117.0" text="Slett møte" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="317.0" layoutY="326.0" prefHeight="201.0" prefWidth="386.0">
+                           <children>
+                              <Button layoutX="14.0" layoutY="31.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="158.0" text="Deltar ikke" />
+                              <Button layoutX="207.0" layoutY="31.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="151.0" text="Deltar" />
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
               </content>
             </Tab>
         </tabs>
