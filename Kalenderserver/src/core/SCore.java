@@ -11,7 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 public class SCore {
 	DBConnector dbc;
+	PConnector pc;
 	public void init(){
+		//pc = new PConnector(this);
 		try {
 			dbc = new DBConnector(this);
 		} catch (SQLException e) {
@@ -54,7 +56,14 @@ public class SCore {
 		}
 	}
 	
-	public Boolean createAppointment(String title,String dato,String start, String slutt, ArrayList<String> invited){
+	public Boolean createAppointment(String title,String vert, String dato,String start, String slutt, ArrayList<String> invited){
+		try {
+			dbc.insertRow("avtale", null,vert,title);
+			//dbc.getQueryCondition("avtale","vert_brukernavn",vert,);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
