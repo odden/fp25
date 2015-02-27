@@ -17,7 +17,7 @@ public class LoggInnMain extends Application {
 		Scene scene = new Scene(root);
 		TextField brukernavn = (TextField) root.lookup("#brukernavn");
 		
-		primaryStage.setTitle("Create User");
+		primaryStage.setTitle("Lag Bruker");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
