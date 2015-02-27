@@ -2,7 +2,10 @@ package gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -17,12 +20,47 @@ public class LoggInnController {
 	
 	@FXML
 	public void validateUser(ActionEvent event) {
-		System.out.println("hei");
-		/*
-		If passord og bruker stemmer overens med database
-			åpne kalenderen til denne brukeren og lukk logg inn vindu 
-		else gi tilbakemelding om en feil
-		*/
+		final ContextMenu usernameValidator = new ContextMenu();
+        usernameValidator.setAutoHide(false);
+        final ContextMenu passwordValidator = new ContextMenu();
+        passwordValidator.setAutoHide(false);
+		
+        boolean check = true;
+		
+		if (brukernavn.getText().trim().length() == 0){
+			check = false;
+			brukernavn.setStyle("-fx-border-color: red");
+			usernameValidator.getItems().clear();
+            usernameValidator.getItems().add(
+                    new MenuItem("Dette feltet kan ikke stå tomt"));
+            usernameValidator.show(brukernavn, Side.RIGHT, 5, 0);
+		}else if (!brukernavn.getText().matches("[a-z]+[a-z,0-9]{2,}")){
+			check = false;
+			brukernavn.setStyle("-fx-border-color: red");
+			usernameValidator.getItems().clear();
+            usernameValidator.getItems().add(
+                    new MenuItem("Brukernavnet kan ikke inneholde mellomrom"));
+            usernameValidator.show(brukernavn, Side.RIGHT, 5, 0);
+		}else {
+			brukernavn.setStyle("-fx-border-color: green");
+		}
+		
+		if (passord.getText().trim().length() == 0){
+			check = false;
+			passord.setStyle("-fx-border-color: red");
+			passwordValidator.getItems().clear();
+            passwordValidator.getItems().add(
+                    new MenuItem("Dette feltet kan ikke stå tomt"));
+            passwordValidator.show(passord, Side.RIGHT, 5, 0);
+		}else{
+			passord.setStyle("-fx-border-color: green");
+		}
+		
+		if (check){
+			int svaretPåLivet = 42; 
+			//hvis  brukernavn og passord samsvarer => logg inn
+		}
+		
 	}
 	
 	@FXML
