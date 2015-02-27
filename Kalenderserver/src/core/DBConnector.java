@@ -376,7 +376,6 @@ public class DBConnector {
 		ResultSet result = null;
 		
 		try {
-			
 			statement = connection.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			//System.out.println(SQLString);

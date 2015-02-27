@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 public class SCore {
 	DBConnector dbc;
@@ -22,15 +23,17 @@ public class SCore {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		Date d = null;
 		try {
-			d = new java.sql.Date(sdf.parse("2015/02/25").getTime());
+			d = new java.sql.Date(sdf.parse("2015/02/26").getTime());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		Calendar cal=Calendar.getInstance(); 
+		cal.setTime(d); 
 		//System.out.println(getRoom(8,d,java.sql.Time.valueOf("11:00:00"),java.sql.Time.valueOf("13:00:00")));
 		//System.out.println(logIn("stefanborg","stefanPW"));
 		//createUser("herman","hpw","HP PLLLL","emmmm",423423);
+		//createAppointment("stefanborg","Kake","322",cal,"13:00:00","15:00:00",Arrays.asList("stefanborg"));
 	}
 	public List<Object> logIn(String username, String password){
 		
@@ -56,10 +59,17 @@ public class SCore {
 		}
 	}
 	
-	public Boolean createAppointment(String title,String vert, String dato,String start, String slutt, ArrayList<String> invited){
+	public Boolean createAppointment(String vert,String title,String room, Calendar dato,String start, String slutt, List<String> invited){
 		try {
-			dbc.insertRow("avtale", null,vert,title);
-			//dbc.getQueryCondition("avtale","vert_brukernavn",vert,);
+			
+			dbc.insertRow("avtale", null,vert,title,room,dato,start,slutt);
+			ResultSet rs = dbc.executeSQL("SELECT MAX( idavtale ) AS idavtale FROM avtale");
+			Object max = resToList(rs).get(0).get(0);
+			if (invited != null){
+				for (String bn:invited){
+					dbc.insertRow("bruker_has_avtale", bn,max,false);
+				}
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,6 +77,35 @@ public class SCore {
 		return false;
 	}
 	
+	public boolean invite(List<String>usernames,String vert,String dato,String start){
+		int id = getAppointmentID(vert, dato, start);
+		try {
+			if (id != 0){
+				for (String n:usernames){
+						dbc.insertRow("bruker_has_avtale",n,id,false);
+				}
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	public int getAppointmentID(String vert,String dato,String start){
+		ResultSet rs;
+		try {
+			rs = dbc.executeSQL("SELECT idavtale FROM avtale WHERE vert_brukernavn = '"+vert+"' AND dato = '"+dato+" 00:00:00' AND start = '"+start+"'");
+			return (int) resToList(rs).get(0).get(0);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
+	}
 	public ArrayList<List<Object>> getRoom(int size,Date dato,Time start, Time slutt){
 		//Gir tilbake en liste med lister over rom som er ledig til den tid
 		
@@ -83,7 +122,7 @@ public class SCore {
 			}
 			rooms = rooms.substring(1,rooms.length()-1);
 			System.out.println(rooms);
-			rs2= dbc.executeSQL("SELECT romNr FROM reservasjon WHERE romNr in ("+rooms+") AND dato BETWEEN '"+dato+" 00:00:00' AND '"+dato+" 00:00:00' AND start BETWEEN '"+start+"' AND '"+slutt+"' AND slutt BETWEEN '"+start+"' AND '"+slutt+"'");
+			rs2= dbc.executeSQL("SELECT romNr FROM avtale WHERE romNr in ("+rooms+") AND dato BETWEEN '"+dato+" 00:00:00' AND '"+dato+" 00:00:00' AND start BETWEEN '"+start+"' AND '"+slutt+"' AND slutt BETWEEN '"+start+"' AND '"+slutt+"'");
 			ArrayList<List<Object>> invalidRooms = resToList(rs2);
 			System.out.println(potentialRooms);
 			ArrayList<List<Object>> tobeRemoved = new ArrayList<List<Object>>();

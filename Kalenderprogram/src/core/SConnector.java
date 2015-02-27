@@ -4,15 +4,18 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 
 public class SConnector {
 
-	public String getUserData(String userName){
-		String message = "GetUser:" + userName;
+	public String logIn(String userName, String password){
+		String message = "logIn:" + userName + ":" + password;
+		String response = connectToServer(message);
+		return response;
+	}
+	
+	public String createUser(String userName, String password, String name, String email, int tlf){
+		String message = "createUser:" + userName + ":" + password + ":" + name + ":" + email + ":" + Integer.toString(tlf);
 		String response = connectToServer(message);
 		return response;
 	}
@@ -21,17 +24,14 @@ public class SConnector {
 		try {
 			String sentence = message;
 			String response;
-			BufferedReader inFromUser = new BufferedReader( new InputStreamReader(System.in));
 			Socket clientSocket = new Socket("localhost", 1200);
 			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
 			BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			sentence = inFromUser.readLine();
 			outToServer.writeBytes(sentence + '\n');
 			response = inFromServer.readLine();
 			System.out.println("FROM SERVER: " + response);
 			clientSocket.close();
 			return response;
-	        
 		}  catch (IOException e) {
 			System.out.println("Funk itj");
 		}
@@ -39,7 +39,8 @@ public class SConnector {
 	}
 	
 	public static void main(String argv[]) throws Exception{
-	  
-	 }
+		SConnector sco =  new SConnector();
+		sco.logIn("eirirog", "1234");
+	}
 }
 
