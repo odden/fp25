@@ -1,16 +1,12 @@
 package gui;
 
-import java.awt.Component;
-import java.awt.Frame;
-
-import javax.swing.JOptionPane;
-
 import core.Person;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Side;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
-import javafx.scene.shape.Rectangle;
 
 public class CreateUserController {
 	//Det er her brukeren registrerer seg første gang, 
@@ -22,21 +18,32 @@ public class CreateUserController {
 	@FXML private TextField password;
 	
 	
+	
+	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
+		final ContextMenu nameValidator = new ContextMenu();
+        nameValidator.setAutoHide(false);
+        final ContextMenu usernameValidator = new ContextMenu();
+        usernameValidator.setAutoHide(false);
+        final ContextMenu passwordValidator = new ContextMenu();
+        passwordValidator.setAutoHide(false);
+        final ContextMenu emailValidator = new ContextMenu();
+        emailValidator.setAutoHide(false);
+        final ContextMenu phonenumberValidator = new ContextMenu();
+        phonenumberValidator.setAutoHide(false);
 		
-		//Sjekker Navn
+		//Sjekker Navn   
 		if (name.getText().matches("[A-Z][a-z]+ [A-Z][a-z]+")){
 			name.setStyle("-fx-border-color:green");
 		}else{
 			check = false;
 			name.setStyle("-fx-border-color: red");
-			Tooltip tooltip = new Tooltip();
-			tooltip.setText(
-			    "\nYour password must be\n" +
-			    "at least 8 characters in length\n"
-			);
-			name.setTooltip(tooltip);
+			//name.setPromptText("Fornavn og Etternavn");
+			 nameValidator.getItems().clear();
+             nameValidator.getItems().add(
+                     new MenuItem("Please enter name"));
+             nameValidator.show(name, Side.RIGHT, 5, 0);
 		}
 		
 		//Sjekker brukernavn
@@ -45,6 +52,11 @@ public class CreateUserController {
 		}else{
 			check = false;
 			username.setStyle("-fx-border-color: red");
+			
+			usernameValidator.getItems().clear();
+            usernameValidator.getItems().add(
+                    new MenuItem("Please enter username"));
+            usernameValidator.show(username, Side.RIGHT, 5, 0);
 		}
 		
 		//Sjekker epostadresse
@@ -53,6 +65,10 @@ public class CreateUserController {
 		}else{
 			check = false;
 			email.setStyle("-fx-border-color: red");
+			emailValidator.getItems().clear();
+            emailValidator.getItems().add(
+                    new MenuItem("Emailaddress is invalid"));
+            emailValidator.show(email, Side.RIGHT, 5, 0);
 		}
 		
 		//Sjekker telefonnummer
@@ -61,6 +77,10 @@ public class CreateUserController {
 		}else{
 			check = false;
 			phoneNumber.setStyle("-fx-border-color: red");
+			phonenumberValidator.getItems().clear();
+            phonenumberValidator.getItems().add(
+                    new MenuItem("Phonenumber is invalid"));
+            phonenumberValidator.show(phoneNumber, Side.RIGHT, 5, 0);
 		}
 		
 		if (password.getText().matches("[A-Z,a-z,0-9]{6,}")){
@@ -68,6 +88,10 @@ public class CreateUserController {
 		}else{
 			check = false;
 			password.setStyle("-fx-border-color: red");
+			passwordValidator.getItems().clear();
+            passwordValidator.getItems().add(
+                    new MenuItem("Password is invalid"));
+            passwordValidator.show(password, Side.RIGHT, 5, 0);
 		}
 		
 		if (check){
