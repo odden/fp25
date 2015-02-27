@@ -1,9 +1,14 @@
 package gui;
 
+import java.io.IOException;
+
 import core.Person;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
+import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -17,8 +22,13 @@ public class CreateUserController {
 	@FXML private TextField phoneNumber;
 	@FXML private TextField password;
 	
+	CreateUserMain createUserMain = new CreateUserMain();
 	
-	
+	protected void handle(Event evt){
+		if (!name.isDisable()){
+			name.setStyle("-fx-border-color: null");
+		}
+	}
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
@@ -42,7 +52,7 @@ public class CreateUserController {
 			//name.setPromptText("Fornavn og Etternavn");
 			 nameValidator.getItems().clear();
              nameValidator.getItems().add(
-                     new MenuItem("Please enter name"));
+                     new MenuItem("Fyll inn navn"));
              nameValidator.show(name, Side.RIGHT, 5, 0);
 		}
 		
@@ -55,7 +65,7 @@ public class CreateUserController {
 			
 			usernameValidator.getItems().clear();
             usernameValidator.getItems().add(
-                    new MenuItem("Please enter username"));
+                    new MenuItem("Fyll inn brukernavn"));
             usernameValidator.show(username, Side.RIGHT, 5, 0);
 		}
 		
@@ -67,7 +77,7 @@ public class CreateUserController {
 			email.setStyle("-fx-border-color: red");
 			emailValidator.getItems().clear();
             emailValidator.getItems().add(
-                    new MenuItem("Emailaddress is invalid"));
+                    new MenuItem("Fyll inn emailadresse"));
             emailValidator.show(email, Side.RIGHT, 5, 0);
 		}
 		
@@ -79,7 +89,7 @@ public class CreateUserController {
 			phoneNumber.setStyle("-fx-border-color: red");
 			phonenumberValidator.getItems().clear();
             phonenumberValidator.getItems().add(
-                    new MenuItem("Phonenumber is invalid"));
+                    new MenuItem("Fyll inn telefonnummeret"));
             phonenumberValidator.show(phoneNumber, Side.RIGHT, 5, 0);
 		}
 		
@@ -90,7 +100,7 @@ public class CreateUserController {
 			password.setStyle("-fx-border-color: red");
 			passwordValidator.getItems().clear();
             passwordValidator.getItems().add(
-                    new MenuItem("Password is invalid"));
+                    new MenuItem("Passordet er ugyldig"));
             passwordValidator.show(password, Side.RIGHT, 5, 0);
 		}
 		
@@ -100,6 +110,11 @@ public class CreateUserController {
 	
 		
 	}
+	
+	@FXML protected void avbryt(ActionEvent event) throws IOException{
+		createUserMain.changeView();
+	}
+	
 	
 	//Sjekker emailadresse
 	private boolean isValidEmailAddress(String email) {

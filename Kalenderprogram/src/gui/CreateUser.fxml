@@ -34,6 +34,6 @@
       </GridPane>
       <Text layoutX="82.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrer bruker" />
       <Button layoutX="150.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Lag bruker" />
-      <Button layoutX="82.0" layoutY="317.0" mnemonicParsing="false" text="Avbryt" />
+      <Button layoutX="82.0" layoutY="317.0" mnemonicParsing="false" onAction="#avbryt" text="Avbryt" />
    </children>
 </Pane>

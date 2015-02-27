@@ -10,11 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class CreateUserMain extends Application {
-
+	Parent root;
+	Scene scene;
+	LoggInnMain lim = new LoggInnMain();
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("CreateUser.fxml"));
-		Scene scene = new Scene(root);
+		root = FXMLLoader.load(getClass().getResource("CreateUser.fxml"));
+		scene = new Scene(root);
 		TextField name = (TextField) root.lookup("#name");
 		
 		primaryStage.setTitle("Create User");
@@ -22,6 +24,13 @@ public class CreateUserMain extends Application {
 		primaryStage.show();
 		
 		name.requestFocus();
+	}
+	
+	public void changeView() throws IOException{
+		//root = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+		//scene = new Scene(root);
+		lim.launch();
+		
 	}
 	
 	public static void main(String[] args) {
