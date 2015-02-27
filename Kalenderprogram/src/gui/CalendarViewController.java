@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -18,6 +19,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.util.Callback;
 
 public class CalendarViewController {
 
@@ -30,6 +32,26 @@ public class CalendarViewController {
 	@FXML private TextField sluttT;
 	@FXML private DatePicker dato;
 	@FXML private Button leggTilHendelse;
+	
+	public void initialize(){
+		dato.setValue(LocalDate.now());
+		final Callback<DatePicker, DateCell> datoerSjekk = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isBefore(dato.getValue())) {
+                                setDisable(true);
+                                setStyle("-fx-background-color: #ffc0cb;");
+                        }   
+                    }
+                };
+            }
+        };
+        dato.setDayCellFactory(datoerSjekk);
+	}
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
@@ -100,6 +122,8 @@ public class CalendarViewController {
 		this.alarm = new ChoiceBox<>(FXCollections.observableArrayList("First", "Second", "Third"));
 		 alarm.getSelectionModel().selectFirst();
 	}
+	
+	
 //	@FXML
 //	public void listView(MouseEvent event) {
 //		alarm.getItems().addAll("ingen", "15 min","30 min","1 time","3 timer");
