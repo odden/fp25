@@ -1,14 +1,18 @@
 package gui;
 
-import java.io.IOException;
-
 import core.Person;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.geometry.Side;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class CreateUserController {
 	//Det er her brukeren registrerer seg første gang, 
@@ -106,9 +110,25 @@ public class CreateUserController {
 	
 		
 	}
-	
-	@FXML protected void avbryt(ActionEvent event) throws IOException{
-	}
+	//Skifte scene fra CreateUser til Main
+//	@FXML protected void avbryt(ActionEvent event) throws Exception{
+//		replaceSceneContent("LoggInn.fxml");
+//	}
+//		
+//	private Parent replaceSceneContent(String fxml) throws Exception {
+//		Stage stage = null;
+//		Parent page = (Parent) FXMLLoader.load(Application.class.getResource("fxml"), null, new JavaFXBuilderFactory());
+//        @SuppressWarnings("null")
+//		Scene scene = stage.getScene();
+//        if (scene == null) {
+//            scene = new Scene(page, 700, 450);
+//            stage.setScene(scene);
+//        } else {
+//            stage.getScene().setRoot(page);
+//        }
+//        stage.sizeToScene();
+//        return page;
+//	}
 	
 	
 	//Sjekker emailadresse
