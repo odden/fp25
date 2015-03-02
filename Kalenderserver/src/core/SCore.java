@@ -14,10 +14,11 @@ public class SCore {
 	DBConnector dbc;
 	PConnector pc;
 	public void init(){
-		//pc = new PConnector(this);
+		pc = new PConnector(this);
 		try {
 			dbc = new DBConnector(this);
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -34,9 +35,10 @@ public class SCore {
 		//System.out.println(logIn("stefanborg","stefanPW"));
 		//createUser("herman","hpw","HP PLLLL","emmmm",423423);
 		//createAppointment("stefanborg","Kake","322",cal,"13:00:00","15:00:00",Arrays.asList("stefanborg"));
+		//setStatus("herman", "stefanborg", "2015-02-26", "13:00:00",false);
 	}
 	public List<Object> logIn(String username, String password){
-		
+		//Sjekker om oppgit info er korrekt, hvis ja send bruker info og OK
 		ResultSet login;
 		try {
 			login = dbc.executeSQL("SELECT brukernavn,navn,epost,tlfnr FROM bruker WHERE brukernavn = '"+username+"' AND passord = '"+password+"'");
@@ -60,8 +62,8 @@ public class SCore {
 	}
 	
 	public Boolean createAppointment(String vert,String title,String room, Calendar dato,String start, String slutt, List<String> invited){
+		
 		try {
-			
 			dbc.insertRow("avtale", null,vert,title,room,dato,start,slutt);
 			ResultSet rs = dbc.executeSQL("SELECT MAX( idavtale ) AS idavtale FROM avtale");
 			Object max = resToList(rs).get(0).get(0);
@@ -78,6 +80,7 @@ public class SCore {
 	}
 	
 	public boolean invite(List<String>usernames,String vert,String dato,String start){
+		//Inviterer en eller flere brukere til et arrangement
 		int id = getAppointmentID(vert, dato, start);
 		try {
 			if (id != 0){
@@ -93,6 +96,17 @@ public class SCore {
 		catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public void setStatus(String bruker, String vert,String dato,String start, Boolean status){
+		//Setter invitasjon status til 'bruker' til 'status'
+		int id = getAppointmentID(vert, dato, start);
+		try {
+			dbc.executeSQL("UPDATE bruker_has_avtale SET bruker_svar = "+status+" WHERE avtale_idavtale = '"+id+"' AND bruker_brukernavn = '"+bruker+"'");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	public int getAppointmentID(String vert,String dato,String start){
@@ -142,6 +156,28 @@ public class SCore {
 		}
 	}
 	
+	public ArrayList<List<Object>> getUsers(){
+		ResultSet rs;
+		try {
+			rs = dbc.getQuery("bruker");
+			return resToList(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	public ArrayList<List<Object>> getAppointments(){
+		ResultSet rs;
+		try {
+			rs = dbc.getQuery("avtale");
+			return resToList(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
 	
 	public static ArrayList<List<Object>> resToList(ResultSet resultSet) {
 		

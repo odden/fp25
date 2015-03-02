@@ -91,7 +91,6 @@ public class DBConnector {
 				
 		} catch (SQLException ex) {
 			// TODO	
-			// Kanskje Core.ConnectionFailed(); som ikke krasjer programmet? -Sindre
 			
 			System.out.println("SQLException: " + ex.getMessage());
 			System.out.println("SQLState: " + ex.getSQLState());
@@ -379,12 +378,11 @@ public class DBConnector {
 			statement = connection.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			//System.out.println(SQLString);
-			if (statement.execute(SQLString)) {     // Returnerer 1 om query (SELECT), 0 om noe blir endret (eks. INSERT) -Sindre 
+			if (statement.execute(SQLString)) {     // Returnerer 1 om query (SELECT), 0 om noe blir endret (eks. INSERT)
 				result = statement.getResultSet();
 			}
 			
 		} catch (SQLException ex) {
-			// TODO: Kanskje Core.DBConnectionFailure() som i konstruktøren? -Sindre
 			
 			throw (new SQLException(
 					" SQLException: " + ex.getMessage() + 

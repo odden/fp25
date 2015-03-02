@@ -36,7 +36,7 @@ public class PConnector {
 			    for (String object : response) {
 			    	responseStr += object + ":";
 			    }
-			    outToClient.writeBytes(responseStr);
+			    outToClient.writeBytes(responseStr + "\n");
 			}
 		} catch (IOException e) {
 			System.out.println("Noe gikk galt");
