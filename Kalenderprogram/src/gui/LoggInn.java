@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import gui.LoggInnController;
 
-public class LoggInn extends Application {
+public class LoggInn {
 	
 	private String brukernavn;
 	private String passord;
@@ -29,23 +29,5 @@ public class LoggInn extends Application {
 		this.passord = passord;
 	}
 
-	@Override
-    public void start(Stage stage) throws Exception {
-    	FXMLLoader fxmlLoader = new FXMLLoader();
-    	fxmlLoader.setController(new LoggInnController());
-        Parent root = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
 
-        Scene scene = new Scene(root);
-
-        stage.setScene(scene);
-        stage.setTitle("LogInWindow");
-        stage.show();
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

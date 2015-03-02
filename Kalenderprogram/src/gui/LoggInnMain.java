@@ -10,14 +10,15 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class LoggInnMain extends Application {
-
+	public Stage primaryStage;
+	CreateUserMain createUM = new CreateUserMain();
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
 		Scene scene = new Scene(root);
 		TextField brukernavn = (TextField) root.lookup("#brukernavn");
 		
-		primaryStage.setTitle("Lag Bruker");
+		primaryStage.setTitle("Logg Inn");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		

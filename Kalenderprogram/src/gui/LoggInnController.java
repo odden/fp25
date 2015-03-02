@@ -54,10 +54,12 @@ public class LoggInnController {
             passwordValidator.show(passord, Side.RIGHT, 5, 0);
 		}else{
 			passord.setStyle("-fx-border-color: green");
+			//passwordValidator.hide(); funker ikke
 		}
 		
 		if (check){
-			int svaretPåLivet = 42; 
+			@SuppressWarnings("unused")
+			int svaretPaaLivet = 42; 
 			//hvis  brukernavn og passord samsvarer => logg inn
 		}
 		

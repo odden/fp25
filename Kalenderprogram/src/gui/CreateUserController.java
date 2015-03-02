@@ -4,11 +4,8 @@ import java.io.IOException;
 
 import core.Person;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
-import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -22,26 +19,24 @@ public class CreateUserController {
 	@FXML private TextField phoneNumber;
 	@FXML private TextField password;
 	
-	CreateUserMain createUserMain = new CreateUserMain();
-	
-	protected void handle(Event evt){
-		if (!name.isDisable()){
-			name.setStyle("-fx-border-color: null");
-		}
-	}
-	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
 		final ContextMenu nameValidator = new ContextMenu();
-        nameValidator.setAutoHide(false);
-        final ContextMenu usernameValidator = new ContextMenu();
-        usernameValidator.setAutoHide(false);
-        final ContextMenu passwordValidator = new ContextMenu();
-        passwordValidator.setAutoHide(false);
-        final ContextMenu emailValidator = new ContextMenu();
-        emailValidator.setAutoHide(false);
-        final ContextMenu phonenumberValidator = new ContextMenu();
-        phonenumberValidator.setAutoHide(false);
+		nameValidator.setAutoHide(false);
+		final ContextMenu usernameValidator = new ContextMenu();
+		usernameValidator.setAutoHide(false);
+		final ContextMenu passwordValidator = new ContextMenu();
+		passwordValidator.setAutoHide(false);
+		final ContextMenu emailValidator = new ContextMenu();
+		emailValidator.setAutoHide(false);
+		final ContextMenu phonenumberValidator = new ContextMenu();
+		phonenumberValidator.setAutoHide(false);
+        
+        nameValidator.hide();
+        usernameValidator.hide();
+        passwordValidator.hide();
+        emailValidator.hide();
+        phonenumberValidator.hide();
 		
 		//Sjekker Navn   
 		if (name.getText().matches("[A-Z][a-z]+ [A-Z][a-z]+")){
@@ -105,6 +100,7 @@ public class CreateUserController {
 		}
 		
 		if (check){
+			@SuppressWarnings("unused")
 			Person p = new Person(name.getText(), username.getText(), email.getText(), phoneNumber.getText(), password.getText());
 		}
 	
@@ -112,7 +108,6 @@ public class CreateUserController {
 	}
 	
 	@FXML protected void avbryt(ActionEvent event) throws IOException{
-		createUserMain.changeView();
 	}
 	
 	

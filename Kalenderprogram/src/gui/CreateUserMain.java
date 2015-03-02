@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 public class CreateUserMain extends Application {
 	Parent root;
 	Scene scene;
-	LoggInnMain lim = new LoggInnMain();
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("CreateUser.fxml"));
@@ -24,13 +23,6 @@ public class CreateUserMain extends Application {
 		primaryStage.show();
 		
 		name.requestFocus();
-	}
-	
-	public void changeView() throws IOException{
-		//root = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
-		//scene = new Scene(root);
-		lim.launch();
-		
 	}
 	
 	public static void main(String[] args) {
