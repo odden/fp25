@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
+import apple.laf.JRSUIState.TitleBarHeightState;
+import core.Appointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -78,7 +80,6 @@ public class CalendarViewController {
         
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
         alarm.getSelectionModel().selectFirst();
-        moteinnkallinger.setItems(FXCollections.observableArrayList("apeloff","ku","spaghetti","Eirik Rogn"));
         velgPerson.setItems(FXCollections.observableArrayList("Ollef","Fridus","Karolina","Erik"));
         valgtePersoner.setItems(FXCollections.observableArrayList("Oline","Frode","Karsten","Erika"));
 	}
@@ -138,21 +139,42 @@ public class CalendarViewController {
 			System.out.println("Må være etter i dag");
 		}
 		
+		if(check) {
+			lagNyAvtale();
+		}
+		
 		
 	}	
+	
+	public void lagNyAvtale() {
+		Appointment avtale = new Appointment();
+		avtale.setStart(startT.getText());
+		avtale.setSlutt(sluttT.getText());
+		avtale.setBeskrivelse(beskrivelse.getText());
+		avtale.setTitle(tittel.getText());
+		moteinnkallinger.getItems().add(avtale);
+	}
+	
 	public void leggTilPerson(ActionEvent event) {
 		Object valg = velgPerson.getSelectionModel().getSelectedItem();
-		
+		if (valg != null) {
+		valgtePersoner.getItems().add(valg);
+		velgPerson.getItems().remove(valg);
+		}
 	}
 	
 	public void fjernPerson(ActionEvent event) {
-		//fjerner personen fra boksen og legger den i den andre
+		Object valg = valgtePersoner.getSelectionModel().getSelectedItem();
+		if (valg != null) {
+		valgtePersoner.getItems().remove(valg);
+		velgPerson.getItems().add(valg);
+		}
 	
 	}
 	//møter
 	@FXML private ListView moteavtaler;
 	@FXML private Tooltip tips;
-	@FXML private ListView<String> moteinnkallinger;
+	@FXML private ListView<Appointment> moteinnkallinger;
 	@FXML private ChoiceBox alarm;
 
 	@FXML

@@ -12,11 +12,44 @@ public class Appointment {
 	private String title;
 	private ArrayList<Person> participants;
 	private Person host;
+	private String beskrivelse;
 	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getBeskrivelse() {
+		return beskrivelse;
+	}
+
+	public void setBeskrivelse(String beskrivelse) {
+		this.beskrivelse = beskrivelse;
+	}
+
 	public void init(Date date, String rom, Person host){
 		this.rom = rom;
 		this.date = date;
 		this.host = host;
+	}
+
+	public String getStart() {
+		return start;
+	}
+
+	public void setStart(String start) {
+		this.start = start;
+	}
+
+	public String getSlutt() {
+		return slutt;
+	}
+
+	public void setSlutt(String slutt) {
+		this.slutt = slutt;
 	}
 
 	public ArrayList<Person> getParticipants() {
