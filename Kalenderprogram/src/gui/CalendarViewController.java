@@ -25,6 +25,28 @@ public class CalendarViewController {
 
 	// Min Kalender
 	
+	@FXML
+	public void blaTilbake(ActionEvent event) {
+		//blar tilbake til forrige uke
+		//og endrer hva som vises i kalenderen
+	}
+	
+	@FXML 
+	public void blaFremover(ActionEvent event) {
+		//blar til neste uke
+		//og endrer hva som vises i kalenderen
+	}
+	
+	@FXML
+	public void seKalender(ActionEvent event) {
+		//Legger til kalenderen til valgt person i oversikten
+	}
+	
+	@FXML
+	public void fjernKalender(ActionEvent event) {
+		//fjerner valgt kalender fra kalenderen
+	}
+	
 	//Ny hendelse
 	@FXML private TextField tittel;
 	@FXML private TextArea beskrivelse;
@@ -32,6 +54,8 @@ public class CalendarViewController {
 	@FXML private TextField sluttT;
 	@FXML private DatePicker dato;
 	@FXML private Button leggTilHendelse;
+	@FXML private ListView velgPerson;
+	@FXML private ListView valgtePersoner;
 	
 	public void initialize(){
 		dato.setValue(LocalDate.now());
@@ -51,6 +75,12 @@ public class CalendarViewController {
             }
         };
         dato.setDayCellFactory(datoerSjekk);
+        
+        alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
+        alarm.getSelectionModel().selectFirst();
+        moteinnkallinger.setItems(FXCollections.observableArrayList("apeloff","ku","spaghetti","Eirik Rogn"));
+        velgPerson.setItems(FXCollections.observableArrayList("Ollef","Fridus","Karolina","Erik"));
+        valgtePersoner.setItems(FXCollections.observableArrayList("Oline","Frode","Karsten","Erika"));
 	}
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
@@ -109,24 +139,54 @@ public class CalendarViewController {
 		}
 		
 		
-		
 	}	
+	public void leggTilPerson(ActionEvent event) {
+		Object valg = velgPerson.getSelectionModel().getSelectedItem();
+		
+	}
+	
+	public void fjernPerson(ActionEvent event) {
+		//fjerner personen fra boksen og legger den i den andre
+	
+	}
 	//møter
 	@FXML private ListView moteavtaler;
 	@FXML private Tooltip tips;
 	@FXML private ListView<String> moteinnkallinger;
-	@FXML private ChoiceBox<String> alarm; 
-			  
+	@FXML private ChoiceBox alarm;
+
+	@FXML
+	public void lagreMoteEndring(ActionEvent event) {
+		//Metoden skal lagre alle endringene gjort
+	}
 	
-	public CalendarViewController() {
-		this.alarm = new ChoiceBox<>(FXCollections.observableArrayList("First", "Second", "Third"));
-		 alarm.getSelectionModel().selectFirst();
+	@FXML
+	public void slettMote(ActionEvent event) {
+		//Metoden skal slette møte
+		//alle andres kalendere oppdateres  
+	}
+	
+	@FXML
+	public void slettDeltaker(ActionEvent event) {
+		//Metoden fjerner deltaker fra statusliste 
+		//dette blir ikke lagret før man trykker lagre endring
+	}
+	
+	@FXML
+	public void inviterEkstraDeltaker(ActionEvent event) {
+		//Metoden flytter person over til deltaker-ruten 
+		//Da skal personen få en invitasjon (møtet blir synlig i møter) etter at "lagre endringer" 
+		//er trykket.
+	}
+	
+	@FXML
+	public void finnRom(ActionEvent event) {
+		//Finner et passende rom utifra antall folk invitert
 	}
 	
 	
-//	@FXML
-//	public void listView(MouseEvent event) {
-//		alarm.getItems().addAll("ingen", "15 min","30 min","1 time","3 timer");
-//		System.out.println("haha");
-//	}
+	
+	
+	
+
 }
