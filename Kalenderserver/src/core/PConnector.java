@@ -52,11 +52,22 @@ public class PConnector {
 			ArrayList<String> response = new ArrayList<String>();
 			response.add(String.valueOf(createUser(requestList)));
 			return response;
+		}else if (requestList[0].equals("createAppointment")) {
+			ArrayList<String> response = new ArrayList<String>();
+			response.add(String.valueOf(createAppointment(requestList)));
+			return response;
 		}
 		return null;
 	}
 	
 	
+	private boolean createAppointment(String[] request) {
+		
+		
+		
+		return false;
+	}
+
 	private ArrayList<String> logIn(String[] request) {
 		List<Object> responseList = sc.logIn(request[1], request[2]);
 		ArrayList<String> response = new ArrayList<String>();

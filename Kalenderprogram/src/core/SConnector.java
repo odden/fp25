@@ -5,6 +5,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 public class SConnector {
 
@@ -18,6 +21,20 @@ public class SConnector {
 		String message = "createUser:" + userName + ":" + password + ":" + name + ":" + email + ":" + Integer.toString(tlf);
 		String response = connectToServer(message);
 		return response;
+	}
+	
+	public String createAppointment(String host,String title,String room, Calendar date,String start, String end, List<String> invited){
+		String message = "createAppointment:" + host + ":" + title + ":" + room + ":" + date.toString() + ":" + start + ":" + end + ":";
+		for (String string : invited) {
+			message += string + ":";
+		}
+		String response = connectToServer(message);
+		return response;
+	}
+	
+	public ArrayList<String> getAppointments(String user){
+		return null;
+		
 	}
 	
 	private String connectToServer(String message){
