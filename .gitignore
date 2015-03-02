@@ -15,7 +15,7 @@ bin/
 *~.nib
 local.properties
 .settings/
-
+.DS_Store
 
 # External tool builders
 .externalToolBuilders/
