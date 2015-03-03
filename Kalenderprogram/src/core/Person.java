@@ -1,5 +1,7 @@
 package core;
 
+import java.util.ArrayList;
+
 public class Person {
 	
 	private String name;
@@ -7,6 +9,7 @@ public class Person {
 	private String email;
 	private String phoneNumber;
 	private String password;
+	private ArrayList<Appointment> avtaler = new ArrayList<Appointment>();
 	
 	//Constructor
 	public Person(String name, String username, String email, String phoneNumber, String password){
@@ -16,7 +19,15 @@ public class Person {
 		setPhoneNumber(phoneNumber);
 		setPassword(password);
 	}
+	//avtaler
+	public ArrayList<Appointment> getAvtaler() {
+		return avtaler;
+	}
 	
+	public void addAvtale(Appointment avtale) {
+		avtaler.add(avtale);
+	}
+
 	//Navn
 	public String getName(){
 		return name;
@@ -57,4 +68,8 @@ public class Person {
 		this.password = password;
 	}
 	
+	@Override
+	public String toString() {
+		return username;
+	}
 }
