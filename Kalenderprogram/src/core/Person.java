@@ -27,6 +27,14 @@ public class Person {
 	public void addAvtale(Appointment avtale) {
 		avtaler.add(avtale);
 	}
+	
+	public boolean hasAvtale() {
+		if(avtaler.isEmpty()){ 
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	//Navn
 	public String getName(){

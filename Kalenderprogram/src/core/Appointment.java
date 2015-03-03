@@ -1,11 +1,12 @@
 package core;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Appointment {
 	
-	private Date date;
+	private LocalDate date;
 	private String start;
 	private String slutt;
 	private String rom;
@@ -30,7 +31,7 @@ public class Appointment {
 		this.beskrivelse = beskrivelse;
 	}
 
-	public void init(Date date, String rom, Person host){
+	public void init(LocalDate date, String rom, Person host){
 		this.rom = rom;
 		this.date = date;
 		this.host = host;
@@ -72,11 +73,11 @@ public class Appointment {
 		this.host = host;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

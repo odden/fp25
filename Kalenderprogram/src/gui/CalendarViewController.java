@@ -2,6 +2,7 @@ package gui;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 import core.Appointment;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -27,7 +29,24 @@ public class CalendarViewController {
 
 	// Min Kalender
 	
-	@FXML private ListView leggTilKalender;
+	@FXML private ListView<Person> leggTilKalender;
+	@FXML private ListView<Appointment> mandag;
+	@FXML private Label startK;
+	@FXML private Label sluttK;
+	@FXML private Label beskrivelseK;
+	@FXML private Label stedK;
+	@FXML private Label datoK;
+	
+	
+	@FXML
+	public void moteBeskrivelseTilInfo(MouseEvent event) {
+		Appointment mote = mandag.getSelectionModel().getSelectedItem();
+		sluttK.setText(mote.getSlutt());
+		startK.setText(mote.getStart());
+		beskrivelseK.setText(mote.getBeskrivelse());
+		stedK.setText(mote.getRom());
+		datoK.setText("" + mote.getDate());
+	}
 	
 	@FXML
 	public void blaTilbake(ActionEvent event) {
@@ -43,12 +62,23 @@ public class CalendarViewController {
 	
 	@FXML
 	public void seKalender(ActionEvent event) {
-		//Legger til kalenderen til valgt person i oversikten
+		Person person = leggTilKalender.getSelectionModel().getSelectedItem();
+		if(person.hasAvtale()){
+			for (Appointment avtale : person.getAvtaler()) {
+				//legg avtalen inn på riktig sted i kalenderen
+			}
+		}
 	}
 	
 	@FXML
 	public void fjernKalender(ActionEvent event) {
 		//fjerner valgt kalender fra kalenderen
+		Person person = leggTilKalender.getSelectionModel().getSelectedItem();
+		if(person.hasAvtale()){
+			for (Appointment avtale : person.getAvtaler()) {
+				//finn og slett avtalene fra oversikten
+			}
+		}	
 	}
 	
 	//Ny hendelse
@@ -85,6 +115,17 @@ public class CalendarViewController {
         velgPerson.setItems(FXCollections.observableArrayList(new Person("Ollef", "Ollef","ollef@gmail.com","22225555","ollef123"),new Person("Fridus", "fridus","fridus@gmail.com","22235555","ollef123")));
         valgtePersoner.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555","ollef123"),new Person("Frode", "frodiss","frode@gmail.com","22255555","ollef123")));
         leggTilKalender.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555","ollef123"),new Person("Frode", "frodiss","frode@gmail.com","22255555","ollef123")));
+        leggTilKalender.getItems().get(0).addAvtale(new Appointment());
+        Person oline = leggTilKalender.getItems().get(0);
+        ArrayList<Appointment> avtaler = oline.getAvtaler();
+        Appointment avtale = avtaler.get(0);
+        avtale.setBeskrivelse("Kompoiss");
+        avtale.setRom("Kinoen");
+        avtale.setSlutt("11:13");
+        avtale.setStart("11:10");
+        avtale.setTitle("klasse1");
+        avtale.setDate(LocalDate.now());
+        mandag.getItems().add(avtale);
 	}
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){

@@ -39,7 +39,7 @@
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="114.0" text="Fredag" GridPane.columnIndex="4" />
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="110.0" text="Lørdag" GridPane.columnIndex="5" />
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="131.0" text="Søndag" GridPane.columnIndex="6" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                              <ListView fx:id="mandag" onMouseClicked="#moteBeskrivelseTilInfo" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
                               <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
@@ -109,8 +109,8 @@
                               <Label text="Sted:" GridPane.rowIndex="1" />
                               <Label text="Start:" GridPane.rowIndex="2" />
                               <Label text="Slutt:" GridPane.rowIndex="3" />
-                              <Label text="-" GridPane.columnIndex="1" />
-                              <Label text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="beskrivelseK" text="-" GridPane.columnIndex="1" />
+                              <Label fx:id="stedK" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <children>
                                     <GridPane>
@@ -123,9 +123,9 @@
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Label text="-" />
+                                          <Label fx:id="startK" text="-" />
                                           <Label text="Dato:" GridPane.columnIndex="1" />
-                                          <Label text="-" GridPane.columnIndex="2" />
+                                          <Label fx:id="datoK" text="-" GridPane.columnIndex="2" />
                                        </children>
                                     </GridPane>
                                  </children>
@@ -140,7 +140,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="-" />
+                                    <Label fx:id="sluttK" text="-" />
                                     <Label text="Dato:" GridPane.columnIndex="1" />
                                     <Label text="-" GridPane.columnIndex="2" />
                                  </children>
@@ -202,7 +202,7 @@
                                 </rowConstraints>
                                  <children>
                                     <Label text="-" />
-                                    <Button mnemonicParsing="false" onAction="#finnRom" prefHeight="26.0" prefWidth="89.0" text="Finn rom" GridPane.columnIndex="1" />
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRom" prefHeight="26.0" prefWidth="89.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="1" />
                                  </children>
                               </GridPane>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -255,8 +255,8 @@
                            <children>
                               <ListView fx:id="velgPerson" prefHeight="77.0" prefWidth="123.0" GridPane.rowSpan="5" />
                               <ListView fx:id="valgtePersoner" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowSpan="5" />
-                              <Button mnemonicParsing="false" onAction="#leggTilPerson" prefHeight="26.0" prefWidth="100.0" text="Legg til -&gt;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                              <Button mnemonicParsing="false" onAction="#fjernPerson" prefHeight="26.0" prefWidth="100.0" text="&lt;- Fjern" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#leggTilPerson" prefHeight="26.0" prefWidth="100.0" text="Legg til -&gt;" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#fjernPerson" prefHeight="26.0" prefWidth="100.0" text="&lt;- Fjern" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
                            </children>
                         </GridPane>
                         <Button fx:id="leggTilHendelse" layoutX="341.0" layoutY="485.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" prefHeight="63.0" prefWidth="168.0" text="Legg til hendelse" />
@@ -285,7 +285,7 @@
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
                                     <Label text="-" />
-                                    <Button mnemonicParsing="false" onAction="#finnRom" prefHeight="26.0" prefWidth="89.0" text="Finn rom" GridPane.columnIndex="1" />
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRom" prefHeight="26.0" prefWidth="89.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="1" />
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="121.0" />
@@ -345,13 +345,13 @@
                         </GridPane>
                         <Pane layoutX="236.0" layoutY="337.0" prefHeight="230.0" prefWidth="485.0">
                            <children>
-                              <Button layoutX="273.0" layoutY="208.0" mnemonicParsing="false" onAction="#lagreMoteEndring" prefHeight="26.0" prefWidth="116.0" text="Lagre endring" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="273.0" layoutY="208.0" mnemonicParsing="false" onAction="#lagreMoteEndring" prefHeight="26.0" prefWidth="116.0" text="Lagre endring" textAlignment="CENTER" />
                               <ListView fx:id="invitertePersoner" layoutX="110.0" layoutY="37.0" prefHeight="128.0" prefWidth="221.0" />
                               <Label layoutX="46.0" layoutY="37.0" text="Status" />
                               <ListView fx:id="inviterEkstraPerson" layoutX="362.0" layoutY="38.0" prefHeight="134.0" prefWidth="107.0" />
                               <Button layoutX="388.0" layoutY="172.0" mnemonicParsing="false" onAction="#inviterEkstraDeltaker" text="Inviter" />
-                              <Button layoutX="121.0" layoutY="165.0" mnemonicParsing="false" onAction="#slettDeltaker" prefHeight="5.0" prefWidth="199.0" text="Slett" />
-                              <Button layoutX="113.0" layoutY="208.0" mnemonicParsing="false" onAction="#slettMote" prefHeight="26.0" prefWidth="117.0" text="Slett møte" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="121.0" layoutY="165.0" mnemonicParsing="false" onAction="#slettDeltaker" prefHeight="5.0" prefWidth="199.0" text="Slett" textAlignment="CENTER" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="113.0" layoutY="208.0" mnemonicParsing="false" onAction="#slettMote" prefHeight="26.0" prefWidth="117.0" text="Slett møte" textAlignment="CENTER" />
                            </children>
                         </Pane>
                         <Pane layoutX="317.0" layoutY="326.0" prefHeight="201.0" prefWidth="386.0" visible="false">
