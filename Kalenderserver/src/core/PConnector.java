@@ -74,6 +74,7 @@ public class PConnector {
 		for (Object object : responseList) {
 			response.add(object.toString());
 		}
+		ArrayList<List<Object>> response2 = sc.getAppointments(request[1]);
 		return response;
 	}
 	
