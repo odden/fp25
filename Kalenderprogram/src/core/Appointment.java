@@ -10,7 +10,7 @@ public class Appointment {
 	private String slutt;
 	private String rom;
 	private String title;
-	private ArrayList<Person> participants;
+	private ArrayList<Person> participants = new ArrayList<Person>();
 	private Person host;
 	private String beskrivelse;
 	
@@ -86,6 +86,10 @@ public class Appointment {
 
 	public void setRom(String rom) {
 		this.rom = rom;
+	}
+	
+	public String toString() {
+		return title;
 	}
 	
 	

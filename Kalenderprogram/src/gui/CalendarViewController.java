@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
-import apple.laf.JRSUIState.TitleBarHeightState;
 import core.Appointment;
+import core.Person;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,6 +26,8 @@ import javafx.util.Callback;
 public class CalendarViewController {
 
 	// Min Kalender
+	
+	@FXML private ListView leggTilKalender;
 	
 	@FXML
 	public void blaTilbake(ActionEvent event) {
@@ -56,8 +58,8 @@ public class CalendarViewController {
 	@FXML private TextField sluttT;
 	@FXML private DatePicker dato;
 	@FXML private Button leggTilHendelse;
-	@FXML private ListView velgPerson;
-	@FXML private ListView valgtePersoner;
+	@FXML private ListView<Person> velgPerson;
+	@FXML private ListView<Person> valgtePersoner;
 	
 	public void initialize(){
 		dato.setValue(LocalDate.now());
@@ -80,8 +82,9 @@ public class CalendarViewController {
         
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
         alarm.getSelectionModel().selectFirst();
-        velgPerson.setItems(FXCollections.observableArrayList("Ollef","Fridus","Karolina","Erik"));
-        valgtePersoner.setItems(FXCollections.observableArrayList("Oline","Frode","Karsten","Erika"));
+        velgPerson.setItems(FXCollections.observableArrayList(new Person("Ollef", "Ollef","ollef@gmail.com","22225555","ollef123"),new Person("Fridus", "fridus","fridus@gmail.com","22235555","ollef123")));
+        valgtePersoner.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555","ollef123"),new Person("Frode", "frodiss","frode@gmail.com","22255555","ollef123")));
+        leggTilKalender.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555","ollef123"),new Person("Frode", "frodiss","frode@gmail.com","22255555","ollef123")));
 	}
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
@@ -148,23 +151,34 @@ public class CalendarViewController {
 	
 	public void lagNyAvtale() {
 		Appointment avtale = new Appointment();
+		
 		avtale.setStart(startT.getText());
 		avtale.setSlutt(sluttT.getText());
 		avtale.setBeskrivelse(beskrivelse.getText());
 		avtale.setTitle(tittel.getText());
+		System.out.println(valgtePersoner.getItems().size());
+		System.out.println(valgtePersoner.getItems().get(0));
+		for (int i = 0; i < valgtePersoner.getItems().size(); i++) {
+			
+			avtale.addParticipant(valgtePersoner.getItems().get(i));
+			System.out.println(valgtePersoner.getItems().get(i));
+		}
 		moteinnkallinger.getItems().add(avtale);
+		
 	}
 	
+	@FXML
 	public void leggTilPerson(ActionEvent event) {
-		Object valg = velgPerson.getSelectionModel().getSelectedItem();
+		Person valg = velgPerson.getSelectionModel().getSelectedItem();
 		if (valg != null) {
 		valgtePersoner.getItems().add(valg);
 		velgPerson.getItems().remove(valg);
 		}
 	}
 	
+	@FXML
 	public void fjernPerson(ActionEvent event) {
-		Object valg = valgtePersoner.getSelectionModel().getSelectedItem();
+		Person valg = valgtePersoner.getSelectionModel().getSelectedItem();
 		if (valg != null) {
 		valgtePersoner.getItems().remove(valg);
 		velgPerson.getItems().add(valg);
@@ -172,11 +186,29 @@ public class CalendarViewController {
 	
 	}
 	//møter
-	@FXML private ListView moteavtaler;
 	@FXML private Tooltip tips;
 	@FXML private ListView<Appointment> moteinnkallinger;
 	@FXML private ChoiceBox alarm;
+	@FXML private TextField sluttTid;
+	@FXML private TextField startTid;
+	@FXML private TextField tittelM;
+	@FXML private TextArea beskrivelseM;
+	@FXML private ListView<Person> invitertePersoner;
+	@FXML private ListView<Person> inviterEkstraPerson;
 
+	@FXML
+	public void moteInfoTilView(MouseEvent event) {
+		Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
+		sluttTid.setText(mote.getSlutt());
+		startTid.setText(mote.getStart());
+		tittelM.setText(mote.getTitle());
+		beskrivelseM.setText(mote.getBeskrivelse());
+		invitertePersoner.getItems().clear();
+		for (Person person : mote.getParticipants()) {
+			invitertePersoner.getItems().add(person);
+		}
+	}
+	
 	@FXML
 	public void lagreMoteEndring(ActionEvent event) {
 		//Metoden skal lagre alle endringene gjort
