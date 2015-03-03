@@ -36,11 +36,17 @@ public class CalendarViewController {
 	@FXML private Label beskrivelseK;
 	@FXML private Label stedK;
 	@FXML private Label datoK;
+	@FXML private DatePicker datoVelgK;
 	
+	@FXML
+	public void visUkeFraDato(ActionEvent event) {
+		//bla frem til riktig uke
+		//Alle avtalene må lates inn på riktig måte
+	}
 	
 	@FXML
 	public void moteBeskrivelseTilInfo(MouseEvent event) {
-		Appointment mote = mandag.getSelectionModel().getSelectedItem();
+		Appointment mote = mandag.getSelectionModel().getSelectedItem(); //testish - velger ikke alle dager
 		sluttK.setText(mote.getSlutt());
 		startK.setText(mote.getStart());
 		beskrivelseK.setText(mote.getBeskrivelse());
@@ -62,23 +68,45 @@ public class CalendarViewController {
 	
 	@FXML
 	public void seKalender(ActionEvent event) {
-		Person person = leggTilKalender.getSelectionModel().getSelectedItem();
-		if(person.hasAvtale()){
-			for (Appointment avtale : person.getAvtaler()) {
-				//legg avtalen inn på riktig sted i kalenderen
+		if(!leggTilKalender.getSelectionModel().isEmpty()){
+			Person person = leggTilKalender.getSelectionModel().getSelectedItem();
+			if(person.hasAvtale()){
+				for (Appointment avtale : person.getAvtaler()) {
+					if(!leggTilKalender.getSelectionModel().isEmpty()){ 
+						mandag.getItems().add(avtale); //test
+						//må velge riktig dag å sette inn avtalen på bakgrunn av datoen lagret i avtalen 
+					}
+				}
 			}
 		}
+	}
+	
+	public void resetBeskrivelse() {
+		startK.setText("-");
+		sluttK.setText("-");
+		beskrivelseK.setText("-");
+		stedK.setText("-");
+		datoK.setText("-");
 	}
 	
 	@FXML
 	public void fjernKalender(ActionEvent event) {
 		//fjerner valgt kalender fra kalenderen
-		Person person = leggTilKalender.getSelectionModel().getSelectedItem();
-		if(person.hasAvtale()){
-			for (Appointment avtale : person.getAvtaler()) {
-				//finn og slett avtalene fra oversikten
+		if(!leggTilKalender.getSelectionModel().isEmpty()){ 
+			Person person = leggTilKalender.getSelectionModel().getSelectedItem();
+			if(person.hasAvtale()){
+				for (Appointment avtale : person.getAvtaler()) {
+					if(!mandag.getSelectionModel().isEmpty()){ //må velge riktig dag(listview)
+						if(mandag.getSelectionModel().getSelectedItem().equals(avtale)) { //må velge riktig dag(listView) her
+							resetBeskrivelse();
+						}
+						mandag.getItems().remove(avtale); //test
+						//må finne avtalene knyttet til personen. Kan kobles til "this" kanskje?
+						//Hva om andre også har denne avtalen? Må sjekke alle kalendre
+					}	
+				}
 			}
-		}	
+		}
 	}
 	
 	//Ny hendelse
@@ -110,8 +138,27 @@ public class CalendarViewController {
         };
         dato.setDayCellFactory(datoerSjekk);
         
+        datoM.setValue(LocalDate.now());
+		final Callback<DatePicker, DateCell> datoerSjekk1 = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isBefore(datoM.getValue())) {
+                                setDisable(true);
+                                setStyle("-fx-background-color: #ffc0cb;");
+                        }   
+                    }
+                };
+            }
+        };
+        datoM.setDayCellFactory(datoerSjekk1);
+        
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
         alarm.getSelectionModel().selectFirst();
+        //test start
         velgPerson.setItems(FXCollections.observableArrayList(new Person("Ollef", "Ollef","ollef@gmail.com","22225555","ollef123"),new Person("Fridus", "fridus","fridus@gmail.com","22235555","ollef123")));
         valgtePersoner.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555","ollef123"),new Person("Frode", "frodiss","frode@gmail.com","22255555","ollef123")));
         leggTilKalender.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555","ollef123"),new Person("Frode", "frodiss","frode@gmail.com","22255555","ollef123")));
@@ -126,6 +173,7 @@ public class CalendarViewController {
         avtale.setTitle("klasse1");
         avtale.setDate(LocalDate.now());
         mandag.getItems().add(avtale);
+        //test slutt
 	}
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
@@ -236,6 +284,7 @@ public class CalendarViewController {
 	@FXML private TextArea beskrivelseM;
 	@FXML private ListView<Person> invitertePersoner;
 	@FXML private ListView<Person> inviterEkstraPerson;
+	@FXML private DatePicker datoM;
 
 	@FXML
 	public void moteInfoTilView(MouseEvent event) {
