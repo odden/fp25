@@ -16,7 +16,7 @@ public class LoggInnController {
 	@FXML private Button loggInn;
 	@FXML private PasswordField passord;
 	private LoggInn innlogger = new LoggInn();
-	
+	private Main main = new Main();
 	
 	@FXML
 	public void validateUser(ActionEvent event) {
@@ -41,9 +41,10 @@ public class LoggInnController {
             usernameValidator.getItems().add(
                     new MenuItem("Brukernavnet kan ikke inneholde mellomrom"));
             usernameValidator.show(brukernavn, Side.RIGHT, 5, 0);
-		}else {
-			brukernavn.setStyle("-fx-border-color: green");
 		}
+//		else {
+//			brukernavn.setStyle("-fx-border-color: green");
+//		}
 		
 		if (passord.getText().trim().length() == 0){
 			check = false;
@@ -52,10 +53,11 @@ public class LoggInnController {
             passwordValidator.getItems().add(
                     new MenuItem("Dette feltet kan ikke stå tomt"));
             passwordValidator.show(passord, Side.RIGHT, 5, 0);
-		}else{
-			passord.setStyle("-fx-border-color: green");
-			//passwordValidator.hide(); funker ikke
 		}
+//		else{
+//			passord.setStyle("-fx-border-color: green");
+//			//passwordValidator.hide(); funker ikke
+//		}
 		
 		if (check){
 			@SuppressWarnings("unused")
@@ -64,6 +66,18 @@ public class LoggInnController {
 		}
 		
 	}
+	
+	//Knappen man trykker paa for aa komme til lagbrukervinduet
+	@FXML
+	public void lagbruker(ActionEvent Event){
+		try {
+			main.replaceSceneContent("CreateUser.fxml");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 	@FXML
 	public void updateBrukernavn(KeyEvent event) {

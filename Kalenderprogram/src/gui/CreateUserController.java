@@ -111,24 +111,24 @@ public class CreateUserController {
 		
 	}
 	//Skifte scene fra CreateUser til Main
-//	@FXML protected void avbryt(ActionEvent event) throws Exception{
-//		replaceSceneContent("LoggInn.fxml");
-//	}
-//		
-//	private Parent replaceSceneContent(String fxml) throws Exception {
-//		Stage stage = null;
-//		Parent page = (Parent) FXMLLoader.load(Application.class.getResource("fxml"), null, new JavaFXBuilderFactory());
-//        @SuppressWarnings("null")
-//		Scene scene = stage.getScene();
-//        if (scene == null) {
-//            scene = new Scene(page, 700, 450);
-//            stage.setScene(scene);
-//        } else {
-//            stage.getScene().setRoot(page);
-//        }
-//        stage.sizeToScene();
-//        return page;
-//	}
+	@FXML protected void avbryt(ActionEvent event) throws Exception{
+		replaceSceneContent("LoggInn.fxml");
+	}
+		
+	private Parent replaceSceneContent(String fxml) throws Exception {
+		Stage stage = null;
+		Parent page = (Parent) FXMLLoader.load(Application.class.getResource("fxml"), null, new JavaFXBuilderFactory());
+        @SuppressWarnings("null")
+		Scene scene = stage.getScene();
+        if (scene == null) {
+            scene = new Scene(page, 700, 450);
+            stage.setScene(scene);
+        } else {
+            stage.getScene().setRoot(page);
+        }
+        stage.sizeToScene();
+        return page;
+	}
 	
 	
 	//Sjekker emailadresse

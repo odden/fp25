@@ -28,6 +28,7 @@
             <PasswordField fx:id="passord" onKeyReleased="#updatePassord" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="loggInn" layoutX="40.0" layoutY="189.0" mnemonicParsing="false" onAction="#validateUser" prefHeight="26.0" prefWidth="149.0" text="Logg inn" />
+      <Button fx:id="loggInn" layoutX="40.0" layoutY="172.0" mnemonicParsing="false" onAction="#validateUser" prefHeight="26.0" prefWidth="149.0" text="Logg inn" />
+      <Button layoutX="40.0" layoutY="212.0" mnemonicParsing="false" onAction="#lagbruker" prefHeight="26.0" prefWidth="149.0" text="Lag bruker" />
    </children>
 </AnchorPane>
