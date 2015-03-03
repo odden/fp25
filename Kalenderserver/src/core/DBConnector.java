@@ -377,7 +377,7 @@ public class DBConnector {
 		try {
 			statement = connection.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			//System.out.println(SQLString);
+			System.out.println(SQLString);
 			if (statement.execute(SQLString)) {     // Returnerer 1 om query (SELECT), 0 om noe blir endret (eks. INSERT)
 				result = statement.getResultSet();
 			}

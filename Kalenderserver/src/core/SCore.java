@@ -36,6 +36,8 @@ public class SCore {
 		//createUser("herman","hpw","HP PLLLL","emmmm",423423);
 		//createAppointment("stefanborg","Kake","322",cal,"13:00:00","15:00:00",Arrays.asList("stefanborg"));
 		//setStatus("herman", "stefanborg", "2015-02-26", "13:00:00",false);
+		//System.out.println(getAppointments("herman"));
+		//editAppointment(4,"kakemann","Kakefest for noen","322","2015-02-28","16:45:00","19:00:00");
 	}
 	public List<Object> logIn(String username, String password){
 		//Sjekker om oppgit info er korrekt, hvis ja send bruker info og OK
@@ -176,6 +178,45 @@ public class SCore {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
+		}
+	}
+	
+	public ArrayList<List<Object>> getAppointments(String bruker){
+		ResultSet rs;
+		
+		try {
+			rs = dbc.getQueryCondition("bruker_has_avtale", "bruker_brukernavn", bruker, "avtale_idavtale");
+			ArrayList<List<Object>> ids = resToList(rs);
+			String appIds = ",";
+			for (List<Object> o:ids){
+				appIds+= o.get(0).toString()+",";
+			}
+			appIds = appIds.substring(1,appIds.length()-1);
+			System.out.println(appIds);
+			rs = dbc.executeSQL("SELECT * FROM avtale WHERE idavtale in ("+appIds+")");
+			ids = resToList(rs);
+			rs = dbc.getQueryCondition("avtale", "vert_brukernavn", bruker);
+			ids.addAll(resToList(rs));
+			return ids;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public boolean editAppointment(int id, String vert, String title, String room,String dato,String start, String slutt){
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(sdf.parse(dato));
+			dbc.editRow("avtale", id,null,vert,title,room,cal,start,slutt);
+			return true;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
 		}
 	}
 	
