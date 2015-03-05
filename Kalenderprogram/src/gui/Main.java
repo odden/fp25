@@ -30,20 +30,7 @@ public class Main extends Application {
 	}
 	
 
-	//private Stage stage; 
-	public Parent replaceSceneContent(String fxml) throws Exception {
-		Parent page = (Parent) FXMLLoader.load(Application.class.getResource(fxml), null, new JavaFXBuilderFactory());
-		Scene scene = stage.getScene();
-		if (scene == null) {
-			scene = new Scene(page, 700, 450);
-			stage.setScene(scene);
-		} else {
-			stage.getScene().setRoot(page);
-		}
-		stage.sizeToScene();
-		return page;
-	}
-
+	
 	public static void main(String[] args) {
 		launch(args);
 	}

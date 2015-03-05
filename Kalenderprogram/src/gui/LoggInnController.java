@@ -70,11 +70,7 @@ public class LoggInnController {
 	//Knappen man trykker paa for aa komme til lagbrukervinduet
 	@FXML
 	public void lagbruker(ActionEvent Event){
-		try {
-			main.replaceSceneContent("CreateUser.fxml");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
 	}
 	
 	
