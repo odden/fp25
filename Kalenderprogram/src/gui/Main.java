@@ -10,20 +10,22 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-	Stage stage; 
+	private Stage stage; 
+	private LoggInnController lic = new LoggInnController();
+	
 	@Override
 	public void start(Stage primaryStage) {
-		stage = primaryStage;
+		this.stage = primaryStage;
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
 			Scene scene = new Scene(root);
 			TextField brukernavn = (TextField) root.lookup("#brukernavn");
-
 			primaryStage.setTitle("Logg Inn");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
 			brukernavn.requestFocus();
+			lic.setPrevStage(primaryStage);
 		} catch (Exception e){
 			e.printStackTrace();
 		}

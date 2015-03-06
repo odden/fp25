@@ -1,22 +1,31 @@
 package gui;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Side;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
-public class LoggInnController {
+public class LoggInnController implements Initializable{
 	
 	@FXML private TextField brukernavn;
 	@FXML private Button loggInn;
 	@FXML private PasswordField passord;
 	private LoggInn innlogger = new LoggInn();
-	private Main main = new Main();
+	private Stage prevStage;
 	
 	@FXML
 	public void validateUser(ActionEvent event) {
@@ -70,7 +79,16 @@ public class LoggInnController {
 	//Knappen man trykker paa for aa komme til lagbrukervinduet
 	@FXML
 	public void lagbruker(ActionEvent Event){
-		
+		Parent root;
+		try {
+			root = FXMLLoader.load(getClass().getResource("CreateUser.fxml"));
+			Scene scene = new Scene(root);
+			prevStage.setTitle("CreateUser");
+			prevStage.setScene(scene);
+			prevStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -85,6 +103,14 @@ public class LoggInnController {
 	public void updatePassord(KeyEvent event) {
 		String str = passord.getText();
 		innlogger.setPassord(str);
+	}
+	
+	public void setPrevStage(Stage stage){
+		this.prevStage = stage;
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 	}
 
 	
