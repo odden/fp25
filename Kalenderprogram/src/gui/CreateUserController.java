@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 public class CreateUserController {
 	//Det er her brukeren registrerer seg første gang, 
 	//her man skriver inn passord, email, telefonnr osvosv. 
+	@FXML
+	private static Stage stage;
 	@FXML private TextField name;
 	@FXML private TextField username;
 	@FXML private TextField email;
@@ -116,18 +118,16 @@ public class CreateUserController {
 	}
 		
 	private Parent replaceSceneContent(String fxml) throws Exception {
-		Stage stage = null;
-		Parent page = (Parent) FXMLLoader.load(Application.class.getResource("fxml"), null, new JavaFXBuilderFactory());
-        @SuppressWarnings("null")
-		Scene scene = stage.getScene();
-        if (scene == null) {
-            scene = new Scene(page, 700, 450);
-            stage.setScene(scene);
-        } else {
-            stage.getScene().setRoot(page);
-        }
-        stage.sizeToScene();
-        return page;
+		final FXMLLoader loader = new FXMLLoader(
+			      getClass().getResource(
+			        fxml
+			      )
+			    );
+
+		Parent root = loader.load();
+		stage.setScene(new Scene(root));
+		stage.show();
+		return root;
 	}
 	
 	
@@ -137,6 +137,10 @@ public class CreateUserController {
 		java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
 		java.util.regex.Matcher m = p.matcher(email);
 		return m.matches();
+	}
+	public void initData(Stage stage) {
+		this.stage = stage;
+		
 	}
 	
 }

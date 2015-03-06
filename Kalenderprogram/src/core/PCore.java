@@ -4,7 +4,7 @@ import gui.Gui;
 
 public class PCore {
 	private Gui gui;
-	private SConnector sc;
+	public SConnector sc;
 	public void init(){
 		gui = new Gui(this);
 		sc = new SConnector(this);

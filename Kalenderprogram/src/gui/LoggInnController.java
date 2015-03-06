@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,13 +20,39 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-public class LoggInnController implements Initializable{
-	
+public class LoggInnController extends Application{
+	private static Stage stage; 
+	Parent root;
 	@FXML private TextField brukernavn;
 	@FXML private Button loggInn;
 	@FXML private PasswordField passord;
 	private LoggInn innlogger = new LoggInn();
-	private Stage prevStage;
+	private Gui gui;
+	
+	public LoggInnController(Gui gui){
+		this.gui = gui;
+	}
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+
+		this.stage = primaryStage;
+		try {
+			root = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
+			Scene scene = new Scene(root);
+			TextField brukernavn = (TextField) root.lookup("#brukernavn");
+			primaryStage.setTitle("Logg Inn");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+			brukernavn.requestFocus();
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	public void start(){
+		launch();
+	}
 	
 	@FXML
 	public void validateUser(ActionEvent event) {
@@ -71,6 +98,7 @@ public class LoggInnController implements Initializable{
 		if (check){
 			@SuppressWarnings("unused")
 			int svaretPaaLivet = 42; 
+			String login = gui.logIn(brukernavn.getText(),passord.getText());
 			//hvis  brukernavn og passord samsvarer => logg inn
 		}
 		
@@ -79,13 +107,20 @@ public class LoggInnController implements Initializable{
 	//Knappen man trykker paa for aa komme til lagbrukervinduet
 	@FXML
 	public void lagbruker(ActionEvent Event){
-		Parent root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("CreateUser.fxml"));
+			 final FXMLLoader loader = new FXMLLoader(
+				      getClass().getResource(
+				        "CreateUser.fxml"
+				      )
+				    );
+
+			root = loader.load();
+			final CreateUserController controller = loader.getController();
+		    controller.initData(stage);
 			Scene scene = new Scene(root);
-			prevStage.setTitle("CreateUser");
-			prevStage.setScene(scene);
-			prevStage.show();
+			stage.setTitle("CreateUser");
+			stage.setScene(scene);
+			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -105,13 +140,5 @@ public class LoggInnController implements Initializable{
 		innlogger.setPassord(str);
 	}
 	
-	public void setPrevStage(Stage stage){
-		this.prevStage = stage;
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-	}
-
 	
 }

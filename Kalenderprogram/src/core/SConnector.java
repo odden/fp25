@@ -57,10 +57,5 @@ public class SConnector {
 		}
 		return null;
 	}
-	
-	public static void main(String argv[]) throws Exception{
-		SConnector sco =  new SConnector();
-		sco.logIn("eirirog", "1234");
-	}
 }
 
