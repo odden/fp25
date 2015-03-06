@@ -47,7 +47,6 @@ public class SCore {
 			List<Object> user = resToList(login).get(0);
 			return user;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -63,10 +62,10 @@ public class SCore {
 		}
 	}
 	
-	public Boolean createAppointment(String vert,String title,String room, Calendar dato,String start, String slutt, List<String> invited){
-		
+	public Boolean createAppointment(String vert,String title,int room, Calendar dato,String start, String slutt, List<String> invited){
+		//Avtale med reservert rom
 		try {
-			dbc.insertRow("avtale", null,vert,title,room,dato,start,slutt);
+			dbc.insertRow("avtale", null,vert,title,null,room,dato,start,slutt,null);
 			ResultSet rs = dbc.executeSQL("SELECT MAX( idavtale ) AS idavtale FROM avtale");
 			Object max = resToList(rs).get(0).get(0);
 			if (invited != null){
@@ -80,6 +79,23 @@ public class SCore {
 		}
 		return false;
 	}
+	public Boolean createAppointment(String vert,String title,String sted, Calendar dato,String start, String slutt, List<String> invited){
+		//Avtale med bare stedsnavn	
+			try {
+				dbc.insertRow("avtale", null,vert,title,sted,null,dato,start,slutt,null);
+				ResultSet rs = dbc.executeSQL("SELECT MAX( idavtale ) AS idavtale FROM avtale");
+				Object max = resToList(rs).get(0).get(0);
+				if (invited != null){
+					for (String bn:invited){
+						dbc.insertRow("bruker_has_avtale", bn,max,false);
+					}
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return false;
+		}
 	
 	public boolean invite(List<String>usernames,String vert,String dato,String start){
 		//Inviterer en eller flere brukere til et arrangement
@@ -106,6 +122,18 @@ public class SCore {
 		int id = getAppointmentID(vert, dato, start);
 		try {
 			dbc.executeSQL("UPDATE bruker_has_avtale SET bruker_svar = "+status+" WHERE avtale_idavtale = '"+id+"' AND bruker_brukernavn = '"+bruker+"'");
+			if (status == false){
+				ResultSet rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", id);
+				ArrayList<List<Object>> ids = resToList(rs);
+				String appIds = ",";
+				for (List<Object> o:ids){
+					appIds+= o.get(0).toString()+",";
+				}
+				String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", id, "tittel")).get(0).get(0);
+				String endring = " - " + bruker + " har avslått invitasjonen til "+tittel+" - ";
+				dbc.executeSQL("UPDATE bruker_has_avtale SET varsel_endring = varsel_endring + "+endring+" WHERE avtale_idavtale IN ("+appIds+")");
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -205,12 +233,19 @@ public class SCore {
 		}
 	}
 	
-	public boolean editAppointment(int id, String vert, String title, String room,String dato,String start, String slutt){
+	public boolean editAppointment(int id, String vert, String title, String sted, String room,String dato,String start, String slutt, String endring){
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(sdf.parse(dato));
-			dbc.editRow("avtale", id,null,vert,title,room,cal,start,slutt);
+			dbc.editRow("avtale", id,null,vert,title,sted, room,cal,start,slutt,endring);
+			ResultSet rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", id);
+			ArrayList<List<Object>> ids = resToList(rs);
+			String appIds = ",";
+			for (List<Object> o:ids){
+				appIds+= o.get(0).toString()+",";
+			}
+			dbc.executeSQL("UPDATE bruker_has_avtale SET varsel_endring = varsel_endring + "+endring+" WHERE avtale_idavtale IN ("+appIds+")");
 			return true;
 
 		} catch (Exception e) {
@@ -219,7 +254,25 @@ public class SCore {
 			return false;
 		}
 	}
-	
+	public boolean setAlarm(String bruker,String id, String tid){
+		try {
+			dbc.executeSQL("UPDATE bruker_has_avtale SET alarm = "+tid+" WHERE avtale_idavtale = '"+id+"' AND bruker_brukernavn = '"+bruker+"'");
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	public boolean setVisible(String brukernavn, String avtaleid, boolean svar){
+		try {
+			dbc.executeSQL("UPDATE bruker_has_avtale SET synlig = "+svar+" WHERE avtale_idavtale = '"+avtaleid+"' AND bruker_brukernavn = '"+brukernavn+"'");
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 	public static ArrayList<List<Object>> resToList(ResultSet resultSet) {
 		
 		ArrayList<List<Object>> results = new ArrayList<List<Object>>();

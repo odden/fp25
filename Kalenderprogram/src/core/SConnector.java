@@ -10,7 +10,10 @@ import java.util.Calendar;
 import java.util.List;
 
 public class SConnector {
-
+	PCore core;
+	public SConnector(PCore core){
+		this.core = core;
+	}
 	public String logIn(String userName, String password){
 		String message = "logIn:" + userName + ":" + password;
 		String response = connectToServer(message);
