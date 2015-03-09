@@ -19,12 +19,12 @@ public class CreateUserController {
 	//her man skriver inn passord, email, telefonnr osvosv. 
 	@FXML
 	private static Stage stage;
+	private Gui gui;
 	@FXML private TextField name;
 	@FXML private TextField username;
 	@FXML private TextField email;
 	@FXML private TextField phoneNumber;
 	@FXML private TextField password;
-	private Gui gui;
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
