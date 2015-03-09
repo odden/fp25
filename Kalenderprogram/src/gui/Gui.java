@@ -46,6 +46,7 @@ public class Gui extends Application {
 		return core.sc.logIn(brukernavn,passord);
 	}
 	
+	@SuppressWarnings("static-access")
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.stage = primaryStage;

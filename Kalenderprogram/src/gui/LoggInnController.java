@@ -1,77 +1,56 @@
 package gui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Side;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class LoggInnController{
+	@SuppressWarnings("unused")
 	private static Stage stage; 
 	Parent root;
 	@FXML private TextField brukernavn;
 	@FXML private Button loggInn;
 	@FXML private PasswordField passord;
+	@FXML private Text commentUsername;
+	@FXML private Text commentPassword;
 	private LoggInn innlogger = new LoggInn();
 	Gui gui;
 	
 
-	
-	
 	@FXML
 	public void validateUser(ActionEvent event) {
-		final ContextMenu usernameValidator = new ContextMenu();
-        usernameValidator.setAutoHide(false);
-        final ContextMenu passwordValidator = new ContextMenu();
-        passwordValidator.setAutoHide(false);
-		
+
         boolean check = true;
 		
-		if (brukernavn.getText().trim().length() == 0){
+		if (brukernavn.getText().trim().length() == 0 && !brukernavn.getText().matches("[a-z]+[a-z,0-9]{2,}")){
 			check = false;
 			brukernavn.setStyle("-fx-border-color: red");
-			usernameValidator.getItems().clear();
-            usernameValidator.getItems().add(
-                    new MenuItem("Dette feltet kan ikke stå tomt"));
-            usernameValidator.show(brukernavn, Side.RIGHT, 5, 0);
-		}else if (!brukernavn.getText().matches("[a-z]+[a-z,0-9]{2,}")){
-			check = false;
-			brukernavn.setStyle("-fx-border-color: red");
-			usernameValidator.getItems().clear();
-            usernameValidator.getItems().add(
-                    new MenuItem("Brukernavnet kan ikke inneholde mellomrom"));
-            usernameValidator.show(brukernavn, Side.RIGHT, 5, 0);
+			commentUsername.setVisible(true);
+		
+		}else {
+			check = true;
+			brukernavn.setStyle("-fx-border-color: green");
 		}
-//		else {
-//			brukernavn.setStyle("-fx-border-color: green");
-//		}
+
+
 		
 		if (passord.getText().trim().length() == 0){
 			check = false;
 			passord.setStyle("-fx-border-color: red");
-			passwordValidator.getItems().clear();
-            passwordValidator.getItems().add(
-                    new MenuItem("Dette feltet kan ikke stå tomt"));
-            passwordValidator.show(passord, Side.RIGHT, 5, 0);
+			commentPassword.setVisible(true);
 		}
-//		else{
-//			passord.setStyle("-fx-border-color: green");
-//			//passwordValidator.hide(); funker ikke
-//		}
+		else{
+			passord.setStyle("-fx-border-color: green");
+			check = true;
+		}
 		
 		if (check){
 			@SuppressWarnings("unused")
@@ -107,8 +86,30 @@ public class LoggInnController{
 		innlogger.setPassord(str);
 	}
 
+	@SuppressWarnings("static-access")
 	public void initData(Stage stage, Gui gui) {
 		this.stage = stage;
 		this.gui = gui;
+		
+		
+		ChangeListener<Boolean> SjekkUsername = new ChangeListener<Boolean>() {
+	        @Override
+	        public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
+	        	brukernavn.setStyle("-fx-border-color:transparent");
+	        	commentUsername.setVisible(false);
+	        }
+		};
+		
+		ChangeListener<Boolean> SjekkPassword = new ChangeListener<Boolean>() {
+	        @Override
+	        public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
+	        	passord.setStyle("-fx-border-color:transparent");
+	        	commentPassword.setVisible(false);
+	        }
+		};
+		
+		brukernavn.focusedProperty().addListener(SjekkUsername);
+		passord.focusedProperty().addListener(SjekkPassword);
+		
 	}
 }
