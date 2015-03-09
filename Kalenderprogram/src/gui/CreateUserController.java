@@ -1,21 +1,11 @@
 package gui;
 
 import core.Person;
-import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
-import javafx.geometry.Side;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -31,15 +21,12 @@ public class CreateUserController {
 	@FXML private TextField phoneNumber;
 	@FXML private TextField password;
 	@FXML private Text commentName;
-<<<<<<< HEAD
 	@FXML private Text commentUsername;
 	@FXML private Text commentPassword;
 	@FXML private Text commentEmail;
 	@FXML private Text commentPhone;
-	private Gui gui;
 
-=======
->>>>>>> f3501f0763fc61ff335a5f59965eb7256a2d5d2f
+
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
