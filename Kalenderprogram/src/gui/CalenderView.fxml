@@ -328,6 +328,8 @@
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
                                     <TextField fx:id="sluttTid" promptText="hh:mm" />
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="138.0" text="Sett alarm:  " GridPane.columnIndex="1" />
+                                    <ChoiceBox fx:id="alarm" prefWidth="150.0" GridPane.columnIndex="2" />
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -354,27 +356,21 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
-                        <Pane layoutX="236.0" layoutY="337.0" prefHeight="230.0" prefWidth="485.0">
+                        <Pane layoutX="236.0" layoutY="320.0" prefHeight="247.0" prefWidth="485.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="273.0" layoutY="208.0" mnemonicParsing="false" onAction="#lagreMoteEndring" prefHeight="26.0" prefWidth="116.0" text="Lagre endring" textAlignment="CENTER" />
-                              <ListView fx:id="invitertePersoner" layoutX="110.0" layoutY="37.0" prefHeight="128.0" prefWidth="221.0" />
-                              <Label layoutX="46.0" layoutY="37.0" text="Status" />
-                              <ListView fx:id="inviterEkstraPerson" layoutX="362.0" layoutY="38.0" prefHeight="134.0" prefWidth="107.0" />
-                              <Button layoutX="388.0" layoutY="172.0" mnemonicParsing="false" onAction="#inviterEkstraDeltaker" text="Inviter" />
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="121.0" layoutY="165.0" mnemonicParsing="false" onAction="#slettDeltaker" prefHeight="5.0" prefWidth="199.0" text="Slett" textAlignment="CENTER" />
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="113.0" layoutY="208.0" mnemonicParsing="false" onAction="#slettMote" prefHeight="26.0" prefWidth="117.0" text="Slett møte" textAlignment="CENTER" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="293.0" layoutY="195.0" mnemonicParsing="false" onAction="#lagreMoteEndring" prefHeight="26.0" prefWidth="116.0" text="Lagre endring" textAlignment="CENTER" />
+                              <ListView fx:id="invitertePersoner" layoutX="99.0" layoutY="14.0" prefHeight="127.0" prefWidth="221.0" />
+                              <Label layoutY="21.0" text="Status:" />
+                              <ListView fx:id="inviterEkstraPerson" layoutX="351.0" layoutY="13.0" prefHeight="128.0" prefWidth="107.0" />
+                              <Button layoutX="378.0" layoutY="145.0" mnemonicParsing="false" onAction="#inviterEkstraDeltaker" text="Inviter" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="145.0" mnemonicParsing="false" onAction="#slettDeltaker" prefHeight="26.0" prefWidth="157.0" text="Slett" textAlignment="CENTER" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="151.0" layoutY="195.0" mnemonicParsing="false" onAction="#slettMote" prefHeight="26.0" prefWidth="117.0" text="Slett møte" textAlignment="CENTER" />
                            </children>
                         </Pane>
-                        <Pane layoutX="317.0" layoutY="326.0" prefHeight="201.0" prefWidth="386.0" visible="false">
+                        <Pane layoutX="319.0" layoutY="326.0" prefHeight="201.0" prefWidth="386.0" visible="false">
                            <children>
-                              <Button layoutX="14.0" layoutY="31.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="158.0" text="Deltar ikke" />
-                              <Button layoutX="207.0" layoutY="31.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="151.0" text="Deltar" />
-                           </children>
-                        </Pane>
-                        <Pane layoutX="238.0" layoutY="319.0" prefHeight="36.0" prefWidth="482.0">
-                           <children>
-                              <Label layoutX="12.0" layoutY="10.0" prefHeight="16.0" prefWidth="74.0" text="Set Alarm:" />
-                              <ChoiceBox fx:id="alarm" layoutX="102.0" layoutY="5.0" prefWidth="150.0" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="214.0" layoutY="31.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="158.0" text="Deltar ikke" textAlignment="CENTER" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="32.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="151.0" text="Deltar" textAlignment="CENTER" />
                            </children>
                         </Pane>
                      </children></AnchorPane>
