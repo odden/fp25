@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -36,8 +37,18 @@ public class SConnector {
 	}
 	
 	public ArrayList<String> getAppointments(String user){
-		return null;
+		String message = "getAppointments:" + user;
+		String response = connectToServer(message);
 		
+		return null;
+	}
+	
+	public ArrayList<String> getUsers(){
+		String message = "getUsers";
+		String response = connectToServer(message);
+		String[] responseSplit = response.split("|");
+		ArrayList<String> responseList = new ArrayList<String>(Arrays.asList(responseSplit));
+		return responseList;
 	}
 	
 	private String connectToServer(String message){
@@ -57,5 +68,6 @@ public class SConnector {
 		}
 		return null;
 	}
+	
 }
 

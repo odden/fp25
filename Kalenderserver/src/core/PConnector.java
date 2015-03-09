@@ -45,16 +45,30 @@ public class PConnector {
 	
 	private ArrayList<String> response(String request){
 		String[] requestList = request.split(":");
+		ArrayList<String> response = new ArrayList<String>();
 		if(requestList[0].equals("logIn")){
 			return logIn(requestList);
 		}
 		else if(requestList[0].equals("createUser")){
-			ArrayList<String> response = new ArrayList<String>();
 			response.add(String.valueOf(createUser(requestList)));
 			return response;
 		}else if (requestList[0].equals("createAppointment")) {
-			ArrayList<String> response = new ArrayList<String>();
 			response.add(String.valueOf(createAppointment(requestList)));
+			return response;
+		}else if(requestList[0].equals("getAppointments")){
+
+		
+		}else if (requestList[0].equals("getUsers")){
+			ArrayList<List<Object>> responseList = getUsers();
+			for (List<Object> list : responseList) {
+				String userdata = "";
+				
+				for (Object object : list) {
+					userdata += object.toString();
+				}
+				userdata += "|";
+				response.add(userdata);
+			}
 			return response;
 		}
 		return null;
@@ -66,6 +80,12 @@ public class PConnector {
 		
 		
 		return false;
+	}
+	
+	private ArrayList<List<Object>> getUsers(){
+		ArrayList<List<Object>> users = new ArrayList<List<Object>>();
+		users = sc.getUsers();
+		return users;
 	}
 
 	private ArrayList<String> logIn(String[] request) {
