@@ -20,39 +20,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-public class LoggInnController extends Application{
+public class LoggInnController{
 	private static Stage stage; 
 	Parent root;
 	@FXML private TextField brukernavn;
 	@FXML private Button loggInn;
 	@FXML private PasswordField passord;
 	private LoggInn innlogger = new LoggInn();
-	private Gui gui;
+	Gui gui;
 	
-	public LoggInnController(Gui gui){
-		this.gui = gui;
-	}
 
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-
-		this.stage = primaryStage;
-		try {
-			root = FXMLLoader.load(getClass().getResource("LoggInn.fxml"));
-			Scene scene = new Scene(root);
-			TextField brukernavn = (TextField) root.lookup("#brukernavn");
-			primaryStage.setTitle("Logg Inn");
-			primaryStage.setScene(scene);
-			primaryStage.show();
-			brukernavn.requestFocus();
-		}
-		catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-	public void start(){
-		launch();
-	}
+	
 	
 	@FXML
 	public void validateUser(ActionEvent event) {
@@ -98,7 +76,8 @@ public class LoggInnController extends Application{
 		if (check){
 			@SuppressWarnings("unused")
 			int svaretPaaLivet = 42; 
-			String login = gui.logIn(brukernavn.getText(),passord.getText());
+			String login = gui.tryLogIn(brukernavn.getText(),passord.getText());
+			System.out.println(login);
 			//hvis  brukernavn og passord samsvarer => logg inn
 		}
 		
@@ -108,20 +87,8 @@ public class LoggInnController extends Application{
 	@FXML
 	public void lagbruker(ActionEvent Event){
 		try {
-			 final FXMLLoader loader = new FXMLLoader(
-				      getClass().getResource(
-				        "CreateUser.fxml"
-				      )
-				    );
-
-			root = loader.load();
-			final CreateUserController controller = loader.getController();
-		    controller.initData(stage);
-			Scene scene = new Scene(root);
-			stage.setTitle("CreateUser");
-			stage.setScene(scene);
-			stage.show();
-		} catch (IOException e) {
+			gui.switchSceneContent("CreateUser.fxml");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -139,6 +106,9 @@ public class LoggInnController extends Application{
 		String str = passord.getText();
 		innlogger.setPassord(str);
 	}
-	
-	
+
+	public void initData(Stage stage, Gui gui) {
+		this.stage = stage;
+		this.gui = gui;
+	}
 }

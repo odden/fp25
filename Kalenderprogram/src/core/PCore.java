@@ -5,16 +5,10 @@ import gui.Gui;
 public class PCore {
 	private Gui gui;
 	public SConnector sc;
-	public void init(){
-		gui = new Gui(this);
-		sc = new SConnector(this);
-		
-	}
 	
-	public static void main(String[] args) {
-		PCore core = new PCore();
-		core.init();
-		
+	public PCore(Gui gui){
+		this.gui = gui;
+		sc = new SConnector(this);
 	}
 
 }

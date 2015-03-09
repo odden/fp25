@@ -24,6 +24,7 @@ public class CreateUserController {
 	@FXML private TextField email;
 	@FXML private TextField phoneNumber;
 	@FXML private TextField password;
+	private Gui gui;
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
@@ -114,22 +115,9 @@ public class CreateUserController {
 	}
 	//Skifte scene fra CreateUser til Main
 	@FXML protected void avbryt(ActionEvent event) throws Exception{
-		replaceSceneContent("LoggInn.fxml");
+		gui.switchSceneContent("LoggInn.fxml");
 	}
 		
-	private Parent replaceSceneContent(String fxml) throws Exception {
-		final FXMLLoader loader = new FXMLLoader(
-			      getClass().getResource(
-			        fxml
-			      )
-			    );
-
-		Parent root = loader.load();
-		stage.setScene(new Scene(root));
-		stage.show();
-		return root;
-	}
-	
 	
 	//Sjekker emailadresse
 	private boolean isValidEmailAddress(String email) {
@@ -138,9 +126,9 @@ public class CreateUserController {
 		java.util.regex.Matcher m = p.matcher(email);
 		return m.matches();
 	}
-	public void initData(Stage stage) {
+	public void initData(Stage stage, Gui gui) {
 		this.stage = stage;
-		
+		this.gui = gui;
 	}
 	
 }
