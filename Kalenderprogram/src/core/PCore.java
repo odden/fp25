@@ -10,5 +10,5 @@ public class PCore {
 		this.gui = gui;
 		sc = new SConnector(this);
 	}
-
+	
 }

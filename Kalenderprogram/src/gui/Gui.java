@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,14 +10,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import core.PCore;
+import core.Person;
 
 public class Gui extends Application {
 	PCore core;
 	private static Stage stage; 
 	Parent root;
 	private LoggInnController logIn;
-	
-	public void initialize(){
+	private String brukernavn;
+	private ArrayList<Person> users;
+	public void init(){
 		this.core = new PCore(this);
 	}
 	
@@ -30,9 +33,13 @@ public class Gui extends Application {
 				final CreateUserController controller = loader.getController();
 				controller.initData(stage,this);
 			}
-			else{
+			else if (fxml.equals("LoggInn.fxml")){
 				logIn = loader.getController();
 			    logIn.initData(stage,this);
+			}
+			else if(fxml.equals("CalenderView.fxml")) {
+				final CalendarViewController controller = loader.getController();
+				controller.initData(stage,this);
 			}
 			stage.show();
 		} catch (IOException e) {
@@ -43,7 +50,24 @@ public class Gui extends Application {
 	
 	
 	public String tryLogIn(String brukernavn,String passord){
-		return core.sc.logIn(brukernavn,passord);
+			String response = core.sc.logIn(brukernavn,passord);
+			System.out.println(response);
+			if (response == null){
+				return "aua";
+			}
+			else{
+				switchSceneContent("CalenderView.fxml");
+				this.brukernavn = response.split(":")[0];
+				/*ArrayList<String> users = core.sc.getUsers();
+				for (String s: users){
+					String[] user = s.split(":");
+					Person p = new Person(user[0], user[1], user[2], user[3], user[4]);
+				}*/
+				
+				
+				
+				return "Ok";
+			}
 	}
 	
 	@Override

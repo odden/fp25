@@ -23,12 +23,14 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class CalendarViewController {
 
 	// Min Kalender
-	
+	private static Stage stage;
+	private Gui gui;
 	@FXML private ListView<Person> leggTilKalender;
 	@FXML private ListView<Appointment> mandag;
 	@FXML private Label startK;
@@ -326,6 +328,11 @@ public class CalendarViewController {
 	@FXML
 	public void finnRom(ActionEvent event) {
 		//Finner et passende rom utifra antall folk invitert
+	}
+
+	public void initData(Stage stage, Gui gui) {
+		this.stage = stage;
+		this.gui = gui;
 	}
 	
 	
