@@ -52,6 +52,7 @@ public class Gui extends Application {
 	public String tryLogIn(String brukernavn,String passord){
 			String response = core.sc.logIn(brukernavn,passord);
 			System.out.println(response);
+			this.users = new ArrayList<Person>();
 			if (response == null){
 				return "aua";
 			}
@@ -60,9 +61,12 @@ public class Gui extends Application {
 				this.brukernavn = response.split(":")[0];
 				ArrayList<String> users = core.sc.getUsers();
 				for (String s: users){
-					String[] user = s.split(":");
-					Person p = new Person(user[0], user[1], user[2], user[3]);
-					this.users.add(p);
+					if (s.equals(":")){}
+					else{
+						String[] user = s.split(":");
+						Person p = new Person(user[0], user[1], user[2], user[3]);
+						this.users.add(p);
+					}
 				}
 				
 				System.out.println(this.users);
