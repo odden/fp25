@@ -114,6 +114,7 @@ public class CalendarViewController {
 	//Ny hendelse
 	@FXML private TextField tittel;
 	@FXML private TextArea beskrivelse;
+	@FXML private Label labRomNrNH;
 	@FXML private TextField startT;
 	@FXML private TextField sluttT;
 	@FXML private DatePicker dato;
@@ -287,6 +288,7 @@ public class CalendarViewController {
 	@FXML private ListView<Person> invitertePersoner;
 	@FXML private ListView<Person> inviterEkstraPerson;
 	@FXML private DatePicker datoM;
+	@FXML private Label labRomNrM;
 
 	@FXML
 	public void moteInfoTilView(MouseEvent event) {
