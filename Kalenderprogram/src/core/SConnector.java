@@ -46,8 +46,12 @@ public class SConnector {
 	public ArrayList<String> getUsers(){
 		String message = "getUsers";
 		String response = connectToServer(message);
-		String[] responseSplit = response.split("|");
-		ArrayList<String> responseList = new ArrayList<String>(Arrays.asList(responseSplit));
+		String[] responseSplit = response.split(";");
+		ArrayList<String> responseList = new ArrayList<String>();
+		for (String string : responseSplit) {
+			responseList.add(string);
+		}
+		System.out.println(responseList);
 		return responseList;
 	}
 	
