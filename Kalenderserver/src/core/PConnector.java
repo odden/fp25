@@ -64,7 +64,13 @@ public class PConnector {
 				String userdata = "";
 				
 				for (Object object : list) {
-					userdata += object.toString();
+					if (object.toString() != null){
+						userdata += object.toString();
+					}
+					else
+						userdata += "NULL";
+					userdata += ":";
+					System.out.println("ASD");
 				}
 				userdata += "|";
 				response.add(userdata);

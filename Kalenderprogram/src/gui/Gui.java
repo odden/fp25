@@ -58,13 +58,14 @@ public class Gui extends Application {
 			else{
 				switchSceneContent("CalenderView.fxml");
 				this.brukernavn = response.split(":")[0];
-				/*ArrayList<String> users = core.sc.getUsers();
+				ArrayList<String> users = core.sc.getUsers();
 				for (String s: users){
 					String[] user = s.split(":");
-					Person p = new Person(user[0], user[1], user[2], user[3], user[4]);
-				}*/
+					Person p = new Person(user[0], user[1], user[2], user[3]);
+					this.users.add(p);
+				}
 				
-				
+				System.out.println(this.users);
 				
 				return "Ok";
 			}
