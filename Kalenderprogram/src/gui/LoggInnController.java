@@ -36,7 +36,6 @@ public class LoggInnController{
 			commentUsername.setVisible(true);
 		
 		}else {
-			check = true;
 			brukernavn.setStyle("-fx-border-color: green");
 		}
 
@@ -49,7 +48,6 @@ public class LoggInnController{
 		}
 		else{
 			passord.setStyle("-fx-border-color: green");
-			check = true;
 		}
 		
 		if (check){
