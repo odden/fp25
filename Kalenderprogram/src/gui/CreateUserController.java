@@ -10,8 +10,11 @@ import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CreateUserController {
@@ -24,12 +27,13 @@ public class CreateUserController {
 	@FXML private TextField email;
 	@FXML private TextField phoneNumber;
 	@FXML private TextField password;
+	@FXML private Text commentName;
 	private Gui gui;
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
-		final ContextMenu nameValidator = new ContextMenu();
-		nameValidator.setAutoHide(false);
+//		final ContextMenu nameValidator = new ContextMenu();
+//		nameValidator.setAutoHide(false);
 		final ContextMenu usernameValidator = new ContextMenu();
 		usernameValidator.setAutoHide(false);
 		final ContextMenu passwordValidator = new ContextMenu();
@@ -38,8 +42,9 @@ public class CreateUserController {
 		emailValidator.setAutoHide(false);
 		final ContextMenu phonenumberValidator = new ContextMenu();
 		phonenumberValidator.setAutoHide(false);
-        
-        nameValidator.hide();
+	
+        commentName.setStyle("-fx-visibility: false");
+		
         usernameValidator.hide();
         passwordValidator.hide();
         emailValidator.hide();
@@ -51,11 +56,15 @@ public class CreateUserController {
 		}else{
 			check = false;
 			name.setStyle("-fx-border-color: red");
+			
+			commentName.setVisible(true);
+			
 			//name.setPromptText("Fornavn og Etternavn");
-			 nameValidator.getItems().clear();
-             nameValidator.getItems().add(
-                     new MenuItem("Fyll inn navn"));
-             nameValidator.show(name, Side.RIGHT, 5, 0);
+//			 nameValidator.getItems().clear();
+//             nameValidator.getItems().add(
+//                     new MenuItem("Fyll inn navn"));
+//             nameValidator.show(name, Side.RIGHT, 5, 0);
+//             nameValidator
 		}
 		
 		//Sjekker brukernavn
