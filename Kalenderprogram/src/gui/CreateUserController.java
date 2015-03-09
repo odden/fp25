@@ -24,18 +24,22 @@ public class CreateUserController {
 	//her man skriver inn passord, email, telefonnr osvosv. 
 	@FXML
 	private static Stage stage;
+	private Gui gui;
 	@FXML private TextField name;
 	@FXML private TextField username;
 	@FXML private TextField email;
 	@FXML private TextField phoneNumber;
 	@FXML private TextField password;
 	@FXML private Text commentName;
+<<<<<<< HEAD
 	@FXML private Text commentUsername;
 	@FXML private Text commentPassword;
 	@FXML private Text commentEmail;
 	@FXML private Text commentPhone;
 	private Gui gui;
 
+=======
+>>>>>>> f3501f0763fc61ff335a5f59965eb7256a2d5d2f
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
@@ -92,7 +96,7 @@ public class CreateUserController {
 		
 		if (check){
 			@SuppressWarnings("unused")
-			Person p = new Person(name.getText(), username.getText(), email.getText(), phoneNumber.getText(), password.getText());
+			Person p = new Person(name.getText(), username.getText(), email.getText(), phoneNumber.getText());
 		}
 	}
 	

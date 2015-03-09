@@ -189,7 +189,7 @@ public class SCore {
 	public ArrayList<List<Object>> getUsers(){
 		ResultSet rs;
 		try {
-			rs = dbc.getQuery("bruker");
+			rs = dbc.getQuery("bruker","brukernavn","navn","epost","tlfnr");
 			return resToList(rs);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

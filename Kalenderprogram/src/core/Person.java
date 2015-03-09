@@ -8,16 +8,14 @@ public class Person {
 	private String username;
 	private String email;
 	private String phoneNumber;
-	private String password;
 	private ArrayList<Appointment> avtaler = new ArrayList<Appointment>();
 	
 	//Constructor
-	public Person(String name, String username, String email, String phoneNumber, String password){
+	public Person(String name, String username, String email, String phoneNumber){
 		setName(name);
 		setUsername(username);
 		setEmail(email);
 		setPhoneNumber(phoneNumber);
-		setPassword(password);
 	}
 	//avtaler
 	public ArrayList<Appointment> getAvtaler() {
@@ -69,12 +67,6 @@ public class Person {
 	}
 	
 	//Passord
-	public String getPassword(){
-		return password;
-	}
-	public void setPassword(String password){
-		this.password = password;
-	}
 	
 	@Override
 	public String toString() {

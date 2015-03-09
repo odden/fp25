@@ -23,12 +23,14 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class CalendarViewController {
 
 	// Min Kalender
-	
+	private static Stage stage;
+	private Gui gui;
 	@FXML private ListView<Person> leggTilKalender;
 	@FXML private ListView<Appointment> mandag;
 	@FXML private Label startK;
@@ -112,6 +114,7 @@ public class CalendarViewController {
 	//Ny hendelse
 	@FXML private TextField tittel;
 	@FXML private TextArea beskrivelse;
+	@FXML private Label labRomNrNH;
 	@FXML private TextField startT;
 	@FXML private TextField sluttT;
 	@FXML private DatePicker dato;
@@ -159,9 +162,9 @@ public class CalendarViewController {
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
         alarm.getSelectionModel().selectFirst();
         //test start
-        velgPerson.setItems(FXCollections.observableArrayList(new Person("Ollef", "Ollef","ollef@gmail.com","22225555","ollef123"),new Person("Fridus", "fridus","fridus@gmail.com","22235555","ollef123")));
-        valgtePersoner.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555","ollef123"),new Person("Frode", "frodiss","frode@gmail.com","22255555","ollef123")));
-        leggTilKalender.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555","ollef123"),new Person("Frode", "frodiss","frode@gmail.com","22255555","ollef123")));
+        velgPerson.setItems(FXCollections.observableArrayList(new Person("Ollef", "Ollef","ollef@gmail.com","22225555"),new Person("Fridus", "fridus","fridus@gmail.com","22235555")));
+        valgtePersoner.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555"),new Person("Frode", "frodiss","frode@gmail.com","22255555")));
+        leggTilKalender.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555"),new Person("Frode", "frodiss","frode@gmail.com","22255555")));
         leggTilKalender.getItems().get(0).addAvtale(new Appointment());
         Person oline = leggTilKalender.getItems().get(0);
         ArrayList<Appointment> avtaler = oline.getAvtaler();
@@ -285,6 +288,7 @@ public class CalendarViewController {
 	@FXML private ListView<Person> invitertePersoner;
 	@FXML private ListView<Person> inviterEkstraPerson;
 	@FXML private DatePicker datoM;
+	@FXML private Label labRomNrM;
 
 	@FXML
 	public void moteInfoTilView(MouseEvent event) {
@@ -326,6 +330,11 @@ public class CalendarViewController {
 	@FXML
 	public void finnRom(ActionEvent event) {
 		//Finner et passende rom utifra antall folk invitert
+	}
+
+	public void initData(Stage stage, Gui gui) {
+		this.stage = stage;
+		this.gui = gui;
 	}
 	
 	
