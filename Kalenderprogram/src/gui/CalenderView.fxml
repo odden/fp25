@@ -78,7 +78,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label fx:id="labUkeNr" alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="241.0" text="Uke 9" GridPane.columnIndex="1">
+                                    <Label fx:id="labUkeNr" alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="241.0" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="15.0" />
                                        </font>

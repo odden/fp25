@@ -2,8 +2,10 @@ package gui;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import core.Appointment;
 import core.Person;
@@ -336,11 +338,14 @@ public class CalendarViewController {
 	public void initData(Stage stage, Gui gui) {
 		this.stage = stage;
 		this.gui = gui;
+		
+		LocalDate date;
+		date = LocalDate.now();
+		
+		WeekFields weekFields = WeekFields.of(Locale.getDefault()); 
+		
+		labUkeNr.setText("Uke " + date.get(weekFields.weekOfWeekBasedYear()));
 	}
-	
-	
-	
-	
 	
 
 }
