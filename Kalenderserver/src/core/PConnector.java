@@ -116,9 +116,9 @@ public class PConnector {
 		for (List<Object> list : appointments) {
 			String appointment = "";
 			for (Object object : list) {
-				appointment += object.toString() + "_";
+				appointment += object.toString() + ":";
 			}
-			appointment += ":";
+			appointment += ";";
 			response.add(appointment);
 		}
 		return response;
