@@ -39,6 +39,7 @@ public class CalendarViewController {
 	@FXML private Label stedK;
 	@FXML private Label datoK;
 	@FXML private DatePicker datoVelgK;
+	@FXML private Label labUkeNr;
 	
 	@FXML
 	public void visUkeFraDato(ActionEvent event) {
