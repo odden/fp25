@@ -80,11 +80,13 @@ public class PConnector {
 	}
 	
 	
+	//kan være int i for løkke er en for mye/lite
 	private boolean createAppointment(String[] request) {
-		
-		
-		
-		return false;
+		List<String> invited = new ArrayList<String>();
+		for (int i = 7; i < request.length; i++) {
+			invited.add(request[i]);
+		}
+		return createAppointment(request[1], request[2], request[3], request[4], request[5],request[6], invited);
 	}
 	
 	private ArrayList<List<Object>> getUsers(){
