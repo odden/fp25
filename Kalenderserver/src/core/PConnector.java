@@ -56,8 +56,8 @@ public class PConnector {
 			response.add(String.valueOf(createAppointment(requestList)));
 			return response;
 		}else if(requestList[0].equals("getAppointments")){
-
-		
+			response = getAppointments(requestList[1]);
+			return response;
 		}else if (requestList[0].equals("getUsers")){
 			ArrayList<List<Object>> responseList = getUsers();
 			for (List<Object> list : responseList) {
@@ -106,6 +106,22 @@ public class PConnector {
 	
 	private Boolean createUser(String[] request){
 		return sc.createUser(request[1], request[2], request[3], request[4], Integer.parseInt(request[5]));
+	}
+	
+	private ArrayList<String> getAppointments(String user){
+		ArrayList<List<Object>> appointments = new ArrayList<List<Object>>();
+		appointments = sc.getAppointments(user);
+		ArrayList<String> response = new ArrayList<String>();
+
+		for (List<Object> list : appointments) {
+			String appointment = "";
+			for (Object object : list) {
+				appointment += object.toString() + "_";
+			}
+			appointment += ":";
+			response.add(appointment);
+		}
+		return response;
 	}
 
 	public static void main(String argv[]) throws Exception{
