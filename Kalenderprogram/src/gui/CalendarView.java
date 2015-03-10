@@ -18,7 +18,7 @@ public class CalendarView extends Application {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
-        stage.setTitle("Calendar");
+        stage.setTitle("Kalender");
         stage.show();
     }
 
