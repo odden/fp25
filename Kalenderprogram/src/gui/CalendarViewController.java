@@ -53,7 +53,7 @@ public class CalendarViewController {
 		sluttK.setText(mote.getSlutt());
 		startK.setText(mote.getStart());
 		beskrivelseK.setText(mote.getBeskrivelse());
-		stedK.setText(mote.getRom());
+		stedK.setText(Integer.toString(mote.getRom()));
 		datoK.setText("" + mote.getDate());
 	}
 	
@@ -132,7 +132,7 @@ public class CalendarViewController {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (item.isBefore(dato.getValue())) {
+                        if (item.isBefore(LocalDate.now())) {
                                 setDisable(true);
                                 setStyle("-fx-background-color: #ffc0cb;");
                         }   
@@ -171,7 +171,7 @@ public class CalendarViewController {
         ArrayList<Appointment> avtaler = oline.getAvtaler();
         Appointment avtale = avtaler.get(0);
         avtale.setBeskrivelse("Kompoiss");
-        avtale.setRom("Kinoen");
+        avtale.setRom(123);
         avtale.setSlutt("11:13");
         avtale.setStart("11:10");
         avtale.setTitle("klasse1");

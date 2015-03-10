@@ -62,10 +62,11 @@ public class SCore {
 		}
 	}
 	
-	public Boolean createAppointment(String vert,String title,int room, Calendar dato,String start, String slutt, List<String> invited){
+	public Boolean createAppointment(String vert,String title,int room, String dato,String start, String slutt, List<String> invited){
 		//Avtale med reservert rom
 		try {
-			dbc.insertRow("avtale", null,vert,title,null,room,dato,start,slutt,null);
+			Calendar cal = stringToCal(dato);
+			dbc.insertRow("avtale", null,vert,title,null,room,cal,start,slutt,null);
 			ResultSet rs = dbc.executeSQL("SELECT MAX( idavtale ) AS idavtale FROM avtale");
 			Object max = resToList(rs).get(0).get(0);
 			if (invited != null){
@@ -79,10 +80,11 @@ public class SCore {
 		}
 		return false;
 	}
-	public Boolean createAppointment(String vert,String title,String sted, Calendar dato,String start, String slutt, List<String> invited){
+	public Boolean createAppointment(String vert,String title,String sted, String dato,String start, String slutt, List<String> invited){
 		//Avtale med bare stedsnavn	
 			try {
-				dbc.insertRow("avtale", null,vert,title,sted,null,dato,start,slutt,null);
+				Calendar cal = stringToCal(dato);
+				dbc.insertRow("avtale", null,vert,title,sted,null,cal,start,slutt,null);
 				ResultSet rs = dbc.executeSQL("SELECT MAX( idavtale ) AS idavtale FROM avtale");
 				Object max = resToList(rs).get(0).get(0);
 				if (invited != null){
@@ -235,9 +237,7 @@ public class SCore {
 	
 	public boolean editAppointment(int id, String vert, String title, String sted, String room,String dato,String start, String slutt, String endring){
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(sdf.parse(dato));
+			Calendar cal = stringToCal(dato);
 			dbc.editRow("avtale", id,null,vert,title,sted, room,cal,start,slutt,endring);
 			ResultSet rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", id);
 			ArrayList<List<Object>> ids = resToList(rs);
@@ -254,6 +254,20 @@ public class SCore {
 			return false;
 		}
 	}
+	
+	public Calendar stringToCal(String date){
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(sdf.parse(date));
+			return cal;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public boolean setAlarm(String bruker,String id, String tid){
 		try {
 			dbc.executeSQL("UPDATE bruker_has_avtale SET alarm = "+tid+" WHERE avtale_idavtale = '"+id+"' AND bruker_brukernavn = '"+bruker+"'");
