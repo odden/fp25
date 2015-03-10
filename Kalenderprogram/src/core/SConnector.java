@@ -59,13 +59,18 @@ public class SConnector {
 		return responseList;
 	}
 	
-	public String invite(List<String>usernames,String vert,String dato,String start){
-		String message = "invite" + ":" + vert + ":" + dato + ":" + start + ":";
+	public String invite(List<String>usernames,String host,String date,String start){
+		String message = "invite" + ":" + host + ":" + date + ":" + start + ":";
 		for (String string : usernames) {
 			message += string + ":";
 		}
 		String response = connectToServer(message);
 		return response;
+	}
+	
+	public void setStatus(String user, String host,String date,String start, Boolean status){
+		String message = "setStatus" + ":" + user + ":" + host + ":" + date + ":" + start + ":" + status.toString();
+		connectToServer(message);
 	}
 	
 	

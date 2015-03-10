@@ -78,6 +78,9 @@ public class PConnector {
 		}else if(requestList[0].equals("invite")){
 			response.add(String.valueOf(invite(requestList)));
 			return response;
+		}else if(requestList[0].equals("setStatus")){
+			sc.setStatus(requestList[1], requestList[2], requestList[3], requestList[4], Boolean.valueOf(requestList[5]));
+			return null;
 		}
 		return null;
 	}
