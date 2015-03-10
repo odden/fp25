@@ -33,8 +33,14 @@ public class CreateUserController {
 
 		
 		//Sjekker Navn   
-		if (name.getText().matches("[A-Z,ÆØÅ][a-z,æøå]+ [A-Z,ÆØÅ][a-z,æøå]+(-)*([A-Z,ÆØÅ][a-z,æøå]+)*")){
+		if (name.getText().matches("[A-Z,\u00C6\u00D8\u00D5][a-z,\u00E6\u00F8\u00E5]+ [A-Z,\u00C6\u00D8\u00D5][a-z,\u00E6\u00F8\u00E5]+(-)*([A-Z,\u00C6\u00D8\u00D5][a-z,\u00E6\u00F8\u00E5]+)*")){
 			name.setStyle("-fx-border-color:green");
+//			æ = \u00E6
+//					Æ = \u00C6\u00D8\u00D5
+//					ø = \u00F8
+//					Ø = \u00D8
+//					å = \u00E5
+//					Å = \u00D5
 			commentName.setVisible(false);
 		}else{
 			check = false;
