@@ -107,6 +107,9 @@ public class Appointment {
 		this.sted = sted;
 	}
 	
+	public String getWhen(){
+		return date.toString()+" "+start;
+	}
 	
 	
 	

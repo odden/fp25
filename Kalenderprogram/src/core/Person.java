@@ -8,7 +8,7 @@ public class Person {
 	private String username;
 	private String email;
 	private String phoneNumber;
-	private ArrayList<Appointment> avtaler = new ArrayList<Appointment>();
+	private ArrayList<Invitation> avtaler = new ArrayList<Invitation>();
 	
 	//Constructor
 	public Person(String name, String username, String email, String phoneNumber){
@@ -18,11 +18,11 @@ public class Person {
 		setPhoneNumber(phoneNumber);
 	}
 	//avtaler
-	public ArrayList<Appointment> getAvtaler() {
+	public ArrayList<Invitation> getAvtaler() {
 		return avtaler;
 	}
 	
-	public void addAvtale(Appointment avtale) {
+	public void addAvtale(Invitation avtale) {
 		avtaler.add(avtale);
 	}
 	
@@ -71,5 +71,9 @@ public class Person {
 	@Override
 	public String toString() {
 		return username;
+	}
+	public void runAlarm(Appointment appointment) {
+		// TODO Auto-generated method stub
+		
 	}
 }
