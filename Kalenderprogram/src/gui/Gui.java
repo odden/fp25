@@ -17,6 +17,7 @@ public class Gui extends Application {
 	private static Stage stage; 
 	Parent root;
 	private LoggInnController logIn;
+	@SuppressWarnings("unused")
 	private String brukernavn;
 	private ArrayList<Person> users;
 	public void init(){

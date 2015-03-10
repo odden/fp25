@@ -78,7 +78,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="241.0" text="Uke 9" GridPane.columnIndex="1">
+                                    <Label fx:id="labUkeNr" alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="241.0" text="Uke 9" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
@@ -93,16 +93,16 @@
                               </GridPane>
                            </children>
                         </GridPane>
-                        <GridPane layoutX="98.0" layoutY="375.0" prefHeight="118.0" prefWidth="324.0">
+                        <GridPane layoutX="93.0" layoutY="381.0" prefHeight="97.0" prefWidth="328.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="159.0" minWidth="10.0" prefWidth="80.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="251.0" minWidth="10.0" prefWidth="244.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="26.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="38.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <Label text="Beskrivelse:" />
@@ -195,7 +195,7 @@
                            <children>
                               <Label text="Tittel:" GridPane.rowIndex="1" />
                               <Label text="Beskrivelse:" GridPane.rowIndex="2" />
-                              <Label text="Rom:" GridPane.rowIndex="3" />
+                              <Label text="Sted:" GridPane.rowIndex="3" />
                               <Label text="Starttid:" GridPane.rowIndex="4" />
                               <Label text="Sluttid:" GridPane.rowIndex="5" />
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="388.0" text="Fyll inn informasjon" GridPane.columnIndex="1">
@@ -289,7 +289,7 @@
                            <children>
                               <Label text="Tittel:" GridPane.rowIndex="1" />
                               <Label text="Beskrivelse:" GridPane.rowIndex="2" />
-                              <Label text="Rom:" GridPane.rowIndex="3" />
+                              <Label text="Sted:" GridPane.rowIndex="3" />
                               <Label text="Starttid:" GridPane.rowIndex="4" />
                               <Label text="Sluttid:" GridPane.rowIndex="5" />
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="388.0" text="Fyll inn informasjon" GridPane.columnIndex="1">
