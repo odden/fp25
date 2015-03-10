@@ -29,8 +29,7 @@ public class LoggInnController {
 
 		boolean check = true;
 
-		if (brukernavn.getText().trim().length() != 0
-				&& brukernavn.getText().matches("[a-z]+[a-z,0-9]{2,}")) {
+		if (brukernavn.getText().trim().length() != 0) {
 					brukernavn.setStyle("-fx-border-color: green");
 		} else {
 			check = false;
@@ -38,7 +37,7 @@ public class LoggInnController {
 			commentUsername.setVisible(true);
 		}
 
-		if (passord.getText().trim().length() != 0 && passord.getText().matches("[A-Z,a-z,0-9]{6,}")) {
+		if (passord.getText().trim().length() != 0) {
 			passord.setStyle("-fx-border-color: green");
 		} else {
 			check = false;
