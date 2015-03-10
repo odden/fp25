@@ -9,11 +9,17 @@ public class Appointment {
 	private LocalDate date;
 	private String start;
 	private String slutt;
-	private String rom;
+	private int rom;
+	private String sted;
 	private String title;
 	private ArrayList<Person> participants = new ArrayList<Person>();
 	private Person host;
 	private String beskrivelse;
+	
+	
+	public Appointment(){
+		
+	}
 	
 	public String getTitle() {
 		return title;
@@ -31,7 +37,7 @@ public class Appointment {
 		this.beskrivelse = beskrivelse;
 	}
 
-	public void init(LocalDate date, String rom, Person host){
+	public void init(LocalDate date, int rom, Person host){
 		this.rom = rom;
 		this.date = date;
 		this.host = host;
@@ -81,16 +87,24 @@ public class Appointment {
 		this.date = date;
 	}
 
-	public String getRom() {
+	public int getRom() {
 		return rom;
 	}
 
-	public void setRom(String rom) {
+	public void setRom(int rom) {
 		this.rom = rom;
 	}
 	
 	public String toString() {
 		return title;
+	}
+
+	public String getSted() {
+		return sted;
+	}
+
+	public void setSted(String sted) {
+		this.sted = sted;
 	}
 	
 	

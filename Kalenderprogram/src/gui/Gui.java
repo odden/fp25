@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import core.PCore;
 import core.Person;
+import core.Appointment;
 
 public class Gui extends Application {
 	PCore core;
@@ -19,10 +20,18 @@ public class Gui extends Application {
 	private LoggInnController logIn;
 	private String brukernavn;
 	private ArrayList<Person> users;
+	private ArrayList<Appointment> myAppointments;
+	
 	public void init(){
 		this.core = new PCore(this);
 	}
 	
+	public ArrayList<Person> getUsers(){
+		return users;
+	}
+	public ArrayList<Appointment> getAppointments(){
+		return myAppointments;
+	}
 	public void switchSceneContent(String fxml){
 		try {
 			final FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
@@ -68,14 +77,21 @@ public class Gui extends Application {
 						this.users.add(p);
 					}
 				}
-				
+				ArrayList<String> myAppointments = core.sc.getAppointments(brukernavn);
+				for (String s: myAppointments){
+					if (s.equals(":")){}
+					else{
+						String[] appointments = s.split(":");
+						Appointment a = new Appointment();
+						this.myAppointments.add(a);
+					}
+				}
 				System.out.println(this.users);
 				
 				return "Ok";
 			}
 	}
 	
-	@SuppressWarnings("static-access")
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.stage = primaryStage;
