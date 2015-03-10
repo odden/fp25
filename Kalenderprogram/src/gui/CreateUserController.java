@@ -84,6 +84,7 @@ public class CreateUserController {
 		if (check){
 			@SuppressWarnings("unused")
 			Person p = new Person(name.getText(), username.getText(), email.getText(), phoneNumber.getText());
+			gui.tryCreateUser(username.getText(), password.getText(), name.getText(), email.getText(), Integer.parseInt(phoneNumber.getText()));
 		}
 	}
 	

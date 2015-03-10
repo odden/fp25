@@ -15,41 +15,43 @@ import core.Appointment;
 
 public class Gui extends Application {
 	PCore core;
-	private static Stage stage; 
+	private static Stage stage;
 	Parent root;
 	private LoggInnController logIn;
 	@SuppressWarnings("unused")
 	private String brukernavn;
 	private ArrayList<Person> users;
 	private ArrayList<Appointment> myAppointments;
-	
-	public void init(){
+
+	public void init() {
 		this.core = new PCore(this);
 	}
-	
-	public ArrayList<Person> getUsers(){
+
+	public ArrayList<Person> getUsers() {
 		return users;
 	}
-	public ArrayList<Appointment> getAppointments(){
+
+	public ArrayList<Appointment> getAppointments() {
 		return myAppointments;
 	}
-	public void switchSceneContent(String fxml){
+
+	public void switchSceneContent(String fxml) {
 		try {
-			final FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
-			
+			final FXMLLoader loader = new FXMLLoader(getClass().getResource(
+					fxml));
+
 			root = loader.load();
 			stage.setScene(new Scene(root));
-			if (fxml.equals("CreateUser.fxml")){
+			if (fxml.equals("CreateUser.fxml")) {
 				final CreateUserController controller = loader.getController();
-				controller.initData(stage,this);
-			}
-			else if (fxml.equals("LoggInn.fxml")){
+				controller.initData(stage, this);
+			} else if (fxml.equals("LoggInn.fxml")) {
 				logIn = loader.getController();
-			    logIn.initData(stage,this);
-			}
-			else if(fxml.equals("CalenderView.fxml")) {
-				final CalendarViewController controller = loader.getController();
-				controller.initData(stage,this);
+				logIn.initData(stage, this);
+			} else if (fxml.equals("CalenderView.fxml")) {
+				final CalendarViewController controller = loader
+						.getController();
+				controller.initData(stage, this);
 			}
 			stage.show();
 		} catch (IOException e) {
@@ -57,65 +59,77 @@ public class Gui extends Application {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	public String tryLogIn(String brukernavn,String passord){
-			String response = core.sc.logIn(brukernavn,passord);
-			System.out.println(response);
-			this.users = new ArrayList<Person>();
-			if (response == null){
-				return "aua";
-			}
-			else{
-				switchSceneContent("CalenderView.fxml");
-				this.brukernavn = response.split(":")[0];
-				ArrayList<String> users = core.sc.getUsers();
-				for (String s: users){
-					if (s.equals(":")){}
-					else{
-						String[] user = s.split(":");
-						Person p = new Person(user[0], user[1], user[2], user[3]);
-						this.users.add(p);
-					}
-				}
-				ArrayList<String> myAppointments = core.sc.getAppointments(brukernavn);
-				for (String s: myAppointments){
-					if (s.equals(":")){}
-					else{
-						String[] appointments = s.split(":");
-						Appointment a = new Appointment();
-						this.myAppointments.add(a);
-					}
-				}
-				System.out.println(this.users);
-				
-				return "Ok";
-			}
+
+	public String tryCreateUser(String brukernavn, String passord, String email, String navn, int telefon){
+		String response = core.sc.createUser(brukernavn, passord, navn, email, telefon);
+		System.out.println(response);
+		if (response == null){
+			return "yipyip";
+		}else{
+			switchSceneContent("LoggInn.fxml");
+		}
+		
+		return "oki"; 
 	}
-	
+
+	public String tryLogIn(String brukernavn, String passord) {
+		String response = core.sc.logIn(brukernavn, passord);
+		System.out.println(response);
+		this.users = new ArrayList<Person>();
+		if (response == null) {
+			return "aua";
+		} else {
+			switchSceneContent("CalenderView.fxml");
+			this.brukernavn = response.split(":")[0];
+			ArrayList<String> users = core.sc.getUsers();
+			for (String s : users) {
+				if (s.equals(":")) {
+				} else {
+					String[] user = s.split(":");
+					Person p = new Person(user[0], user[1], user[2], user[3]);
+					this.users.add(p);
+				}
+			}
+			/*ArrayList<String> myAppointments = core.sc
+					.getAppointments(brukernavn);
+			for (String s : myAppointments) {
+				if (s.equals(":")) {
+				} else {
+					String[] appointments = s.split(":");
+					Appointment a = new Appointment();
+					this.myAppointments.add(a);
+				}
+			}
+			System.out.println(this.users);
+*/
+			return "Ok";
+		}
+	}
+
+	@SuppressWarnings("static-access")
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.stage = primaryStage;
 		try {
-			final FXMLLoader loader = new FXMLLoader(getClass().getResource("LoggInn.fxml"));
-			
+			final FXMLLoader loader = new FXMLLoader(getClass().getResource(
+					"LoggInn.fxml"));
+
 			root = loader.load();
 			Scene scene = new Scene(root);
 			logIn = loader.getController();
-		    logIn.initData(stage,this);
+			logIn.initData(stage, this);
 			TextField brukernavn = (TextField) root.lookup("#brukernavn");
 			primaryStage.setTitle("Logg Inn");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			brukernavn.requestFocus();
-		}
-		catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	public static void main(String args[]){
+
+	public static void main(String args[]) {
 		launch();
 	}
 }
