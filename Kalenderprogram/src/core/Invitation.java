@@ -11,6 +11,7 @@ import java.util.TimerTask;
 public class Invitation extends TimerTask {
 	private Person me;
 	private Appointment appointment;
+	
 	boolean svar;
 	boolean visibility;
 	ArrayList<String> varsler;
@@ -33,7 +34,10 @@ public class Invitation extends TimerTask {
 			e.printStackTrace();
 		}
 	}
-	
+	public Appointment getAppointment() {
+		return appointment;
+	}
+
 	@Override
 	public void run() {
 		me.runAlarm(appointment);

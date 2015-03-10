@@ -18,8 +18,12 @@ public class Person {
 		setPhoneNumber(phoneNumber);
 	}
 	//avtaler
-	public ArrayList<Invitation> getAvtaler() {
-		return avtaler;
+	public ArrayList<Appointment> getAvtaler() {
+		ArrayList<Appointment> a=new ArrayList<Appointment>();
+		for (Invitation i:avtaler){
+			a.add(i.getAppointment());
+		}
+		return a;
 	}
 	
 	public void addAvtale(Invitation avtale) {
