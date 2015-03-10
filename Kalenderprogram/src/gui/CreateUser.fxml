@@ -54,7 +54,7 @@
                   <Font size="10.0" />
                </font>
             </Text>
-            <Text fx:id="commentName" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Skriv inn gyldig brukernavn" visible="false" GridPane.columnIndex="1">
+            <Text fx:id="commentName" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="Skriv inn gyldig navn" visible="false" GridPane.columnIndex="1">
                <font>
                   <Font size="10.0" />
                </font>
