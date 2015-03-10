@@ -56,8 +56,8 @@ public class PConnector {
 			response.add(String.valueOf(createAppointment(requestList)));
 			return response;
 		}else if(requestList[0].equals("getAppointments")){
-
-		
+			response = getAppointments(requestList[1]);
+			return response;
 		}else if (requestList[0].equals("getUsers")){
 			ArrayList<List<Object>> responseList = getUsers();
 			for (List<Object> list : responseList) {
@@ -74,6 +74,9 @@ public class PConnector {
 				userdata += ";";
 				response.add(userdata);
 			}
+			return response;
+		}else if(requestList[0].equals("invite")){
+			response.add(String.valueOf(invite(requestList)));
 			return response;
 		}
 		return null;
@@ -104,8 +107,32 @@ public class PConnector {
 		return response;
 	}
 	
-	private Boolean createUser(String[] request){
+	private boolean createUser(String[] request){
 		return sc.createUser(request[1], request[2], request[3], request[4], Integer.parseInt(request[5]));
+	}
+	
+	private ArrayList<String> getAppointments(String user){
+		ArrayList<List<Object>> appointments = new ArrayList<List<Object>>();
+		appointments = sc.getAppointments(user);
+		ArrayList<String> response = new ArrayList<String>();
+
+		for (List<Object> list : appointments) {
+			String appointment = "";
+			for (Object object : list) {
+				appointment += object.toString() + ":";
+			}
+			appointment += ";";
+			response.add(appointment);
+		}
+		return response;
+	}
+	
+	private boolean invite(String[] request){
+		List<String> invited = new ArrayList<String>();
+		for (int i = 4; i < request.length; i++) {
+			invited.add(request[i]);
+		}
+		return sc.invite(invited, request[1], request[2], request[3]);
 	}
 
 	public static void main(String argv[]) throws Exception{

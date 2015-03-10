@@ -37,8 +37,12 @@ public class SConnector {
 	public ArrayList<String> getAppointments(String user){
 		String message = "getAppointments:" + user;
 		String response = connectToServer(message);
-		
-		return null;
+		String[] responseSplit = response.split(";");
+		ArrayList<String> responseList = new ArrayList<String>();
+		for (String string : responseSplit) {
+			responseList.add(string);
+		}
+		return responseList;
 	}
 	
 	public ArrayList<String> getUsers(){
@@ -52,6 +56,16 @@ public class SConnector {
 		System.out.println(responseList);
 		return responseList;
 	}
+	
+	public String invite(List<String>usernames,String vert,String dato,String start){
+		String message = "invite" + ":" + vert + ":" + dato + ":" + start + ":";
+		for (String string : usernames) {
+			message += string + ":";
+		}
+		String response = connectToServer(message);
+		return response;
+	}
+	
 	
 	private String connectToServer(String message){
 		try {
