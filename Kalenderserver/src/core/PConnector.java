@@ -75,6 +75,9 @@ public class PConnector {
 				response.add(userdata);
 			}
 			return response;
+		}else if(requestList[0].equals("invite")){
+			response.add(String.valueOf(invite(requestList)));
+			return response;
 		}
 		return null;
 	}
@@ -104,7 +107,7 @@ public class PConnector {
 		return response;
 	}
 	
-	private Boolean createUser(String[] request){
+	private boolean createUser(String[] request){
 		return sc.createUser(request[1], request[2], request[3], request[4], Integer.parseInt(request[5]));
 	}
 	
@@ -122,6 +125,14 @@ public class PConnector {
 			response.add(appointment);
 		}
 		return response;
+	}
+	
+	private boolean invite(String[] request){
+		List<String> invited = new ArrayList<String>();
+		for (int i = 4; i < request.length; i++) {
+			invited.add(request[i]);
+		}
+		return sc.invite(invited, request[1], request[2], request[3]);
 	}
 
 	public static void main(String argv[]) throws Exception{

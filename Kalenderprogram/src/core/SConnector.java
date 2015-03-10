@@ -59,6 +59,16 @@ public class SConnector {
 		return responseList;
 	}
 	
+	public String invite(List<String>usernames,String vert,String dato,String start){
+		String message = "invite" + ":" + vert + ":" + dato + ":" + start + ":";
+		for (String string : usernames) {
+			message += string + ":";
+		}
+		String response = connectToServer(message);
+		return response;
+	}
+	
+	
 	private String connectToServer(String message){
 		try {
 			String sentence = message;
