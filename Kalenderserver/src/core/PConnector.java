@@ -86,7 +86,7 @@ public class PConnector {
 		for (int i = 7; i < request.length; i++) {
 			invited.add(request[i]);
 		}
-		return createAppointment(request[1], request[2], request[3], request[4], request[5],request[6], invited);
+		return sc.createAppointment(request[1], request[2], request[3], request[4], request[5],request[6], invited);
 	}
 	
 	private ArrayList<List<Object>> getUsers(){
