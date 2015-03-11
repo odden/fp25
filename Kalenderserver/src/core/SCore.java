@@ -45,12 +45,16 @@ public class SCore {
 		ResultSet login;
 		try {
 			login = dbc.executeSQL("SELECT brukernavn,navn,epost,tlfnr FROM bruker WHERE brukernavn = '"+username+"' AND passord = '"+password+"'");
-			List<Object> user = resToList(login).get(0);
-			return user;
+			ArrayList<List<Object>> rs = resToList(login);
+			if (rs.size() != 0){
+				List<Object> user = rs.get(0);
+				return user;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
 		}
+		return null;
 	}
 	
 	public Boolean createUser(String username,String password,String name,String email,int tlf){

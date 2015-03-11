@@ -88,12 +88,15 @@ public class SConnector {
 	}
 	
 	private ArrayList<String> convert(String response){
-		String[] responseSplit = response.split(";");
-		ArrayList<String> responseList = new ArrayList<String>();
-		for (String string : responseSplit) {
-			responseList.add(string);
+		if (response != null){
+			String[] responseSplit = response.split(";");
+			ArrayList<String> responseList = new ArrayList<String>();
+			for (String string : responseSplit) {
+				responseList.add(string);
+			}
+			return responseList;
 		}
-		return responseList;
+		return null;
 	}
 	
 }

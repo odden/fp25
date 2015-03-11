@@ -33,8 +33,10 @@ public class PConnector {
 			    System.out.println("Received: " + request);
 			    response = response(request);
 			    String responseStr = "";
-			    for (String object : response) {
-			    	responseStr += object + ":";
+			    if (response != null){
+				    for (String object : response) {
+				    	responseStr += object + ":";
+				    }
 			    }
 			    outToClient.writeBytes(responseStr + "\n");
 			}
@@ -108,8 +110,10 @@ public class PConnector {
 	private ArrayList<String> logIn(String[] request) {
 		List<Object> responseList = sc.logIn(request[1], request[2]);
 		ArrayList<String> response = new ArrayList<String>();
-		for (Object object : responseList) {
-			response.add(object.toString());
+		if (responseList != null){
+			for (Object object : responseList) {
+				response.add(object.toString());
+			}
 		}
 		return response;
 	}

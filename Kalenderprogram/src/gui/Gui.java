@@ -79,7 +79,7 @@ public class Gui extends Application {
 
 	public String tryLogIn(String brukernavn, String passord) {
 		String response = core.sc.logIn(brukernavn, passord);
-		System.out.println(response);
+		System.out.println(response + "----");
 		this.users = new ArrayList<Person>();
 		if (response == null) {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -90,7 +90,17 @@ public class Gui extends Application {
 			alert.showAndWait();
             
 			return "aua";
-		} else {
+		} else if (response.equals("\n") || response.equals("")){
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Feilmelding");
+			alert.setHeaderText("Ugyldig brukernavn og/eller passord");
+			alert.setContentText("Vennligst prøv igjen");
+
+			alert.showAndWait();
+            
+			return "aua";
+		}
+		else{
 			this.brukernavn = response.split(":")[0];
 			ArrayList<String> users = core.sc.getUsers();
 			for (String s : users) {
