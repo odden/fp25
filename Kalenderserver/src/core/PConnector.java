@@ -59,22 +59,7 @@ public class PConnector {
 			response = getAppointments(requestList[1]);
 			return response;
 		}else if (requestList[0].equals("getUsers")){
-			ArrayList<List<Object>> responseList = getUsers();
-			for (List<Object> list : responseList) {
-				String userdata = "";
-				
-				for (Object object : list) {
-					if (object != null){
-						userdata += object.toString();
-					}
-					else
-						userdata += "NULL";
-					userdata += ":";
-				}
-				userdata += ";";
-				response.add(userdata);
-			}
-			return response;
+			return getUsers();
 		}else if(requestList[0].equals("invite")){
 			response.add(String.valueOf(invite(requestList)));
 			return response;
@@ -98,10 +83,26 @@ public class PConnector {
 		return sc.createAppointment(request[1], request[2], request[3], request[4], request[5],request[6], invited);
 	}
 	
-	private ArrayList<List<Object>> getUsers(){
+	private ArrayList<String> getUsers(){
 		ArrayList<List<Object>> users = new ArrayList<List<Object>>();
 		users = sc.getUsers();
-		return users;
+		ArrayList<String> response = new ArrayList<String>();
+		for (List<Object> list : users) {
+			String userdata = "";
+			
+			for (Object object : list) {
+				if (object != null){
+					userdata += object.toString();
+				}
+				else
+					userdata += "NULL";
+				userdata += ":";
+			}
+			userdata += ";";
+			response.add(userdata);
+		}
+		
+		return response;
 	}
 
 	private ArrayList<String> logIn(String[] request) {
