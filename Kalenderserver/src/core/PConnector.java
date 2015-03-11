@@ -129,20 +129,22 @@ public class PConnector {
 		ArrayList<List<Object>> appointments = new ArrayList<List<Object>>();
 		appointments = sc.getAppointments(user);
 		ArrayList<String> response = new ArrayList<String>();
-
-		for (List<Object> list : appointments) {
-			String appointment = "";
-			for (Object object : list) {
-				if (object != null){
-					appointment += object.toString() + ":";
+		if (appointments != null){
+			for (List<Object> list : appointments) {
+				String appointment = "";
+				for (Object object : list) {
+					if (object != null){
+						appointment += object.toString() + ":";
+					}
+					else
+						appointment += "NULL"+":";
 				}
-				else
-					appointment += "NULL"+":";
+				appointment += ";";
+				response.add(appointment);
 			}
-			appointment += ";";
-			response.add(appointment);
+			return response;
 		}
-		return response;
+		else return null;
 	}
 	
 	private boolean invite(String[] request){

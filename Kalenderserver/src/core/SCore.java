@@ -223,16 +223,19 @@ public class SCore {
 			rs = dbc.getQueryCondition("bruker_has_avtale", "bruker_brukernavn", bruker, "avtale_idavtale");
 			ArrayList<List<Object>> ids = resToList(rs);
 			String appIds = ",";
-			for (List<Object> o:ids){
-				appIds+= o.get(0).toString()+",";
+			if (ids.size() != 0){
+				for (List<Object> o:ids){
+					appIds+= o.get(0).toString()+",";
+				}
+				appIds = appIds.substring(1,appIds.length()-1);
+				System.out.println(appIds);
+				rs = dbc.executeSQL("SELECT * FROM avtale WHERE idavtale in ("+appIds+")");
+				ids = resToList(rs);
+				rs = dbc.getQueryCondition("avtale", "vert_brukernavn", bruker);
+				ids.addAll(resToList(rs));
+				return ids;
 			}
-			appIds = appIds.substring(1,appIds.length()-1);
-			System.out.println(appIds);
-			rs = dbc.executeSQL("SELECT * FROM avtale WHERE idavtale in ("+appIds+")");
-			ids = resToList(rs);
-			rs = dbc.getQueryCondition("avtale", "vert_brukernavn", bruker);
-			ids.addAll(resToList(rs));
-			return ids;
+			else return null;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
