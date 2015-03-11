@@ -41,6 +41,19 @@ public class CalendarViewController {
 	
 	@FXML private ListView<Person> leggTilKalender;
 	@FXML private ListView<Appointment> mandag;
+	@FXML private ListView<Appointment> tirsdag;
+	@FXML private ListView<Appointment> onsdag;
+	@FXML private ListView<Appointment> tordag;
+	@FXML private ListView<Appointment> fredag;
+	@FXML private ListView<Appointment> lordag;
+	@FXML private ListView<Appointment> sondag;
+	@FXML private Label mandagL;
+	@FXML private Label tirsdagL;
+	@FXML private Label onsdagL;
+	@FXML private Label torsdagL;
+	@FXML private Label fredagL;
+	@FXML private Label lordagL;
+	@FXML private Label sondagL;
 	@FXML private Label startK;
 	@FXML private Label sluttK;
 	@FXML private Label beskrivelseK;
@@ -67,6 +80,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void blaTilbake(ActionEvent event) {
+		
 		//blar tilbake til forrige uke
 		//og endrer hva som vises i kalenderen
 	}
@@ -168,7 +182,7 @@ public class CalendarViewController {
             }
         };
         datoM.setDayCellFactory(datoerSjekk1);
-        
+
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
         alarm.getSelectionModel().selectFirst();
         //test start

@@ -68,6 +68,12 @@ public class SConnector {
 		return convert(response);
 	}
 	
+	public String editAppointment(int id, String host, String title, String sted, String room,String dato,String start, String slutt, String endring){
+		String message = "editAppointment" + ":" + Integer.toString(id) + ":" + host + ":" + title + ":" + sted + ":" + room + ":" + dato + ":" + start + ":" + slutt + ":" + endring;
+		String response = connectToServer(message);
+		return null;
+	}
+	
 	
 	private String connectToServer(String message){
 		try {
