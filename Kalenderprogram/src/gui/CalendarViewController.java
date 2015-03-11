@@ -1,7 +1,10 @@
 package gui;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
+import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.PickResult;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -54,6 +58,13 @@ public class CalendarViewController {
 	@FXML private Label fredagL;
 	@FXML private Label lordagL;
 	@FXML private Label sondagL;
+	private LocalDate mandagDato;
+	private LocalDate tirsdagDato;
+	private LocalDate onsdagDato;
+	private LocalDate torsdagDato;
+	private LocalDate fredagDato;
+	private LocalDate lordagDato;
+	private LocalDate sondagDato;
 	@FXML private Label startK;
 	@FXML private Label sluttK;
 	@FXML private Label beskrivelseK;
@@ -61,34 +72,55 @@ public class CalendarViewController {
 	@FXML private Label datoK;
 	@FXML private DatePicker datoVelgK;
 	@FXML private Label labUkeNr;
+	@FXML private Label maned;
 	
 	@FXML
 	public void visUkeFraDato(Event event) {
 		System.out.println("hei");
+		LocalDate tilDato = datoVelgK.getValue();
+		settKalenderDato(tilDato);
+		
 		//Alle avtalene må lates inn på riktig måte
 	}
 	
 	@FXML
 	public void moteBeskrivelseTilInfo(MouseEvent event) {
+		PickResult pick = event.getPickResult();
+		if (mandag.isFocused()){
+			System.out.println("var det jeg sa jo!");
 		Appointment mote = mandag.getSelectionModel().getSelectedItem(); //testish - velger ikke alle dager
 		sluttK.setText(mote.getSlutt());
 		startK.setText(mote.getStart());
 		beskrivelseK.setText(mote.getBeskrivelse());
 		stedK.setText(Integer.toString(mote.getRom()));
 		datoK.setText("" + mote.getDate());
+		}
 	}
 	
 	@FXML
 	public void blaTilbake(ActionEvent event) {
-		
-		//blar tilbake til forrige uke
-		//og endrer hva som vises i kalenderen
+		mandagDato = mandagDato.minusWeeks(1);
+		tirsdagDato = tirsdagDato.minusWeeks(1);
+		onsdagDato = onsdagDato.minusWeeks(1);
+		torsdagDato = torsdagDato.minusWeeks(1);
+		fredagDato = fredagDato.minusWeeks(1);
+		lordagDato = lordagDato.minusWeeks(1);
+		sondagDato = sondagDato.minusWeeks(1);
+		updateKalenderDato();
+		//endrer ikke hva som vises i kalenderen
 	}
 	
 	@FXML 
 	public void blaFremover(ActionEvent event) {
-		//blar til neste uke
-		//og endrer hva som vises i kalenderen
+		mandagDato = mandagDato.plusWeeks(1);
+		tirsdagDato = tirsdagDato.plusWeeks(1);
+		onsdagDato = onsdagDato.plusWeeks(1);
+		torsdagDato = torsdagDato.plusWeeks(1);
+		fredagDato = fredagDato.plusWeeks(1);
+		lordagDato = lordagDato.plusWeeks(1);
+		sondagDato = sondagDato.plusWeeks(1);
+		updateKalenderDato();
+		//endrer ikke hva som vises i kalenderen
 	}
 	
 	@FXML
@@ -104,6 +136,97 @@ public class CalendarViewController {
 				}
 			}
 		}
+	}
+	
+	private void settKalenderDato(LocalDate date) {
+		DayOfWeek dag = date.getDayOfWeek();	       
+		Month month = date.getMonth();
+		System.out.println(dag);
+		maned.setText(month + "");
+		if (dag.getValue() == 1) {
+			mandagDato = date;
+			tirsdagDato = date.plusDays(1);
+			onsdagDato = date.plusDays(2);
+			torsdagDato = date.plusDays(3);
+			fredagDato = date.plusDays(4);
+			lordagDato = date.plusDays(5);
+			sondagDato = date.plusDays(6);
+			updateKalenderDato();
+		}
+		else if (dag.getValue() == 2) {
+			mandagDato = date.minusDays(1);
+			tirsdagDato = date;
+			onsdagDato = date.plusDays(1);
+			torsdagDato = date.plusDays(2);
+			fredagDato = date.plusDays(3);
+			lordagDato = date.plusDays(4);
+			sondagDato = date.plusDays(5);
+			updateKalenderDato();
+		}
+		else if (dag.getValue() == 3) {
+			mandagDato = date.minusDays(2);
+			tirsdagDato = date.minusDays(1);
+			onsdagDato = date;
+			torsdagDato = date.plusDays(1);
+			fredagDato = date.plusDays(2);
+			lordagDato = date.plusDays(3);
+			sondagDato = date.plusDays(4);
+			updateKalenderDato();
+			
+		}
+		else if (dag.getValue() == 4) {
+			mandagDato = date.minusDays(3);
+			onsdagDato = date.minusDays(2);
+			onsdagDato = date.minusDays(1);
+			torsdagDato = date;
+			fredagDato = date.plusDays(1);
+			lordagDato = date.plusDays(2);
+			sondagDato = date.plusDays(3);
+			updateKalenderDato();
+		}
+		else if (dag.getValue() == 5) {
+			mandagDato = date.minusDays(4);
+			onsdagDato = date.minusDays(3);
+			onsdagDato = date.minusDays(2);
+			torsdagDato = date.minusDays(1);
+			fredagDato = date;
+			lordagDato = date.plusDays(1);
+			sondagDato = date.plusDays(2);
+			updateKalenderDato();
+		}
+		else if (dag.getValue() == 6) {
+			mandagDato = date.minusDays(5);
+			onsdagDato = date.minusDays(4);
+			onsdagDato = date.minusDays(3);
+			torsdagDato = date.minusDays(2);
+			fredagDato = date.minusDays(1);
+			lordagDato = date;
+			sondagDato = date.plusDays(1);
+			updateKalenderDato();
+		}
+		else {
+			mandagDato = date.minusDays(6);
+			onsdagDato = date.minusDays(5);
+			onsdagDato = date.minusDays(4);
+			torsdagDato = date.minusDays(3);
+			fredagDato = date.minusDays(2);
+			lordagDato = date.minusDays(1);
+			sondagDato = date;
+			updateKalenderDato();
+		}
+	}
+	
+	public void updateKalenderDato() {
+		WeekFields weekFields = WeekFields.of(Locale.getDefault()); 
+		mandagL.setText("Mandag " + mandagDato.getDayOfMonth() + ".");
+		tirsdagL.setText("Tirsdag " + tirsdagDato.getDayOfMonth() + ".");
+		onsdagL.setText("Onsdag " + onsdagDato.getDayOfMonth() + ".");
+		torsdagL.setText("Torsdag " + torsdagDato.getDayOfMonth() + ".");
+		fredagL.setText("Fredag " + fredagDato.getDayOfMonth() + ".");
+		lordagL.setText("Lørdag " + lordagDato.getDayOfMonth() + ".");
+		sondagL.setText("Søndag " + sondagDato.getDayOfMonth() + ".");
+		maned.setText(mandagDato.getMonth() +" " + mandagDato.getYear());
+		labUkeNr.setText(mandagDato.get(weekFields.weekOfWeekBasedYear()) + "");
 	}
 	
 	public void resetBeskrivelse() {
@@ -183,16 +306,18 @@ public class CalendarViewController {
         };
         datoM.setDayCellFactory(datoerSjekk1);
 
+        LocalDate date = LocalDate.now();
+        settKalenderDato(date);
+        
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
         alarm.getSelectionModel().selectFirst();
         //test start
-        /*velgPerson.setItems(FXCollections.observableArrayList(new Person("Ollef", "Ollef","ollef@gmail.com","22225555"),new Person("Fridus", "fridus","fridus@gmail.com","22235555")));
+        velgPerson.setItems(FXCollections.observableArrayList(new Person("Ollef", "Ollef","ollef@gmail.com","22225555"),new Person("Fridus", "fridus","fridus@gmail.com","22235555")));
         valgtePersoner.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555"),new Person("Frode", "frodiss","frode@gmail.com","22255555")));
         leggTilKalender.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555"),new Person("Frode", "frodiss","frode@gmail.com","22255555")));
-        leggTilKalender.getItems().get(0).addAvtale(new Appointment());
         Person oline = leggTilKalender.getItems().get(0);
         ArrayList<Appointment> avtaler = oline.getAvtaler();
-        Appointment avtale = avtaler.get(0);
+        Appointment avtale = new Appointment();
         avtale.setBeskrivelse("Kompoiss");
         avtale.setRom(123);
         avtale.setSlutt("11:13");
@@ -200,9 +325,9 @@ public class CalendarViewController {
         avtale.setTitle("klasse1");
         avtale.setDate(LocalDate.now());
         mandag.getItems().add(avtale);
-        test slutt*/
+        //test slutt
 	}
-	
+
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
 		
@@ -272,6 +397,7 @@ public class CalendarViewController {
 		}
 		Appointment avtale = new Appointment(startT.getText(),sluttT.getText(),stedNH.getText(),tittel.getText(),beskrivelse.getText(),dato.getValue(),meg, personer);
 		moteinnkallinger.getItems().add(avtale);
+		myAppointments.add(avtale);
 	}
 	
 	@FXML
@@ -361,12 +487,6 @@ public class CalendarViewController {
 		for (Appointment appointment : appointments) {
 			moteinnkallinger.getItems().add(appointment);
 		}
-		LocalDate date;
-		date = LocalDate.now();
-		
-		WeekFields weekFields = WeekFields.of(Locale.getDefault()); 
-		
-		labUkeNr.setText("Uke " + date.get(weekFields.weekOfWeekBasedYear()));
 	}
 	
 
