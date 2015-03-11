@@ -32,20 +32,20 @@
                             <RowConstraints maxHeight="256.0" minHeight="10.0" prefHeight="160.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="114.0" text="Mandag" />
-                              <Label alignment="CENTER" prefHeight="35.0" prefWidth="101.0" text="Tirsdag" GridPane.columnIndex="1" />
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="110.0" text="Onsdag" GridPane.columnIndex="2" />
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="105.0" text="Torsdag" GridPane.columnIndex="3" />
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="114.0" text="Fredag" GridPane.columnIndex="4" />
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="110.0" text="Lørdag" GridPane.columnIndex="5" />
-                              <Label alignment="CENTER" prefHeight="16.0" prefWidth="131.0" text="Søndag" GridPane.columnIndex="6" />
+                              <Label fx:id="mandagL" alignment="CENTER" contentDisplay="CENTER" prefHeight="16.0" prefWidth="114.0" text="Mandag" />
+                              <Label fx:id="tirsdagL" alignment="CENTER" prefHeight="35.0" prefWidth="101.0" text="Tirsdag" GridPane.columnIndex="1" />
+                              <Label fx:id="onsdagL" alignment="CENTER" prefHeight="16.0" prefWidth="110.0" text="Onsdag" GridPane.columnIndex="2" />
+                              <Label fx:id="torsdagL" alignment="CENTER" prefHeight="16.0" prefWidth="105.0" text="Torsdag" GridPane.columnIndex="3" />
+                              <Label fx:id="fredagL" alignment="CENTER" prefHeight="16.0" prefWidth="114.0" text="Fredag" GridPane.columnIndex="4" />
+                              <Label fx:id="lordagL" alignment="CENTER" prefHeight="16.0" prefWidth="110.0" text="Lørdag" GridPane.columnIndex="5" />
+                              <Label fx:id="sondagL" alignment="CENTER" prefHeight="16.0" prefWidth="131.0" text="Søndag" GridPane.columnIndex="6" />
                               <ListView fx:id="mandag" onMouseClicked="#moteBeskrivelseTilInfo" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                              <ListView prefHeight="153.0" prefWidth="98.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                              <ListView fx:id="tirsdag" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ListView fx:id="onsdag" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <ListView fx:id="torsdag" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <ListView fx:id="fredag" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <ListView fx:id="lordag" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                              <ListView fx:id="sondag" prefHeight="153.0" prefWidth="98.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                         <GridPane layoutX="248.0" layoutY="23.0" prefHeight="104.0" prefWidth="199.0">
@@ -216,7 +216,7 @@
                                  <children>
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="76.0" text="eller" GridPane.columnIndex="1" />
                                     <Label fx:id="labRomNrNH" alignment="CENTER" prefHeight="16.0" prefWidth="75.0" text="rom nr." GridPane.columnIndex="3" />
-                                    <TextField prefHeight="26.0" prefWidth="137.0" />
+                                    <TextField fx:id="stedNH" prefHeight="26.0" prefWidth="137.0" />
                                     <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRom" prefHeight="26.0" prefWidth="108.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="2" />
                                  </children>
                               </GridPane>
