@@ -165,7 +165,7 @@ public class CalendarViewController {
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
         alarm.getSelectionModel().selectFirst();
         //test start
-        velgPerson.setItems(FXCollections.observableArrayList(new Person("Ollef", "Ollef","ollef@gmail.com","22225555"),new Person("Fridus", "fridus","fridus@gmail.com","22235555")));
+        /*velgPerson.setItems(FXCollections.observableArrayList(new Person("Ollef", "Ollef","ollef@gmail.com","22225555"),new Person("Fridus", "fridus","fridus@gmail.com","22235555")));
         valgtePersoner.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555"),new Person("Frode", "frodiss","frode@gmail.com","22255555")));
         leggTilKalender.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555"),new Person("Frode", "frodiss","frode@gmail.com","22255555")));
         //leggTilKalender.getItems().get(0).addAvtale(new Appointment());
@@ -179,7 +179,7 @@ public class CalendarViewController {
         avtale.setTitle("klasse1");
         avtale.setDate(LocalDate.now());
         mandag.getItems().add(avtale);
-        //test slutt
+        //test slutt*/
 	}
 	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
