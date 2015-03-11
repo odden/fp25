@@ -71,6 +71,9 @@ public class PConnector {
 		}else if(requestList[0].equals("getRoom")){
 			response = getRoom(requestList[1], requestList[2], requestList[3], requestList[4]);
 			return response;
+		}else if(requestList[0].equals("editAppointment")){
+			response.add(String.valueOf(editAppointment( requestList[1], requestList[2], requestList[3], requestList[4],requestList[5], requestList[6], requestList[7], requestList[8], requestList[9])));
+			return response;
 		}
 		return null;
 	}
@@ -163,6 +166,10 @@ public class PConnector {
 			roomList.add(roomstr);
 		}
 		return roomList;
+	}
+	
+	private boolean editAppointment(String id, String vert, String title, String sted, String room,String dato,String start, String slutt, String endring){
+		return sc.editAppointment(Integer.parseInt(id), vert, title, sted, room, dato, start, slutt, endring);
 	}
 	
 }
