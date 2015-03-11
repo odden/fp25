@@ -5,16 +5,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LoggInnController {
@@ -39,8 +36,6 @@ public class LoggInnController {
 			check = true;
 		} else {
 			check = false;
-			//brukernavn.setStyle("-fx-border-color: red");
-			//commentUsername.setVisible(true);
 		}
 
 		if (passord.getText().trim().length() != 0) {
@@ -48,17 +43,13 @@ public class LoggInnController {
 			check = true;
 		} else {
 			check = false;
-			//passord.setStyle("-fx-border-color: red");
-			//commentPassword.setVisible(true);
 		}
 		
 
 		if (check) {
-			@SuppressWarnings("unused")
 			String login = gui
 					.tryLogIn(brukernavn.getText(), passord.getText());
 			System.out.println(login);
-			// hvis brukernavn og passord samsvarer => logg inn
 		}else{
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Feilmelding");
