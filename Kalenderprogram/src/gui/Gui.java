@@ -56,7 +56,7 @@ public class Gui extends Application {
 			} else if (fxml.equals("CalenderView.fxml")) {
 				final CalendarViewController controller = loader
 						.getController();
-				controller.initData(stage, this,users,myAppointments);
+				controller.initData(stage, this,users,myAppointments, brukernavn);
 			}
 			stage.show();
 		} catch (IOException e) {

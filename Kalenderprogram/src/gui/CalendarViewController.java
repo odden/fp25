@@ -12,6 +12,7 @@ import core.Person;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -30,11 +31,13 @@ import javafx.util.Callback;
 
 public class CalendarViewController {
 
-	// Min Kalender
+	private String meg;
 	private static Stage stage;
 	private Gui gui;
 	private ArrayList<Person> users;
 	private ArrayList<Appointment> myAppointments;
+	
+	// Min Kalender
 	
 	@FXML private ListView<Person> leggTilKalender;
 	@FXML private ListView<Appointment> mandag;
@@ -47,8 +50,8 @@ public class CalendarViewController {
 	@FXML private Label labUkeNr;
 	
 	@FXML
-	public void visUkeFraDato(ActionEvent event) {
-		//bla frem til riktig uke
+	public void visUkeFraDato(Event event) {
+		System.out.println("hei");
 		//Alle avtalene må lates inn på riktig måte
 	}
 	
@@ -295,6 +298,7 @@ public class CalendarViewController {
 	@FXML private ListView<Person> inviterEkstraPerson;
 	@FXML private DatePicker datoM;
 	@FXML private Label labRomNrM;
+	
 
 	@FXML
 	public void moteInfoTilView(MouseEvent event) {
@@ -338,8 +342,9 @@ public class CalendarViewController {
 		//Finner et passende rom utifra antall folk invitert
 	}
 
-	public void initData(Stage stage, Gui gui, ArrayList<Person> users, ArrayList<Appointment> appointments) {
+	public void initData(Stage stage, Gui gui, ArrayList<Person> users, ArrayList<Appointment> appointments, String meg) {
 		this.stage = stage;
+		this.meg = meg;
 		this.gui = gui;
 		this.users = users;
 		this.myAppointments = appointments;
