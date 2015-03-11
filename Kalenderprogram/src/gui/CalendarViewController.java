@@ -33,6 +33,9 @@ public class CalendarViewController {
 	// Min Kalender
 	private static Stage stage;
 	private Gui gui;
+	private ArrayList<Person> users;
+	private ArrayList<Appointment> myAppointments;
+	
 	@FXML private ListView<Person> leggTilKalender;
 	@FXML private ListView<Appointment> mandag;
 	@FXML private Label startK;
@@ -335,10 +338,11 @@ public class CalendarViewController {
 		//Finner et passende rom utifra antall folk invitert
 	}
 
-	public void initData(Stage stage, Gui gui) {
+	public void initData(Stage stage, Gui gui, ArrayList<Person> users, ArrayList<Appointment> appointments) {
 		this.stage = stage;
 		this.gui = gui;
-		
+		this.users = users;
+		this.myAppointments = appointments;
 		LocalDate date;
 		date = LocalDate.now();
 		
