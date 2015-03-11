@@ -81,6 +81,9 @@ public class PConnector {
 		}else if(requestList[0].equals("setStatus")){
 			sc.setStatus(requestList[1], requestList[2], requestList[3], requestList[4], Boolean.valueOf(requestList[5]));
 			return null;
+		}else if(requestList[0].equals("getRoom")){
+			response = getRoom(requestList[1], requestList[2], requestList[3], requestList[4]);
+			return response;
 		}
 		return null;
 	}
@@ -137,14 +140,20 @@ public class PConnector {
 		}
 		return sc.invite(invited, request[1], request[2], request[3]);
 	}
-
-	public static void main(String argv[]) throws Exception{
-       SCore sc = new SCore();
-       PConnector pco = new PConnector(sc);
-       sc.init();
-       pco.runServer();
-    }
 	
-	
+	private ArrayList<String> getRoom(String size,String date, String start, String slutt){
+		int sizeInt = Integer.parseInt(size);
+		ArrayList<List<Object>> rooms = sc.getRoom(sizeInt, date, start, slutt);
+		ArrayList<String> roomList = new ArrayList<String>();
+		for (List<Object> list : rooms) {
+			String roomstr = "";
+			for (Object room : list) {
+				roomstr += room + ":";
+			}
+			roomstr += ";";
+			roomList.add(roomstr);
+		}
+		return roomList;
+	}
 	
 }
