@@ -14,30 +14,31 @@ public class SCore {
 	DBConnector dbc;
 	PConnector pc;
 	public void init(){
-		pc = new PConnector(this);
 		try {
 			dbc = new DBConnector(this);
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-		Date d = null;
-		try {
-			d = new java.sql.Date(sdf.parse("2015/02/26").getTime());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Calendar cal=Calendar.getInstance(); 
-		cal.setTime(d); 
-		//System.out.println(getRoom(8,d,java.sql.Time.valueOf("11:00:00"),java.sql.Time.valueOf("13:00:00")));
-		//System.out.println(logIn("stefanborg","stefanPW"));
-		//createUser("herman","hpw","HP PLLLL","emmmm",423423);
-		//createAppointment("stefanborg","Kake","322",cal,"13:00:00","15:00:00",Arrays.asList("stefanborg"));
-		//setStatus("herman", "stefanborg", "2015-02-26", "13:00:00",false);
-		//System.out.println(getAppointments("herman"));
-		//editAppointment(4,"kakemann","Kakefest for noen","322","2015-02-28","16:45:00","19:00:00");
+		pc = new PConnector(this);
+		pc.runServer();
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+//		Date d = null;
+//		try {
+//			d = new java.sql.Date(sdf.parse("2015/02/26").getTime());
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		Calendar cal=Calendar.getInstance(); 
+//		cal.setTime(d); 
+//		System.out.println(getRoom(8,d,java.sql.Time.valueOf("11:00:00"),java.sql.Time.valueOf("13:00:00")));
+//		System.out.println(logIn("stefanborg","stefanPW"));
+//		createUser("herman","hpw","HP PLLLL","emmmm",423423);
+//		createAppointment("stefanborg","Kake","322",cal,"13:00:00","15:00:00",Arrays.asList("stefanborg"));
+//		setStatus("herman", "stefanborg", "2015-02-26", "13:00:00",false);
+//		System.out.println(getAppointments("herman"));
+//		editAppointment(4,"kakemann","Kakefest for noen","322","2015-02-28","16:45:00","19:00:00");
 	}
 	public List<Object> logIn(String username, String password){
 		//Sjekker om oppgit info er korrekt, hvis ja send bruker info og OK
@@ -152,7 +153,7 @@ public class SCore {
 			return 0;
 		}
 	}
-	public ArrayList<List<Object>> getRoom(int size,Date dato,Time start, Time slutt){
+	public ArrayList<List<Object>> getRoom(int size,String dato,String start, String slutt){
 		//Gir tilbake en liste med lister over rom som er ledig til den tid
 		
 		ResultSet rs1;

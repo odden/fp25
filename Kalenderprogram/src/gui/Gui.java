@@ -56,7 +56,7 @@ public class Gui extends Application {
 			} else if (fxml.equals("CalenderView.fxml")) {
 				final CalendarViewController controller = loader
 						.getController();
-				controller.initData(stage, this);
+				controller.initData(stage, this,users,myAppointments);
 			}
 			stage.show();
 		} catch (IOException e) {
@@ -91,7 +91,6 @@ public class Gui extends Application {
             
 			return "aua";
 		} else {
-			switchSceneContent("CalenderView.fxml");
 			this.brukernavn = response.split(":")[0];
 			ArrayList<String> users = core.sc.getUsers();
 			for (String s : users) {
@@ -102,7 +101,8 @@ public class Gui extends Application {
 					this.users.add(p);
 				}
 			}
-			/*ArrayList<String> myAppointments = core.sc
+			this.myAppointments = new ArrayList<Appointment>();
+			ArrayList<String> myAppointments = core.sc
 					.getAppointments(brukernavn);
 			for (String s : myAppointments) {
 				if (s.equals(":")) {
@@ -113,7 +113,8 @@ public class Gui extends Application {
 				}
 			}
 			System.out.println(this.users);
-*/
+
+			switchSceneContent("CalenderView.fxml");
 			return "Ok";
 		}
 	}
