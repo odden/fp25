@@ -13,14 +13,33 @@ public class Appointment {
 	private String sted;
 	private String title;
 	private ArrayList<Person> participants = new ArrayList<Person>();
-	private Person host;
+	private String host;
 	private String beskrivelse;
 	
 	
-	public Appointment(){
+	public Appointment(String start, String slutt, String sted, String title, String beskrivelse, LocalDate date, String host, ArrayList<Person> participants){
+		this.start=start;
+		this.slutt=slutt;
+		this.sted=sted;
+		this.title=title;
+		this.beskrivelse=beskrivelse;
+		this.date =date;
+		this.host=host;
+		this.participants.addAll(participants);
 		
 	}
 	
+	public Appointment(String start, String slutt, int rom, String title, String beskrivelse, LocalDate date, String host, ArrayList<Person> participants){
+		this.start=start;
+		this.slutt=slutt;
+		this.rom=rom;
+		this.title=title;
+		this.beskrivelse=beskrivelse;
+		this.date =date;
+		this.host=host;
+		this.participants.addAll(participants);
+		
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -37,7 +56,7 @@ public class Appointment {
 		this.beskrivelse = beskrivelse;
 	}
 
-	public void init(LocalDate date, int rom, Person host){
+	public void init(LocalDate date, int rom, String host){
 		this.rom = rom;
 		this.date = date;
 		this.host = host;
@@ -71,11 +90,11 @@ public class Appointment {
 		this.participants.remove(participant);
 	}
 
-	public Person getHost() {
+	public String getHost() {
 		return host;
 	}
 
-	public void setHost(Person host) {
+	public void setHost(String host) {
 		this.host = host;
 	}
 

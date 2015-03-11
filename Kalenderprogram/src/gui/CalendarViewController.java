@@ -130,6 +130,7 @@ public class CalendarViewController {
 	@FXML private Button leggTilHendelse;
 	@FXML private ListView<Person> velgPerson;
 	@FXML private ListView<Person> valgtePersoner;
+	@FXML private TextField stedNH;
 	
 	public void initialize(){
 		dato.setValue(LocalDate.now());
@@ -251,21 +252,12 @@ public class CalendarViewController {
 	}	
 	
 	public void lagNyAvtale() {
-		Appointment avtale = new Appointment();
-		
-		avtale.setStart(startT.getText());
-		avtale.setSlutt(sluttT.getText());
-		avtale.setBeskrivelse(beskrivelse.getText());
-		avtale.setTitle(tittel.getText());
-		System.out.println(valgtePersoner.getItems().size());
-		System.out.println(valgtePersoner.getItems().get(0));
-		for (int i = 0; i < valgtePersoner.getItems().size(); i++) {
-			
-			avtale.addParticipant(valgtePersoner.getItems().get(i));
-			System.out.println(valgtePersoner.getItems().get(i));
+		ArrayList<Person> personer = new ArrayList<Person>();
+		for (Person person : valgtePersoner.getItems()) {
+			personer.add(person);
 		}
+		Appointment avtale = new Appointment(startT.getText(),sluttT.getText(),stedNH.getText(),tittel.getText(),beskrivelse.getText(),dato.getValue(),meg, personer);
 		moteinnkallinger.getItems().add(avtale);
-		
 	}
 	
 	@FXML
@@ -341,13 +333,20 @@ public class CalendarViewController {
 	public void finnRom(ActionEvent event) {
 		//Finner et passende rom utifra antall folk invitert
 	}
+	
 
 	public void initData(Stage stage, Gui gui, ArrayList<Person> users, ArrayList<Appointment> appointments, String meg) {
 		this.stage = stage;
 		this.meg = meg;
 		this.gui = gui;
 		this.users = users;
+		for (Person person : users) {
+			leggTilKalender.getItems().add(person);
+		}
 		this.myAppointments = appointments;
+		for (Appointment appointment : appointments) {
+			moteinnkallinger.getItems().add(appointment);
+		}
 		LocalDate date;
 		date = LocalDate.now();
 		
