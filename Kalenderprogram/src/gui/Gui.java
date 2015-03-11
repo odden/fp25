@@ -70,7 +70,11 @@ public class Gui extends Application {
 		System.out.println(response);
 		if (response == null){
 			return "yipyip";
-		}else{
+		}
+		else if (response.equals("false:")){
+			return "tatt";
+		}
+		else{
 			switchSceneContent("LoggInn.fxml");
 		}
 		
