@@ -5,6 +5,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,24 +39,13 @@ public class SConnector {
 	public ArrayList<String> getAppointments(String user){
 		String message = "getAppointments:" + user;
 		String response = connectToServer(message);
-		String[] responseSplit = response.split(";");
-		ArrayList<String> responseList = new ArrayList<String>();
-		for (String string : responseSplit) {
-			responseList.add(string);
-		}
-		return responseList;
+		return convert(response);
 	}
 	
 	public ArrayList<String> getUsers(){
 		String message = "getUsers";
 		String response = connectToServer(message);
-		String[] responseSplit = response.split(";");
-		ArrayList<String> responseList = new ArrayList<String>();
-		for (String string : responseSplit) {
-			responseList.add(string);
-		}
-		System.out.println(responseList);
-		return responseList;
+		return convert(response);
 	}
 	
 	public String invite(List<String>usernames,String host,String date,String start){
@@ -69,6 +60,12 @@ public class SConnector {
 	public void setStatus(String user, String host,String date,String start, Boolean status){
 		String message = "setStatus" + ":" + user + ":" + host + ":" + date + ":" + start + ":" + status.toString();
 		connectToServer(message);
+	}
+	
+	public ArrayList<String> getRoom(int size,String date, String start, String slutt){
+		String message = "getRoom:" + Integer.toString(size) + ":" + date + ":" + start + ":" + slutt;
+		String response = connectToServer(message);
+		return convert(response);
 	}
 	
 	
@@ -88,6 +85,15 @@ public class SConnector {
 			System.out.println("Funk itj");
 		}
 		return null;
+	}
+	
+	private ArrayList<String> convert(String response){
+		String[] responseSplit = response.split(";");
+		ArrayList<String> responseList = new ArrayList<String>();
+		for (String string : responseSplit) {
+			responseList.add(string);
+		}
+		return responseList;
 	}
 	
 }
