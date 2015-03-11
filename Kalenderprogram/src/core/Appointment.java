@@ -16,6 +16,9 @@ public class Appointment {
 	private String host;
 	private String beskrivelse;
 	
+	public Appointment(){
+		
+	}
 	
 	public Appointment(String start, String slutt, String sted, String title, String beskrivelse, LocalDate date, String host, ArrayList<Person> participants){
 		this.start=start;

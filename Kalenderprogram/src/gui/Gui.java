@@ -65,7 +65,7 @@ public class Gui extends Application {
 		}
 	}
 
-	public String tryCreateUser(String brukernavn, String passord, String email, String navn, int telefon){
+	public String tryCreateUser(String brukernavn, String passord, String navn, String email, int telefon){
 		String response = core.sc.createUser(brukernavn, passord, navn, email, telefon);
 		System.out.println(response);
 		if (response == null){

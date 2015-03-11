@@ -36,6 +36,7 @@ public class LoggInnController {
 
 		if (brukernavn.getText().trim().length() != 0) {
 			brukernavn.setStyle("-fx-border-color:transparent");
+			check = true;
 		} else {
 			check = false;
 			//brukernavn.setStyle("-fx-border-color: red");
@@ -44,6 +45,7 @@ public class LoggInnController {
 
 		if (passord.getText().trim().length() != 0) {
 			passord.setStyle("-fx-border-color:transparent");
+			check = true;
 		} else {
 			check = false;
 			//passord.setStyle("-fx-border-color: red");
