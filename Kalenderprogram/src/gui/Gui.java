@@ -85,7 +85,7 @@ public class Gui extends Application {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Feilmelding");
 			alert.setHeaderText("Ugyldig brukernavn og/eller passord");
-			alert.setContentText("Vennligst prøv igjen");
+			alert.setContentText("Vennligst pr\u00F8v igjen");
 
 			alert.showAndWait();
             
@@ -94,7 +94,7 @@ public class Gui extends Application {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Feilmelding");
 			alert.setHeaderText("Ugyldig brukernavn og/eller passord");
-			alert.setContentText("Vennligst prøv igjen");
+			alert.setContentText("Vennligst pr\u00F8v igjen");
 
 			alert.showAndWait();
             
