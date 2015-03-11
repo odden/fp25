@@ -7,7 +7,12 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import core.PCore;
 import core.Person;
@@ -77,6 +82,13 @@ public class Gui extends Application {
 		System.out.println(response);
 		this.users = new ArrayList<Person>();
 		if (response == null) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Feilmelding");
+			alert.setHeaderText("Ugyldig brukernavn og/eller passord");
+			alert.setContentText("Vennligst prøv igjen");
+
+			alert.showAndWait();
+            
 			return "aua";
 		} else {
 			switchSceneContent("CalenderView.fxml");

@@ -5,11 +5,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class LoggInnController {
@@ -30,28 +35,35 @@ public class LoggInnController {
 		boolean check = true;
 
 		if (brukernavn.getText().trim().length() != 0) {
-					brukernavn.setStyle("-fx-border-color: green");
+			brukernavn.setStyle("-fx-border-color:transparent");
 		} else {
 			check = false;
-			brukernavn.setStyle("-fx-border-color: red");
-			commentUsername.setVisible(true);
+			//brukernavn.setStyle("-fx-border-color: red");
+			//commentUsername.setVisible(true);
 		}
 
 		if (passord.getText().trim().length() != 0) {
-			passord.setStyle("-fx-border-color: green");
+			passord.setStyle("-fx-border-color:transparent");
 		} else {
 			check = false;
-			passord.setStyle("-fx-border-color: red");
-			commentPassword.setVisible(true);
+			//passord.setStyle("-fx-border-color: red");
+			//commentPassword.setVisible(true);
 		}
+		
 
 		if (check) {
 			@SuppressWarnings("unused")
-			int svaretPaaLivet = 42;
 			String login = gui
 					.tryLogIn(brukernavn.getText(), passord.getText());
 			System.out.println(login);
 			// hvis brukernavn og passord samsvarer => logg inn
+		}else{
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Feilmelding");
+			alert.setHeaderText("Ugyldig brukernavn og/eller passord");
+			alert.setContentText("Vennligst prøv igjen");
+
+			alert.showAndWait();
 		}
 
 	}
