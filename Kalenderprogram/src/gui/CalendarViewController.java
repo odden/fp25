@@ -42,7 +42,7 @@ public class CalendarViewController {
 	private ArrayList<Person> users;
 	private ArrayList<Appointment> myAppointments;
 	
-	public boolean validateAvtale(TextField tittel, TextField beskrivelse, TextField startT, TextField sluttT) { {
+	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT) { {
 		boolean check = true;
 		
 		//sjekker tittel
@@ -325,7 +325,7 @@ public class CalendarViewController {
 	@FXML private TextField stedNH;
 	
 	public void initialize(){
-		dato.setValue(LocalDate.now());
+		datoNH.setValue(LocalDate.now());
 		final Callback<DatePicker, DateCell> datoerSjekk = new Callback<DatePicker, DateCell>() {
             @Override
             public DateCell call(final DatePicker datePicker) {
@@ -341,7 +341,7 @@ public class CalendarViewController {
                 };
             }
         };
-        dato.setDayCellFactory(datoerSjekk);
+        datoNH.setDayCellFactory(datoerSjekk);
         
         datoM.setValue(LocalDate.now());
 		
@@ -374,12 +374,9 @@ public class CalendarViewController {
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
 		
-		check = validateAvtale(tittelM, beskrivelse, startT, sluttT);
+		check = validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH);
 		//sjekker om dato er senere
-		LocalDate dag = dato.getValue();
-		if(dag.isBefore(LocalDate.now())) {
-			System.out.println("Må være etter i dag");
-		}
+	
 		
 		if(check) {
 			lagNyAvtale();
@@ -393,7 +390,7 @@ public class CalendarViewController {
 		for (Person person : valgtePersoner.getItems()) {
 			personer.add(person);
 		}
-		Appointment avtale = new Appointment(startT.getText(),sluttT.getText(),stedNH.getText(),tittel.getText(),beskrivelse.getText(),dato.getValue(),meg, personer);
+		Appointment avtale = new Appointment(1,startNH.getText(),sluttNH.getText(),stedNH.getText(),tittelNH.getText(),beskrivelseNH.getText(),datoNH.getValue(),meg, personer);
 		moteinnkallinger.getItems().add(avtale);
 		myAppointments.add(avtale);
 	}
@@ -414,10 +411,12 @@ public class CalendarViewController {
 		valgtePersoner.getItems().remove(valg);
 		velgPerson.getItems().add(valg);
 		}
+	}
 	
 	@FXML
 	public void finnRomNH(ActionEvent event) {
-		gui.getRoom(date, start, slutt, size)
+		validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH);
+		gui.getRoom(datoNH.getValue()+"", startNH.getText(), sluttNH.getText(), valgtePersoner.getItems().size());
 		//Finner et passende rom utifra antall folk invitert
 	
 	}
@@ -425,8 +424,8 @@ public class CalendarViewController {
 	@FXML private Tooltip tips;
 	@FXML private ListView<Appointment> moteinnkallinger;
 	@FXML private ChoiceBox alarm;
-	@FXML private TextField sluttTid;
-	@FXML private TextField startTid;
+	@FXML private TextField sluttM;
+	@FXML private TextField startM;
 	@FXML private TextField tittelM;
 	@FXML private TextField stedM;
 	@FXML private TextArea beskrivelseM;
@@ -443,8 +442,8 @@ public class CalendarViewController {
 	public void moteInfoTilView(MouseEvent event) {
 		if(!moteinnkallinger.getSelectionModel().isEmpty()) {
 			Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
-			sluttTid.setText(mote.getSlutt());
-			startTid.setText(mote.getStart());
+			sluttM.setText(mote.getSlutt());
+			startM.setText(mote.getStart());
 			tittelM.setText(mote.getTitle());
 			beskrivelseM.setText(mote.getBeskrivelse());
 			meg = "stefan";
@@ -461,8 +460,8 @@ public class CalendarViewController {
 				beskrivelseM.setDisable(true);
 				datoM.setDisable(true);
 				tittelM.setDisable(true);
-				sluttTid.setDisable(true);
-				startTid.setDisable(true);
+				sluttM.setDisable(true);
+				startM.setDisable(true);
 				stedM.setDisable(true);
 				
 			}
@@ -496,8 +495,8 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomM(ActionEvent event) {
-		startTid.getText();
-		gui.getRoom(date, start, slutt, size)
+		validateAvtale(tittelM, beskrivelseM, startM, sluttM);
+		gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), invitertePersoner.getItems().size());
 		//Finner et passende rom utifra antall folk invitert
 	}
 	
