@@ -77,11 +77,22 @@ public class PConnector {
 		}else if(requestList[0].equals("getInvited")){
 			response = getInvited(requestList[1]);
 			return response;
+		}else if(requestList[0].equals("getGroups")){
+			response = getGroups();
+			return response;
 		}
 		return null;
 	}
 	
 	
+	private ArrayList<String> getGroups() {
+		ArrayList<List<Object>> groups = sc.getGroups();
+		ArrayList<String> groupList = new ArrayList<String>();
+		
+		
+		return groupList;
+	}
+
 	//kan være int i for løkke er en for mye/lite
 	private boolean createAppointment(String[] request) {
 		List<String> invited = new ArrayList<String>();
@@ -92,25 +103,8 @@ public class PConnector {
 	}
 	
 	private ArrayList<String> getUsers(){
-		ArrayList<List<Object>> users = new ArrayList<List<Object>>();
-		users = sc.getUsers();
-		ArrayList<String> response = new ArrayList<String>();
-		for (List<Object> list : users) {
-			String userdata = "";
-			
-			for (Object object : list) {
-				if (object != null){
-					userdata += object.toString();
-				}
-				else
-					userdata += "NULL";
-				userdata += ":";
-			}
-			userdata += ";";
-			response.add(userdata);
-		}
-		
-		return response;
+		ArrayList<List<Object>> users = sc.getUsers();
+		return convertToList(users);
 	}
 
 	private ArrayList<String> logIn(String[] request) {
@@ -129,26 +123,8 @@ public class PConnector {
 	}
 	
 	private ArrayList<String> getAppointments(String user){
-		ArrayList<List<Object>> appointments = new ArrayList<List<Object>>();
-		appointments = sc.getAppointments(user);
-		ArrayList<String> response = new ArrayList<String>();
-		if (appointments != null){
-			for (List<Object> list : appointments) {
-				String appointment = "";
-				for (Object object : list) {
-					if (object != null){
-						appointment += object.toString() + ":";
-					}
-					else{
-						appointment += "NULL"+":";
-					}
-				}
-				appointment += ";";
-				response.add(appointment);
-			}
-		return response;
-		}
-		else return null;
+		ArrayList<List<Object>> appointments = sc.getAppointments(user);
+		return convertToList(appointments);
 	}
 	
 	private boolean invite(String[] request){
@@ -162,16 +138,7 @@ public class PConnector {
 	private ArrayList<String> getRoom(String size,String date, String start, String slutt){
 		int sizeInt = Integer.parseInt(size);
 		ArrayList<List<Object>> rooms = sc.getRoom(sizeInt, date, start, slutt);
-		ArrayList<String> roomList = new ArrayList<String>();
-		for (List<Object> list : rooms) {
-			String roomstr = "";
-			for (Object room : list) {
-				roomstr += room.toString() + ":";
-			}
-			roomstr += ";";
-			roomList.add(roomstr);
-		}
-		return roomList;
+		return convertToList(rooms);
 	}
 	
 	private boolean editAppointment(String id, String vert, String title, String sted, String room,String dato,String start, String slutt, String endring){
@@ -180,21 +147,27 @@ public class PConnector {
 	
 	private ArrayList<String> getInvited(String appId){
 		ArrayList<List<Object>> invited = sc.getInvited(appId);
-		ArrayList<String> invitedList = new ArrayList<String>();
-		for (List<Object> list : invited) {
+		return convertToList(invited);
+	}
+	
+	private ArrayList<String> convertToList(ArrayList<List<Object>> list){
+		if (list == null) {
+			return null;
+		}
+		ArrayList<String> arrayList = new ArrayList<String>();
+		for (List<Object> listList : list) {
 			String str = "";
-			for (Object object : list) {
+			for (Object object : listList) {
 				if (object != null){
-					str += object.toString();
+					str += object.toString() + ":";
 				}
 				else{
 					str += "NULL";
 				}
 			}
-			str += ";";
-			invitedList.add(str);
+			arrayList.add(str.substring(0, str.length() - 1 ) + ";");
 		}
-		return invitedList;
+		return arrayList;
 	}
 	
 }

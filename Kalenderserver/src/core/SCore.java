@@ -264,6 +264,17 @@ public class SCore {
 		}
 	}
 	
+	public ArrayList<List<Object>> getGroups(){
+		ResultSet rs;
+		try {
+			rs = dbc.executeSQL("SELECT navn FROM gruppe");
+			return resToList(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public boolean editAppointment(int id, String vert, String title, String sted, String room,String dato,String start, String slutt, String endring){
 		try {
 			Calendar cal = stringToCal(dato);

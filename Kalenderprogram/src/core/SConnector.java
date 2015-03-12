@@ -78,6 +78,12 @@ public class SConnector {
 		return convert(response);
 	}
 	
+	public ArrayList<String> getGroups(){
+		String message = "getGroups";
+		String response = connectToServer(message);
+		return convert(response);
+	}
+	
 	
 	private String connectToServer(String message){
 		try {
