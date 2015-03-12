@@ -19,6 +19,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -42,7 +43,7 @@ public class CalendarViewController {
 	private ArrayList<Person> users;
 	private ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
 	
-	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT, TextField sted, ChoiceBox rom) { {
+	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT, TextField sted, ComboBox rom) { {
 		boolean check = true;
 		
 		//sjekker tittel
@@ -328,7 +329,7 @@ public class CalendarViewController {
 	@FXML private ListView<Person> velgPerson;
 	@FXML private ListView<Person> valgtePersoner;
 	@FXML private TextField stedNH;
-	@FXML private ChoiceBox romCBNH; 
+	@FXML private ComboBox romCBNH; 
 	
 	public void initialize(){
 		datoNH.setValue(LocalDate.now());
@@ -442,7 +443,7 @@ public class CalendarViewController {
 	@FXML private Pane hostValg;
 	@FXML private Pane notHostValg;
 	@FXML private Button finnRomM;
-	@FXML private ChoiceBox romCBM;
+	@FXML private ComboBox romCBM;
 	
 
 	@FXML
