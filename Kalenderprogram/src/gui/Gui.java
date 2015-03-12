@@ -117,12 +117,11 @@ public class Gui extends Application {
 				}
 			}
 			this.myAppointments = new ArrayList<Appointment>();
-			ArrayList<String> myAppointments = core.sc
+			ArrayList<String> myApps = core.sc
 					.getAppointments(brukernavn);
-			if (myAppointments != null){
-				if (myAppointments.size() > 1){
-					System.out.println(myAppointments.size() + " -----sadasd");
-					for (String s : myAppointments) {
+			if (myApps != null){
+				if (!myApps.get(0).equals("")){
+					for (String s : myApps) {
 						if (s.equals(":")) {
 						} else {
 							String[] appointments = s.split(":");
