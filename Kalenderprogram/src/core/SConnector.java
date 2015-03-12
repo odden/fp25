@@ -5,8 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +69,13 @@ public class SConnector {
 	public String editAppointment(int id, String host, String title, String sted, String room,String dato,String start, String slutt, String endring){
 		String message = "editAppointment" + ":" + Integer.toString(id) + ":" + host + ":" + title + ":" + sted + ":" + room + ":" + dato + ":" + start + ":" + slutt + ":" + endring;
 		String response = connectToServer(message);
-		return null;
+		return response;
+	}
+	
+	public ArrayList<String> getInvited(String appId){
+		String message = "getInvited:" + appId;
+		String response = connectToServer(message);
+		return convert(response);
 	}
 	
 	

@@ -35,7 +35,7 @@ public class PConnector {
 			    String responseStr = "";
 			    if (response != null){
 				    for (String object : response) {
-				    	responseStr += object + ":";
+				    	responseStr += object;
 				    }
 			    }
 			    outToClient.writeBytes(responseStr + "\n");
@@ -73,6 +73,9 @@ public class PConnector {
 			return response;
 		}else if(requestList[0].equals("editAppointment")){
 			response.add(String.valueOf(editAppointment( requestList[1], requestList[2], requestList[3], requestList[4],requestList[5], requestList[6], requestList[7], requestList[8], requestList[9])));
+			return response;
+		}else if(requestList[0].equals("getInvited")){
+			response = getInvited(requestList[1]);
 			return response;
 		}
 		return null;
@@ -115,7 +118,7 @@ public class PConnector {
 		ArrayList<String> response = new ArrayList<String>();
 		if (responseList != null){
 			for (Object object : responseList) {
-				response.add(object.toString());
+				response.add(object.toString() + ":");
 			}
 		}
 		return response;
@@ -136,13 +139,14 @@ public class PConnector {
 					if (object != null){
 						appointment += object.toString() + ":";
 					}
-					else
+					else{
 						appointment += "NULL"+":";
+					}
 				}
 				appointment += ";";
 				response.add(appointment);
 			}
-			return response;
+		return response;
 		}
 		else return null;
 	}
@@ -162,7 +166,7 @@ public class PConnector {
 		for (List<Object> list : rooms) {
 			String roomstr = "";
 			for (Object room : list) {
-				roomstr += room + ":";
+				roomstr += room.toString() + ":";
 			}
 			roomstr += ";";
 			roomList.add(roomstr);
@@ -172,6 +176,25 @@ public class PConnector {
 	
 	private boolean editAppointment(String id, String vert, String title, String sted, String room,String dato,String start, String slutt, String endring){
 		return sc.editAppointment(Integer.parseInt(id), vert, title, sted, room, dato, start, slutt, endring);
+	}
+	
+	private ArrayList<String> getInvited(String appId){
+		ArrayList<List<Object>> invited = sc.getInvited(appId);
+		ArrayList<String> invitedList = new ArrayList<String>();
+		for (List<Object> list : invited) {
+			String str = "";
+			for (Object object : list) {
+				if (object != null){
+					str += object.toString();
+				}
+				else{
+					str += "NULL";
+				}
+			}
+			str += ";";
+			invitedList.add(str);
+		}
+		return invitedList;
 	}
 	
 }
