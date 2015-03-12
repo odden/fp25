@@ -120,21 +120,31 @@ public class Gui extends Application {
 			ArrayList<String> myAppointments = core.sc
 					.getAppointments(brukernavn);
 			if (myAppointments != null){
-				for (String s : myAppointments) {
-					if (s.equals(":")) {
-					} else {
-						String[] appointments = s.split(":");
-						ArrayList<String> invited = core.sc.getInvited(appointments[0]);
-						System.out.println(invited);
-						ArrayList<Person> participants = new ArrayList<Person>();
-						for (Person p: this.users){
-							if (invited.contains(p.getUsername())){
-								participants.add(p);
+				if (myAppointments.size() > 1){
+					System.out.println(myAppointments.size() + " -----sadasd");
+					for (String s : myAppointments) {
+						if (s.equals(":")) {
+						} else {
+							String[] appointments = s.split(":");
+							ArrayList<String> invited = core.sc.getInvited(appointments[0]);
+							System.out.println(invited);
+							ArrayList<Person> participants = new ArrayList<Person>();
+							if (invited != null){
+								for (Person p: this.users){
+									if (invited.contains(p.getUsername())){
+										participants.add(p);
+									}
+								}
 							}
+							int room;
+							try{
+								room = Integer.parseInt(appointments[4]);
+							} catch(NumberFormatException e){
+								room = 0;
+							}
+							Appointment a = new Appointment(Integer.parseInt(appointments[0]),appointments[1],appointments[2],appointments[3],room,appointments[5],appointments[6],appointments[7],participants);
+							this.myAppointments.add(a);
 						}
-						
-						Appointment a = new Appointment(Integer.parseInt(appointments[0]),appointments[1],appointments[2],appointments[3],Integer.parseInt(appointments[4]),appointments[5],appointments[6],appointments[7],participants);
-						this.myAppointments.add(a);
 					}
 				}
 			}
