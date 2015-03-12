@@ -218,7 +218,7 @@
                                     <Label fx:id="labRomNrNH" alignment="CENTER" prefHeight="16.0" prefWidth="75.0" text="rom nr." GridPane.columnIndex="3" />
                                     <TextField fx:id="stedNH" prefHeight="26.0" prefWidth="137.0" />
                                     <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRomNH" prefHeight="26.0" prefWidth="108.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="2" />
-                                    <ComboBox fx:id="romCB1" prefHeight="25.0" prefWidth="67.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                                    <ComboBox fx:id="romCBNH" prefHeight="25.0" prefWidth="67.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
                                  </children>
                               </GridPane>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -304,7 +304,7 @@
                                     <Button fx:id="finnRomM" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRomM" prefHeight="26.0" prefWidth="108.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="2" />
                                     <TextField fx:id="stedM" />
                                     <Label fx:id="labRomNrM" alignment="CENTER" prefHeight="16.0" prefWidth="95.0" text="rom nr." GridPane.columnIndex="3" />
-                                    <ComboBox fx:id="romCB" prefHeight="25.0" prefWidth="67.0" GridPane.columnIndex="3">
+                                    <ComboBox fx:id="romCBM" prefHeight="25.0" prefWidth="67.0" GridPane.columnIndex="3">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>

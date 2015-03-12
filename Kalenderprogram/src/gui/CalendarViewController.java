@@ -40,9 +40,9 @@ public class CalendarViewController {
 	private static Stage stage;
 	private Gui gui;
 	private ArrayList<Person> users;
-	private ArrayList<Appointment> myAppointments;
+	private ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
 	
-	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT) { {
+	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT, TextField sted, ChoiceBox rom) { {
 		boolean check = true;
 		
 		//sjekker tittel
@@ -53,6 +53,11 @@ public class CalendarViewController {
 		
 		//sjekker beskrivelse
 		else if (beskrivelse.getText().isEmpty()) {
+			check = false;
+		}
+		
+		//sjekker sted
+		else if (sted.getText().isEmpty()) {
 			check = false;
 		}
 
@@ -323,6 +328,7 @@ public class CalendarViewController {
 	@FXML private ListView<Person> velgPerson;
 	@FXML private ListView<Person> valgtePersoner;
 	@FXML private TextField stedNH;
+	@FXML private ChoiceBox romCBNH; 
 	
 	public void initialize(){
 		datoNH.setValue(LocalDate.now());
@@ -374,7 +380,7 @@ public class CalendarViewController {
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
 		
-		check = validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH);
+		check = validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH);
 		//sjekker om dato er senere
 	
 		
@@ -415,7 +421,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomNH(ActionEvent event) {
-		validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH);
+		validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH);
 		gui.getRoom(datoNH.getValue()+"", startNH.getText(), sluttNH.getText(), valgtePersoner.getItems().size());
 		//Finner et passende rom utifra antall folk invitert
 	
@@ -436,6 +442,7 @@ public class CalendarViewController {
 	@FXML private Pane hostValg;
 	@FXML private Pane notHostValg;
 	@FXML private Button finnRomM;
+	@FXML private ChoiceBox romCBM;
 	
 
 	@FXML
@@ -495,7 +502,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomM(ActionEvent event) {
-		validateAvtale(tittelM, beskrivelseM, startM, sluttM);
+		validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM);
 		gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), invitertePersoner.getItems().size());
 		//Finner et passende rom utifra antall folk invitert
 	}
