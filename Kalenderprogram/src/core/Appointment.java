@@ -1,6 +1,7 @@
 package core;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,37 +16,25 @@ public class Appointment {
 	private String title;
 	private ArrayList<Person> participants = new ArrayList<Person>();
 	private String host;
-	private String beskrivelse;
 	
 	public Appointment(){
 		
 	}
 	
-	public Appointment(int id, String start, String slutt, String sted, String title, String beskrivelse, LocalDate date, String host, ArrayList<Person> participants){
+	public Appointment(int id, String host, String title, String sted, int rom, String date, String start,String slutt, ArrayList<Person> participants){
 		this.id = id;
 		this.start=start;
 		this.slutt=slutt;
 		this.sted=sted;
+		this.rom = rom;
 		this.title=title;
-		this.beskrivelse=beskrivelse;
-		this.date =date;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		this.date = LocalDate.parse(date, formatter);
 		this.host=host;
 		this.participants.addAll(participants);
 		
 	}
-	
-	public Appointment(int id,String start, String slutt, int rom, String title, String beskrivelse, LocalDate date, String host, ArrayList<Person> participants){
-		this.id = id;
-		this.start=start;
-		this.slutt=slutt;
-		this.rom=rom;
-		this.title=title;
-		this.beskrivelse=beskrivelse;
-		this.date =date;
-		this.host=host;
-		this.participants.addAll(participants);
-		
-	}
+
 	
 	
 	public int getId(){
@@ -59,13 +48,6 @@ public class Appointment {
 		this.title = title;
 	}
 
-	public String getBeskrivelse() {
-		return beskrivelse;
-	}
-
-	public void setBeskrivelse(String beskrivelse) {
-		this.beskrivelse = beskrivelse;
-	}
 
 	public void init(LocalDate date, int rom, String host){
 		this.rom = rom;
