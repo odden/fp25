@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 public class Person {
 	
-	private String name;
 	private String username;
+	private String name;
 	private String email;
 	private String phoneNumber;
 	private ArrayList<Invitation> avtaler = new ArrayList<Invitation>();
 	
 	//Constructor
-	public Person(String name, String username, String email, String phoneNumber){
-		setName(name);
+	public Person(String username, String name, String email, String phoneNumber){
 		setUsername(username);
+		setName(name);
 		setEmail(email);
 		setPhoneNumber(phoneNumber);
 	}

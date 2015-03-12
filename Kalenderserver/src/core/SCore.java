@@ -245,7 +245,7 @@ public class SCore {
 	public ArrayList<List<Object>> getInvited(String appId){
 		ResultSet rs;
 		try {
-			rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", appId);
+			rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", appId,"bruker_brukernavn");
 			return resToList(rs);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
