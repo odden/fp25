@@ -42,6 +42,59 @@ public class CalendarViewController {
 	private ArrayList<Person> users;
 	private ArrayList<Appointment> myAppointments;
 	
+	public boolean validateAvtale(TextField tittel, TextField beskrivelse, TextField startT, TextField sluttT) { {
+		boolean check = true;
+		
+		//sjekker tittel
+		if (tittel.getText().isEmpty()) {
+			check = false;
+			tittel.setTooltip(new Tooltip("Kan ike være tom"));
+		}
+		
+		//sjekker beskrivelse
+		else if (beskrivelse.getText().isEmpty()) {
+			check = false;
+		}
+
+		//sjekk start tid format
+		String str1 = startT.getText();
+		String[] tid1 = str1.split(":");
+		String str = sluttT.getText();
+		String[] tid = str.split(":");
+		try {
+		int endH = (Integer.parseInt(tid[0]));
+		int endM = (Integer.parseInt(tid[1]));
+		int startH = (Integer.parseInt(tid1[0]));
+		int startM = (Integer.parseInt(tid1[1]));
+			if (!((tid1.length == 2) &&  (startH <= 23) && (startH >= 0) &&
+					(startM >= 0) && (startM<= 59) && (tid1[1].length() == 2))) {
+				check = false;
+				System.out.println("feil format");
+			}
+		
+		
+		//sjekk slutt tid format
+		
+			else if (!((tid.length == 2) &&  (endH <= 23) && (endH >= 0) &&
+					(endM >= 0 && (endM <= 59) && (tid[1].length() == 2)))) {
+				check = false;
+				System.out.println("format");
+			}
+		//sjekker om slutt tid er etter start
+			else if ((startH > endH) || ((startH==endH) && (startM > endM))) {
+				check = false;
+				System.out.println("start etter slutt");
+			}
+		
+		} catch (Exception e) {
+			check = false;
+			System.out.println("kun tall");
+		} finally {
+			return check;
+			} 
+		}
+	}
+	
 	// Min Kalender
 	
 	@FXML private ListView<Person> leggTilKalender;
@@ -260,12 +313,12 @@ public class CalendarViewController {
 	}
 	
 	//Ny hendelse
-	@FXML private TextField tittel;
-	@FXML private TextArea beskrivelse;
+	@FXML private TextField tittelNH;
+	@FXML private TextArea beskrivelseNH;
 	@FXML private Label labRomNrNH;
-	@FXML private TextField startT;
-	@FXML private TextField sluttT;
-	@FXML private DatePicker dato;
+	@FXML private TextField startNH;
+	@FXML private TextField sluttNH;
+	@FXML private DatePicker datoNH;
 	@FXML private Button leggTilHendelse;
 	@FXML private ListView<Person> velgPerson;
 	@FXML private ListView<Person> valgtePersoner;
@@ -321,52 +374,7 @@ public class CalendarViewController {
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
 		
-		//sjekker tittel
-		if (tittel.getText().isEmpty()) {
-			check = false;
-			tittel.setTooltip(new Tooltip("Kan ike være tom"));
-		}
-		
-		//sjekker beskrivelse
-		else if (beskrivelse.getText().isEmpty()) {
-			check = false;
-		}
-
-		//sjekk start tid format
-		String str1 = startT.getText();
-		String[] tid1 = str1.split(":");
-		String str = sluttT.getText();
-		String[] tid = str.split(":");
-		try {
-		int endH = (Integer.parseInt(tid[0]));
-		int endM = (Integer.parseInt(tid[1]));
-		int startH = (Integer.parseInt(tid1[0]));
-		int startM = (Integer.parseInt(tid1[1]));
-			if (!((tid1.length == 2) &&  (startH <= 23) && (startH >= 0) &&
-					(startM >= 0) && (startM<= 59) && (tid1[1].length() == 2))) {
-				check = false;
-				System.out.println("feil format");
-			}
-		
-		
-		//sjekk slutt tid format
-		
-			else if (!((tid.length == 2) &&  (endH <= 23) && (endH >= 0) &&
-					(endM >= 0 && (endM <= 59) && (tid[1].length() == 2)))) {
-				check = false;
-				System.out.println("format");
-			}
-		//sjekker om slutt tid er etter start
-			else if ((startH > endH) || ((startH==endH) && (startM > endM))) {
-				check = false;
-				System.out.println("start etter slutt");
-			}
-		
-		} catch (Exception e) {
-			check = false;
-			System.out.println("kun tall");
-		} finally {
-		} 
+		check = validateAvtale(tittelM, beskrivelse, startT, sluttT);
 		//sjekker om dato er senere
 		LocalDate dag = dato.getValue();
 		if(dag.isBefore(LocalDate.now())) {
@@ -407,6 +415,11 @@ public class CalendarViewController {
 		velgPerson.getItems().add(valg);
 		}
 	
+	@FXML
+	public void finnRomNH(ActionEvent event) {
+		gui.getRoom(date, start, slutt, size)
+		//Finner et passende rom utifra antall folk invitert
+	
 	}
 	//møter
 	@FXML private Tooltip tips;
@@ -434,7 +447,7 @@ public class CalendarViewController {
 			startTid.setText(mote.getStart());
 			tittelM.setText(mote.getTitle());
 			beskrivelseM.setText(mote.getBeskrivelse());
-			meg = "stefn";
+			meg = "stefan";
 			if(mote.getHost().equals(meg)) {
 				notHostValg.setVisible(false);
 				hostValg.setVisible(true);
@@ -445,12 +458,12 @@ public class CalendarViewController {
 			} else {
 				hostValg.setVisible(false);
 				notHostValg.setVisible(true);
-				beskrivelseM.setEditable(false);
-				datoM.setEditable(false);
-				tittelM.setEditable(false);
-				sluttTid.setEditable(false);
-				startTid.setEditable(false);
-				stedM.setEditable(false);
+				beskrivelseM.setDisable(true);
+				datoM.setDisable(true);
+				tittelM.setDisable(true);
+				sluttTid.setDisable(true);
+				startTid.setDisable(true);
+				stedM.setDisable(true);
 				
 			}
 			
@@ -482,7 +495,9 @@ public class CalendarViewController {
 	}
 	
 	@FXML
-	public void finnRom(ActionEvent event) {
+	public void finnRomM(ActionEvent event) {
+		startTid.getText();
+		gui.getRoom(date, start, slutt, size)
 		//Finner et passende rom utifra antall folk invitert
 	}
 	
