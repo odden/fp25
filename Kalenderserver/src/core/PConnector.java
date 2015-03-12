@@ -87,10 +87,7 @@ public class PConnector {
 	
 	private ArrayList<String> getGroups() {
 		ArrayList<List<Object>> groups = sc.getGroups();
-		ArrayList<String> groupList = new ArrayList<String>();
-		
-		
-		return groupList;
+		return convertToList(groups);
 	}
 
 	//kan være int i for løkke er en for mye/lite

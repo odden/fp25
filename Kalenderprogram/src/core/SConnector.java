@@ -84,7 +84,6 @@ public class SConnector {
 		return convert(response);
 	}
 	
-	
 	private String connectToServer(String message){
 		try {
 			String sentence = message;
