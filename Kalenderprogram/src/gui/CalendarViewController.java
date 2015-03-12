@@ -29,6 +29,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.PickResult;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -73,19 +74,20 @@ public class CalendarViewController {
 	@FXML private DatePicker datoVelgK;
 	@FXML private Label labUkeNr;
 	@FXML private Label maned;
+	private ArrayList<LocalDate> ukeDatoer = new ArrayList<LocalDate>(); 
 	
 	@FXML
 	public void visUkeFraDato(Event event) {
 		System.out.println("hei");
+		if (datoVelgK.getValue() != null){
 		LocalDate tilDato = datoVelgK.getValue();
 		settKalenderDato(tilDato);
-		
+		}
 		//Alle avtalene må lates inn på riktig måte
 	}
 	
 	@FXML
 	public void moteBeskrivelseTilInfo(MouseEvent event) {
-		PickResult pick = event.getPickResult();
 		if (mandag.isFocused()){
 			System.out.println("var det jeg sa jo!");
 		Appointment mote = mandag.getSelectionModel().getSelectedItem(); //testish - velger ikke alle dager
@@ -226,7 +228,7 @@ public class CalendarViewController {
 		lordagL.setText("Lørdag " + lordagDato.getDayOfMonth() + ".");
 		sondagL.setText("Søndag " + sondagDato.getDayOfMonth() + ".");
 		maned.setText(mandagDato.getMonth() +" " + mandagDato.getYear());
-		labUkeNr.setText(mandagDato.get(weekFields.weekOfWeekBasedYear()) + "");
+		labUkeNr.setText("Uke " + mandagDato.get(weekFields.weekOfWeekBasedYear()));
 	}
 	
 	public void resetBeskrivelse() {
@@ -289,22 +291,8 @@ public class CalendarViewController {
         dato.setDayCellFactory(datoerSjekk);
         
         datoM.setValue(LocalDate.now());
-		final Callback<DatePicker, DateCell> datoerSjekk1 = new Callback<DatePicker, DateCell>() {
-            @Override
-            public DateCell call(final DatePicker datePicker) {
-                return new DateCell() {
-                    @Override
-                    public void updateItem(LocalDate item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item.isBefore(datoM.getValue())) {
-                                setDisable(true);
-                                setStyle("-fx-background-color: #ffc0cb;");
-                        }   
-                    }
-                };
-            }
-        };
-        datoM.setDayCellFactory(datoerSjekk1);
+		
+        datoM.setDayCellFactory(datoerSjekk);
 
         LocalDate date = LocalDate.now();
         settKalenderDato(date);
@@ -324,7 +312,9 @@ public class CalendarViewController {
         avtale.setStart("11:10");
         avtale.setTitle("klasse1");
         avtale.setDate(LocalDate.now());
+        avtale.setHost("stefan");
         mandag.getItems().add(avtale);
+        moteinnkallinger.getItems().add(avtale);
         //test slutt
 	}
 
@@ -425,23 +415,45 @@ public class CalendarViewController {
 	@FXML private TextField sluttTid;
 	@FXML private TextField startTid;
 	@FXML private TextField tittelM;
+	@FXML private TextField stedM;
 	@FXML private TextArea beskrivelseM;
 	@FXML private ListView<Person> invitertePersoner;
 	@FXML private ListView<Person> inviterEkstraPerson;
 	@FXML private DatePicker datoM;
 	@FXML private Label labRomNrM;
+	@FXML private Pane hostValg;
+	@FXML private Pane notHostValg;
+	@FXML private Button finnRomM;
 	
 
 	@FXML
 	public void moteInfoTilView(MouseEvent event) {
-		Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
-		sluttTid.setText(mote.getSlutt());
-		startTid.setText(mote.getStart());
-		tittelM.setText(mote.getTitle());
-		beskrivelseM.setText(mote.getBeskrivelse());
-		invitertePersoner.getItems().clear();
-		for (Person person : mote.getParticipants()) {
-			invitertePersoner.getItems().add(person);
+		if(!moteinnkallinger.getSelectionModel().isEmpty()) {
+			Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
+			sluttTid.setText(mote.getSlutt());
+			startTid.setText(mote.getStart());
+			tittelM.setText(mote.getTitle());
+			beskrivelseM.setText(mote.getBeskrivelse());
+			meg = "stefn";
+			if(mote.getHost().equals(meg)) {
+				notHostValg.setVisible(false);
+				hostValg.setVisible(true);
+				invitertePersoner.getItems().clear();
+				for (Person person : mote.getParticipants()) {
+					invitertePersoner.getItems().add(person);
+				}
+			} else {
+				hostValg.setVisible(false);
+				notHostValg.setVisible(true);
+				beskrivelseM.setEditable(false);
+				datoM.setEditable(false);
+				tittelM.setEditable(false);
+				sluttTid.setEditable(false);
+				startTid.setEditable(false);
+				stedM.setEditable(false);
+				
+			}
+			
 		}
 	}
 	
