@@ -141,10 +141,16 @@ public class CalendarViewController {
 		if (datoVelgK.getValue() != null){
 		LocalDate tilDato = datoVelgK.getValue();
 		settKalenderDato(tilDato);
+		updateAvtalerIKalender();
 		}
 		//Alle avtalene må lates inn på riktig måte
 	}
 	
+	private void updateAvtalerIKalender() {
+		// Sletter gamle avtaler og legger inn nye 
+		
+	}
+
 	@FXML
 	public void moteBeskrivelseTilInfo(MouseEvent event) {
 		resetBeskrivelse();
