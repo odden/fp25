@@ -162,7 +162,7 @@ public class PConnector {
 					str += object.toString() + ":";
 				}
 				else{
-					str += "NULL";
+					str += "NULL:";
 				}
 			}
 			arrayList.add(str.substring(0, str.length() - 1 ) + ";");
