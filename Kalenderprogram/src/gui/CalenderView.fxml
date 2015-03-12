@@ -322,7 +322,7 @@
                               </GridPane>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
-                                    <TextField fx:id="startTid" promptText="hh:mm">
+                                    <TextField fx:id="startM" promptText="hh:mm">
                                        <tooltip>
                                           <Tooltip opacity="0.0" text="Empty Tooltip" />
                                        </tooltip>
@@ -341,7 +341,7 @@
                               </GridPane>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
-                                    <TextField fx:id="sluttTid" promptText="hh:mm" />
+                                    <TextField fx:id="sluttM" promptText="hh:mm" />
                                     <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="138.0" text="Sett alarm:  " GridPane.columnIndex="1" />
                                     <ChoiceBox fx:id="alarm" prefWidth="150.0" GridPane.columnIndex="2" />
                                  </children>
