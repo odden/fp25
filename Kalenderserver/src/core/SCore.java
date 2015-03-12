@@ -243,6 +243,17 @@ public class SCore {
 		}
 	}
 	
+	public ArrayList<List<Object>> getGroup(String groupname){
+		ResultSet rs;
+		try {
+			rs = dbc.executeSQL("SELECT bruker_brukernavn FROM gruppe_has_bruker WHERE gruppe_navn = "+groupname);
+			return resToList(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public boolean editAppointment(int id, String vert, String title, String sted, String room,String dato,String start, String slutt, String endring){
 		try {
 			Calendar cal = stringToCal(dato);

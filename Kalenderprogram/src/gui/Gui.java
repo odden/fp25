@@ -135,6 +135,13 @@ public class Gui extends Application {
 		}
 	}
 
+	public ArrayList<String> getRoom(String date, String start, String slutt, int size){
+		return core.sc.getRoom(size, date, start, slutt);
+	}
+	
+	
+	
+	
 	@SuppressWarnings("static-access")
 	@Override
 	public void start(Stage primaryStage) throws Exception {
