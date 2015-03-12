@@ -123,6 +123,7 @@ public class Gui extends Application {
 					if (s.equals(":")) {
 					} else {
 						String[] appointments = s.split(":");
+						//ArrayList<String> invited = core.sc.getInvited(appointments[0]);
 						Appointment a = new Appointment();
 						this.myAppointments.add(a);
 					}

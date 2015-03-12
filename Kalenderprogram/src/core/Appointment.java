@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class Appointment {
 	
+	private int id;
 	private LocalDate date;
 	private String start;
 	private String slutt;
@@ -20,7 +21,8 @@ public class Appointment {
 		
 	}
 	
-	public Appointment(String start, String slutt, String sted, String title, String beskrivelse, LocalDate date, String host, ArrayList<Person> participants){
+	public Appointment(int id, String start, String slutt, String sted, String title, String beskrivelse, LocalDate date, String host, ArrayList<Person> participants){
+		this.id = id;
 		this.start=start;
 		this.slutt=slutt;
 		this.sted=sted;
@@ -32,7 +34,8 @@ public class Appointment {
 		
 	}
 	
-	public Appointment(String start, String slutt, int rom, String title, String beskrivelse, LocalDate date, String host, ArrayList<Person> participants){
+	public Appointment(int id,String start, String slutt, int rom, String title, String beskrivelse, LocalDate date, String host, ArrayList<Person> participants){
+		this.id = id;
 		this.start=start;
 		this.slutt=slutt;
 		this.rom=rom;
@@ -42,6 +45,11 @@ public class Appointment {
 		this.host=host;
 		this.participants.addAll(participants);
 		
+	}
+	
+	
+	public int getId(){
+		return id;
 	}
 	public String getTitle() {
 		return title;
