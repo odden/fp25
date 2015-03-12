@@ -176,7 +176,7 @@ public class CalendarViewController {
 		}
 		else if (dag.getValue() == 4) {
 			mandagDato = date.minusDays(3);
-			onsdagDato = date.minusDays(2);
+			tirsdagDato = date.minusDays(2);
 			onsdagDato = date.minusDays(1);
 			torsdagDato = date;
 			fredagDato = date.plusDays(1);
@@ -186,7 +186,7 @@ public class CalendarViewController {
 		}
 		else if (dag.getValue() == 5) {
 			mandagDato = date.minusDays(4);
-			onsdagDato = date.minusDays(3);
+			tirsdagDato = date.minusDays(3);
 			onsdagDato = date.minusDays(2);
 			torsdagDato = date.minusDays(1);
 			fredagDato = date;
@@ -196,7 +196,7 @@ public class CalendarViewController {
 		}
 		else if (dag.getValue() == 6) {
 			mandagDato = date.minusDays(5);
-			onsdagDato = date.minusDays(4);
+			tirsdagDato = date.minusDays(4);
 			onsdagDato = date.minusDays(3);
 			torsdagDato = date.minusDays(2);
 			fredagDato = date.minusDays(1);
@@ -206,7 +206,7 @@ public class CalendarViewController {
 		}
 		else {
 			mandagDato = date.minusDays(6);
-			onsdagDato = date.minusDays(5);
+			tirsdagDato = date.minusDays(5);
 			onsdagDato = date.minusDays(4);
 			torsdagDato = date.minusDays(3);
 			fredagDato = date.minusDays(2);
