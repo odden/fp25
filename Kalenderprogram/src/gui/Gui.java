@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -123,8 +124,16 @@ public class Gui extends Application {
 					if (s.equals(":")) {
 					} else {
 						String[] appointments = s.split(":");
-						//ArrayList<String> invited = core.sc.getInvited(appointments[0]);
-						Appointment a = new Appointment();
+						ArrayList<String> invited = core.sc.getInvited(appointments[0]);
+						ArrayList<Person> participants = new ArrayList<Person>();
+						for (Person p: this.users){
+							if (invited.contains(p.getUsername())){
+								participants.add(p);
+							}
+						}
+						
+						Appointment a = new Appointment(Integer.parseInt(appointments[0]),appointments[1],appointments[2],appointments[3],Integer.parseInt(appointments[4]),appointments[5],appointments[6],appointments[7],participants);
+						System.out.println(a.getParticipants() + " er med");
 						this.myAppointments.add(a);
 					}
 				}

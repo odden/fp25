@@ -179,10 +179,10 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane layoutX="151.0" layoutY="25.0" prefHeight="312.0" prefWidth="468.0">
+                        <GridPane layoutX="151.0" layoutY="17.0" prefHeight="320.0" prefWidth="527.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="101.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="367.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="89.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="438.0" minWidth="10.0" prefWidth="438.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -203,22 +203,21 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <GridPane prefHeight="55.0" prefWidth="423.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="164.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="95.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="107.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="107.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="147.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="75.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="106.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="111.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="76.0" text="eller" GridPane.columnIndex="1" />
-                                    <Label fx:id="labRomNrNH" alignment="CENTER" prefHeight="16.0" prefWidth="75.0" text="rom nr." GridPane.columnIndex="3" />
                                     <TextField fx:id="stedNH" prefHeight="26.0" prefWidth="137.0" />
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRomNH" prefHeight="26.0" prefWidth="108.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="2" />
-                                    <ComboBox fx:id="romCB1" prefHeight="25.0" prefWidth="67.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRomNH" prefHeight="26.0" prefWidth="89.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="2" />
+                                    <ComboBox fx:id="romCBNH" prefHeight="25.0" prefWidth="67.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
                                  </children>
                               </GridPane>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -232,8 +231,8 @@
                                 </rowConstraints>
                                  <children>
                                     <TextField fx:id="startNH" promptText="hh:mm" />
-                                    <Label alignment="CENTER_RIGHT" prefHeight="16.0" prefWidth="159.0" text="Dato:  " GridPane.columnIndex="1" />
-                                    <DatePicker fx:id="datoNH" GridPane.columnIndex="2" />
+                                    <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="46.0" GridPane.columnIndex="2" />
+                                    <Label text="Antall deltakere:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                                  </children>
                               </GridPane>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
@@ -247,13 +246,15 @@
                                 </rowConstraints>
                                  <children>
                                     <TextField fx:id="sluttNH" promptText="hh:mm" />
+                                    <DatePicker fx:id="datoNH" GridPane.columnIndex="2" />
+                                    <Label alignment="CENTER_RIGHT" prefHeight="16.0" prefWidth="159.0" text="Dato:  " GridPane.columnIndex="1" />
                                  </children>
                               </GridPane>
                               <TextArea fx:id="beskrivelseNH" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextField fx:id="tittelNH" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
-                        <GridPane layoutX="251.0" layoutY="356.0" prefHeight="99.0" prefWidth="369.0">
+                        <GridPane layoutX="239.0" layoutY="341.0" prefHeight="114.0" prefWidth="442.0">
                           <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -269,7 +270,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ListView fx:id="velgPerson" prefHeight="77.0" prefWidth="123.0" GridPane.rowSpan="5" />
+                              <ListView fx:id="velgPerson" prefHeight="73.0" prefWidth="142.0" GridPane.rowSpan="5" />
                               <ListView fx:id="valgtePersoner" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowSpan="5" />
                               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#leggTilPerson" prefHeight="26.0" prefWidth="100.0" text="Legg til -&gt;" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                               <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#fjernPerson" prefHeight="26.0" prefWidth="100.0" text="&lt;- Fjern" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
@@ -304,7 +305,7 @@
                                     <Button fx:id="finnRomM" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRomM" prefHeight="26.0" prefWidth="108.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="2" />
                                     <TextField fx:id="stedM" />
                                     <Label fx:id="labRomNrM" alignment="CENTER" prefHeight="16.0" prefWidth="95.0" text="rom nr." GridPane.columnIndex="3" />
-                                    <ComboBox fx:id="romCB" prefHeight="25.0" prefWidth="67.0" GridPane.columnIndex="3">
+                                    <ComboBox fx:id="romCBM" prefHeight="25.0" prefWidth="67.0" GridPane.columnIndex="3">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
