@@ -162,20 +162,12 @@ public class CalendarViewController {
 	public void visUkeFraDato(Event event) {
 		System.out.println("hei");
 		if (datoVelgK.getValue() != null){
-		LocalDate tilDato = datoVelgK.getValue();
-		settKalenderDato(tilDato);
-<<<<<<< HEAD
+			LocalDate tilDato = datoVelgK.getValue();
+			settKalenderDato(tilDato);
+			updateAppointments();
 		}
-		//Alle avtalene må lates inn på riktig måte
-	}
-
-=======
-		updateAppointments();
-		}
-		//Alle avtalene må lates inn på riktig måte
 	}
 	
->>>>>>> 9251e433d5032e1fbb53782a0752d12cf30ab18e
 	@FXML
 	public void moteBeskrivelseTilInfo(MouseEvent event) {
 		resetBeskrivelse();
