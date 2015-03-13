@@ -135,6 +135,7 @@ public class CalendarViewController {
 	@FXML private Label maned;
 	private ArrayList<LocalDate> ukeDatoer = new ArrayList<LocalDate>();
 	private ArrayList<ListView<Appointment>> ukeDagListe =  new ArrayList<ListView<Appointment>>();
+	private ArrayList<Person> personKalendere = new ArrayList<Person>();
 	
 	@FXML
 	public void visUkeFraDato(Event event) {
@@ -489,7 +490,6 @@ public class CalendarViewController {
 			startM.setText(mote.getStart());
 			tittelM.setText(mote.getTitle());
 			beskrivelseM.setText(mote.getTitle());
-			meg = "stefan";
 			if(mote.getHost().equals(meg)) {
 				notHostValg.setVisible(false);
 				hostValg.setVisible(true);
