@@ -133,7 +133,8 @@ public class CalendarViewController {
 	@FXML private DatePicker datoVelgK;
 	@FXML private Label labUkeNr;
 	@FXML private Label maned;
-	private ArrayList<LocalDate> ukeDatoer = new ArrayList<LocalDate>(); 
+	private ArrayList<LocalDate> ukeDatoer = new ArrayList<LocalDate>();
+	private ArrayList<ListView<Appointment>> ukeDagListe =  new ArrayList<ListView<Appointment>>();
 	
 	@FXML
 	public void visUkeFraDato(Event event) {
@@ -175,7 +176,9 @@ public class CalendarViewController {
 		fredagDato = fredagDato.minusWeeks(1);
 		lordagDato = lordagDato.minusWeeks(1);
 		sondagDato = sondagDato.minusWeeks(1);
+		updateUkeDatoer();
 		updateKalenderDato();
+		updateAppointments();
 		//endrer ikke hva som vises i kalenderen
 	}
 	
@@ -188,7 +191,9 @@ public class CalendarViewController {
 		fredagDato = fredagDato.plusWeeks(1);
 		lordagDato = lordagDato.plusWeeks(1);
 		sondagDato = sondagDato.plusWeeks(1);
+		updateUkeDatoer();
 		updateKalenderDato();
+		updateAppointments();
 		//endrer ikke hva som vises i kalenderen
 	}
 	
@@ -205,6 +210,17 @@ public class CalendarViewController {
 				}
 			}
 		}
+	}
+	
+	private void updateUkeDatoer(){
+		this.ukeDatoer.clear();
+		this.ukeDatoer.add(mandagDato);
+		this.ukeDatoer.add(tirsdagDato);
+		this.ukeDatoer.add(onsdagDato);
+		this.ukeDatoer.add(torsdagDato);
+		this.ukeDatoer.add(fredagDato);
+		this.ukeDatoer.add(lordagDato);
+		this.ukeDatoer.add(sondagDato);
 	}
 	
 	private void settKalenderDato(LocalDate date) {
@@ -283,6 +299,7 @@ public class CalendarViewController {
 			sondagDato = date;
 			updateKalenderDato();
 		}
+		updateUkeDatoer();
 	}
 	
 	public void updateKalenderDato() {
@@ -341,6 +358,13 @@ public class CalendarViewController {
 	@FXML private TextField antallNH;
 	
 	public void initialize(){
+		this.ukeDagListe.add(this.mandag);
+		this.ukeDagListe.add(this.tirsdag);
+		this.ukeDagListe.add(this.onsdag);
+		this.ukeDagListe.add(this.torsdag);
+		this.ukeDagListe.add(this.fredag);
+		this.ukeDagListe.add(this.lordag);
+		this.ukeDagListe.add(this.sondag);
 		datoNH.setValue(LocalDate.now());
 		final Callback<DatePicker, DateCell> datoerSjekk = new Callback<DatePicker, DateCell>() {
             @Override
@@ -368,35 +392,26 @@ public class CalendarViewController {
         
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
         alarm.getSelectionModel().selectFirst();
-        //test start
-        velgPerson.setItems(FXCollections.observableArrayList(new Person("Ollef", "Ollef","ollef@gmail.com","22225555"),new Person("Fridus", "fridus","fridus@gmail.com","22235555")));
-        valgtePersoner.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555"),new Person("Frode", "frodiss","frode@gmail.com","22255555")));
-        leggTilKalender.setItems(FXCollections.observableArrayList(new Person("Oline", "Oline","olle@gmail.com","22245555"),new Person("Frode", "frodiss","frode@gmail.com","22255555")));
-        Person oline = leggTilKalender.getItems().get(0);
-        ArrayList<Appointment> avtaler = oline.getAvtaler();
-        Appointment avtale = new Appointment();
-        Appointment avtale2 = new Appointment();
-        Appointment avtale1 = new Appointment();
-        avtale1.setTitle("Klovn");
-        avtale2.setTitle("klippefisk");
-        avtale1.setStart("9:00");
-        avtale2.setSlutt("10:14");
-        mandag.getItems().add(avtale1);
-        tirsdag.getItems().add(avtale1);
-        tirsdag.getItems().add(avtale2);
-        fredag.getItems().add(avtale2);
-        avtale.setTitle("Kompoiss");
-        avtale.setRom(123);
-        avtale.setSlutt("11:13");
-        avtale.setStart("11:10");
-        avtale.setTitle("klasse1");
-        avtale.setDate(LocalDate.now());
-        avtale.setHost("stefan");
-        mandag.getItems().add(avtale);
-        moteinnkallinger.getItems().add(avtale);
-        //test slutt
 	}
 
+	private void updateAppointments(){
+		for (ListView<Appointment> list : ukeDagListe) {
+			list.getItems().clear();
+		}
+		for (Appointment appointment : this.myAppointments) {
+			for (LocalDate date : this.ukeDatoer) {
+				if (appointment.getDate().equals(date)) {
+					int dayInt = ukeDatoer.indexOf(date);
+					if (!this.ukeDagListe.get(dayInt).getItems().contains(appointment)) {
+						this.ukeDagListe.get(dayInt).getItems().add(appointment);
+					}
+				}
+			}
+		}
+		
+		
+	}
+	
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
 		
@@ -543,6 +558,7 @@ public class CalendarViewController {
 		for (Appointment appointment : appointments) {
 			moteinnkallinger.getItems().add(appointment);
 		}
+		updateAppointments();
 	}
 	
 
