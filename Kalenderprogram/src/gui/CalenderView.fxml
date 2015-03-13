@@ -183,7 +183,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeecec" height="106.0" layoutX="424.0" layoutY="185.0" stroke="BLACK" strokeType="INSIDE" width="257.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="181.0" layoutY="184.0" stroke="BLACK" strokeType="INSIDE" width="211.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeecec" height="51.0" layoutX="181.0" layoutY="184.0" stroke="BLACK" strokeType="INSIDE" width="211.0" />
                         <GridPane layoutX="151.0" layoutY="17.0" prefHeight="320.0" prefWidth="527.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="89.0" />
@@ -291,8 +291,8 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8e8e8" height="83.0" layoutX="524.0" layoutY="178.0" stroke="BLACK" strokeType="INSIDE" width="233.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8e8e8" height="44.0" layoutX="257.0" layoutY="178.0" stroke="BLACK" strokeType="INSIDE" width="199.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeecec" height="83.0" layoutX="524.0" layoutY="178.0" stroke="BLACK" strokeType="INSIDE" width="233.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeecec" height="44.0" layoutX="257.0" layoutY="178.0" stroke="BLACK" strokeType="INSIDE" width="199.0" />
                         <ListView fx:id="moteinnkallinger" layoutX="51.0" layoutY="68.0" onMouseClicked="#moteInfoTilView" prefHeight="459.0" prefWidth="151.0" />
                         <Label layoutX="68.0" layoutY="43.0" prefHeight="16.0" prefWidth="117.0" text="Møteinnkallinger" />
                         <GridPane layoutX="237.0" layoutY="17.0" prefHeight="309.0" prefWidth="514.0">
