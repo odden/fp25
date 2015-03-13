@@ -135,7 +135,6 @@ public class CalendarViewController {
 	@FXML private Label maned;
 	private ArrayList<LocalDate> ukeDatoer = new ArrayList<LocalDate>();
 	private ArrayList<ListView<Appointment>> ukeDagListe =  new ArrayList<ListView<Appointment>>();
-	private ArrayList<Person> personKalendere = new ArrayList<Person>();
 	
 	@FXML
 	public void visUkeFraDato(Event event) {
