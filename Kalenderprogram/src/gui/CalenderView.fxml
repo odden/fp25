@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -179,6 +182,8 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeecec" height="106.0" layoutX="424.0" layoutY="185.0" stroke="BLACK" strokeType="INSIDE" width="257.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="181.0" layoutY="184.0" stroke="BLACK" strokeType="INSIDE" width="211.0" />
                         <GridPane layoutX="151.0" layoutY="17.0" prefHeight="320.0" prefWidth="527.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="89.0" />
@@ -195,7 +200,6 @@
                            <children>
                               <Label text="Tittel:" GridPane.rowIndex="1" />
                               <Label text="Beskrivelse:" GridPane.rowIndex="2" />
-                              <Label text="Sted:" GridPane.rowIndex="3" />
                               <Label text="Starttid:" GridPane.rowIndex="4" />
                               <Label text="Sluttid:" GridPane.rowIndex="5" />
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="388.0" text="Fyll inn informasjon" GridPane.columnIndex="1">
@@ -215,9 +219,10 @@
                                 </rowConstraints>
                                  <children>
                                     <TextField fx:id="stedNH" prefHeight="26.0" prefWidth="137.0" />
-                                    <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="46.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
                                     <Label text="Antall deltakere:" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRomNH" prefHeight="26.0" prefWidth="89.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
+                                    <TextField fx:id="antallNH" maxWidth="-Infinity" prefHeight="26.0" prefWidth="46.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                                    <Button fx:id="finnRomNH" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRomNH" prefHeight="26.0" prefWidth="89.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
+                                    <RadioButton fx:id="velgRomNH" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#romValgtNH" prefHeight="18.0" prefWidth="33.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
                                  </children>
                               </GridPane>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -251,6 +256,8 @@
                               </GridPane>
                               <TextArea fx:id="beskrivelseNH" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextField fx:id="tittelNH" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <RadioButton fx:id="velgStedNH" mnemonicParsing="false" onAction="#stedValgtNH" GridPane.halignment="LEFT" GridPane.rowIndex="3" />
+                              <Label text="Sted:" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                         <GridPane layoutX="239.0" layoutY="341.0" prefHeight="114.0" prefWidth="442.0">
@@ -276,7 +283,6 @@
                            </children>
                         </GridPane>
                         <Button fx:id="leggTilHendelse" layoutX="352.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" prefHeight="63.0" prefWidth="168.0" text="Legg til hendelse" />
-                        <Label alignment="CENTER" layoutX="121.0" layoutY="334.0" prefHeight="16.0" prefWidth="76.0" text="eller" />
                      </children>
                   </AnchorPane>
             </content>
@@ -285,13 +291,14 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8e8e8" height="83.0" layoutX="524.0" layoutY="178.0" stroke="BLACK" strokeType="INSIDE" width="233.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8e8e8" height="44.0" layoutX="257.0" layoutY="178.0" stroke="BLACK" strokeType="INSIDE" width="199.0" />
                         <ListView fx:id="moteinnkallinger" layoutX="51.0" layoutY="68.0" onMouseClicked="#moteInfoTilView" prefHeight="459.0" prefWidth="151.0" />
                         <Label layoutX="68.0" layoutY="43.0" prefHeight="16.0" prefWidth="117.0" text="Møteinnkallinger" />
                         <GridPane layoutX="237.0" layoutY="17.0" prefHeight="309.0" prefWidth="514.0">
                            <children>
                               <Label text="Tittel:" GridPane.rowIndex="1" />
                               <Label text="Beskrivelse:" GridPane.rowIndex="2" />
-                              <Label text="Sted:" GridPane.rowIndex="3" />
                               <Label text="Starttid:" GridPane.rowIndex="4" />
                               <Label text="Sluttid:" GridPane.rowIndex="5" />
                               <Label alignment="CENTER" prefHeight="16.0" prefWidth="388.0" text="Fyll inn informasjon" GridPane.columnIndex="1">
@@ -301,11 +308,15 @@
                               </Label>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
-                                    <Label alignment="CENTER" prefHeight="16.0" prefWidth="89.0" text="eller" GridPane.columnIndex="1" />
                                     <Button fx:id="finnRomM" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRomM" prefHeight="26.0" prefWidth="75.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
                                     <TextField fx:id="stedM" />
-                                    <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="33.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                                    <TextField fx:id="antallM" maxWidth="-Infinity" prefHeight="26.0" prefWidth="33.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
                                     <Label text="Antall deltakere:" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
+                                    <RadioButton fx:id="velgRomM" contentDisplay="RIGHT" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#romValgtM" prefHeight="18.0" prefWidth="49.0" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                                       <cursor>
+                                          <Cursor fx:constant="DEFAULT" />
+                                       </cursor>
+                                    </RadioButton>
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="139.0" />
@@ -324,8 +335,6 @@
                                           <Tooltip opacity="0.0" text="Empty Tooltip" />
                                        </tooltip>
                                     </TextField>
-                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="53.0" text="Dato:  " GridPane.columnIndex="1" />
-                                    <DatePicker fx:id="datoM" prefHeight="26.0" prefWidth="131.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                                     <ComboBox fx:id="romCBM" prefHeight="26.0" prefWidth="115.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
@@ -345,7 +354,9 @@
                                  <children>
                                     <TextField fx:id="sluttM" maxWidth="-Infinity" prefHeight="26.0" prefWidth="62.0" promptText="hh:mm" />
                                     <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="76.0" text="Alarm:  " GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-                                    <ChoiceBox fx:id="alarm" prefWidth="150.0" GridPane.columnIndex="2" />
+                                    <ChoiceBox fx:id="alarm" prefHeight="26.0" prefWidth="116.0" GridPane.columnIndex="2" />
+                                    <DatePicker fx:id="datoM" prefHeight="26.0" prefWidth="131.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="53.0" text="Dato:  " GridPane.columnIndex="2" GridPane.halignment="CENTER" />
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.0" minWidth="10.0" prefWidth="66.0" />
@@ -358,6 +369,7 @@
                               </GridPane>
                               <TextArea fx:id="beskrivelseM" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextField fx:id="tittelM" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <RadioButton fx:id="velgStedM" mnemonicParsing="false" onAction="#stedValgtM" prefHeight="18.0" prefWidth="63.0" text="Sted:" GridPane.rowIndex="3" />
                            </children>
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="73.0" />

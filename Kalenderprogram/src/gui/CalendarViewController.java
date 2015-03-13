@@ -24,6 +24,7 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -43,7 +44,23 @@ public class CalendarViewController {
 	private ArrayList<Person> users;
 	private ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
 	
-	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT, TextField sted, ComboBox rom) { {
+	private void stedValgt(TextField antall, Button finnRom, RadioButton romKnapp, TextField sted, ComboBox ledigRom) {
+		antall.setDisable(true);
+		finnRom.setDisable(true);
+		romKnapp.setSelected(false);
+		sted.setDisable(false);
+		ledigRom.setDisable(true);
+	}
+	
+	private void romValgt(TextField sted, RadioButton stedKnapp, TextField antall, Button finnRom, ComboBox ledigRom) {
+		sted.setDisable(true);
+		stedKnapp.setSelected(false);
+		antall.setDisable(false);
+		finnRom.setDisable(false);
+		ledigRom.setDisable(false);
+	}
+	
+	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT, TextField sted, ComboBox rom, String antall) { {
 		boolean check = true;
 		
 		//sjekker tittel
@@ -58,7 +75,12 @@ public class CalendarViewController {
 		}
 		
 		//sjekker sted
-		else if (sted.getText().isEmpty()) {
+		else if (sted.getText().isEmpty() && rom.getSelectionModel().isEmpty()) {
+			check = false;
+		}
+		
+		//sjekker antall deltakere
+		else if (!antall.matches("[0-9]+")) {
 			check = false;
 		}
 
@@ -302,6 +324,24 @@ public class CalendarViewController {
 		updateUkeDatoer();
 	}
 	
+	private void updateAppointments(){
+		for (ListView<Appointment> list : ukeDagListe) {
+			list.getItems().clear();
+		}
+		for (Appointment appointment : this.myAppointments) {
+			for (LocalDate date : this.ukeDatoer) {
+				if (appointment.getDate().equals(date)) {
+					int dayInt = ukeDatoer.indexOf(date);
+					if (!this.ukeDagListe.get(dayInt).getItems().contains(appointment)) {
+						this.ukeDagListe.get(dayInt).getItems().add(appointment);
+					}
+				}
+			}
+		}
+		
+		
+	}
+	
 	public void updateKalenderDato() {
 		WeekFields weekFields = WeekFields.of(Locale.getDefault()); 
 		mandagL.setText("Mandag " + mandagDato.getDayOfMonth() + ".");
@@ -356,6 +396,9 @@ public class CalendarViewController {
 	@FXML private TextField stedNH;
 	@FXML private ComboBox romCBNH; 
 	@FXML private TextField antallNH;
+	@FXML private RadioButton velgStedNH;
+	@FXML private RadioButton velgRomNH;
+	@FXML private Button finnRomNH;
 	
 	public void initialize(){
 		this.ukeDagListe.add(this.mandag);
@@ -393,29 +436,25 @@ public class CalendarViewController {
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
         alarm.getSelectionModel().selectFirst();
 	}
-
-	private void updateAppointments(){
-		for (ListView<Appointment> list : ukeDagListe) {
-			list.getItems().clear();
-		}
-		for (Appointment appointment : this.myAppointments) {
-			for (LocalDate date : this.ukeDatoer) {
-				if (appointment.getDate().equals(date)) {
-					int dayInt = ukeDatoer.indexOf(date);
-					if (!this.ukeDagListe.get(dayInt).getItems().contains(appointment)) {
-						this.ukeDagListe.get(dayInt).getItems().add(appointment);
-					}
-				}
-			}
-		}
-		
-		
+	
+	@FXML
+	public void stedValgtNH(ActionEvent event) {
+		stedValgt(antallNH, finnRomNH, velgRomNH, stedNH, romCBNH);
 	}
 	
+
+	@FXML 
+	public void romValgtNH(ActionEvent event) {
+		romValgt(stedNH, velgStedNH, antallNH, finnRomNH, romCBNH);
+	}
+
+	
+	
+
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
 		
-		check = validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH);
+		check = validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH.getText());
 		//sjekker om dato er senere
 	
 		
@@ -456,7 +495,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomNH(ActionEvent event) {
-		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH)) {
+		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH.getText())) {
 		gui.getRoom(datoNH.getValue()+"", startNH.getText(), sluttNH.getText(), Integer.parseInt(antallNH.getText()));
 		//Finner et passende rom utifra antall folk invitert
 		}
@@ -479,6 +518,9 @@ public class CalendarViewController {
 	@FXML private Button finnRomM;
 	@FXML private ComboBox romCBM;
 	@FXML private TextField antallM;
+	@FXML private RadioButton velgStedM;
+	@FXML private RadioButton velgRomM;
+
 	
 
 	@FXML
@@ -537,10 +579,21 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomM(ActionEvent event) {
-		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH)) {
+		if (validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM.getText())) {
 		gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), Integer.parseInt(antallM.getText()));
 		//Finner et passende rom utifra antall folk invitert
 		}
+	}
+	
+	@FXML
+	public void stedValgtM(ActionEvent event) {
+		stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
+	}
+	
+
+	@FXML 
+	public void romValgtM(ActionEvent event) {
+		romValgt(stedM, velgStedM, antallM, finnRomM, romCBM);
 	}
 		
 	
