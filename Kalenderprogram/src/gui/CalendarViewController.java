@@ -219,6 +219,7 @@ public class CalendarViewController {
 			Person person = leggTilKalender.getSelectionModel().getSelectedItem();
 			if (! this.personerIKalender.contains(person)) {
 				this.personerIKalender.add(person);
+				updateAppointments();
 			}
 		}
 	}
@@ -368,6 +369,7 @@ public class CalendarViewController {
 			Person person = leggTilKalender.getSelectionModel().getSelectedItem();
 			if (this.personerIKalender.contains(person)) {
 				this.personerIKalender.remove(person);
+				updateAppointments();
 			}
 		}
 	}
