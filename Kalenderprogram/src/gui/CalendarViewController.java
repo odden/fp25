@@ -43,7 +43,7 @@ public class CalendarViewController {
 	private ArrayList<Person> users;
 	private ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
 	
-	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT, TextField sted, ComboBox rom) { {
+	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT, TextField sted, ComboBox rom, String antall) { {
 		boolean check = true;
 		
 		//sjekker tittel
@@ -58,7 +58,12 @@ public class CalendarViewController {
 		}
 		
 		//sjekker sted
-		else if (sted.getText().isEmpty()) {
+		else if (sted.getText().isEmpty() && rom.getSelectionModel().isEmpty()) {
+			check = false;
+		}
+		
+		//sjekker antall deltakere
+		else if (!antall.matches("[0-9]+")) {
 			check = false;
 		}
 
@@ -415,7 +420,7 @@ public class CalendarViewController {
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
 		
-		check = validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH);
+		check = validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH.getText());
 		//sjekker om dato er senere
 	
 		
@@ -456,7 +461,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomNH(ActionEvent event) {
-		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH)) {
+		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH.getText())) {
 		gui.getRoom(datoNH.getValue()+"", startNH.getText(), sluttNH.getText(), Integer.parseInt(antallNH.getText()));
 		//Finner et passende rom utifra antall folk invitert
 		}
@@ -538,7 +543,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomM(ActionEvent event) {
-		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH)) {
+		if (validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM.getText())) {
 		gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), Integer.parseInt(antallM.getText()));
 		//Finner et passende rom utifra antall folk invitert
 		}
