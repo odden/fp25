@@ -102,12 +102,15 @@ public class Gui extends Application {
 		else{
 			this.user = new Person(response.split(":")[0],response.split(":")[1],response.split(":")[2],response.split(":")[3]);
 			ArrayList<String> users = core.sc.getUsers();
+			this.users.add(user);
 			for (String s : users) {
 				if (s.equals(":")) {
 				} else {
 					String[] user = s.split(":");
-					Person p = new Person(user[0], user[1], user[2], user[3]);
-					this.users.add(p);
+					if (!user[0].equals(this.user.getUsername())) {
+						Person p = new Person(user[0], user[1], user[2], user[3]);
+						this.users.add(p);
+					}
 				}
 			}
 			ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();

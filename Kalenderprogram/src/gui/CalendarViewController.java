@@ -217,14 +217,8 @@ public class CalendarViewController {
 	public void seKalender(ActionEvent event) {
 		if(!leggTilKalender.getSelectionModel().isEmpty()){
 			Person person = leggTilKalender.getSelectionModel().getSelectedItem();
-			this.personerIKalender.add(person);
-			if(person.hasAvtale()){
-				for (Appointment avtale : person.getAvtaler()) {
-					if(!leggTilKalender.getSelectionModel().isEmpty()){ 
-						mandag.getItems().add(avtale); //test
-						//må velge riktig dag å sette inn avtalen på bakgrunn av datoen lagret i avtalen 
-					}
-				}
+			if (! this.personerIKalender.contains(person)) {
+				this.personerIKalender.add(person);
 			}
 		}
 	}
@@ -323,7 +317,16 @@ public class CalendarViewController {
 		for (ListView<Appointment> list : ukeDagListe) {
 			list.getItems().clear();
 		}
-		for (Appointment appointment : this.myAppointments) {
+		ArrayList<Appointment> apps = new ArrayList<Appointment>();
+		for (Person p : this.personerIKalender) {
+			ArrayList<Appointment> a = p.getMyAppointments();
+			for (Appointment appointment : a) {
+				if(!apps.contains(appointment)){
+					apps.add(appointment);
+				}
+			}
+		}
+		for (Appointment appointment : apps) {
 			for (LocalDate date : this.ukeDatoer) {
 				if (appointment.getDate().equals(date)) {
 					int dayInt = ukeDatoer.indexOf(date);
@@ -363,17 +366,8 @@ public class CalendarViewController {
 		//fjerner valgt kalender fra kalenderen
 		if(!leggTilKalender.getSelectionModel().isEmpty()){ 
 			Person person = leggTilKalender.getSelectionModel().getSelectedItem();
-			if(person.hasAvtale()){
-				for (Appointment avtale : person.getAvtaler()) {
-					if(!mandag.getSelectionModel().isEmpty()){ //må velge riktig dag(listview)
-						if(mandag.getSelectionModel().getSelectedItem().equals(avtale)) { //må velge riktig dag(listView) her
-							resetBeskrivelse();
-						}
-						mandag.getItems().remove(avtale); //test
-						//må finne avtalene knyttet til personen. Kan kobles til "this" kanskje?
-						//Hva om andre også har denne avtalen? Må sjekke alle kalendre
-					}	
-				}
+			if (this.personerIKalender.contains(person)) {
+				this.personerIKalender.remove(person);
 			}
 		}
 	}
@@ -602,13 +596,14 @@ public class CalendarViewController {
 		this.me = me;
 		this.gui = gui;
 		this.users = users;
+		ArrayList<Appointment> appointments = me.getMyAppointments();
 		for (Person person : users) {
 			leggTilKalender.getItems().add(person);
 		}
-		ArrayList<Appointment> appointments = me.getMyAppointments();
 		for (Appointment appointment : appointments) {
 			moteinnkallinger.getItems().add(appointment);
 		}
+		this.personerIKalender.add(me);
 		updateAppointments();
 	}
 	
