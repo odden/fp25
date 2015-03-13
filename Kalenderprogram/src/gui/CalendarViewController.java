@@ -60,7 +60,7 @@ public class CalendarViewController {
 		ledigRom.setDisable(false);
 	}
 	
-	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT, TextField sted, ComboBox rom, String antall) { {
+	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT, TextField sted, ComboBox rom, String antall, RadioButton stedValgt) { {
 		boolean check = true;
 		
 		//sjekker tittel
@@ -75,15 +75,14 @@ public class CalendarViewController {
 		}
 		
 		//sjekker sted
-		else if (sted.getText().isEmpty() && rom.getSelectionModel().isEmpty()) {
+		else if (stedValgt.isSelected() && sted.getText().isEmpty()) {
 			check = false;
 		}
 		
-		//sjekker antall deltakere
-		else if (!antall.matches("[0-9]+")) {
+		else if (!stedValgt.isSelected() && (!antall.matches("[0-9]+"))) {
 			check = false;
 		}
-
+		
 		//sjekk start tid format
 		String str1 = startT.getText();
 		String[] tid1 = str1.split(":");
@@ -165,10 +164,18 @@ public class CalendarViewController {
 		if (datoVelgK.getValue() != null){
 		LocalDate tilDato = datoVelgK.getValue();
 		settKalenderDato(tilDato);
+<<<<<<< HEAD
 		}
 		//Alle avtalene må lates inn på riktig måte
 	}
 
+=======
+		updateAppointments();
+		}
+		//Alle avtalene må lates inn på riktig måte
+	}
+	
+>>>>>>> 9251e433d5032e1fbb53782a0752d12cf30ab18e
 	@FXML
 	public void moteBeskrivelseTilInfo(MouseEvent event) {
 		resetBeskrivelse();
@@ -428,7 +435,10 @@ public class CalendarViewController {
 
         LocalDate date = LocalDate.now();
         settKalenderDato(date);
-        
+        velgStedM.setSelected(true);
+        velgStedNH.setSelected(true);
+        stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
+        stedValgt(antallNH, finnRomNH, velgRomNH, stedNH, romCBNH);
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
         alarm.getSelectionModel().selectFirst();
 	}
@@ -450,7 +460,7 @@ public class CalendarViewController {
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
 		
-		check = validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH.getText());
+		check = validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH.getText(), velgStedNH);
 		//sjekker om dato er senere
 	
 		
@@ -491,7 +501,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomNH(ActionEvent event) {
-		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH.getText())) {
+		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH.getText(), velgStedNH)) {
 		gui.getRoom(datoNH.getValue()+"", startNH.getText(), sluttNH.getText(), Integer.parseInt(antallNH.getText()));
 		//Finner et passende rom utifra antall folk invitert
 		}
@@ -562,12 +572,13 @@ public class CalendarViewController {
 	
 	@FXML
 	public void slettDeltaker(ActionEvent event) {
-		//Metoden fjerner deltaker fra statusliste 
-		//dette blir ikke lagret før man trykker lagre endring
+		invitertePersoner.getItems().remove(invitertePersoner.getSelectionModel().getSelectedItem());
 	}
 	
 	@FXML
 	public void inviterEkstraDeltaker(ActionEvent event) {
+		invitertePersoner.getItems().add(inviterEkstraPerson.getSelectionModel().getSelectedItem());
+		inviterEkstraPerson.getItems().remove(inviterEkstraPerson.getSelectionModel().getSelectedItem());
 		//Metoden flytter person over til deltaker-ruten 
 		//Da skal personen få en invitasjon (møtet blir synlig i møter) etter at "lagre endringer" 
 		//er trykket.
@@ -575,7 +586,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomM(ActionEvent event) {
-		if (validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM.getText())) {
+		if (validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM.getText(), velgStedM)) {
 		gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), Integer.parseInt(antallM.getText()));
 		//Finner et passende rom utifra antall folk invitert
 		}
