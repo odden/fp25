@@ -231,7 +231,7 @@
                                 </rowConstraints>
                                  <children>
                                     <TextField fx:id="startNH" promptText="hh:mm" />
-                                    <ComboBox fx:id="romCBNH" prefHeight="25.0" prefWidth="67.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
+                                    <ComboBox fx:id="romCBNH" prefHeight="26.0" prefWidth="111.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP" />
                                  </children>
                               </GridPane>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
@@ -287,7 +287,7 @@
                      <children>
                         <ListView fx:id="moteinnkallinger" layoutX="51.0" layoutY="68.0" onMouseClicked="#moteInfoTilView" prefHeight="459.0" prefWidth="151.0" />
                         <Label layoutX="68.0" layoutY="43.0" prefHeight="16.0" prefWidth="117.0" text="Møteinnkallinger" />
-                        <GridPane layoutX="237.0" layoutY="14.0" prefHeight="312.0" prefWidth="468.0">
+                        <GridPane layoutX="237.0" layoutY="17.0" prefHeight="309.0" prefWidth="514.0">
                            <children>
                               <Label text="Tittel:" GridPane.rowIndex="1" />
                               <Label text="Beskrivelse:" GridPane.rowIndex="2" />
@@ -302,20 +302,16 @@
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <children>
                                     <Label alignment="CENTER" prefHeight="16.0" prefWidth="89.0" text="eller" GridPane.columnIndex="1" />
-                                    <Button fx:id="finnRomM" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRomM" prefHeight="26.0" prefWidth="108.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="2" />
+                                    <Button fx:id="finnRomM" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finnRomM" prefHeight="26.0" prefWidth="75.0" text="Finn rom" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="RIGHT" />
                                     <TextField fx:id="stedM" />
-                                    <Label fx:id="labRomNrM" alignment="CENTER" prefHeight="16.0" prefWidth="95.0" text="rom nr." GridPane.columnIndex="3" />
-                                    <ComboBox fx:id="romCBM" prefHeight="25.0" prefWidth="67.0" GridPane.columnIndex="3">
-                                       <GridPane.margin>
-                                          <Insets left="10.0" />
-                                       </GridPane.margin>
-                                    </ComboBox>
+                                    <TextField maxWidth="-Infinity" prefHeight="26.0" prefWidth="33.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+                                    <Label text="Antall deltakere:" GridPane.columnIndex="2" GridPane.halignment="LEFT" />
                                  </children>
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="172.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="87.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="108.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="108.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="315.0" minWidth="10.0" prefWidth="139.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="82.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="137.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="82.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -323,18 +319,23 @@
                               </GridPane>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                                  <children>
-                                    <TextField fx:id="startM" promptText="hh:mm">
+                                    <TextField fx:id="startM" maxWidth="-Infinity" prefHeight="26.0" prefWidth="63.0" promptText="hh:mm">
                                        <tooltip>
                                           <Tooltip opacity="0.0" text="Empty Tooltip" />
                                        </tooltip>
                                     </TextField>
-                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="159.0" text="Dato:  " GridPane.columnIndex="1" />
-                                    <DatePicker fx:id="datoM" GridPane.columnIndex="2" />
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="53.0" text="Dato:  " GridPane.columnIndex="1" />
+                                    <DatePicker fx:id="datoM" prefHeight="26.0" prefWidth="131.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                                    <ComboBox fx:id="romCBM" prefHeight="26.0" prefWidth="115.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                                       <GridPane.margin>
+                                          <Insets left="10.0" />
+                                       </GridPane.margin>
+                                    </ComboBox>
                                  </children>
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="76.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.0" minWidth="10.0" prefWidth="180.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="179.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -342,14 +343,14 @@
                               </GridPane>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
-                                    <TextField fx:id="sluttM" promptText="hh:mm" />
-                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="138.0" text="Sett alarm:  " GridPane.columnIndex="1" />
+                                    <TextField fx:id="sluttM" maxWidth="-Infinity" prefHeight="26.0" prefWidth="62.0" promptText="hh:mm" />
+                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="76.0" text="Alarm:  " GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                                     <ChoiceBox fx:id="alarm" prefWidth="150.0" GridPane.columnIndex="2" />
                                  </children>
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="117.0" minWidth="10.0" prefWidth="66.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="63.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="309.0" minWidth="10.0" prefWidth="309.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -359,8 +360,8 @@
                               <TextField fx:id="tittelM" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="101.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="367.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="73.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="441.0" minWidth="10.0" prefWidth="441.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -371,18 +372,18 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
-                        <Pane fx:id="hostValg" layoutX="236.0" layoutY="320.0" prefHeight="247.0" prefWidth="485.0" visible="false">
+                        <Pane fx:id="hostValg" layoutX="236.0" layoutY="319.0" prefHeight="248.0" prefWidth="515.0">
                            <children>
                               <Button alignment="CENTER" contentDisplay="CENTER" layoutX="293.0" layoutY="195.0" mnemonicParsing="false" onAction="#lagreMoteEndring" prefHeight="26.0" prefWidth="116.0" text="Lagre endring" textAlignment="CENTER" />
-                              <ListView fx:id="invitertePersoner" layoutX="99.0" layoutY="14.0" prefHeight="127.0" prefWidth="221.0" />
+                              <ListView fx:id="invitertePersoner" layoutX="74.0" layoutY="13.0" prefHeight="128.0" prefWidth="246.0" />
                               <Label layoutY="21.0" text="Status:" />
-                              <ListView fx:id="inviterEkstraPerson" layoutX="351.0" layoutY="13.0" prefHeight="128.0" prefWidth="107.0" />
-                              <Button layoutX="378.0" layoutY="145.0" mnemonicParsing="false" onAction="#inviterEkstraDeltaker" text="Inviter" />
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="131.0" layoutY="145.0" mnemonicParsing="false" onAction="#slettDeltaker" prefHeight="26.0" prefWidth="157.0" text="Slett" textAlignment="CENTER" />
+                              <ListView fx:id="inviterEkstraPerson" layoutX="351.0" layoutY="14.0" prefHeight="127.0" prefWidth="159.0" />
+                              <Button layoutX="402.0" layoutY="145.0" mnemonicParsing="false" onAction="#inviterEkstraDeltaker" text="Inviter" />
+                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="119.0" layoutY="145.0" mnemonicParsing="false" onAction="#slettDeltaker" prefHeight="26.0" prefWidth="157.0" text="Slett" textAlignment="CENTER" />
                               <Button alignment="CENTER" contentDisplay="CENTER" layoutX="151.0" layoutY="195.0" mnemonicParsing="false" onAction="#slettMote" prefHeight="26.0" prefWidth="117.0" text="Slett møte" textAlignment="CENTER" />
                            </children>
                         </Pane>
-                        <Pane fx:id="notHostValg" layoutX="319.0" layoutY="326.0" prefHeight="201.0" prefWidth="386.0">
+                        <Pane fx:id="notHostValg" layoutX="319.0" layoutY="322.0" prefHeight="205.0" prefWidth="431.0" visible="false">
                            <children>
                               <Button alignment="CENTER" contentDisplay="CENTER" layoutX="214.0" layoutY="31.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="158.0" text="Deltar ikke" textAlignment="CENTER" />
                               <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="32.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="151.0" text="Deltar" textAlignment="CENTER" />
