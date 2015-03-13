@@ -528,7 +528,6 @@ public class CalendarViewController {
 			startM.setText(mote.getStart());
 			tittelM.setText(mote.getTitle());
 			beskrivelseM.setText(mote.getTitle());
-			meg = "stefan";
 			if(mote.getHost().equals(meg)) {
 				notHostValg.setVisible(false);
 				hostValg.setVisible(true);

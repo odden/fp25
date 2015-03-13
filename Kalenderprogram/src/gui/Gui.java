@@ -24,8 +24,7 @@ public class Gui extends Application {
 	private static Stage stage;
 	Parent root;
 	private LoggInnController logIn;
-	@SuppressWarnings("unused")
-	private String brukernavn;
+	private Person user;
 	private ArrayList<Person> users;
 	private ArrayList<Appointment> myAppointments;
 
@@ -57,7 +56,7 @@ public class Gui extends Application {
 			} else if (fxml.equals("CalenderView.fxml")) {
 				final CalendarViewController controller = loader
 						.getController();
-				controller.initData(stage, this,users,myAppointments, brukernavn);
+				controller.initData(stage, this,users,myAppointments, user.getUsername());
 			}
 			stage.show();
 		} catch (IOException e) {
@@ -106,7 +105,7 @@ public class Gui extends Application {
 			return "aua";
 		}
 		else{
-			this.brukernavn = response.split(":")[0];
+			this.user = new Person(response.split(":")[0],response.split(":")[1],response.split(":")[2],response.split(":")[3]);
 			ArrayList<String> users = core.sc.getUsers();
 			for (String s : users) {
 				if (s.equals(":")) {
