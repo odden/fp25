@@ -526,6 +526,12 @@ public class CalendarViewController {
 			if(mote.getHost().equals(me.getUsername())) {
 				notHostValg.setVisible(false);
 				hostValg.setVisible(true);
+				beskrivelseM.setDisable(false);
+				datoM.setDisable(false);
+				tittelM.setDisable(false);
+				sluttM.setDisable(false);
+				startM.setDisable(false);
+				stedM.setDisable(false);
 				invitertePersoner.getItems().clear();
 				for (Person person : mote.getParticipants()) {
 					invitertePersoner.getItems().add(person);
@@ -599,6 +605,7 @@ public class CalendarViewController {
 		ArrayList<Appointment> appointments = me.getMyAppointments();
 		for (Person person : users) {
 			leggTilKalender.getItems().add(person);
+			velgPerson.getItems().add(person);
 		}
 		for (Appointment appointment : appointments) {
 			moteinnkallinger.getItems().add(appointment);
