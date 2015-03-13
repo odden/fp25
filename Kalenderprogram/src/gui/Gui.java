@@ -26,7 +26,6 @@ public class Gui extends Application {
 	private LoggInnController logIn;
 	private Person user;
 	private ArrayList<Person> users;
-	private ArrayList<Appointment> myAppointments;
 
 	public void init() {
 		this.core = new PCore(this);
@@ -34,10 +33,6 @@ public class Gui extends Application {
 
 	public ArrayList<Person> getUsers() {
 		return users;
-	}
-
-	public ArrayList<Appointment> getAppointments() {
-		return myAppointments;
 	}
 
 	public void switchSceneContent(String fxml) {
@@ -56,7 +51,7 @@ public class Gui extends Application {
 			} else if (fxml.equals("CalenderView.fxml")) {
 				final CalendarViewController controller = loader
 						.getController();
-				controller.initData(stage, this,users,myAppointments, user.getUsername());
+				controller.initData(stage, this,users , user);
 			}
 			stage.show();
 		} catch (IOException e) {
@@ -115,7 +110,7 @@ public class Gui extends Application {
 					this.users.add(p);
 				}
 			}
-			this.myAppointments = new ArrayList<Appointment>();
+			ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
 			ArrayList<String> myApps = core.sc
 					.getAppointments(brukernavn);
 			if (myApps != null){
@@ -141,13 +136,13 @@ public class Gui extends Application {
 								room = 0;
 							}
 							Appointment a = new Appointment(Integer.parseInt(appointments[0]),appointments[1],appointments[2],appointments[3],room,appointments[5],appointments[6],appointments[7],participants);
-							this.myAppointments.add(a);
+							myAppointments.add(a);
 						}
 					}
 				}
 			}
 			System.out.println(this.users);
-
+			user.setAllAppointments(myAppointments);
 			switchSceneContent("CalenderView.fxml");
 			return "Ok";
 		}

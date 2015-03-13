@@ -9,6 +9,7 @@ public class Person {
 	private String email;
 	private String phoneNumber;
 	private ArrayList<Invitation> avtaler = new ArrayList<Invitation>();
+	private ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
 	
 	//Constructor
 	public Person(String username, String name, String email, String phoneNumber){
@@ -80,4 +81,19 @@ public class Person {
 		// TODO Auto-generated method stub
 		
 	}
+	public ArrayList<Appointment> getMyAppointments() {
+		return myAppointments;
+	}
+	public void setAllAppointments(ArrayList<Appointment> myAppointments) {
+		this.myAppointments = myAppointments;
+	}
+	public void removeAppointment(Appointment a){
+		this.myAppointments.remove(a);
+	}
+	public void addAppointment(Appointment a){
+		if (! this.myAppointments.contains(a)) {
+			this.myAppointments.add(a);
+		}
+	}
+	
 }

@@ -38,7 +38,7 @@ import javafx.util.Callback;
 
 public class CalendarViewController {
 
-	private String meg;
+	private Person me;
 	private static Stage stage;
 	private Gui gui;
 	private ArrayList<Person> users;
@@ -157,6 +157,7 @@ public class CalendarViewController {
 	@FXML private Label maned;
 	private ArrayList<LocalDate> ukeDatoer = new ArrayList<LocalDate>();
 	private ArrayList<ListView<Appointment>> ukeDagListe =  new ArrayList<ListView<Appointment>>();
+	private ArrayList<Person> personerIKalender = new ArrayList<Person>();
 	
 	@FXML
 	public void visUkeFraDato(Event event) {
@@ -164,14 +165,8 @@ public class CalendarViewController {
 		if (datoVelgK.getValue() != null){
 		LocalDate tilDato = datoVelgK.getValue();
 		settKalenderDato(tilDato);
-		updateAvtalerIKalender();
 		}
 		//Alle avtalene må lates inn på riktig måte
-	}
-	
-	private void updateAvtalerIKalender() {
-		// Sletter gamle avtaler og legger inn nye 
-		
 	}
 
 	@FXML
@@ -223,6 +218,7 @@ public class CalendarViewController {
 	public void seKalender(ActionEvent event) {
 		if(!leggTilKalender.getSelectionModel().isEmpty()){
 			Person person = leggTilKalender.getSelectionModel().getSelectedItem();
+			this.personerIKalender.add(person);
 			if(person.hasAvtale()){
 				for (Appointment avtale : person.getAvtaler()) {
 					if(!leggTilKalender.getSelectionModel().isEmpty()){ 
@@ -470,7 +466,7 @@ public class CalendarViewController {
 		for (Person person : valgtePersoner.getItems()) {
 			personer.add(person);
 		}
-		Appointment avtale = new Appointment(1,meg, tittelNH.getText(),stedNH.getText(),0,datoNH.getValue().toString(),startNH.getText(),sluttNH.getText(), personer);
+		Appointment avtale = new Appointment(1,me.getUsername(), tittelNH.getText(),stedNH.getText(),0,datoNH.getValue().toString(),startNH.getText(),sluttNH.getText(), personer);
 		moteinnkallinger.getItems().add(avtale);
 		myAppointments.add(avtale);
 	}
@@ -531,7 +527,7 @@ public class CalendarViewController {
 			startM.setText(mote.getStart());
 			tittelM.setText(mote.getTitle());
 			beskrivelseM.setText(mote.getTitle());
-			if(mote.getHost().equals(meg)) {
+			if(mote.getHost().equals(me.getUsername())) {
 				notHostValg.setVisible(false);
 				hostValg.setVisible(true);
 				invitertePersoner.getItems().clear();
@@ -598,15 +594,15 @@ public class CalendarViewController {
 		
 	
 
-	public void initData(Stage stage, Gui gui, ArrayList<Person> users, ArrayList<Appointment> appointments, String meg) {
-		this.stage = stage;
-		this.meg = meg;
+	public void initData(Stage stage, Gui gui, ArrayList<Person> users, Person me) {
+		CalendarViewController.stage = stage;
+		this.me = me;
 		this.gui = gui;
 		this.users = users;
 		for (Person person : users) {
 			leggTilKalender.getItems().add(person);
 		}
-		this.myAppointments = appointments;
+		ArrayList<Appointment> appointments = me.getMyAppointments();
 		for (Appointment appointment : appointments) {
 			moteinnkallinger.getItems().add(appointment);
 		}
