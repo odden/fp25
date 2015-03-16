@@ -44,7 +44,7 @@ public class SCore {
 		//Sjekker om oppgit info er korrekt, hvis ja send bruker info og OK
 		ResultSet login;
 		try {
-			login = dbc.executeSQL("SELECT brukernavn,navn,epost,tlfnr FROM bruker WHERE brukernavn = '"+username+"' AND passord = '"+password+"'");
+			login = dbc.executeSQL("SELECT brukernavn,navn,epost,tlfnr,varsel_endring FROM bruker WHERE brukernavn = '"+username+"' AND passord = '"+password+"'");
 			ArrayList<List<Object>> rs = resToList(login);
 			if (rs.size() != 0){
 				List<Object> user = rs.get(0);

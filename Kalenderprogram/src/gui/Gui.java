@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -101,7 +102,7 @@ public class Gui extends Application {
 		}
 		else{
 			this.user = new Person(response.split(":")[0],response.split(":")[1],response.split(":")[2],response.split(":")[3]);
-			this.user.setVarsler((ArrayList<String>) Arrays.asList(response.split(":")[4].split(";")));
+			this.user.setVarsler(new ArrayList<String>(Arrays.asList(response.split(":")[4].split(";"))));
 			ArrayList<String> users = sc.getUsers();
 			this.users.add(user);
 			for (String s : users) {
@@ -162,7 +163,20 @@ public class Gui extends Application {
 		return sc.getRoom(size, date, start, slutt);
 	}
 	
-	
+	public void tryCreateAppointment(Appointment avtale) {
+		String host = avtale.getHost().getUsername();
+		String title = avtale.getTitle();
+		String room = Integer.toString(avtale.getRom());
+		String date = avtale.getDate().toString();
+		String start = avtale.getStart();
+		String end = avtale.getSlutt();
+		ArrayList<String> invited = new ArrayList<String>();
+		ArrayList<Person> persons = avtale.getParticipants();
+		for (Person person : persons) {
+			invited.add(person.getUsername());
+		}
+		sc.createAppointment(host, title, room, date, start, end, invited);
+	}
 	
 	
 	@SuppressWarnings("static-access")
@@ -187,6 +201,8 @@ public class Gui extends Application {
 		}
 
 	}
+	
+	
 
 	public static void main(String args[]) {
 		launch();

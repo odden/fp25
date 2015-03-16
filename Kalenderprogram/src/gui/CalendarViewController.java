@@ -47,7 +47,6 @@ public class CalendarViewController {
 	private static Stage stage;
 	private Gui gui;
 	private ArrayList<Person> users;
-	private ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
 	
 	private void stedValgt(TextField antall, Button finnRom, RadioButton romKnapp, TextField sted, ComboBox ledigRom) {
 		antall.setDisable(true);
@@ -475,7 +474,8 @@ public class CalendarViewController {
 		for (Person person : valgtePersoner.getItems()) {
 			personer.add(person);
 		}
-		Appointment avtale = new Appointment(1,me.getUsername(), tittelNH.getText(),stedNH.getText(),0,datoNH.getValue().toString(),startNH.getText(),sluttNH.getText(), personer);
+		Appointment avtale = new Appointment(1,me, tittelNH.getText(),stedNH.getText(),0,datoNH.getValue().toString(),startNH.getText(),sluttNH.getText(), personer);
+		this.gui.tryCreateAppointment(avtale);
 		moteinnkallinger.getItems().add(avtale);
 		me.addAppointment(avtale);
 	}
@@ -595,7 +595,7 @@ public class CalendarViewController {
 		if(svar.get().equals(ja)) {
 			Appointment slett = moteinnkallinger.getItems().get(moteinnkallinger.getSelectionModel().getSelectedIndex());
 			moteinnkallinger.getItems().remove(slett);
-			myAppointments.remove(slett);
+			me.removeAppointment(slett);
 		}
 		
 		//Metoden skal slette møte
