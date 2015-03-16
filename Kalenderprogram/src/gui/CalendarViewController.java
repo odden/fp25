@@ -554,9 +554,11 @@ public class CalendarViewController {
 	public void moteInfoTilView(MouseEvent event) {
 		if(!moteinnkallinger.getSelectionModel().isEmpty()) {
 			Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
+			ArrayList<Person> ikkeInvitert = users;
 			sluttM.setText(mote.getSlutt());
 			startM.setText(mote.getStart());
 			tittelM.setText(mote.getTitle());
+			stedM.setText(mote.getSted());
 			beskrivelseM.setText(mote.getTitle());
 			if(mote.getHost().equals(me)) {
 				notHostValg.setVisible(false);
@@ -572,7 +574,9 @@ public class CalendarViewController {
 				invitertePersoner.getItems().clear();
 				for (Person person : mote.getParticipants()) {
 					invitertePersoner.getItems().add(person);
+					ikkeInvitert.remove(person);
 				}
+				inviterEkstraPerson.getItems().addAll(ikkeInvitert);
 			} else {
 				velgStedM.setDisable(true);
 				velgRomM.setDisable(true);
@@ -615,6 +619,15 @@ public class CalendarViewController {
 			moteinnkallinger.getItems().remove(slett);
 			me.removeAppointment(slett);
 		}
+		
+		beskrivelseM.clear();
+		tittelM.clear();
+		stedM.clear();
+		sluttM.clear();
+		startM.clear();
+		antallM.clear();
+		invitertePersoner.getItems().clear();
+		inviterEkstraPerson.getItems().clear();
 		
 		//Metoden skal slette møte
 		//alle andres kalendere oppdateres  
