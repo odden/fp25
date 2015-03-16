@@ -169,7 +169,7 @@ public class Gui extends Application {
 			invited.add(p.getUsername());
 		}
 		int id = 0;
-		id = Integer.parseInt(sc.createAppointment(host.getUsername(), title, sted,Integer.toString(rom), date, start, slutt, invited));
+		id = Integer.parseInt(sc.createAppointment(host.getUsername(), title, sted,(rom == 0 ? null:Integer.toString(rom)), date, start, slutt, invited));
 		return id;
 	}
 	

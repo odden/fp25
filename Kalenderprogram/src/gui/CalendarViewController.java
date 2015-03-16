@@ -492,17 +492,23 @@ public class CalendarViewController {
 		}
 		String tittel = tittelNH.getText();
 		String sted = stedNH.getText();
-		int rom = (int) romCBNH.getValue();
+		int rom = 0;
+		if (velgRomNH.isSelected()) {
+			rom = (int) romCBNH.getValue();
+		}
+		
 		String dato = datoNH.getValue().toString();
 		String start = startNH.getText();
 		String slutt = sluttNH.getText();
 		
 		int id = gui.tryCreateAppointment(this.me, tittel,sted,rom,dato, start, slutt, personer);
-		Appointment avtale = new Appointment(id,this.me, tittel,sted,rom,dato, start, slutt, personer);
-		moteinnkallinger.getItems().add(avtale);
-		me.addAppointment(avtale);
-		avtaleApprove.setText("Avtale '"  + avtale.getTitle() + "' opprettet!" );
-		
+		if(id != 0){
+			Appointment avtale = new Appointment(id,this.me, tittel,sted,rom,dato, start, slutt, personer);
+			moteinnkallinger.getItems().add(avtale);
+			me.addAppointment(avtale);
+			avtaleApprove.setText("Avtale '"  + avtale.getTitle() + "' opprettet!" );
+		}
+			
 	}
 	
 	@FXML
