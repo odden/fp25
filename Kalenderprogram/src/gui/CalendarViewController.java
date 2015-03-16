@@ -72,23 +72,31 @@ public class CalendarViewController {
 			check = false;
 			tittel.setStyle("-fx-border-color:red");
 			tittel.setTooltip(new Tooltip("Kan ike være tom"));
+		}else {
+			tittel.setStyle("-fx-border-color:green");
 		}
 		
 		//sjekker beskrivelse
 		if (beskrivelse.getText().isEmpty()) {
 			beskrivelse.setStyle("-fx-border-color:red");
 			check = false;
+		}else {
+			beskrivelse.setStyle("-fx-border-color:green");
 		}
 		
 		//sjekker sted
 		if (stedValgt.isSelected() && sted.getText().isEmpty()) {
-			stedValgt.setStyle("-fx-border-color:red");
+			sted.setStyle("-fx-border-color:red");
 			check = false;
+		}else {
+			sted.setStyle("-fx-border-color:green");
 		}
 		
 		if (!stedValgt.isSelected() && (!antall.getText().matches("[0-9]+"))) {
 			antall.setStyle("-fx-border-color:red");
 			check = false;
+		}else {
+			antall.setStyle("-fx-border-color:green");
 		}
 		
 		//sjekk start tid format
@@ -106,6 +114,8 @@ public class CalendarViewController {
 				check = false;
 				startT.setStyle("-fx-border-color:red");
 				System.out.println("feil format");
+			}else {
+				startT.setStyle("-fx-border-color:green");
 			}
 		
 		
@@ -116,16 +126,21 @@ public class CalendarViewController {
 				check = false;
 				sluttT.setStyle("-fx-border-color:red");
 				System.out.println("format");
+			}else {
+				sluttT.setStyle("-fx-border-color:green");
 			}
 		//sjekker om slutt tid er etter start
 			if ((startH > endH) || ((startH==endH) && (startM > endM))) {
 				check = false;
 				System.out.println("start etter slutt");
+				sluttT.setStyle("-fx-border-color:red");
 			}
 		
 		} catch (Exception e) {
 			check = false;
 			System.out.println("kun tall");
+			startT.setStyle("-fx-border-color:red");
+			sluttT.setStyle("-fx-border-color:red");
 		} finally {
 			return check;
 			} 
@@ -400,6 +415,7 @@ public class CalendarViewController {
 	@FXML private RadioButton velgStedNH;
 	@FXML private RadioButton velgRomNH;
 	@FXML private Button finnRomNH;
+	@FXML private Label avtaleApprove;
 	
 	public void initialize(){
 		this.ukeDagListe.add(this.mandag);
@@ -474,10 +490,19 @@ public class CalendarViewController {
 		for (Person person : valgtePersoner.getItems()) {
 			personer.add(person);
 		}
+		String tittel = tittelNH.getText();
+		String sted = stedNH.getText();
+		int rom = (int) romCBNH.getValue();
+		String dato = datoNH.getValue().toString();
+		String start = startNH.getText();
+		String slutt = sluttNH.getText();
 		
-		Appointment avtale = new Appointment(1,me, tittelNH.getText(),stedNH.getText(),0,datoNH.getValue().toString(),startNH.getText(),sluttNH.getText(), personer);
+		int id = gui.tryCreateAppointment(this.me, tittel,sted,rom,dato, start, slutt, personer);
+		Appointment avtale = new Appointment(id,this.me, tittel,sted,rom,dato, start, slutt, personer);
 		moteinnkallinger.getItems().add(avtale);
 		me.addAppointment(avtale);
+		avtaleApprove.setText("Avtale '"  + avtale.getTitle() + "' opprettet!" );
+		
 	}
 	
 	@FXML
