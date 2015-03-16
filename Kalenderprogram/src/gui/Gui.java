@@ -101,7 +101,7 @@ public class Gui extends Application {
 		}
 		else{
 			this.user = new Person(response.split(":")[0],response.split(":")[1],response.split(":")[2],response.split(":")[3]);
-			this.user.setVarsler((ArrayList<String>) Arrays.asList(response.split(":")[4].split(";")));
+			this.user.setVarsler(new ArrayList<String>(Arrays.asList(response.split(":")[4].split(";"))));
 			ArrayList<String> users = sc.getUsers();
 			this.users.add(user);
 			for (String s : users) {
