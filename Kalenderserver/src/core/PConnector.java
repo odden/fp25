@@ -91,12 +91,12 @@ public class PConnector {
 	}
 
 	//kan være int i for løkke er en for mye/lite
-	private boolean createAppointment(String[] request) {
+	private int createAppointment(String[] request) {
 		List<String> invited = new ArrayList<String>();
-		for (int i = 7; i < request.length; i++) {
+		for (int i = 8; i < request.length; i++) {
 			invited.add(request[i]);
 		}
-		return sc.createAppointment(request[1], request[2], request[3], request[4], request[5],request[6], invited);
+		return sc.createAppointment(request[1], request[2], request[3], request[4], request[5],request[6],request[7], invited);
 	}
 	
 	private ArrayList<String> getUsers(){

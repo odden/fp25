@@ -27,8 +27,8 @@ public class SConnector {
 		return response;
 	}
 	
-	public String createAppointment(String host,String title,String room, String date,String start, String end, List<String> invited){
-		String message = "createAppointment::" + host + "::" + title + "::" + room + "::" + date.toString() + "::" + start + "::" + end + "::";
+	public String createAppointment(String host,String title,String sted, String room, String date,String start, String end, ArrayList<String> invited){
+		String message = "createAppointment::" + host + "::" + title + "::"+sted+"::" + room + "::" + date + "::" + start + "::" + end + "::";
 		for (String string : invited) {
 			message += string + "::";
 		}
