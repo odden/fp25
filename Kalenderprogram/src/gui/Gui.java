@@ -110,45 +110,49 @@ public class Gui extends Application {
 					if (!user[0].equals(this.user.getUsername())) {
 						Person p = new Person(user[0], user[1], user[2], user[3]);
 						this.users.add(p);
+						
 					}
 				}
 			}
-			ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
-			ArrayList<String> myApps = core.sc
-					.getAppointments(brukernavn);
-			if (myApps != null){
-				if (!myApps.get(0).equals("")){
-					for (String s : myApps) {
-						if (s.equals(":")) {
-						} else {
-							String[] appointments = s.split(":");
-							ArrayList<String> invited = core.sc.getInvited(appointments[0]);
-							System.out.println(invited);
-							ArrayList<Person> participants = new ArrayList<Person>();
-							if (invited != null){
-								for (Person p: this.users){
-									if (invited.contains(p.getUsername())){
-										participants.add(p);
+			for (Person person : this.users) {
+				
+				ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
+				ArrayList<String> myApps = core.sc
+						.getAppointments(person.getUsername());
+				if (myApps != null){
+					if (!myApps.get(0).equals("")){
+						for (String s : myApps) {
+							if (s.equals(":")) {
+							} else {
+								String[] appointments = s.split(":");
+								ArrayList<String> invited = core.sc.getInvited(appointments[0]);
+								System.out.println(invited);
+								ArrayList<Person> participants = new ArrayList<Person>();
+								if (invited != null){
+									for (Person p: this.users){
+										if (invited.contains(p.getUsername())){
+											participants.add(p);
+										}
 									}
 								}
+								int room;
+								try{
+									room = Integer.parseInt(appointments[4]);
+								} catch(NumberFormatException e){
+									room = 0;
+								}
+								Appointment a = new Appointment(Integer.parseInt(appointments[0]),appointments[1],appointments[2],appointments[3],room,appointments[5],appointments[6],appointments[7],participants);
+								myAppointments.add(a);
 							}
-							int room;
-							try{
-								room = Integer.parseInt(appointments[4]);
-							} catch(NumberFormatException e){
-								room = 0;
-							}
-							Appointment a = new Appointment(Integer.parseInt(appointments[0]),appointments[1],appointments[2],appointments[3],room,appointments[5],appointments[6],appointments[7],participants);
-							myAppointments.add(a);
 						}
 					}
 				}
+				person.setAllAppointments(myAppointments);
 			}
 			System.out.println(this.users);
-			user.setAllAppointments(myAppointments);
 			switchSceneContent("CalenderView.fxml");
 			return "Ok";
-		}
+			}
 	}
 
 	public ArrayList<String> getRoom(String date, String start, String slutt, int size){
