@@ -160,16 +160,21 @@ public class Gui extends Application {
 	}
 
 	public ArrayList<String> getRoom(String date, String start, String slutt, int size){
-		return sc.getRoom(size, date, start, slutt);
+		ArrayList<String> rooms = sc.getRoom(size, date, start, slutt);
+		ArrayList<String> roomList = new ArrayList<String>();
+		for (String room : rooms) {
+			roomList.add(room.split("::")[0]);
+		}
+		return roomList;
 	}
 	
-	public int tryCreateAppointment( Person host, String title, String sted, int rom, String date, String start,String slutt, ArrayList<Person> participants) {
+	public int tryCreateAppointment( Person host, String title, String sted, String rom, String date, String start,String slutt, ArrayList<Person> participants) {
 		ArrayList<String> invited = new ArrayList<String>();
 		for (Person p : participants) {
 			invited.add(p.getUsername());
 		}
 		int id = 0;
-		id = Integer.parseInt(sc.createAppointment(host.getUsername(), title, sted,(rom == 0 ? null:Integer.toString(rom)), date, start, slutt, invited));
+		id = Integer.parseInt(sc.createAppointment(host.getUsername(), title, sted,rom, date, start, slutt, invited));
 		return id;
 	}
 	
