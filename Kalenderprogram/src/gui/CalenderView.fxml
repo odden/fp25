@@ -283,6 +283,7 @@
                            </children>
                         </GridPane>
                         <Button fx:id="leggTilHendelse" layoutX="352.0" layoutY="462.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" prefHeight="63.0" prefWidth="168.0" text="Legg til hendelse" />
+                        <Label fx:id="avtaleApprove" alignment="CENTER" contentDisplay="CENTER" layoutX="265.0" layoutY="547.0" maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="304.0" textAlignment="CENTER" textFill="#3dcd2a" />
                      </children>
                   </AnchorPane>
             </content>
