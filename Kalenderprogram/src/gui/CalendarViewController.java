@@ -464,7 +464,7 @@ public class CalendarViewController {
 		for (Person person : valgtePersoner.getItems()) {
 			personer.add(person);
 		}
-		Appointment avtale = new Appointment(1,me.getUsername(), tittelNH.getText(),stedNH.getText(),0,datoNH.getValue().toString(),startNH.getText(),sluttNH.getText(), personer);
+		Appointment avtale = new Appointment(1,me, tittelNH.getText(),stedNH.getText(),0,datoNH.getValue().toString(),startNH.getText(),sluttNH.getText(), personer);
 		moteinnkallinger.getItems().add(avtale);
 		myAppointments.add(avtale);
 	}

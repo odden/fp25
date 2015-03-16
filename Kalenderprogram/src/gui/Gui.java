@@ -128,11 +128,13 @@ public class Gui extends Application {
 								ArrayList<String> invited = core.sc.getInvited(appointments[0]);
 								System.out.println(invited);
 								ArrayList<Person> participants = new ArrayList<Person>();
-								if (invited != null){
-									for (Person p: this.users){
-										if (invited.contains(p.getUsername())){
-											participants.add(p);
-										}
+								Person host = null;
+								for (Person p: this.users){
+									if (invited != null && invited.contains(p.getUsername())){
+										participants.add(p);
+									}
+									if (p.getUsername().equals(appointments[1])) {
+										host = p;
 									}
 								}
 								int room;
@@ -141,7 +143,7 @@ public class Gui extends Application {
 								} catch(NumberFormatException e){
 									room = 0;
 								}
-								Appointment a = new Appointment(Integer.parseInt(appointments[0]),appointments[1],appointments[2],appointments[3],room,appointments[5],appointments[6],appointments[7],participants);
+								Appointment a = new Appointment(Integer.parseInt(appointments[0]),host,appointments[2],appointments[3],room,appointments[5],appointments[6],appointments[7],participants);
 								myAppointments.add(a);
 							}
 						}
