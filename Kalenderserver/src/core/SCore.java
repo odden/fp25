@@ -71,7 +71,7 @@ public class SCore {
 		//Avtale med reservert rom
 		try {
 			Calendar cal = stringToCal(dato);
-			dbc.insertRow("avtale", null,vert,title,sted,room,cal,start,slutt,null);
+			dbc.insertRow("avtale", null,vert,title,sted,room,cal,start,slutt,"");
 			ResultSet rs = dbc.executeSQL("SELECT MAX( idavtale ) AS idavtale FROM avtale");
 			Object max = resToList(rs).get(0).get(0);
 			if (invited != null){
