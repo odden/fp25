@@ -384,7 +384,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                         </GridPane>
-                        <Pane fx:id="hostValg" layoutX="236.0" layoutY="319.0" prefHeight="248.0" prefWidth="515.0">
+                        <Pane fx:id="hostValg" layoutX="236.0" layoutY="319.0" prefHeight="248.0" prefWidth="515.0" visible="false">
                            <children>
                               <Button alignment="CENTER" contentDisplay="CENTER" layoutX="293.0" layoutY="195.0" mnemonicParsing="false" onAction="#lagreMoteEndring" prefHeight="26.0" prefWidth="116.0" text="Lagre endring" textAlignment="CENTER" />
                               <ListView fx:id="invitertePersoner" layoutX="74.0" layoutY="13.0" prefHeight="128.0" prefWidth="246.0" />
@@ -395,7 +395,7 @@
                               <Button alignment="CENTER" contentDisplay="CENTER" layoutX="151.0" layoutY="195.0" mnemonicParsing="false" onAction="#slettMote" prefHeight="26.0" prefWidth="117.0" text="Slett møte" textAlignment="CENTER" />
                            </children>
                         </Pane>
-                        <Pane fx:id="notHostValg" layoutX="319.0" layoutY="322.0" prefHeight="205.0" prefWidth="431.0" visible="false">
+                        <Pane fx:id="notHostValg" layoutX="319.0" layoutY="322.0" prefHeight="205.0" prefWidth="431.0">
                            <children>
                               <Button alignment="CENTER" contentDisplay="CENTER" layoutX="214.0" layoutY="31.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="158.0" text="Deltar ikke" textAlignment="CENTER" />
                               <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="32.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="151.0" text="Deltar" textAlignment="CENTER" />
