@@ -137,7 +137,7 @@ public class SCore {
 				}
 				users.substring(0,users.length()-1);
 				String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", id, "tittel")).get(0).get(0);
-				String endring = " - " + bruker + " har avslått invitasjonen til "+tittel+" - ";
+				String endring = ";" + bruker + " har avslått invitasjonen til "+tittel;
 				dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
 			}
 			
@@ -307,7 +307,7 @@ public class SCore {
 			}
 			users.substring(0,users.length()-1);
 			String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", id, "tittel")).get(0).get(0);
-			String endring = " - "+tittel+" har blitt avlyst. - ";
+			String endring = ";"+tittel+" har blitt avlyst.";
 			dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
 		
 			dbc.deleteRow("avtale", id);
@@ -330,7 +330,7 @@ public class SCore {
 			}
 			users.substring(0,users.length()-1);
 			String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", appId, "tittel")).get(0).get(0);
-			String endring = " - " + name + " har avslått invitasjonen til "+tittel+" - ";
+			String endring = ";" + name + " har avslått invitasjonen til "+tittel;
 			dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
 		
 			return true;

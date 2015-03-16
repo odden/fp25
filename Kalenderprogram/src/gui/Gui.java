@@ -15,20 +15,20 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import core.PCore;
 import core.Person;
 import core.Appointment;
+import core.SConnector;
 
 public class Gui extends Application {
-	PCore core;
 	private static Stage stage;
 	Parent root;
 	private LoggInnController logIn;
 	private Person user;
 	private ArrayList<Person> users;
+	private SConnector sc;
 
 	public void init() {
-		this.core = new PCore(this);
+		sc = new SConnector(this);
 	}
 
 	public ArrayList<Person> getUsers() {
@@ -61,7 +61,7 @@ public class Gui extends Application {
 	}
 
 	public String tryCreateUser(String brukernavn, String passord, String navn, String email, int telefon){
-		String response = core.sc.createUser(brukernavn, passord, navn, email, telefon);
+		String response = sc.createUser(brukernavn, passord, navn, email, telefon);
 		System.out.println(response);
 		if (response == null){
 			return "yipyip";
@@ -77,7 +77,7 @@ public class Gui extends Application {
 	}
 
 	public String tryLogIn(String brukernavn, String passord) {
-		String response = core.sc.logIn(brukernavn, passord);
+		String response = sc.logIn(brukernavn, passord);
 		System.out.println(response + "----");
 		this.users = new ArrayList<Person>();
 		if (response == null) {
@@ -101,7 +101,8 @@ public class Gui extends Application {
 		}
 		else{
 			this.user = new Person(response.split(":")[0],response.split(":")[1],response.split(":")[2],response.split(":")[3]);
-			ArrayList<String> users = core.sc.getUsers();
+			this.user.setVarsler((ArrayList<String>) Arrays.asList(response.split(":")[4].split(";")));
+			ArrayList<String> users = sc.getUsers();
 			this.users.add(user);
 			for (String s : users) {
 				if (s.equals(":")) {
@@ -117,7 +118,7 @@ public class Gui extends Application {
 			for (Person person : this.users) {
 				
 				ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
-				ArrayList<String> myApps = core.sc
+				ArrayList<String> myApps = sc
 						.getAppointments(person.getUsername());
 				if (myApps != null){
 					if (!myApps.get(0).equals("")){
@@ -125,7 +126,7 @@ public class Gui extends Application {
 							if (s.equals(":")) {
 							} else {
 								String[] appointments = s.split(":");
-								ArrayList<String> invited = core.sc.getInvited(appointments[0]);
+								ArrayList<String> invited = sc.getInvited(appointments[0]);
 								System.out.println(invited);
 								ArrayList<Person> participants = new ArrayList<Person>();
 								Person host = null;
@@ -158,7 +159,7 @@ public class Gui extends Application {
 	}
 
 	public ArrayList<String> getRoom(String date, String start, String slutt, int size){
-		return core.sc.getRoom(size, date, start, slutt);
+		return sc.getRoom(size, date, start, slutt);
 	}
 	
 	
