@@ -610,7 +610,9 @@ public class CalendarViewController {
 	
 	@FXML
 	public void lagreMoteEndring(ActionEvent event) {
-		//Metoden skal lagre alle endringene gjort
+		if(validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM, velgStedM)) {
+			
+		}
 	}
 	
 	@FXML
@@ -642,6 +644,7 @@ public class CalendarViewController {
 		antallM.clear();
 		invitertePersoner.getItems().clear();
 		inviterEkstraPerson.getItems().clear();
+		
 		
 		//Metoden skal slette møte
 		//alle andres kalendere oppdateres  
