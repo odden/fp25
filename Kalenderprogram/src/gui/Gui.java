@@ -145,7 +145,7 @@ public class Gui extends Application {
 								} catch(NumberFormatException e){
 									room = 0;
 								}
-								Appointment a = new Appointment(Integer.parseInt(appointments[0]),host,appointments[2],appointments[3],room,appointments[5],appointments[6],appointments[7],participants);
+								Appointment a = new Appointment(Integer.parseInt(appointments[0]),host,appointments[2],appointments[3],room,appointments[5],appointments[6].substring(0,appointments[6].length()-3),appointments[7].substring(0,appointments[7].length()-3),participants);
 								myAppointments.add(a);
 							}
 						}
