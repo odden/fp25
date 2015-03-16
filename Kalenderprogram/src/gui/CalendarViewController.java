@@ -466,7 +466,7 @@ public class CalendarViewController {
 		}
 		Appointment avtale = new Appointment(1,me, tittelNH.getText(),stedNH.getText(),0,datoNH.getValue().toString(),startNH.getText(),sluttNH.getText(), personer);
 		moteinnkallinger.getItems().add(avtale);
-		myAppointments.add(avtale);
+		me.addAppointment(avtale);
 	}
 	
 	@FXML
@@ -525,7 +525,7 @@ public class CalendarViewController {
 			startM.setText(mote.getStart());
 			tittelM.setText(mote.getTitle());
 			beskrivelseM.setText(mote.getTitle());
-			if(mote.getHost().equals(me.getUsername())) {
+			if(mote.getHost().equals(me)) {
 				notHostValg.setVisible(false);
 				hostValg.setVisible(true);
 				beskrivelseM.setDisable(false);
