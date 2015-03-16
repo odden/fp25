@@ -65,7 +65,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Button layoutX="150.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Lag bruker" />
-      <Button layoutX="82.0" layoutY="335.0" mnemonicParsing="false" onAction="#avbryt" text="Avbryt" />
+      <Button defaultButton="true" layoutX="150.0" layoutY="335.0" mnemonicParsing="false" onAction="#handleSubmitButtonAction" text="Lag bruker" />
+      <Button cancelButton="true" layoutX="82.0" layoutY="335.0" mnemonicParsing="false" onAction="#avbryt" text="Avbryt" />
    </children>
 </Pane>
