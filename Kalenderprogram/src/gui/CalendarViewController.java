@@ -590,6 +590,7 @@ public class CalendarViewController {
 					invitertePersoner.getItems().add(person);
 					ikkeInvitert.remove(person);
 				}
+				inviterEkstraPerson.getItems().clear();
 				inviterEkstraPerson.getItems().addAll(ikkeInvitert);
 			} else {
 				velgStedM.setDisable(true);
