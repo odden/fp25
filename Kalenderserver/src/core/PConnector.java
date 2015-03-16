@@ -133,7 +133,7 @@ public class PConnector {
 		for (int i = 4; i < request.length; i++) {
 			invited.add(request[i]);
 		}
-		return sc.invite(invited, request[1], request[2], request[3]);
+		return sc.invite(invited, request[1]);
 	}
 	
 	private ArrayList<String> getRoom(String size,String date, String start, String slutt){

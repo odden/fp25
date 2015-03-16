@@ -48,8 +48,8 @@ public class SConnector {
 		return convert(response);
 	}
 	
-	public String invite(List<String>usernames,String host,String date,String start){
-		String message = "invite" + "::" + host + "::" + date + "::" + start + "::";
+	public String invite(List<String>usernames,String id){
+		String message = "invite" + "::" + id+"::";
 		for (String string : usernames) {
 			message += string + "::";
 		}
