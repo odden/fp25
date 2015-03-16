@@ -76,7 +76,7 @@ public class SCore {
 			Object max = resToList(rs).get(0).get(0);
 			if (invited != null){
 				for (String bn:invited){
-					dbc.insertRow("bruker_has_avtale", bn,max,false);
+					dbc.insertRow("bruker_has_avtale", bn,max,null,0,true);
 				}
 			}
 			return Integer.parseInt(max.toString());
@@ -88,9 +88,9 @@ public class SCore {
 	}
 
 	
-	public boolean invite(List<String>usernames,String vert,String dato,String start){
-		//Inviterer en eller flere brukere til et arrangement
-		int id = getAppointmentID(vert, dato, start);
+	public boolean invite(List<String>usernames,String appId){
+		//Inviterer en eller flere brukere til et arrangemen
+		int id = Integer.parseInt(appId);
 		try {
 			if (id != 0){
 				for (String n:usernames){

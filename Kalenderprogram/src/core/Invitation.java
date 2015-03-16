@@ -23,11 +23,13 @@ public class Invitation extends TimerTask {
 		
 		
 		try {
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			alarm = (df.parse(a.getWhen()));
-			alarm.setTime(alarm.getTime()-(timer*60*1000));
-			Timer appAlarm = new Timer();
-			appAlarm.schedule(this, alarm);
+			if (timer != 0){
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				alarm = (df.parse(a.getWhen()));
+				alarm.setTime(alarm.getTime()-(timer*60*1000));
+				Timer appAlarm = new Timer();
+				appAlarm.schedule(this, alarm);
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
