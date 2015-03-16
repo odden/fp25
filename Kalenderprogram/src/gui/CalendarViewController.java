@@ -490,8 +490,15 @@ public class CalendarViewController {
 		for (Person person : valgtePersoner.getItems()) {
 			personer.add(person);
 		}
+		String tittel = tittelNH.getText();
+		String sted = stedNH.getText();
+		int rom = (int) romCBNH.getValue();
+		String dato = datoNH.getValue().toString();
+		String start = startNH.getText();
+		String slutt = sluttNH.getText();
 		
-		Appointment avtale = new Appointment(1,me, tittelNH.getText(),stedNH.getText(),0,datoNH.getValue().toString(),startNH.getText(),sluttNH.getText(), personer);
+		int id = gui.tryCreateAppointment(this.me, tittel,sted,rom,dato, start, slutt, personer);
+		Appointment avtale = new Appointment(id,this.me, tittel,sted,rom,dato, start, slutt, personer);
 		moteinnkallinger.getItems().add(avtale);
 		me.addAppointment(avtale);
 		avtaleApprove.setText("Avtale '"  + avtale.getTitle() + "' opprettet!" );
