@@ -67,11 +67,11 @@ public class SCore {
 		}
 	}
 	
-	public Boolean createAppointment(String vert,String title,int room, String dato,String start, String slutt, List<String> invited){
+	public int createAppointment(String vert,String title,String sted,String room, String dato,String start, String slutt, List<String> invited){
 		//Avtale med reservert rom
 		try {
 			Calendar cal = stringToCal(dato);
-			dbc.insertRow("avtale", null,vert,title,null,room,cal,start,slutt,null);
+			dbc.insertRow("avtale", null,vert,title,sted,room,cal,start,slutt,null);
 			ResultSet rs = dbc.executeSQL("SELECT MAX( idavtale ) AS idavtale FROM avtale");
 			Object max = resToList(rs).get(0).get(0);
 			if (invited != null){
@@ -79,30 +79,14 @@ public class SCore {
 					dbc.insertRow("bruker_has_avtale", bn,max,false);
 				}
 			}
+			return Integer.parseInt(max.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return false;
+		return 0;
 	}
-	public Boolean createAppointment(String vert,String title,String sted, String dato,String start, String slutt, List<String> invited){
-		//Avtale med bare stedsnavn	
-			try {
-				Calendar cal = stringToCal(dato);
-				dbc.insertRow("avtale", null,vert,title,sted,null,cal,start,slutt,null);
-				ResultSet rs = dbc.executeSQL("SELECT MAX( idavtale ) AS idavtale FROM avtale");
-				Object max = resToList(rs).get(0).get(0);
-				if (invited != null){
-					for (String bn:invited){
-						dbc.insertRow("bruker_has_avtale", bn,max,false);
-					}
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return false;
-		}
+
 	
 	public boolean invite(List<String>usernames,String vert,String dato,String start){
 		//Inviterer en eller flere brukere til et arrangement

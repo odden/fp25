@@ -163,9 +163,10 @@ public class Gui extends Application {
 		return sc.getRoom(size, date, start, slutt);
 	}
 	
-	public void tryCreateAppointment(Appointment avtale) {
+	public int tryCreateAppointment(Appointment avtale) {
 		String host = avtale.getHost().getUsername();
 		String title = avtale.getTitle();
+		String sted = avtale.getSted();
 		String room = Integer.toString(avtale.getRom());
 		String date = avtale.getDate().toString();
 		String start = avtale.getStart();
@@ -175,7 +176,8 @@ public class Gui extends Application {
 		for (Person person : persons) {
 			invited.add(person.getUsername());
 		}
-		sc.createAppointment(host, title, room, date, start, end, invited);
+		sc.createAppointment(host, title, sted,room, date, start, end, invited);
+		return 0;
 	}
 	
 	
