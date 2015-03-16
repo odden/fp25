@@ -590,6 +590,7 @@ public class CalendarViewController {
 					invitertePersoner.getItems().add(person);
 					ikkeInvitert.remove(person);
 				}
+				inviterEkstraPerson.getItems().clear();
 				inviterEkstraPerson.getItems().addAll(ikkeInvitert);
 			} else {
 				velgStedM.setDisable(true);
@@ -627,6 +628,10 @@ public class CalendarViewController {
 		String slutt = sluttM.getText();
 		
 		
+		if(validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM, velgStedM)) {
+			
+		}
+
 	}
 	
 	@FXML
@@ -658,6 +663,7 @@ public class CalendarViewController {
 		antallM.clear();
 		invitertePersoner.getItems().clear();
 		inviterEkstraPerson.getItems().clear();
+		
 		
 		//Metoden skal slette møte
 		//alle andres kalendere oppdateres  
