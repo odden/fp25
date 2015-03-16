@@ -26,7 +26,7 @@ public class Gui extends Application {
 	private LoggInnController logIn;
 	private Person user;
 	private ArrayList<Person> users;
-	private SConnector sc;
+	public SConnector sc;
 
 	public void init() {
 		sc = new SConnector(this);
