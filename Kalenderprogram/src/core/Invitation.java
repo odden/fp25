@@ -14,14 +14,12 @@ public class Invitation extends TimerTask {
 	
 	boolean svar;
 	boolean visibility;
-	ArrayList<String> varsler;
 	private Date alarm;
-	public Invitation(Person p,Appointment a, int timer, boolean svar, boolean visibility,ArrayList<String> varsler){
+	public Invitation(Person p,Appointment a, int timer, boolean svar, boolean visibility){
 		me = p;
 		appointment = a;
 		this.svar = svar;
 		this.visibility = visibility;
-		this.varsler = varsler;
 		
 		
 		try {

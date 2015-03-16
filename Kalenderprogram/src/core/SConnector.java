@@ -1,5 +1,7 @@
 package core;
 
+import gui.Gui;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -9,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SConnector {
-	PCore core;
-	public SConnector(PCore core){
+	Gui core;
+	public SConnector(Gui core){
 		this.core = core;
 	}
 	public String logIn(String userName, String password){
@@ -55,8 +57,8 @@ public class SConnector {
 		return response;
 	}
 	
-	public void setStatus(String user, String host,String date,String start, Boolean status){
-		String message = "setStatus" + ":" + user + ":" + host + ":" + date + ":" + start + ":" + status.toString();
+	public void setStatus(String user, int id, Boolean status){
+		String message = "setStatus" + ":" + user + ":" +id+ ":" + status.toString();
 		connectToServer(message);
 	}
 	

@@ -15,13 +15,13 @@ public class Appointment {
 	private String sted;
 	private String title;
 	private ArrayList<Person> participants = new ArrayList<Person>();
-	private String host;
+	private Person host;
 	
 	public Appointment(){
 		
 	}
 	
-	public Appointment(int id, String host, String title, String sted, int rom, String date, String start,String slutt, ArrayList<Person> participants){
+	public Appointment(int id, Person host, String title, String sted, int rom, String date, String start,String slutt, ArrayList<Person> participants){
 		this.id = id;
 		this.start=start;
 		this.slutt=slutt;
@@ -49,7 +49,7 @@ public class Appointment {
 	}
 
 
-	public void init(LocalDate date, int rom, String host){
+	public void init(LocalDate date, int rom, Person host){
 		this.rom = rom;
 		this.date = date;
 		this.host = host;
@@ -83,11 +83,11 @@ public class Appointment {
 		this.participants.remove(participant);
 	}
 
-	public String getHost() {
+	public Person getHost() {
 		return host;
 	}
 
-	public void setHost(String host) {
+	public void setHost(Person host) {
 		this.host = host;
 	}
 

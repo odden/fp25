@@ -10,6 +10,7 @@ public class Person {
 	private String phoneNumber;
 	private ArrayList<Invitation> avtaler = new ArrayList<Invitation>();
 	private ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
+	private ArrayList<String> varsler = new ArrayList<String>();
 	
 	//Constructor
 	public Person(String username, String name, String email, String phoneNumber){
@@ -94,6 +95,12 @@ public class Person {
 		if (! this.myAppointments.contains(a)) {
 			this.myAppointments.add(a);
 		}
+	}
+	public ArrayList<String> getVarsler() {
+		return varsler;
+	}
+	public void setVarsler(ArrayList<String> varsler) {
+		this.varsler = varsler;
 	}
 	
 }
