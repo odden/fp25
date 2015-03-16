@@ -128,11 +128,10 @@ public class Gui extends Application {
 							} else {
 								String[] appointments = s.split("::");
 								ArrayList<String> invited = sc.getInvited(appointments[0]);
-								System.out.println(invited);
 								ArrayList<Person> participants = new ArrayList<Person>();
 								Person host = null;
 								for (Person p: this.users){
-									if (invited != null && invited.contains(p.getUsername())){
+									if (invited != null && invited.contains(p.getUsername()+ ":")){
 										participants.add(p);
 									}
 									if (p.getUsername().equals(appointments[1])) {

@@ -611,6 +611,22 @@ public class CalendarViewController {
 	@FXML
 	public void lagreMoteEndring(ActionEvent event) {
 		//Metoden skal lagre alle endringene gjort
+		Appointment avtale = moteinnkallinger.getSelectionModel().getSelectedItem();
+		ArrayList<Person> personer = new ArrayList<Person>();
+		for (Person person : valgtePersoner.getItems()) {
+			personer.add(person);
+		}
+		String tittel = tittelM.getText();
+		String sted = stedM.getText();
+		String rom = null;
+		if (velgRomM.isSelected()) {
+			rom = romCBM.getValue().toString();
+		}
+		String dato = datoM.getValue().toString();
+		String start = startM.getText();
+		String slutt = sluttM.getText();
+		
+		
 	}
 	
 	@FXML
