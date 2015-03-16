@@ -16,28 +16,28 @@ public class SConnector {
 		this.core = core;
 	}
 	public String logIn(String userName, String password){
-		String message = "logIn:" + userName + ":" + password;
+		String message = "logIn::" + userName + "::" + password;
 		String response = connectToServer(message);
 		return response;
 	}
 	
 	public String createUser(String userName, String password, String name, String email, int tlf){
-		String message = "createUser:" + userName + ":" + password + ":" + name + ":" + email + ":" + Integer.toString(tlf);
+		String message = "createUser::" + userName + "::" + password + "::" + name + "::" + email + "::" + Integer.toString(tlf);
 		String response = connectToServer(message);
 		return response;
 	}
 	
 	public String createAppointment(String host,String title,String room, String date,String start, String end, List<String> invited){
-		String message = "createAppointment:" + host + ":" + title + ":" + room + ":" + date.toString() + ":" + start + ":" + end + ":";
+		String message = "createAppointment::" + host + "::" + title + "::" + room + "::" + date.toString() + "::" + start + "::" + end + "::";
 		for (String string : invited) {
-			message += string + ":";
+			message += string + "::";
 		}
 		String response = connectToServer(message);
 		return response;
 	}
 	
 	public ArrayList<String> getAppointments(String user){
-		String message = "getAppointments:" + user;
+		String message = "getAppointments::" + user;
 		String response = connectToServer(message);
 		return convert(response);
 	}
@@ -49,33 +49,33 @@ public class SConnector {
 	}
 	
 	public String invite(List<String>usernames,String host,String date,String start){
-		String message = "invite" + ":" + host + ":" + date + ":" + start + ":";
+		String message = "invite" + "::" + host + "::" + date + "::" + start + "::";
 		for (String string : usernames) {
-			message += string + ":";
+			message += string + "::";
 		}
 		String response = connectToServer(message);
 		return response;
 	}
 	
 	public void setStatus(String user, int id, Boolean status){
-		String message = "setStatus" + ":" + user + ":" +id+ ":" + status.toString();
+		String message = "setStatus" + "::" + user + "::" +id+ "::" + status.toString();
 		connectToServer(message);
 	}
 	
 	public ArrayList<String> getRoom(int size,String date, String start, String slutt){
-		String message = "getRoom:" + Integer.toString(size) + ":" + date + ":" + start + ":" + slutt;
+		String message = "getRoom::" + Integer.toString(size) + "::" + date + "::" + start + "::" + slutt;
 		String response = connectToServer(message);
 		return convert(response);
 	}
 	
 	public String editAppointment(int id, String host, String title, String sted, String room,String dato,String start, String slutt, String endring){
-		String message = "editAppointment" + ":" + Integer.toString(id) + ":" + host + ":" + title + ":" + sted + ":" + room + ":" + dato + ":" + start + ":" + slutt + ":" + endring;
+		String message = "editAppointment" + "::" + Integer.toString(id) + "::" + host + "::" + title + "::" + sted + "::" + room + "::" + dato + "::" + start + "::" + slutt + "::" + endring;
 		String response = connectToServer(message);
 		return response;
 	}
 	
 	public ArrayList<String> getInvited(String appId){
-		String message = "getInvited:" + appId;
+		String message = "getInvited::" + appId;
 		String response = connectToServer(message);
 		return convert(response);
 	}

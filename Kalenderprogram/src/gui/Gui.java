@@ -101,14 +101,14 @@ public class Gui extends Application {
 			return "aua";
 		}
 		else{
-			this.user = new Person(response.split(":")[0],response.split(":")[1],response.split(":")[2],response.split(":")[3]);
-			this.user.setVarsler(new ArrayList<String>(Arrays.asList(response.split(":")[4].split(";"))));
+			this.user = new Person(response.split("::")[0],response.split("::")[1],response.split("::")[2],response.split("::")[3]);
+			this.user.setVarsler(new ArrayList<String>(Arrays.asList(response.split("::")[4].split(";"))));
 			ArrayList<String> users = sc.getUsers();
 			this.users.add(user);
 			for (String s : users) {
-				if (s.equals(":")) {
+				if (s.equals("::")) {
 				} else {
-					String[] user = s.split(":");
+					String[] user = s.split("::");
 					if (!user[0].equals(this.user.getUsername())) {
 						Person p = new Person(user[0], user[1], user[2], user[3]);
 						this.users.add(p);
@@ -126,7 +126,7 @@ public class Gui extends Application {
 						for (String s : myApps) {
 							if (s.equals(":")) {
 							} else {
-								String[] appointments = s.split(":");
+								String[] appointments = s.split("::");
 								ArrayList<String> invited = sc.getInvited(appointments[0]);
 								System.out.println(invited);
 								ArrayList<Person> participants = new ArrayList<Person>();

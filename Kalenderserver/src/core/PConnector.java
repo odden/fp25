@@ -46,7 +46,7 @@ public class PConnector {
 	}
 	
 	private ArrayList<String> response(String request){
-		String[] requestList = request.split(":");
+		String[] requestList = request.split("::");
 		ArrayList<String> response = new ArrayList<String>();
 		if(requestList[0].equals("logIn")){
 			return logIn(requestList);
@@ -109,7 +109,11 @@ public class PConnector {
 		ArrayList<String> response = new ArrayList<String>();
 		if (responseList != null){
 			for (Object object : responseList) {
-				response.add(object.toString() + ":");
+				if (object != null){
+					response.add(object.toString() + "::");
+				}
+				else 
+					response.add("NULL::");
 			}
 		}
 		return response;
@@ -156,10 +160,10 @@ public class PConnector {
 			String str = "";
 			for (Object object : listList) {
 				if (object != null){
-					str += object.toString() + ":";
+					str += object.toString() + "::";
 				}
 				else{
-					str += "NULL:";
+					str += "NULL::";
 				}
 			}
 			arrayList.add(str.substring(0, str.length() - 1 ) + ";");
