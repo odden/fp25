@@ -9,6 +9,7 @@ import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Optional;
 
 import core.Appointment;
 import core.Person;
@@ -17,7 +18,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
@@ -28,11 +31,13 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.PickResult;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -464,9 +469,9 @@ public class CalendarViewController {
 		for (Person person : valgtePersoner.getItems()) {
 			personer.add(person);
 		}
-		Appointment avtale = new Appointment(1,me, tittelNH.getText(),stedNH.getText(),0,datoNH.getValue().toString(),startNH.getText(),sluttNH.getText(), personer);
+		Appointment avtale = new Appointment(1,me.getUsername(), tittelNH.getText(),stedNH.getText(),0,datoNH.getValue().toString(),startNH.getText(),sluttNH.getText(), personer);
 		moteinnkallinger.getItems().add(avtale);
-		myAppointments.add(avtale);
+		me.addAppointment(avtale);
 	}
 	
 	@FXML
@@ -490,7 +495,11 @@ public class CalendarViewController {
 	@FXML
 	public void finnRomNH(ActionEvent event) {
 		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH.getText(), velgStedNH)) {
-		gui.getRoom(datoNH.getValue()+"", startNH.getText(), sluttNH.getText(), Integer.parseInt(antallNH.getText()));
+		ArrayList<String> ledigRom = gui.getRoom(datoNH.getValue()+"", startNH.getText(), sluttNH.getText(), Integer.parseInt(antallNH.getText()));
+		if(!ledigRom.isEmpty()) {
+			romCBNH.getItems().addAll(ledigRom);
+			romCBNH.getSelectionModel().selectFirst();
+		}
 		//Finner et passende rom utifra antall folk invitert
 		}
 	}
@@ -525,7 +534,7 @@ public class CalendarViewController {
 			startM.setText(mote.getStart());
 			tittelM.setText(mote.getTitle());
 			beskrivelseM.setText(mote.getTitle());
-			if(mote.getHost().equals(me.getUsername())) {
+			if(mote.getHost().equals(me)) {
 				notHostValg.setVisible(false);
 				hostValg.setVisible(true);
 				beskrivelseM.setDisable(false);
@@ -534,11 +543,15 @@ public class CalendarViewController {
 				sluttM.setDisable(false);
 				startM.setDisable(false);
 				stedM.setDisable(false);
+				velgRomM.setDisable(false);
+				velgStedM.setDisable(false);
 				invitertePersoner.getItems().clear();
 				for (Person person : mote.getParticipants()) {
 					invitertePersoner.getItems().add(person);
 				}
 			} else {
+				velgStedM.setDisable(true);
+				velgRomM.setDisable(true);
 				hostValg.setVisible(false);
 				notHostValg.setVisible(true);
 				beskrivelseM.setDisable(true);
@@ -560,6 +573,25 @@ public class CalendarViewController {
 	
 	@FXML
 	public void slettMote(ActionEvent event) {
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		ButtonType ja = new ButtonType("JA");
+		ButtonType nei = new ButtonType("NEI");
+		alert.getButtonTypes().set(0, nei);
+		alert.getButtonTypes().set(1, ja);
+		
+		alert.setTitle("Sikker på at du vil slette?");
+		alert.setHeaderText("Slette møte?");
+		alert.setContentText("Er du sikker på at du vil slette dette møtet?");
+		
+		Optional<ButtonType> svar = alert.showAndWait();
+		 
+		
+		if(svar.get().equals(ja)) {
+			Appointment slett = moteinnkallinger.getItems().get(moteinnkallinger.getSelectionModel().getSelectedIndex());
+			moteinnkallinger.getItems().remove(slett);
+			myAppointments.remove(slett);
+		}
+		
 		//Metoden skal slette møte
 		//alle andres kalendere oppdateres  
 	}
@@ -581,8 +613,12 @@ public class CalendarViewController {
 	@FXML
 	public void finnRomM(ActionEvent event) {
 		if (validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM.getText(), velgStedM)) {
-		gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), Integer.parseInt(antallM.getText()));
-		//Finner et passende rom utifra antall folk invitert
+			ArrayList<String> ledigRom = gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), Integer.parseInt(antallM.getText()));
+			if(!ledigRom.isEmpty()) {
+				romCBM.getItems().addAll(ledigRom);
+				romCBM.getSelectionModel().selectFirst();
+			}
+			//Finner et passende rom utifra antall folk invitert
 		}
 	}
 	
