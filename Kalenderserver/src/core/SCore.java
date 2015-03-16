@@ -124,21 +124,21 @@ public class SCore {
 		}
 	}
 	
-	public void setStatus(String bruker, String vert,String dato,String start, Boolean status){
+	public void setStatus(String bruker, int id, Boolean status){
 		//Setter invitasjon status til 'bruker' til 'status'
-		int id = getAppointmentID(vert, dato, start);
 		try {
 			dbc.executeSQL("UPDATE bruker_has_avtale SET bruker_svar = "+status+" WHERE avtale_idavtale = '"+id+"' AND bruker_brukernavn = '"+bruker+"'");
 			if (status == false){
 				ResultSet rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", id);
 				ArrayList<List<Object>> ids = resToList(rs);
-				String appIds = ",";
+				String users = ",";
 				for (List<Object> o:ids){
-					appIds+= o.get(0).toString()+",";
+					users+= o.get(0).toString()+",";
 				}
+				users.substring(0,users.length()-1);
 				String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", id, "tittel")).get(0).get(0);
 				String endring = " - " + bruker + " har avslått invitasjonen til "+tittel+" - ";
-				dbc.executeSQL("UPDATE bruker_has_avtale SET varsel_endring = varsel_endring + "+endring+" WHERE avtale_idavtale IN ("+appIds+")");
+				dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
 			}
 			
 		} catch (SQLException e) {
@@ -146,6 +146,7 @@ public class SCore {
 			e.printStackTrace();
 		}
 	}
+	
 	public int getAppointmentID(String vert,String dato,String start){
 		ResultSet rs;
 		try {
@@ -281,11 +282,12 @@ public class SCore {
 			dbc.editRow("avtale", id,null,vert,title,sted, room,cal,start,slutt,endring);
 			ResultSet rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", id);
 			ArrayList<List<Object>> ids = resToList(rs);
-			String appIds = ",";
+			String users = ",";
 			for (List<Object> o:ids){
-				appIds+= o.get(0).toString()+",";
+				users+= o.get(0).toString()+",";
 			}
-			dbc.executeSQL("UPDATE bruker_has_avtale SET varsel_endring = varsel_endring + "+endring+" WHERE avtale_idavtale IN ("+appIds+")");
+			users = users.substring(0,users.length()-1);
+			dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
 			return true;
 
 		} catch (Exception e) {
@@ -295,6 +297,49 @@ public class SCore {
 		}
 	}
 	
+	public boolean deleteAppointment(int id){
+		try {
+			ResultSet rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", id);
+			ArrayList<List<Object>> ids = resToList(rs);
+			String users = ",";
+			for (List<Object> o:ids){
+				users+= o.get(0).toString()+",";
+			}
+			users.substring(0,users.length()-1);
+			String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", id, "tittel")).get(0).get(0);
+			String endring = " - "+tittel+" har blitt avlyst. - ";
+			dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
+		
+			dbc.deleteRow("avtale", id);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	public boolean deleteInvitation(int appId, String name){
+		try {
+			dbc.executeSQL("DELETE FROM bruker_has_avtale WHERE bruker_brukernavn = "+name+" AND avtale_idavtale = "+appId);
+			ResultSet rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", appId);
+			ArrayList<List<Object>> ids = resToList(rs);
+			String users = ",";
+			for (List<Object> o:ids){
+				users+= o.get(0).toString()+",";
+			}
+			users.substring(0,users.length()-1);
+			String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", appId, "tittel")).get(0).get(0);
+			String endring = " - " + name + " har avslått invitasjonen til "+tittel+" - ";
+			dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
+		
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
 	public Calendar stringToCal(String date){
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
