@@ -64,26 +64,30 @@ public class CalendarViewController {
 		ledigRom.setDisable(false);
 	}
 	
-	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT, TextField sted, ComboBox rom, String antall, RadioButton stedValgt) { {
+	public boolean validateAvtale(TextField tittel, TextArea beskrivelse, TextField startT, TextField sluttT, TextField sted, ComboBox rom, TextField antall, RadioButton stedValgt) { {
 		boolean check = true;
 		
 		//sjekker tittel
 		if (tittel.getText().isEmpty()) {
 			check = false;
+			tittel.setStyle("-fx-border-color:red");
 			tittel.setTooltip(new Tooltip("Kan ike være tom"));
 		}
 		
 		//sjekker beskrivelse
-		else if (beskrivelse.getText().isEmpty()) {
+		if (beskrivelse.getText().isEmpty()) {
+			beskrivelse.setStyle("-fx-border-color:red");
 			check = false;
 		}
 		
 		//sjekker sted
-		else if (stedValgt.isSelected() && sted.getText().isEmpty()) {
+		if (stedValgt.isSelected() && sted.getText().isEmpty()) {
+			stedValgt.setStyle("-fx-border-color:red");
 			check = false;
 		}
 		
-		else if (!stedValgt.isSelected() && (!antall.matches("[0-9]+"))) {
+		if (!stedValgt.isSelected() && (!antall.getText().matches("[0-9]+"))) {
+			antall.setStyle("-fx-border-color:red");
 			check = false;
 		}
 		
@@ -100,19 +104,21 @@ public class CalendarViewController {
 			if (!((tid1.length == 2) &&  (startH <= 23) && (startH >= 0) &&
 					(startM >= 0) && (startM<= 59) && (tid1[1].length() == 2))) {
 				check = false;
+				startT.setStyle("-fx-border-color:red");
 				System.out.println("feil format");
 			}
 		
 		
 		//sjekk slutt tid format
 		
-			else if (!((tid.length == 2) &&  (endH <= 23) && (endH >= 0) &&
+			if (!((tid.length == 2) &&  (endH <= 23) && (endH >= 0) &&
 					(endM >= 0 && (endM <= 59) && (tid[1].length() == 2)))) {
 				check = false;
+				sluttT.setStyle("-fx-border-color:red");
 				System.out.println("format");
 			}
 		//sjekker om slutt tid er etter start
-			else if ((startH > endH) || ((startH==endH) && (startM > endM))) {
+			if ((startH > endH) || ((startH==endH) && (startM > endM))) {
 				check = false;
 				System.out.println("start etter slutt");
 			}
@@ -452,7 +458,7 @@ public class CalendarViewController {
 	@FXML protected void handleSubmitButtonAction(ActionEvent event){
 		boolean check = true;
 		
-		check = validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH.getText(), velgStedNH);
+		check = validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH, velgStedNH);
 		//sjekker om dato er senere
 	
 		
@@ -494,7 +500,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomNH(ActionEvent event) {
-		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH.getText(), velgStedNH)) {
+		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH, velgStedNH)) {
 		ArrayList<String> ledigRom = gui.getRoom(datoNH.getValue()+"", startNH.getText(), sluttNH.getText(), Integer.parseInt(antallNH.getText()));
 		if(!ledigRom.isEmpty()) {
 			romCBNH.getItems().addAll(ledigRom);
@@ -612,7 +618,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomM(ActionEvent event) {
-		if (validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM.getText(), velgStedM)) {
+		if (validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM, velgStedM)) {
 			ArrayList<String> ledigRom = gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), Integer.parseInt(antallM.getText()));
 			if(!ledigRom.isEmpty()) {
 				romCBM.getItems().addAll(ledigRom);
