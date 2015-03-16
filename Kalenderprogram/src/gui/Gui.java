@@ -163,21 +163,14 @@ public class Gui extends Application {
 		return sc.getRoom(size, date, start, slutt);
 	}
 	
-	public int tryCreateAppointment(Appointment avtale) {
-		String host = avtale.getHost().getUsername();
-		String title = avtale.getTitle();
-		String sted = avtale.getSted();
-		String room = Integer.toString(avtale.getRom());
-		String date = avtale.getDate().toString();
-		String start = avtale.getStart();
-		String end = avtale.getSlutt();
+	public int tryCreateAppointment( Person host, String title, String sted, int rom, String date, String start,String slutt, ArrayList<Person> participants) {
 		ArrayList<String> invited = new ArrayList<String>();
-		ArrayList<Person> persons = avtale.getParticipants();
-		for (Person person : persons) {
-			invited.add(person.getUsername());
+		for (Person p : participants) {
+			invited.add(p.getUsername());
 		}
-		sc.createAppointment(host, title, sted,room, date, start, end, invited);
-		return 0;
+		int id = 0;
+		id = Integer.parseInt(sc.createAppointment(host.getUsername(), title, sted,Integer.toString(rom), date, start, slutt, invited));
+		return id;
 	}
 	
 	
