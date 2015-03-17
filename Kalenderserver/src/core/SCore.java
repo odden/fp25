@@ -121,7 +121,7 @@ public class SCore {
 				}
 				users.substring(0,users.length()-1);
 				String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", id, "tittel")).get(0).get(0);
-				String endring = ";" + bruker + " har avslått invitasjonen til "+tittel;
+				String endring = ";" + bruker + " har avslï¿½tt invitasjonen til "+tittel;
 				dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
 			}
 			
@@ -267,9 +267,9 @@ public class SCore {
 			ResultSet rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", id);
 			ArrayList<List<Object>> ids = resToList(rs);
 			if (ids.size() != 0) {
-				String users = ",";
+				String users = "";
 				for (List<Object> o:ids){
-					users+= o.get(0).toString()+",";
+					users+= "'"+o.get(0).toString()+"',";
 				}
 				users = users.substring(0,users.length()-1);
 				dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
@@ -314,7 +314,7 @@ public class SCore {
 				users+= o.get(0).toString()+",";
 			}
 			String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", appId, "tittel")).get(0).get(0);
-			String endring = ";" + name + " har avslått invitasjonen til "+tittel;
+			String endring = ";" + name + " har avslï¿½tt invitasjonen til "+tittel;
 			dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + '"+endring+"' WHERE brukernavn IN ("+users+"buffer)");
 		
 			return true;
