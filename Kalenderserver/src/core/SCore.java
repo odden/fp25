@@ -59,7 +59,7 @@ public class SCore {
 	
 	public Boolean createUser(String username,String password,String name,String email,int tlf){
 		try {
-			dbc.insertRow("bruker", username,password,name,email,tlf);
+			dbc.insertRow("bruker", username,password,name,email,tlf,";");
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
