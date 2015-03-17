@@ -33,7 +33,7 @@ public class CreateUserController {
 
 		
 		//Sjekker Navn   
-		if (name.getText().matches("[A-Z,\u00C6\u00D8\u00D5][a-z,\u00E6\u00F8\u00E5]+ [A-Z,\u00C6\u00D8\u00D5][a-z,\u00E6\u00F8\u00E5]+(-)*([A-Z,\u00C6\u00D8\u00D5][a-z,\u00E6\u00F8\u00E5]+)*")){
+		if (name.getText().matches("[A-Z,\u00C6\u00D8\u00D5][a-z,\u00E6\u00F8\u00E5]+ [A-Z,\u00C6\u00D8\u00D5][a-z,\u00E6\u00F8\u00E5]+(-)*( )*([A-Z,\u00C6\u00D8\u00D5][a-z,\u00E6\u00F8\u00E5]+)*")){
 			name.setStyle("-fx-border-color:green");
 			commentName.setVisible(false);
 		}else{
