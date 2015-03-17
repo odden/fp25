@@ -266,12 +266,14 @@ public class SCore {
 			dbc.editRow("avtale", id,null,vert,title,sted, room,cal,start,slutt,endring);
 			ResultSet rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", id);
 			ArrayList<List<Object>> ids = resToList(rs);
-			String users = ",";
-			for (List<Object> o:ids){
-				users+= o.get(0).toString()+",";
+			if (ids.size() != 0) {
+				String users = ",";
+				for (List<Object> o:ids){
+					users+= o.get(0).toString()+",";
+				}
+				users = users.substring(0,users.length()-1);
+				dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
 			}
-			users = users.substring(0,users.length()-1);
-			dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
 			return true;
 
 		} catch (Exception e) {

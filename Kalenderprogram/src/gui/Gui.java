@@ -177,6 +177,12 @@ public class Gui extends Application {
 		return id;
 	}
 	
+	public boolean tryEditAppointment(int id, Person host, String title, String sted, String rom, String date, String start,String slutt, ArrayList<Person> participants) {
+		boolean result = false;
+		result = Boolean.valueOf(sc.editAppointment(id, host.getUsername(), title, sted, rom, date, start, slutt, "endring"));
+		return result;
+	}
+	
 	
 	@SuppressWarnings("static-access")
 	@Override
