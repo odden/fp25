@@ -54,6 +54,12 @@ public class SConnector {
 		return convert(response);
 	}
 	
+	public String deleteAppointment(int id){
+		String message = "deleteAppointment::"+id;
+		String response = connectToServer(message);
+		return response;
+	}
+	
 	public String invite(List<String>usernames,String id){
 		String message = "invite" + "::" + id+"::";
 		for (String string : usernames) {
