@@ -117,31 +117,34 @@ public class Gui extends Application {
 				}
 			}
 			ArrayList<String> appointments = sc.getAllAppointments();
-			for (String appointment : appointments) {
-				String [] appointmentSplit = appointment.split("::");
-				String appId = appointmentSplit[0];
-				ArrayList<String> participants = new ArrayList<String>();
-				participants = sc.getInvited(appId);
-				ArrayList<Person> persons = new ArrayList<Person>();
-				for (String user : participants) {
-					for (Person person : this.users) {
-						if (person.getUsername().equals(user)) {
-							persons.add(person);
+			if(appointments.size() != 0){
+				
+				for (String appointment : appointments) {
+					String [] appointmentSplit = appointment.split("::");
+					String appId = appointmentSplit[0];
+					ArrayList<String> participants = new ArrayList<String>();
+					participants = sc.getInvited(appId);
+					ArrayList<Person> persons = new ArrayList<Person>();
+					for (String user : participants) {
+						for (Person person : this.users) {
+							if (person.getUsername().equals(user)) {
+								persons.add(person);
+							}
 						}
 					}
-				}
-				Person host = null;
-				for (Person person : this.users) {
-					if (appointmentSplit[1].equals(person.getUsername())) {
-						host = person;
+					Person host = null;
+					for (Person person : this.users) {
+						if (appointmentSplit[1].equals(person.getUsername())) {
+							host = person;
+						}
 					}
+					Appointment avtale = new Appointment(Integer.parseInt(appId), host, appointmentSplit[2], appointmentSplit[3],appointmentSplit[4].equals("NULL") ? 0 : Integer.parseInt(appointmentSplit[4]), appointmentSplit[5],appointmentSplit[6].substring(0,appointmentSplit[6].length()-3),appointmentSplit[7].substring(0,appointmentSplit[7].length()-3), persons);
+					host.addAppointment(avtale);
+					for (Person person : persons) {
+						person.addAppointment(avtale);
+					}
+					
 				}
-				Appointment avtale = new Appointment(Integer.parseInt(appId), host, appointmentSplit[2], appointmentSplit[3],appointmentSplit[4].equals("NULL") ? 0 : Integer.parseInt(appointmentSplit[4]), appointmentSplit[5],appointmentSplit[6].substring(0,appointmentSplit[6].length()-3),appointmentSplit[7].substring(0,appointmentSplit[7].length()-3), persons);
-				host.addAppointment(avtale);
-				for (Person person : persons) {
-					person.addAppointment(avtale);
-				}
-				
 			}
 			switchSceneContent("CalenderView.fxml");
 			return "Ok";
