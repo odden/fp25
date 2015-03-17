@@ -503,10 +503,12 @@ public class CalendarViewController {
 		
 		int id = gui.tryCreateAppointment(this.me, tittel,sted,rom,dato, start, slutt, personer);
 		if(id != 0){
-			Appointment avtale = new Appointment(id,this.me, tittel,sted,Integer.parseInt(rom),dato, start, slutt, personer);
-			avtale.setEstimatedSize(Integer.parseInt(antallM.getText()));
+			Appointment avtale = new Appointment(id,this.me, tittel,sted, (rom == null ? 0 : Integer.parseInt(rom)),dato, start, slutt, personer);
 			moteinnkallinger.getItems().add(avtale);
 			me.addAppointment(avtale);
+			for (Person person : personer) {
+				person.addAppointment(avtale);
+			}
 			avtaleApprove.setText("Avtale '"  + avtale.getTitle() + "' opprettet!" );
 		}
 			
