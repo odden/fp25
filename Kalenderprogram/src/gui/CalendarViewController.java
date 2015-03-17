@@ -693,8 +693,12 @@ public class CalendarViewController {
 		if(svar.get().equals(ja)) {
 			Appointment slett = moteinnkallinger.getItems().get(moteinnkallinger.getSelectionModel().getSelectedIndex());
 			moteinnkallinger.getItems().remove(slett);
+			for (Person person : slett.getParticipants()) {
+				person.getAvtaler().remove(slett);
+			}
 			me.removeAppointment(slett);
 			gui.sc.deleteAppointment(slett.getId());
+			
 			if (!moteinnkallinger.getItems().isEmpty()) {
 				moteinnkallinger.getSelectionModel().clearSelection();
 				moteinnkallinger.getSelectionModel().selectFirst();
