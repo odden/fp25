@@ -49,6 +49,17 @@ public class CalendarViewController {
 	private Gui gui;
 	private ArrayList<Person> users;
 	
+	private void resetBoksFarge(TextField tittel, TextArea beskrivelse, TextField sted, TextField antall, TextField start, TextField slutt) {
+		tittel.setStyle("-fx-border-color:black");
+		beskrivelse.setStyle("-fx-border-color:black");
+		sted.setStyle("-fx-border-color:black");
+		antall.setStyle("-fx-border-color:black");
+		slutt.setStyle("-fx-border-color:black");
+		start.setStyle("-fx-border-color:black");
+		
+		
+	}
+	
 	private void stedValgt(TextField antall, Button finnRom, RadioButton romKnapp, TextField sted, ComboBox ledigRom) {
 		antall.setDisable(true);
 		finnRom.setDisable(true);
@@ -584,6 +595,7 @@ public class CalendarViewController {
 
 	@FXML
 	public void moteInfoTilView() {
+		resetBoksFarge(tittelM, beskrivelseM, stedM, antallM, startM, sluttM);
 		if(!moteinnkallinger.getSelectionModel().isEmpty()) {
 			Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
 			ArrayList<Person> ikkeInvitert = users;
