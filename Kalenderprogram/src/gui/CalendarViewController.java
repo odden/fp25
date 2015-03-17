@@ -663,17 +663,17 @@ public class CalendarViewController {
 			Appointment slett = moteinnkallinger.getItems().get(moteinnkallinger.getSelectionModel().getSelectedIndex());
 			moteinnkallinger.getItems().remove(slett);
 			me.removeAppointment(slett);
+			
+			beskrivelseM.clear();
+			tittelM.clear();
+			stedM.clear();
+			sluttM.clear();
+			startM.clear();
+			antallM.clear();
+			invitertePersoner.getItems().clear();
+			inviterEkstraPerson.getItems().clear();
+			
 		}
-		
-		beskrivelseM.clear();
-		tittelM.clear();
-		stedM.clear();
-		sluttM.clear();
-		startM.clear();
-		antallM.clear();
-		invitertePersoner.getItems().clear();
-		inviterEkstraPerson.getItems().clear();
-		
 		
 		//Metoden skal slette møte
 		//alle andres kalendere oppdateres  
