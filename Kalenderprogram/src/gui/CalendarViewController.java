@@ -597,6 +597,11 @@ public class CalendarViewController {
 			beskrivelseM.setText(mote.getTitle());
 			datoM.setValue(mote.getDate());
 			System.out.println(mote.getRom());
+			if(mote.getSted() == null){
+				romValgt(stedM, velgStedM, antallM, finnRomM, romCBM);
+			} else {
+				stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
+			}
 			romCBM.getItems().removeAll(romCBM.getItems());
 			if (mote.getRom() != 0){
 				velgStedM.setSelected(false);
