@@ -80,6 +80,9 @@ public class PConnector {
 		}else if(requestList[0].equals("getGroups")){
 			response = getGroups();
 			return response;
+		}else if(requestList[0].equals("getAllAppointments")){
+			response = getAllAppointments();
+			return response;
 		}else if(requestList[0].equals("deleteAppointment")){
 			response.add(String.valueOf(deleteAppointment(requestList[1])));
 			return response;
@@ -88,6 +91,11 @@ public class PConnector {
 	}
 	
 	
+	private ArrayList<String> getAllAppointments() {
+		ArrayList<List<Object>> appointments = sc.getAppointments();
+		return convertToList(appointments);
+	}
+
 	private ArrayList<String> getGroups() {
 		ArrayList<List<Object>> groups = sc.getGroups();
 		return convertToList(groups);
@@ -173,7 +181,7 @@ public class PConnector {
 					str += "NULL::";
 				}
 			}
-			arrayList.add(str.substring(0, str.length() - 1 ) + ";");
+			arrayList.add(str.substring(0, str.length() - 2 ) + ";");
 		}
 		return arrayList;
 	}

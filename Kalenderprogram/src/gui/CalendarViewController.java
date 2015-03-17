@@ -98,7 +98,7 @@ public class CalendarViewController {
 			check = false;
 		}else {
 			antall.setStyle("-fx-border-color:green");
-			if (Integer.parseInt(antall.getText()) < rediger.getItems().size()){
+			if (!stedValgt.isSelected() && Integer.parseInt(antall.getText()) < rediger.getItems().size()){
 				antall.setStyle("-fx-border-color:red");
 				check = false;
 			}
@@ -511,9 +511,12 @@ public class CalendarViewController {
 		
 		int id = gui.tryCreateAppointment(this.me, tittel,sted,rom,dato, start, slutt, personer);
 		if(id != 0){
-			Appointment avtale = new Appointment(id,this.me, tittel,sted,Integer.parseInt(rom),dato, start, slutt, personer);
+			Appointment avtale = new Appointment(id,this.me, tittel,sted, (rom == null ? 0 : Integer.parseInt(rom)),dato, start, slutt, personer);
 			moteinnkallinger.getItems().add(avtale);
 			me.addAppointment(avtale);
+			for (Person person : personer) {
+				person.addAppointment(avtale);
+			}
 			avtaleApprove.setText("Avtale '"  + avtale.getTitle() + "' opprettet!" );
 		}
 			
@@ -574,13 +577,13 @@ public class CalendarViewController {
 	@FXML private Button deltarIkke;
 	@FXML private Tab moter;
 
-	@FXML
-	public void byttetTilMoterTab(ActionEvent event) {
-		if(!moteinnkallinger.getItems().isEmpty()){
-			moteinnkallinger.getSelectionModel().selectFirst();
-			moteInfoTilView();
-		}
-	}
+//	@FXML
+//	public void byttetTilMoterTab(ActionEvent event) {
+//		if(!moteinnkallinger.getItems().isEmpty()){
+//			moteinnkallinger.getSelectionModel().selectFirst();
+//			moteInfoTilView();
+//		}
+//	}
 
 	@FXML
 	public void moteInfoTilView() {
@@ -594,6 +597,11 @@ public class CalendarViewController {
 			beskrivelseM.setText(mote.getTitle());
 			datoM.setValue(mote.getDate());
 			System.out.println(mote.getRom());
+			if(mote.getSted() == null){
+				romValgt(stedM, velgStedM, antallM, finnRomM, romCBM);
+			} else {
+				stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
+			}
 			romCBM.getItems().removeAll(romCBM.getItems());
 			if (mote.getRom() != 0){
 				velgStedM.setSelected(false);
@@ -690,8 +698,12 @@ public class CalendarViewController {
 		if(svar.get().equals(ja)) {
 			Appointment slett = moteinnkallinger.getItems().get(moteinnkallinger.getSelectionModel().getSelectedIndex());
 			moteinnkallinger.getItems().remove(slett);
+			for (Person person : slett.getParticipants()) {
+				person.getAvtaler().remove(slett);
+			}
 			me.removeAppointment(slett);
 			gui.sc.deleteAppointment(slett.getId());
+			
 			if (!moteinnkallinger.getItems().isEmpty()) {
 				moteinnkallinger.getSelectionModel().clearSelection();
 				moteinnkallinger.getSelectionModel().selectFirst();
@@ -719,8 +731,10 @@ public class CalendarViewController {
 	
 	@FXML
 	public void inviterEkstraDeltaker(ActionEvent event) {
+		if(!inviterEkstraPerson.getSelectionModel().isEmpty()){
 		invitertePersoner.getItems().add(inviterEkstraPerson.getSelectionModel().getSelectedItem());
 		inviterEkstraPerson.getItems().remove(inviterEkstraPerson.getSelectionModel().getSelectedItem());
+		}
 		//Metoden flytter person over til deltaker-ruten 
 		//Da skal personen få en invitasjon (møtet blir synlig i møter) etter at "lagre endringer" 
 		//er trykket.
@@ -806,6 +820,10 @@ public class CalendarViewController {
 		}
 		for (Appointment appointment : appointments) {
 			moteinnkallinger.getItems().add(appointment);
+		}
+		if(!moteinnkallinger.getItems().isEmpty()){
+		moteinnkallinger.getSelectionModel().selectLast();
+		moteInfoTilView();
 		}
 		this.personerIKalender.add(me);
 		updateAppointments();

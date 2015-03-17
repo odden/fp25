@@ -116,42 +116,35 @@ public class Gui extends Application {
 					}
 				}
 			}
-			for (Person person : this.users) {
-				
-				ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
-				ArrayList<String> myApps = sc
-						.getAppointments(person.getUsername());
-				if (myApps != null){
-					if (!myApps.get(0).equals("")){
-						for (String s : myApps) {
-							if (s.equals(":")) {
-							} else {
-								String[] appointments = s.split("::");
-								ArrayList<String> invited = sc.getInvited(appointments[0]);
-								ArrayList<Person> participants = new ArrayList<Person>();
-								Person host = null;
-								for (Person p: this.users){
-									if (invited != null && invited.contains(p.getUsername()+ ":")){
-										participants.add(p);
-									}
-									if (p.getUsername().equals(appointments[1])) {
-										host = p;
-									}
-								}
-								int room;
-								try{
-									room = Integer.parseInt(appointments[4]);
-								} catch(NumberFormatException e){
-									room = 0;
-								}
-								Appointment a = new Appointment(Integer.parseInt(appointments[0]),host,appointments[2],appointments[3],room,appointments[5],appointments[6].substring(0,appointments[6].length()-3),appointments[7].substring(0,appointments[7].length()-3),participants);
-								myAppointments.add(a);
-							}
+			ArrayList<String> appointments = sc.getAllAppointments();
+			System.out.println(appointments);
+			for (String appointment : appointments) {
+				String [] appointmentSplit = appointment.split("::");
+				String appId = appointmentSplit[0];
+				ArrayList<String> participants = new ArrayList<String>();
+				participants = sc.getInvited(appId);
+				ArrayList<Person> persons = new ArrayList<Person>();
+				for (String user : participants) {
+					for (Person person : this.users) {
+						if (person.getUsername().equals(user)) {
+							persons.add(person);
 						}
 					}
 				}
-				person.setAllAppointments(myAppointments);
+				Person host = null;
+				for (Person person : this.users) {
+					if (appointmentSplit[1].equals(person.getUsername())) {
+						host = person;
+					}
+				}
+				Appointment avtale = new Appointment(Integer.parseInt(appId), host, appointmentSplit[2], appointmentSplit[3],appointmentSplit[4].equals("NULL") ? 0 : Integer.parseInt(appointmentSplit[4]), appointmentSplit[5],appointmentSplit[6].substring(0,appointmentSplit[6].length()-3),appointmentSplit[7].substring(0,appointmentSplit[7].length()-3), persons);
+				host.addAppointment(avtale);
+				for (Person person : persons) {
+					person.addAppointment(avtale);
+				}
+				
 			}
+			
 			System.out.println(this.users);
 			switchSceneContent("CalenderView.fxml");
 			return "Ok";
