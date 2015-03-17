@@ -117,10 +117,12 @@ public class Gui extends Application {
 				}
 			}
 			ArrayList<String> appointments = sc.getAllAppointments();
+			System.out.println(appointments);
 			for (String appointment : appointments) {
 				String [] appointmentSplit = appointment.split("::");
 				String appId = appointmentSplit[0];
-				ArrayList<String> participants = sc.getInvited(appId);
+				ArrayList<String> participants = new ArrayList<String>();
+				participants = sc.getInvited(appId);
 				ArrayList<Person> persons = new ArrayList<Person>();
 				for (String user : participants) {
 					for (Person person : this.users) {

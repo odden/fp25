@@ -82,6 +82,7 @@ public class PConnector {
 			return response;
 		}else if(requestList[0].equals("getAllAppointments")){
 			response = getAllAppointments();
+			return response;
 		}else if(requestList[0].equals("deleteAppointment")){
 			response.add(String.valueOf(deleteAppointment(requestList[1])));
 			return response;
