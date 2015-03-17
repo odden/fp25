@@ -117,7 +117,7 @@ public class Gui extends Application {
 				}
 			}
 			ArrayList<String> appointments = sc.getAllAppointments();
-			if(appointments.size() != 0){
+			if(appointments !=null && !appointments.get(0).equals("")){
 				
 				for (String appointment : appointments) {
 					String [] appointmentSplit = appointment.split("::");
