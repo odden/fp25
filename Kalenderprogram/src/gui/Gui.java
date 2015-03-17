@@ -171,9 +171,13 @@ public class Gui extends Application {
 	}
 	
 	public boolean tryEditAppointment(int id, Person host, String title, String sted, String rom, String date, String start,String slutt, ArrayList<Person> participants) {
-		boolean result = false;
-		result = Boolean.valueOf(sc.editAppointment(id, host.getUsername(), title, sted, rom, date, start, slutt, "endring"));
-		return result;
+		ArrayList<String> usernames = new ArrayList<String>();
+		for (Person person : participants) {
+			usernames.add(person.getUsername());
+		}
+		boolean result1 = Boolean.valueOf(sc.invite(usernames, Integer.toString(id)));
+		boolean result2 = Boolean.valueOf(sc.editAppointment(id, host.getUsername(), title, sted, rom, date, start, slutt, "endring"));
+		return result1 && result2;
 	}
 	
 	

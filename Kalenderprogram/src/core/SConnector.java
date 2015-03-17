@@ -60,12 +60,12 @@ public class SConnector {
 		return response;
 	}
 	
-	public String invite(List<String>usernames,String id){
+	public String invite(List<String> usernames,String id){
 		String message = "invite" + "::" + id+"::";
 		for (String string : usernames) {
 			message += string + "::";
 		}
-		String response = connectToServer(message);
+		String response = connectToServer(message.substring(0, message.length() - 2));
 		return response;
 	}
 	

@@ -703,8 +703,8 @@ public class CalendarViewController {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		ButtonType ja = new ButtonType("JA");
 		ButtonType nei = new ButtonType("NEI");
-		alert.getButtonTypes().set(0, nei);
-		alert.getButtonTypes().set(1, ja);
+		alert.getButtonTypes().set(0, ja);
+		alert.getButtonTypes().set(1, nei);
 		
 		alert.setTitle("Sikker p\u00E5 at du vil slette?");
 		alert.setHeaderText("Slette m\u00F8te?");
@@ -802,8 +802,8 @@ public class CalendarViewController {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		ButtonType ja = new ButtonType("JA");
 		ButtonType nei = new ButtonType("NEI");
-		alert.getButtonTypes().set(0, nei);
-		alert.getButtonTypes().set(1, ja);
+		alert.getButtonTypes().set(0, ja);
+		alert.getButtonTypes().set(1, nei);
 		
 		alert.setTitle("Møte");
 		alert.setHeaderText("Vise møtet?");

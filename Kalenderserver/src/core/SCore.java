@@ -94,7 +94,7 @@ public class SCore {
 		try {
 			if (id != 0){
 				for (String n:usernames){
-						dbc.insertRow("bruker_has_avtale",n,id,false);
+						dbc.insertRow("bruker_has_avtale",n,id,"NULL",0,true);
 				}
 				return true;
 			}
