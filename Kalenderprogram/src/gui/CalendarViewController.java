@@ -577,11 +577,14 @@ public class CalendarViewController {
 			stedM.setText(mote.getSted());
 			beskrivelseM.setText(mote.getTitle());
 			datoM.setValue(mote.getDate());
-			if (validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM, velgStedM)) {
-				ArrayList<String> ledigRom = gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), Integer.parseInt(antallM.getText()));
-				if(!ledigRom.isEmpty() && mote.getRom() != 0) {
-					romCBM.getItems().addAll(ledigRom);
-					romCBM.getSelectionModel().select(mote.getRom()+"");
+			if (mote.getRom() != 0){
+				if (validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM, velgStedM)) {
+					ArrayList<String> ledigRom = gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), Integer.parseInt(antallM.getText()));
+					if(!ledigRom.isEmpty() && mote.getRom() != 0) {
+						romCBM.getItems().add(mote.getRom());
+						romCBM.getItems().addAll(ledigRom);
+						romCBM.getSelectionModel().selectFirst();;
+					}
 				}
 			}
 			if(mote.getHost().equals(me)) {
