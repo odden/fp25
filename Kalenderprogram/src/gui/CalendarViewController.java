@@ -504,6 +504,7 @@ public class CalendarViewController {
 		int id = gui.tryCreateAppointment(this.me, tittel,sted,rom,dato, start, slutt, personer);
 		if(id != 0){
 			Appointment avtale = new Appointment(id,this.me, tittel,sted,Integer.parseInt(rom),dato, start, slutt, personer);
+			avtale.setEstimatedSize(Integer.parseInt(antallM.getText()));
 			moteinnkallinger.getItems().add(avtale);
 			me.addAppointment(avtale);
 			avtaleApprove.setText("Avtale '"  + avtale.getTitle() + "' opprettet!" );
@@ -532,7 +533,8 @@ public class CalendarViewController {
 	@FXML
 	public void finnRomNH(ActionEvent event) {
 		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH, velgStedNH)) {
-		ArrayList<String> ledigRom = gui.getRoom(datoNH.getValue()+"", startNH.getText(), sluttNH.getText(), Integer.parseInt(antallNH.getText()));
+			
+			ArrayList<String> ledigRom = gui.getRoom(datoNH.getValue()+"", startNH.getText(), sluttNH.getText(), Integer.parseInt(antallNH.getText()));
 		if(!ledigRom.isEmpty()) {
 			romCBNH.getItems().clear();
 			romCBNH.getItems().addAll(ledigRom);
@@ -574,7 +576,16 @@ public class CalendarViewController {
 			tittelM.setText(mote.getTitle());
 			stedM.setText(mote.getSted());
 			beskrivelseM.setText(mote.getTitle());
+			datoM.setValue(mote.getDate());
+			if (validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM, velgStedM)) {
+				ArrayList<String> ledigRom = gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), Integer.parseInt(antallM.getText()));
+				if(!ledigRom.isEmpty() && mote.getRom() != 0) {
+					romCBM.getItems().addAll(ledigRom);
+					romCBM.getSelectionModel().select(mote.getRom()+"");
+				}
+			}
 			if(mote.getHost().equals(me)) {
+				
 				notHostValg.setVisible(false);
 				hostValg.setVisible(true);
 				beskrivelseM.setDisable(false);
