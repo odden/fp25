@@ -119,10 +119,10 @@ public class SCore {
 				for (List<Object> o:ids){
 					users+= "'"+o.get(0).toString()+"',";
 				}
-				users.substring(0,users.length()-1);
+				users = users.substring(0,users.length()-1);
 				String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", id, "tittel")).get(0).get(0);
 				String endring = ";" + bruker + " har avslått invitasjonen til "+tittel;
-				dbc.executeSQL("UPDATE bruker SET varsel_endring = CONCAT(varsel_endring,'"+endring+"' WHERE brukernavn IN ("+users+")");
+				dbc.executeSQL("UPDATE bruker SET varsel_endring = CONCAT(varsel_endring,'"+endring+"') WHERE brukernavn IN ("+users+")");
 			}
 			
 		} catch (SQLException e) {
