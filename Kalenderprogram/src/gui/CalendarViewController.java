@@ -451,6 +451,7 @@ public class CalendarViewController {
         settKalenderDato(date);
         velgStedM.setSelected(true);
         velgStedNH.setSelected(true);
+        moteinnkallinger.getSelectionModel().selectFirst();
         stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
         stedValgt(antallNH, finnRomNH, velgRomNH, stedNH, romCBNH);
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
@@ -561,11 +562,13 @@ public class CalendarViewController {
 	@FXML private TextField antallM;
 	@FXML private RadioButton velgStedM;
 	@FXML private RadioButton velgRomM;
+	@FXML private Button deltar;
+	@FXML private Button deltarIkke;
 
 	
 
 	@FXML
-	public void moteInfoTilView(MouseEvent event) {
+	public void moteInfoTilView() {
 		if(!moteinnkallinger.getSelectionModel().isEmpty()) {
 			Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
 			ArrayList<Person> ikkeInvitert = users;
@@ -653,7 +656,11 @@ public class CalendarViewController {
 			Appointment slett = moteinnkallinger.getItems().get(moteinnkallinger.getSelectionModel().getSelectedIndex());
 			moteinnkallinger.getItems().remove(slett);
 			me.removeAppointment(slett);
-			
+			if (!moteinnkallinger.getItems().isEmpty()) {
+				moteinnkallinger.getSelectionModel().clearSelection();
+				moteinnkallinger.getSelectionModel().selectFirst();
+				moteInfoTilView();
+			}else {
 			beskrivelseM.clear();
 			tittelM.clear();
 			stedM.clear();
@@ -662,7 +669,7 @@ public class CalendarViewController {
 			antallM.clear();
 			invitertePersoner.getItems().clear();
 			inviterEkstraPerson.getItems().clear();
-			
+			}
 		}
 		
 		//Metoden skal slette møte
@@ -705,6 +712,49 @@ public class CalendarViewController {
 	public void romValgtM(ActionEvent event) {
 		romValgt(stedM, velgStedM, antallM, finnRomM, romCBM);
 	}
+	
+	@FXML
+	public void deltar(ActionEvent event) {
+		gui.sc.setStatus(me.getUsername(), moteinnkallinger.getSelectionModel().getSelectedItem().getId(), true);
+	}
+	
+	@FXML
+	public void deltarIkke(ActionEvent event) {
+		gui.sc.setStatus(me.getUsername(), moteinnkallinger.getSelectionModel().getSelectedItem().getId(), false);
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		ButtonType ja = new ButtonType("JA");
+		ButtonType nei = new ButtonType("NEI");
+		alert.getButtonTypes().set(0, nei);
+		alert.getButtonTypes().set(1, ja);
+		
+		alert.setTitle("Møte");
+		alert.setHeaderText("Vise møtet?");
+		alert.setContentText("Vil du slette møtet fra kalenderen?");
+		
+		Optional<ButtonType> svar = alert.showAndWait();
+		
+		if(svar.get().equals(ja)) {
+			Appointment slett = moteinnkallinger.getItems().get(moteinnkallinger.getSelectionModel().getSelectedIndex());
+			moteinnkallinger.getItems().remove(slett);
+			me.removeAppointment(slett);
+			if (!moteinnkallinger.getItems().isEmpty()) {
+			moteinnkallinger.getSelectionModel().clearSelection();
+			moteinnkallinger.getSelectionModel().selectFirst();
+			moteInfoTilView();
+			} else {
+				beskrivelseM.clear();
+				tittelM.clear();
+				stedM.clear();
+				sluttM.clear();
+				startM.clear();
+				antallM.clear();
+				invitertePersoner.getItems().clear();
+				inviterEkstraPerson.getItems().clear();
+			}
+			
+		}
+		
+	}
 		
 	
 
@@ -720,6 +770,10 @@ public class CalendarViewController {
 		}
 		for (Appointment appointment : appointments) {
 			moteinnkallinger.getItems().add(appointment);
+		}
+		if(!moteinnkallinger.getItems().isEmpty()){
+			moteinnkallinger.getSelectionModel().selectFirst();
+			moteInfoTilView();
 		}
 		this.personerIKalender.add(me);
 		updateAppointments();

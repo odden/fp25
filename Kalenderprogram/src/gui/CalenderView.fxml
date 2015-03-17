@@ -398,8 +398,8 @@
                         </Pane>
                         <Pane fx:id="notHostValg" layoutX="319.0" layoutY="322.0" prefHeight="205.0" prefWidth="431.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="214.0" layoutY="31.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="158.0" text="Deltar ikke" textAlignment="CENTER" />
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="32.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="151.0" text="Deltar" textAlignment="CENTER" />
+                              <Button fx:id="deltarIkke" alignment="CENTER" contentDisplay="CENTER" layoutX="214.0" layoutY="31.0" mnemonicParsing="false" onAction="#deltarIkke" prefHeight="64.0" prefWidth="158.0" text="Deltar ikke" textAlignment="CENTER" />
+                              <Button fx:id="deltar" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="32.0" mnemonicParsing="false" onAction="#deltar" prefHeight="63.0" prefWidth="151.0" text="Deltar" textAlignment="CENTER" />
                            </children>
                         </Pane>
                      </children></AnchorPane>
