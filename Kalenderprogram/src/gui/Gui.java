@@ -117,7 +117,6 @@ public class Gui extends Application {
 				}
 			}
 			ArrayList<String> appointments = sc.getAllAppointments();
-			System.out.println(appointments);
 			for (String appointment : appointments) {
 				String [] appointmentSplit = appointment.split("::");
 				String appId = appointmentSplit[0];
@@ -144,8 +143,6 @@ public class Gui extends Application {
 				}
 				
 			}
-			
-			System.out.println(this.users);
 			switchSceneContent("CalenderView.fxml");
 			return "Ok";
 			}
