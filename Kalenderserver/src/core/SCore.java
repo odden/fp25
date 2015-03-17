@@ -272,7 +272,7 @@ public class SCore {
 					users+= "'"+o.get(0).toString()+"',";
 				}
 				users = users.substring(0,users.length()-1);
-				dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
+				dbc.executeSQL("UPDATE bruker SET varsel_endring = CONCAT(varsel_endring,'"+endring+"') WHERE brukernavn IN ("+users+")");
 			}
 			return true;
 
