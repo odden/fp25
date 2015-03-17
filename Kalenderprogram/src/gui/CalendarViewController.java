@@ -59,6 +59,7 @@ public class CalendarViewController {
 	
 	private void romValgt(TextField sted, RadioButton stedKnapp, TextField antall, Button finnRom, ComboBox ledigRom) {
 		sted.setDisable(true);
+		System.out.println("sånn");
 		stedKnapp.setSelected(false);
 		antall.setDisable(false);
 		finnRom.setDisable(false);
@@ -514,10 +515,12 @@ public class CalendarViewController {
 			Appointment avtale = new Appointment(id,this.me, tittel,sted, (rom == null ? 0 : Integer.parseInt(rom)),dato, start, slutt, personer);
 			moteinnkallinger.getItems().add(avtale);
 			me.addAppointment(avtale);
+			updateAppointments();
 			for (Person person : personer) {
 				person.addAppointment(avtale);
 			}
 			avtaleApprove.setText("Avtale '"  + avtale.getTitle() + "' opprettet!" );
+			
 		}
 			
 	}
@@ -577,13 +580,7 @@ public class CalendarViewController {
 	@FXML private Button deltarIkke;
 	@FXML private Tab moter;
 
-//	@FXML
-//	public void byttetTilMoterTab(ActionEvent event) {
-//		if(!moteinnkallinger.getItems().isEmpty()){
-//			moteinnkallinger.getSelectionModel().selectFirst();
-//			moteInfoTilView();
-//		}
-//	}
+
 
 	@FXML
 	public void moteInfoTilView() {
@@ -597,16 +594,7 @@ public class CalendarViewController {
 			beskrivelseM.setText(mote.getTitle());
 			datoM.setValue(mote.getDate());
 			System.out.println(mote.getRom());
-			if(mote.getSted() == null){
-				velgStedM.setSelected(false);
-				velgRomM.setSelected(true);
-				romValgt(stedM, velgStedM, antallM, finnRomM, romCBM);
-				
-			} else {
-				velgRomM.setSelected(false);
-				velgStedM.setSelected(true);
-				stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
-			}
+			
 			romCBM.getItems().removeAll(romCBM.getItems());
 			if (mote.getRom() != 0){
 				velgStedM.setSelected(false);
@@ -645,6 +633,16 @@ public class CalendarViewController {
 				startM.setDisable(true);
 				stedM.setDisable(true);
 				
+			}
+			if(mote.getSted().equals("")){
+				velgStedM.setSelected(false);
+				velgRomM.setSelected(true);
+				romValgt(stedM, velgStedM, antallM, finnRomM, romCBM);
+				
+			} else {
+				velgRomM.setSelected(false);
+				velgStedM.setSelected(true);
+				stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
 			}
 			
 		}
@@ -750,6 +748,14 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomM(ActionEvent event) {
+		Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
+		romCBM.getItems().removeAll(romCBM.getItems());
+		if (mote.getRom() != 0){
+			velgStedM.setSelected(false);
+			velgRomM.setSelected(true);
+			romCBM.getItems().add(mote.getRom());
+			romCBM.getSelectionModel().selectFirst();;
+		}
 		if (validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM, velgStedM,invitertePersoner)) {
 			ArrayList<String> ledigRom = gui.getRoom(datoM.getValue()+"", startM.getText(), sluttM.getText(), Integer.parseInt(antallM.getText()));
 			if(!ledigRom.isEmpty()) {
@@ -758,6 +764,7 @@ public class CalendarViewController {
 			}
 			//Finner et passende rom utifra antall folk invitert
 		}
+		
 	}
 	
 	@FXML
