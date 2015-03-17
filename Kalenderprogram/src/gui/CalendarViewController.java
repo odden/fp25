@@ -707,7 +707,7 @@ public class CalendarViewController {
 			Appointment slett = moteinnkallinger.getItems().get(moteinnkallinger.getSelectionModel().getSelectedIndex());
 			moteinnkallinger.getItems().remove(slett);
 			for (Person person : slett.getParticipants()) {
-				person.getAvtaler().remove(slett);
+				person.removeAppointment(slett);
 			}
 			me.removeAppointment(slett);
 			gui.sc.deleteAppointment(slett.getId());
