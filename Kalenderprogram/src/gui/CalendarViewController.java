@@ -98,7 +98,7 @@ public class CalendarViewController {
 			check = false;
 		}else {
 			antall.setStyle("-fx-border-color:green");
-			if (Integer.parseInt(antall.getText()) < rediger.getItems().size()){
+			if (!stedValgt.isSelected() && Integer.parseInt(antall.getText()) < rediger.getItems().size()){
 				antall.setStyle("-fx-border-color:red");
 				check = false;
 			}
@@ -574,13 +574,13 @@ public class CalendarViewController {
 	@FXML private Button deltarIkke;
 	@FXML private Tab moter;
 
-	@FXML
-	public void byttetTilMoterTab(ActionEvent event) {
-		if(!moteinnkallinger.getItems().isEmpty()){
-			moteinnkallinger.getSelectionModel().selectFirst();
-			moteInfoTilView();
-		}
-	}
+//	@FXML
+//	public void byttetTilMoterTab(ActionEvent event) {
+//		if(!moteinnkallinger.getItems().isEmpty()){
+//			moteinnkallinger.getSelectionModel().selectFirst();
+//			moteInfoTilView();
+//		}
+//	}
 
 	@FXML
 	public void moteInfoTilView() {
@@ -719,8 +719,10 @@ public class CalendarViewController {
 	
 	@FXML
 	public void inviterEkstraDeltaker(ActionEvent event) {
+		if(!inviterEkstraPerson.getSelectionModel().isEmpty()){
 		invitertePersoner.getItems().add(inviterEkstraPerson.getSelectionModel().getSelectedItem());
 		inviterEkstraPerson.getItems().remove(inviterEkstraPerson.getSelectionModel().getSelectedItem());
+		}
 		//Metoden flytter person over til deltaker-ruten 
 		//Da skal personen få en invitasjon (møtet blir synlig i møter) etter at "lagre endringer" 
 		//er trykket.
@@ -806,6 +808,10 @@ public class CalendarViewController {
 		}
 		for (Appointment appointment : appointments) {
 			moteinnkallinger.getItems().add(appointment);
+		}
+		if(!moteinnkallinger.getItems().isEmpty()){
+		moteinnkallinger.getSelectionModel().selectLast();
+		moteInfoTilView();
 		}
 		this.personerIKalender.add(me);
 		updateAppointments();
