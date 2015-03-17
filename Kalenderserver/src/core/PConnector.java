@@ -80,6 +80,9 @@ public class PConnector {
 		}else if(requestList[0].equals("getGroups")){
 			response = getGroups();
 			return response;
+		}else if(requestList[0].equals("deleteAppointment")){
+			response.add(String.valueOf(deleteAppointment(requestList[1])));
+			return response;
 		}
 		return null;
 	}
@@ -144,6 +147,10 @@ public class PConnector {
 	
 	private boolean editAppointment(String id, String vert, String title, String sted, String room,String dato,String start, String slutt, String endring){
 		return sc.editAppointment(Integer.parseInt(id), vert, title, sted, room, dato, start, slutt, endring);
+	}
+	
+	private boolean deleteAppointment(String id){
+		return sc.deleteAppointment(Integer.parseInt(id));
 	}
 	
 	private ArrayList<String> getInvited(String appId){

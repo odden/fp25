@@ -12,7 +12,6 @@ public class Appointment {
 	private String start;
 	private String slutt;
 	private int rom;
-	private int estimatedSize;
 	private String sted;
 	private String title;
 	private ArrayList<Person> participants = new ArrayList<Person>();
@@ -123,15 +122,5 @@ public class Appointment {
 	public String getWhen(){
 		return date.toString()+" "+start;
 	}
-
-	public int getEstimatedSize() {
-		return estimatedSize;
-	}
-
-	public void setEstimatedSize(int estimatedSize) {
-		this.estimatedSize = estimatedSize;
-	}
-	
-	
 	
 }
