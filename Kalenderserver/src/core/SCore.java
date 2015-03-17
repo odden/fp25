@@ -287,14 +287,13 @@ public class SCore {
 		try {
 			ResultSet rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", id);
 			ArrayList<List<Object>> ids = resToList(rs);
-			String users = ",";
+			String users = "";
 			for (List<Object> o:ids){
-				users+= o.get(0).toString()+",";
+				users+= "'"+o.get(0).toString()+"',";
 			}
-			users.substring(0,users.length()-1);
 			String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", id, "tittel")).get(0).get(0);
 			String endring = ";"+tittel+" har blitt avlyst.";
-			dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
+			dbc.executeSQL("UPDATE bruker SET varsel_endring = CONCAT(varsel_endring,'"+endring+"') WHERE brukernavn IN ("+users+"'buffer')");
 		
 			dbc.deleteRow("avtale", id);
 			return true;
@@ -310,14 +309,13 @@ public class SCore {
 			dbc.executeSQL("DELETE FROM bruker_has_avtale WHERE bruker_brukernavn = "+name+" AND avtale_idavtale = "+appId);
 			ResultSet rs = dbc.getQueryCondition("bruker_has_avtale", "avtale_idavtale", appId);
 			ArrayList<List<Object>> ids = resToList(rs);
-			String users = ",";
+			String users = "";
 			for (List<Object> o:ids){
 				users+= o.get(0).toString()+",";
 			}
-			users.substring(0,users.length()-1);
 			String tittel = (String) resToList(dbc.getQueryCondition("avtale", "idavtale", appId, "tittel")).get(0).get(0);
 			String endring = ";" + name + " har avslått invitasjonen til "+tittel;
-			dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + "+endring+" WHERE brukernavn IN ("+users+")");
+			dbc.executeSQL("UPDATE bruker SET varsel_endring = varsel_endring + '"+endring+"' WHERE brukernavn IN ("+users+"buffer)");
 		
 			return true;
 		} catch (SQLException e) {
