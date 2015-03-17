@@ -28,6 +28,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
@@ -451,7 +452,7 @@ public class CalendarViewController {
         settKalenderDato(date);
         velgStedM.setSelected(true);
         velgStedNH.setSelected(true);
-        moteinnkallinger.getSelectionModel().selectFirst();
+        
         stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
         stedValgt(antallNH, finnRomNH, velgRomNH, stedNH, romCBNH);
         alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
@@ -566,8 +567,15 @@ public class CalendarViewController {
 	@FXML private RadioButton velgRomM;
 	@FXML private Button deltar;
 	@FXML private Button deltarIkke;
+	@FXML private Tab moter;
 
-	
+	@FXML
+	public void byttetTilMoterTab(ActionEvent event) {
+		if(!moteinnkallinger.getItems().isEmpty()){
+			moteinnkallinger.getSelectionModel().selectFirst();
+			moteInfoTilView();
+		}
+	}
 
 	@FXML
 	public void moteInfoTilView() {
@@ -680,6 +688,7 @@ public class CalendarViewController {
 			Appointment slett = moteinnkallinger.getItems().get(moteinnkallinger.getSelectionModel().getSelectedIndex());
 			moteinnkallinger.getItems().remove(slett);
 			me.removeAppointment(slett);
+			gui.sc.deleteAppointment(slett.getId());
 			if (!moteinnkallinger.getItems().isEmpty()) {
 				moteinnkallinger.getSelectionModel().clearSelection();
 				moteinnkallinger.getSelectionModel().selectFirst();
@@ -794,10 +803,6 @@ public class CalendarViewController {
 		}
 		for (Appointment appointment : appointments) {
 			moteinnkallinger.getItems().add(appointment);
-		}
-		if(!moteinnkallinger.getItems().isEmpty()){
-			moteinnkallinger.getSelectionModel().selectFirst();
-			moteInfoTilView();
 		}
 		this.personerIKalender.add(me);
 		updateAppointments();
