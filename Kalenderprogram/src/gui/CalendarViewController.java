@@ -625,22 +625,32 @@ public class CalendarViewController {
 		//Metoden skal lagre alle endringene gjort
 		Appointment avtale = moteinnkallinger.getSelectionModel().getSelectedItem();
 		ArrayList<Person> personer = new ArrayList<Person>();
-		for (Person person : valgtePersoner.getItems()) {
-			personer.add(person);
-		}
-		String tittel = tittelM.getText();
-		String sted = stedM.getText();
-		String rom = null;
-		if (velgRomM.isSelected()) {
-			rom = romCBM.getValue().toString();
-		}
-		String dato = datoM.getValue().toString();
-		String start = startM.getText();
-		String slutt = sluttM.getText();
-		
 		
 		if(validateAvtale(tittelM, beskrivelseM, startM, sluttM, stedM, romCBM, antallM, velgStedM)) {
-			
+			for (Person person : invitertePersoner.getItems()) {
+				personer.add(person);
+			}
+			String tittel = tittelM.getText();
+			String sted = stedM.getText();
+			String rom = null;
+			if (velgRomM.isSelected()) {
+				rom = romCBM.getValue().toString();
+			}
+			LocalDate dato = datoM.getValue();
+			String start = startM.getText();
+			String slutt = sluttM.getText();
+			if (gui.tryEditAppointment(avtale.getId(), this.me, tittel, sted, rom, dato.toString(), start, slutt, personer)) {
+				avtale.setDate(dato);
+				if (rom == null) {
+					avtale.setRom(0);
+				}else {
+					avtale.setRom(Integer.parseInt(rom));
+				}
+				avtale.setStart(start);
+				avtale.setSlutt(slutt);
+				avtale.setSted(sted);
+				avtale.setTitle(tittel);
+			}
 		}
 
 	}
@@ -664,17 +674,17 @@ public class CalendarViewController {
 			Appointment slett = moteinnkallinger.getItems().get(moteinnkallinger.getSelectionModel().getSelectedIndex());
 			moteinnkallinger.getItems().remove(slett);
 			me.removeAppointment(slett);
+			
+			beskrivelseM.clear();
+			tittelM.clear();
+			stedM.clear();
+			sluttM.clear();
+			startM.clear();
+			antallM.clear();
+			invitertePersoner.getItems().clear();
+			inviterEkstraPerson.getItems().clear();
+			
 		}
-		
-		beskrivelseM.clear();
-		tittelM.clear();
-		stedM.clear();
-		sluttM.clear();
-		startM.clear();
-		antallM.clear();
-		invitertePersoner.getItems().clear();
-		inviterEkstraPerson.getItems().clear();
-		
 		
 		//Metoden skal slette møte
 		//alle andres kalendere oppdateres  
