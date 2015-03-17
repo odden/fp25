@@ -829,6 +829,7 @@ public class CalendarViewController {
 				invitertePersoner.getItems().clear();
 				inviterEkstraPerson.getItems().clear();
 			}
+			updateAppointments();
 			
 		}
 		
