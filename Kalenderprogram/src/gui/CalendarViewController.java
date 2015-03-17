@@ -381,8 +381,8 @@ public class CalendarViewController {
 		onsdagL.setText("Onsdag " + onsdagDato.getDayOfMonth() + ".");
 		torsdagL.setText("Torsdag " + torsdagDato.getDayOfMonth() + ".");
 		fredagL.setText("Fredag " + fredagDato.getDayOfMonth() + ".");
-		lordagL.setText("Lørdag " + lordagDato.getDayOfMonth() + ".");
-		sondagL.setText("Søndag " + sondagDato.getDayOfMonth() + ".");
+		lordagL.setText("L\u00F8rdag " + lordagDato.getDayOfMonth() + ".");
+		sondagL.setText("S\u00F8ndag " + sondagDato.getDayOfMonth() + ".");
 		maned.setText(mandagDato.getMonth() +" " + mandagDato.getYear());
 		labUkeNr.setText("Uke " + mandagDato.get(weekFields.weekOfWeekBasedYear()));
 	}
@@ -694,9 +694,9 @@ public class CalendarViewController {
 		alert.getButtonTypes().set(0, nei);
 		alert.getButtonTypes().set(1, ja);
 		
-		alert.setTitle("Sikker på at du vil slette?");
-		alert.setHeaderText("Slette møte?");
-		alert.setContentText("Er du sikker på at du vil slette dette møtet?");
+		alert.setTitle("Sikker p\u00E5 at du vil slette?");
+		alert.setHeaderText("Slette m\u00F8te?");
+		alert.setContentText("Er du sikker p\u00E5 at du vil slette dette m\u00F8tet?");
 		
 		Optional<ButtonType> svar = alert.showAndWait();
 		 
@@ -724,6 +724,7 @@ public class CalendarViewController {
 			invitertePersoner.getItems().clear();
 			inviterEkstraPerson.getItems().clear();
 			}
+			updateAppointments();
 		}
 		
 		//Metoden skal slette møte
