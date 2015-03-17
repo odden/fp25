@@ -598,8 +598,13 @@ public class CalendarViewController {
 			datoM.setValue(mote.getDate());
 			System.out.println(mote.getRom());
 			if(mote.getSted() == null){
+				velgStedM.setSelected(false);
+				velgRomM.setSelected(true);
 				romValgt(stedM, velgStedM, antallM, finnRomM, romCBM);
+				
 			} else {
+				velgRomM.setSelected(false);
+				velgStedM.setSelected(true);
 				stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
 			}
 			romCBM.getItems().removeAll(romCBM.getItems());
@@ -670,6 +675,9 @@ public class CalendarViewController {
 					avtale.setRom(0);
 				}else {
 					avtale.setRom(Integer.parseInt(rom));
+				}
+				for (Person person : personer) {
+					avtale.addParticipant(person);
 				}
 				avtale.setStart(start);
 				avtale.setSlutt(slutt);
