@@ -98,6 +98,12 @@ public class SConnector {
 		return convert(response);
 	}
 	
+	public ArrayList<String> getStatus(String appId){
+		String message = "getStatus::" + appId;
+		String response = connectToServer(message);
+		return convert(response);
+	}
+	
 	private String connectToServer(String message){
 		try {
 			String sentence = message;

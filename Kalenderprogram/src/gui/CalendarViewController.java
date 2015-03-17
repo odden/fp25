@@ -679,7 +679,7 @@ public class CalendarViewController {
 			LocalDate dato = datoM.getValue();
 			String start = startM.getText();
 			String slutt = sluttM.getText();
-			if (gui.tryEditAppointment(avtale.getId(), this.me, tittel, sted, rom, dato.toString(), start, slutt, personer)) {
+			if (gui.tryEditAppointment(avtale, avtale.getId(), this.me, tittel, sted, rom, dato.toString(), start, slutt, personer)) {
 				avtale.setDate(dato);
 				if (rom == null) {
 					avtale.setRom(0);
@@ -693,6 +693,8 @@ public class CalendarViewController {
 				avtale.setSlutt(slutt);
 				avtale.setSted(sted);
 				avtale.setTitle(tittel);
+				moteInfoTilView();
+				updateAppointments();
 			}
 		}
 

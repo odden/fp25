@@ -108,6 +108,18 @@ public class SCore {
 		}
 	}
 	
+	public ArrayList<List<Object>> getStatus(String appId){
+		ResultSet rs;
+		try {
+			rs = dbc.executeSQL("SELECT bruker_brukernavn, avtale_idavtale, bruker_svar FROM bruker_has_avtale INNER JOIN  bruker ON bruker.brukernavn = bruker_has_avtale.bruker_brukernavn WHERE avtale_idavtale = " + appId);
+			return resToList(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public void setStatus(String bruker, int id, Boolean status){
 		//Setter invitasjon status til 'bruker' til 'status'
 		try {
