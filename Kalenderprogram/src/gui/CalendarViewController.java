@@ -70,7 +70,6 @@ public class CalendarViewController {
 	
 	private void romValgt(TextField sted, RadioButton stedKnapp, TextField antall, Button finnRom, ComboBox ledigRom) {
 		sted.setDisable(true);
-		System.out.println("sånn");
 		stedKnapp.setSelected(false);
 		antall.setDisable(false);
 		finnRom.setDisable(false);
@@ -701,8 +700,8 @@ public class CalendarViewController {
 				avtale.setSlutt(slutt);
 				avtale.setSted(sted);
 				avtale.setTitle(tittel);
-				feedbackLagreEndring.setVisible(true);
 				moteInfoTilView();
+				feedbackLagreEndring.setVisible(true);
 				updateAppointments();
 				moteinnkallinger.getItems().clear();
 				for (Appointment mote : this.me.getMyAppointments()) {
