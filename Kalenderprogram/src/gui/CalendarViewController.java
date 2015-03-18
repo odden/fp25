@@ -414,6 +414,7 @@ public class CalendarViewController {
 			if (this.personerIKalender.contains(person)) {
 				this.personerIKalender.remove(person);
 				updateAppointments();
+				resetBeskrivelse();
 			}
 		}
 	}
@@ -590,12 +591,13 @@ public class CalendarViewController {
 	@FXML private Button deltar;
 	@FXML private Button deltarIkke;
 	@FXML private Tab moter;
-
+	@FXML private Label feedbackLagreEndring;
 
 
 	@FXML
 	public void moteInfoTilView() {
 		resetBoksFarge(tittelM, beskrivelseM, stedM, antallM, startM, sluttM);
+		feedbackLagreEndring.setVisible(false);
 		if(!moteinnkallinger.getSelectionModel().isEmpty()) {
 			Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
 			ArrayList<Person> ikkeInvitert = users;
@@ -687,12 +689,15 @@ public class CalendarViewController {
 					avtale.setRom(Integer.parseInt(rom));
 				}
 				for (Person person : personer) {
+					if(!avtale.getParticipants().contains(person)){
 					avtale.addParticipant(person);
+					}
 				}
 				avtale.setStart(start);
 				avtale.setSlutt(slutt);
 				avtale.setSted(sted);
 				avtale.setTitle(tittel);
+				feedbackLagreEndring.setVisible(true);
 				moteInfoTilView();
 				updateAppointments();
 				moteinnkallinger.getItems().clear();
