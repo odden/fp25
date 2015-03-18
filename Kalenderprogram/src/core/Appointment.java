@@ -76,7 +76,9 @@ public class Appointment {
 	}
 
 	public void addParticipant(Person participant) {
-		this.participants.add(participant);
+		if (!participants.contains(participant)) {
+			this.participants.add(participant);
+		}
 	}
 	
 	public void removeParticipant(Person participant){

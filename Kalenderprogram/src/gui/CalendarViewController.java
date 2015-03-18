@@ -695,6 +695,10 @@ public class CalendarViewController {
 				avtale.setTitle(tittel);
 				moteInfoTilView();
 				updateAppointments();
+				moteinnkallinger.getItems().clear();
+				for (Appointment mote : this.me.getMyAppointments()) {
+					moteinnkallinger.getItems().add(mote);
+				}
 			}
 		}
 
@@ -853,8 +857,8 @@ public class CalendarViewController {
 			moteinnkallinger.getItems().add(appointment);
 		}
 		if(!moteinnkallinger.getItems().isEmpty()){
-		moteinnkallinger.getSelectionModel().selectLast();
-		moteInfoTilView();
+			moteinnkallinger.getSelectionModel().selectLast();
+			moteInfoTilView();
 		}
 		this.personerIKalender.add(me);
 		updateAppointments();
