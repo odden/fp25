@@ -697,12 +697,9 @@ public class CalendarViewController {
 				avtale.setSlutt(slutt);
 				avtale.setSted(sted);
 				avtale.setTitle(tittel);
-<<<<<<< HEAD
 				feedbackLagreEndring.setVisible(true);
-=======
 				moteInfoTilView();
 				updateAppointments();
->>>>>>> 204f41652a02299112a42c6ca5e28fcd4dbc011d
 			}
 		}
 
