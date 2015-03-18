@@ -86,11 +86,19 @@ public class PConnector {
 		}else if(requestList[0].equals("deleteAppointment")){
 			response.add(String.valueOf(deleteAppointment(requestList[1])));
 			return response;
+		}else if(requestList[0].equals("getStatus")){
+			response = getStatus(requestList[1]);
+			return response;
 		}
 		return null;
 	}
 	
 	
+	private ArrayList<String> getStatus(String appId) {
+		ArrayList<List<Object>> statuses = sc.getStatus(appId);
+		return convertToList(statuses);
+	}
+
 	private ArrayList<String> getAllAppointments() {
 		ArrayList<List<Object>> appointments = sc.getAppointments();
 		return convertToList(appointments);
@@ -101,7 +109,7 @@ public class PConnector {
 		return convertToList(groups);
 	}
 
-	//kan være int i for løkke er en for mye/lite
+	//kan vï¿½re int i for lï¿½kke er en for mye/lite
 	private int createAppointment(String[] request) {
 		List<String> invited = new ArrayList<String>();
 		for (int i = 8; i < request.length; i++) {
@@ -141,9 +149,10 @@ public class PConnector {
 	
 	private boolean invite(String[] request){
 		List<String> invited = new ArrayList<String>();
-		for (int i = 4; i < request.length; i++) {
+		for (int i = 2; i < request.length; i++) {
 			invited.add(request[i]);
 		}
+		System.out.println(invited);
 		return sc.invite(invited, request[1]);
 	}
 	

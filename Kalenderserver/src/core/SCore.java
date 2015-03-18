@@ -94,7 +94,7 @@ public class SCore {
 		try {
 			if (id != 0){
 				for (String n:usernames){
-						dbc.insertRow("bruker_has_avtale",n,id,false);
+						dbc.insertRow("bruker_has_avtale",n,id,"NULL",0,true);
 				}
 				return true;
 			}
@@ -105,6 +105,18 @@ public class SCore {
 		catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+	
+	public ArrayList<List<Object>> getStatus(String appId){
+		ResultSet rs;
+		try {
+			rs = dbc.executeSQL("SELECT bruker_brukernavn, avtale_idavtale, bruker_svar FROM bruker_has_avtale INNER JOIN  bruker ON bruker.brukernavn = bruker_has_avtale.bruker_brukernavn WHERE avtale_idavtale = " + appId);
+			return resToList(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
 		}
 	}
 	

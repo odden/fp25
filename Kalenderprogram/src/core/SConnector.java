@@ -60,12 +60,12 @@ public class SConnector {
 		return response;
 	}
 	
-	public String invite(List<String>usernames,String id){
+	public String invite(List<String> usernames,String id){
 		String message = "invite" + "::" + id+"::";
 		for (String string : usernames) {
 			message += string + "::";
 		}
-		String response = connectToServer(message);
+		String response = connectToServer(message.substring(0, message.length() - 2));
 		return response;
 	}
 	
@@ -94,6 +94,12 @@ public class SConnector {
 	
 	public ArrayList<String> getGroups(){
 		String message = "getGroups";
+		String response = connectToServer(message);
+		return convert(response);
+	}
+	
+	public ArrayList<String> getStatus(String appId){
+		String message = "getStatus::" + appId;
 		String response = connectToServer(message);
 		return convert(response);
 	}

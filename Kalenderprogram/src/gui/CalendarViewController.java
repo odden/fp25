@@ -681,7 +681,7 @@ public class CalendarViewController {
 			LocalDate dato = datoM.getValue();
 			String start = startM.getText();
 			String slutt = sluttM.getText();
-			if (gui.tryEditAppointment(avtale.getId(), this.me, tittel, sted, rom, dato.toString(), start, slutt, personer)) {
+			if (gui.tryEditAppointment(avtale, avtale.getId(), this.me, tittel, sted, rom, dato.toString(), start, slutt, personer)) {
 				avtale.setDate(dato);
 				if (rom == null) {
 					avtale.setRom(0);
@@ -697,7 +697,12 @@ public class CalendarViewController {
 				avtale.setSlutt(slutt);
 				avtale.setSted(sted);
 				avtale.setTitle(tittel);
+<<<<<<< HEAD
 				feedbackLagreEndring.setVisible(true);
+=======
+				moteInfoTilView();
+				updateAppointments();
+>>>>>>> 204f41652a02299112a42c6ca5e28fcd4dbc011d
 			}
 		}
 
@@ -708,8 +713,8 @@ public class CalendarViewController {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		ButtonType ja = new ButtonType("JA");
 		ButtonType nei = new ButtonType("NEI");
-		alert.getButtonTypes().set(0, nei);
-		alert.getButtonTypes().set(1, ja);
+		alert.getButtonTypes().set(0, ja);
+		alert.getButtonTypes().set(1, nei);
 		
 		alert.setTitle("Sikker p\u00E5 at du vil slette?");
 		alert.setHeaderText("Slette m\u00F8te?");
@@ -807,8 +812,8 @@ public class CalendarViewController {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		ButtonType ja = new ButtonType("JA");
 		ButtonType nei = new ButtonType("NEI");
-		alert.getButtonTypes().set(0, nei);
-		alert.getButtonTypes().set(1, ja);
+		alert.getButtonTypes().set(0, ja);
+		alert.getButtonTypes().set(1, nei);
 		
 		alert.setTitle("Møte");
 		alert.setHeaderText("Vise møtet?");
