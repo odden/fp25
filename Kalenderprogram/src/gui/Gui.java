@@ -143,7 +143,6 @@ public class Gui extends Application {
 					for (Person person : persons) {
 						person.addAppointment(avtale);
 					}
-					
 				}
 			}
 			switchSceneContent("CalenderView.fxml");
@@ -170,10 +169,12 @@ public class Gui extends Application {
 		return id;
 	}
 	
-	public boolean tryEditAppointment(int id, Person host, String title, String sted, String rom, String date, String start,String slutt, ArrayList<Person> participants) {
+	public boolean tryEditAppointment(Appointment avtale, int id, Person host, String title, String sted, String rom, String date, String start,String slutt, ArrayList<Person> participants) {
 		ArrayList<String> usernames = new ArrayList<String>();
 		for (Person person : participants) {
-			usernames.add(person.getUsername());
+			if (!avtale.getParticipants().contains(person)) {
+				usernames.add(person.getUsername());
+			}
 		}
 		boolean result1 = Boolean.valueOf(sc.invite(usernames, Integer.toString(id)));
 		boolean result2 = Boolean.valueOf(sc.editAppointment(id, host.getUsername(), title, sted, rom, date, start, slutt, "endring"));

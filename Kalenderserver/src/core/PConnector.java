@@ -86,11 +86,19 @@ public class PConnector {
 		}else if(requestList[0].equals("deleteAppointment")){
 			response.add(String.valueOf(deleteAppointment(requestList[1])));
 			return response;
+		}else if(requestList[0].equals("getStatus")){
+			response = getStatus(requestList[1]);
+			return response;
 		}
 		return null;
 	}
 	
 	
+	private ArrayList<String> getStatus(String appId) {
+		ArrayList<List<Object>> statuses = sc.getStatus(appId);
+		return convertToList(statuses);
+	}
+
 	private ArrayList<String> getAllAppointments() {
 		ArrayList<List<Object>> appointments = sc.getAppointments();
 		return convertToList(appointments);
