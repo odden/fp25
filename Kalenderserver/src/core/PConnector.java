@@ -67,7 +67,7 @@ public class PConnector {
 			return response;
 		}else if(requestList[0].equals("setStatus")){
 			sc.setStatus(requestList[1],Integer.parseInt(requestList[2]), Boolean.valueOf(requestList[3]));
-			return response;
+			return null;
 		}else if(requestList[0].equals("getRoom")){
 			response = getRoom(requestList[1], requestList[2], requestList[3], requestList[4]);
 			return response;
