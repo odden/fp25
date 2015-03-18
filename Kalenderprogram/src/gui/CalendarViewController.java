@@ -222,7 +222,11 @@ public class CalendarViewController {
 			sluttK.setText(mote.getSlutt());
 			startK.setText(mote.getStart());
 			beskrivelseK.setText(mote.getTitle());
-			stedK.setText(Integer.toString(mote.getRom()));
+			if (mote.getRom() == 0) {
+				stedK.setText(mote.getSted());
+			}else{
+				stedK.setText(Integer.toString(mote.getRom()));
+			}
 			datoK.setText("" + mote.getDate());
 		}
 	}
@@ -756,6 +760,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void slettDeltaker(ActionEvent event) {
+		inviterEkstraPerson.getItems().add(invitertePersoner.getSelectionModel().getSelectedItem());
 		invitertePersoner.getItems().remove(invitertePersoner.getSelectionModel().getSelectedItem());
 	}
 	
