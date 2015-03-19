@@ -92,6 +92,9 @@ public class PConnector {
 		}else if(requestList[0].equals("getStatus")){
 			response = getStatus(requestList[1]);
 			return response;
+		}else if(requestList[0].equals("deleteAppointment")){
+			response.add(String.valueOf(sc.deleteInvitation(Integer.parseInt(requestList[1]), requestList[2])));
+			return response;
 		}
 		return null;
 	}
