@@ -109,6 +109,12 @@ public class SConnector {
 		return convert(response);
 	}
 	
+	public boolean deleteInvitation(int appId, String username){
+		String message = "deleteInvitation::" + Integer.toString(appId) + "::" + username;
+		String response = connectToServer(message);
+		return Boolean.valueOf(response);
+	}
+	
 	private String connectToServer(String message){
 		try {
 			String sentence = message;
