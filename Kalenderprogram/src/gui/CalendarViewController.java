@@ -70,7 +70,6 @@ public class CalendarViewController {
 	
 	private void romValgt(TextField sted, RadioButton stedKnapp, TextField antall, Button finnRom, ComboBox ledigRom) {
 		sted.setDisable(true);
-		System.out.println("sånn");
 		stedKnapp.setSelected(false);
 		antall.setDisable(false);
 		finnRom.setDisable(false);
@@ -222,7 +221,11 @@ public class CalendarViewController {
 			sluttK.setText(mote.getSlutt());
 			startK.setText(mote.getStart());
 			beskrivelseK.setText(mote.getTitle());
-			stedK.setText(Integer.toString(mote.getRom()));
+			if (mote.getRom() == 0) {
+				stedK.setText(mote.getSted());
+			}else{
+				stedK.setText(Integer.toString(mote.getRom()));
+			}
 			datoK.setText("" + mote.getDate());
 		}
 	}
@@ -697,8 +700,8 @@ public class CalendarViewController {
 				avtale.setSlutt(slutt);
 				avtale.setSted(sted);
 				avtale.setTitle(tittel);
-				feedbackLagreEndring.setVisible(true);
 				moteInfoTilView();
+				feedbackLagreEndring.setVisible(true);
 				updateAppointments();
 				moteinnkallinger.getItems().clear();
 				for (Appointment mote : this.me.getMyAppointments()) {
@@ -756,6 +759,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void slettDeltaker(ActionEvent event) {
+		inviterEkstraPerson.getItems().add(invitertePersoner.getSelectionModel().getSelectedItem());
 		invitertePersoner.getItems().remove(invitertePersoner.getSelectionModel().getSelectedItem());
 	}
 	
