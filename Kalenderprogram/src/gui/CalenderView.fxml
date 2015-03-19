@@ -395,6 +395,8 @@
                               <Button alignment="CENTER" contentDisplay="CENTER" layoutX="119.0" layoutY="145.0" mnemonicParsing="false" onAction="#slettDeltaker" prefHeight="26.0" prefWidth="157.0" text="Slett" textAlignment="CENTER" />
                               <Button alignment="CENTER" contentDisplay="CENTER" layoutX="151.0" layoutY="195.0" mnemonicParsing="false" onAction="#slettMote" prefHeight="26.0" prefWidth="117.0" text="Slett møte" textAlignment="CENTER" />
                               <Label fx:id="feedbackLagreEndring" alignment="CENTER" contentDisplay="CENTER" layoutX="312.0" layoutY="226.0" maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="84.0" text="Suksess!" textAlignment="CENTER" visible="false" />
+                              <Button fx:id="btnJa" layoutX="9.0" layoutY="65.0" mnemonicParsing="false" onAction="#siJa" prefHeight="25.0" prefWidth="34.0" text="Ja" />
+                              <Button fx:id="btnNei" layoutX="9.0" layoutY="99.0" mnemonicParsing="false" onAction="#siNei" text="Nei" />
                            </children>
                         </Pane>
                         <Pane fx:id="notHostValg" layoutX="319.0" layoutY="322.0" prefHeight="205.0" prefWidth="431.0">

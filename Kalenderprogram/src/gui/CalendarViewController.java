@@ -598,7 +598,7 @@ public class CalendarViewController {
 	@FXML private Button deltarIkke;
 	@FXML private Tab moter;
 	@FXML private Label feedbackLagreEndring;
-
+	private HashMap<Person,Boolean> parts;
 
 	@FXML
 	public void moteInfoTilView() {
@@ -635,9 +635,8 @@ public class CalendarViewController {
 				velgRomM.setDisable(false);
 				velgStedM.setDisable(false);
 				invitertePersoner.getItems().clear();
-				HashMap<Person,Boolean> parts = mote.getInvited();
+				parts = mote.getInvited();
 				for (Person person : new ArrayList<Person>(parts.keySet())) {
-					System.out.println(person.getName() + " og svar;"+parts.get(person));
 					invitertePersoner.getItems().add(person);
 					ikkeInvitert.remove(person);
 				}
@@ -792,6 +791,49 @@ public class CalendarViewController {
 	public void slettDeltaker(ActionEvent event) {
 		inviterEkstraPerson.getItems().add(invitertePersoner.getSelectionModel().getSelectedItem());
 		invitertePersoner.getItems().remove(invitertePersoner.getSelectionModel().getSelectedItem());
+	}
+	
+	@FXML
+	public void siJa(ActionEvent event){
+		skifteStatus(true);
+	}
+	@FXML
+	public void siNei(ActionEvent event){
+		skifteStatus(false);
+	}
+	
+	public void skifteStatus(Boolean b){
+		if(!moteinnkallinger.getSelectionModel().isEmpty() && !invitertePersoner.getSelectionModel().isEmpty()) {
+			Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
+			gui.sc.setStatus(invitertePersoner.getSelectionModel().getSelectedItem().getUsername(), mote.getId(), b);
+			parts.put(invitertePersoner.getSelectionModel().getSelectedItem(), b);
+			invitertePersoner.setCellFactory(new Callback<ListView<Person>, ListCell<Person>>() {
+				public ListCell<Person> call(ListView<Person> param) {
+					final ListCell<Person> cell = new ListCell<Person>() {
+						@Override
+						public void updateItem(Person item, boolean empty) {
+							super.updateItem(item, empty);
+							if (item != null && !empty){
+								try{
+									if (parts.get(item)) {
+										setStyle("-fx-background-color: #7FFF00");
+									}
+									else if (!parts.get(item)){
+										setStyle("-fx-background-color: #FF2200");
+									}
+									else{
+									}
+								}
+								catch (NullPointerException e){
+								}
+								setText(item.getName());
+							}
+						}
+					};
+					return cell;
+				}
+			});
+		}
 	}
 	
 	@FXML
