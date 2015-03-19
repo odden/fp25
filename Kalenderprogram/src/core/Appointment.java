@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class Appointment {
 	
@@ -14,14 +15,14 @@ public class Appointment {
 	private int rom;
 	private String sted;
 	private String title;
-	private ArrayList<Person> participants = new ArrayList<Person>();
+	private HashMap<Person,Boolean> participants = new HashMap<Person,Boolean>();
 	private Person host;
 	
 	public Appointment(){
 		
 	}
 	
-	public Appointment(int id, Person host, String title, String sted, int rom, String date, String start,String slutt, ArrayList<Person> participants){
+	public Appointment(int id, Person host, String title, String sted, int rom, String date, String start,String slutt, HashMap<Person,Boolean> participants){
 		this.id = id;
 		this.start=start;
 		this.slutt=slutt;
@@ -31,7 +32,7 @@ public class Appointment {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		this.date = LocalDate.parse(date, formatter);
 		this.host=host;
-		this.participants.addAll(participants);
+		this.participants = participants;
 		
 	}
 
@@ -72,12 +73,15 @@ public class Appointment {
 	}
 
 	public ArrayList<Person> getParticipants() {
+		return new ArrayList<Person>(participants.keySet());
+	}
+	
+	public HashMap<Person,Boolean> getInvited(){
 		return participants;
 	}
-
 	public void addParticipant(Person participant) {
-		if (!participants.contains(participant)) {
-			this.participants.add(participant);
+		if (!participants.containsKey(participant)) {
+			this.participants.put(participant, null);
 		}
 	}
 	

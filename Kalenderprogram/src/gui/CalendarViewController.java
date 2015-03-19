@@ -8,6 +8,7 @@ import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
@@ -510,9 +512,9 @@ public class CalendarViewController {
 	}	
 	
 	public void lagNyAvtale() {
-		ArrayList<Person> personer = new ArrayList<Person>();
+		HashMap<Person,Boolean> personer = new HashMap<Person,Boolean>();
 		for (Person person : valgtePersoner.getItems()) {
-			personer.add(person);
+			personer.put(person,null);
 		}
 		String tittel = tittelNH.getText();
 		String sted = stedNH.getText();
@@ -525,13 +527,14 @@ public class CalendarViewController {
 		String start = startNH.getText();
 		String slutt = sluttNH.getText();
 		
-		int id = gui.tryCreateAppointment(this.me, tittel,sted,rom,dato, start, slutt, personer);
+		int id = gui.tryCreateAppointment(this.me, tittel,sted,rom,dato, start, slutt, new ArrayList<Person>(personer.keySet()));
 		if(id != 0){
+			
 			Appointment avtale = new Appointment(id,this.me, tittel,sted, (rom == null ? 0 : Integer.parseInt(rom)),dato, start, slutt, personer);
 			moteinnkallinger.getItems().add(avtale);
 			me.addAppointment(avtale);
 			updateAppointments();
-			for (Person person : personer) {
+			for (Person person : new ArrayList<Person>(personer.keySet())) {
 				person.addAppointment(avtale);
 			}
 			avtaleApprove.setText("Avtale '"  + avtale.getTitle() + "' opprettet!" );
@@ -632,10 +635,38 @@ public class CalendarViewController {
 				velgRomM.setDisable(false);
 				velgStedM.setDisable(false);
 				invitertePersoner.getItems().clear();
-				for (Person person : mote.getParticipants()) {
+				HashMap<Person,Boolean> parts = mote.getInvited();
+				for (Person person : new ArrayList<Person>(parts.keySet())) {
+					System.out.println(person.getName() + " og svar;"+parts.get(person));
 					invitertePersoner.getItems().add(person);
 					ikkeInvitert.remove(person);
 				}
+				invitertePersoner.setCellFactory(new Callback<ListView<Person>, ListCell<Person>>() {
+					public ListCell<Person> call(ListView<Person> param) {
+						final ListCell<Person> cell = new ListCell<Person>() {
+							@Override
+							public void updateItem(Person item, boolean empty) {
+								super.updateItem(item, empty);
+								if (item != null && !empty){
+									try{
+										if (parts.get(item)) {
+											setStyle("-fx-background-color: #7FFF00");
+										}
+										else if (!parts.get(item)){
+											setStyle("-fx-background-color: #FF2200");
+										}
+										else{
+										}
+									}
+									catch (NullPointerException e){
+									}
+									setText(item.getName());
+								}
+							}
+						};
+						return cell;
+					}
+				});
 				inviterEkstraPerson.getItems().clear();
 				inviterEkstraPerson.getItems().addAll(ikkeInvitert);
 			} else {

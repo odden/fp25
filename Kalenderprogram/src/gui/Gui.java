@@ -4,6 +4,7 @@ import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -130,11 +131,12 @@ public class Gui extends Application {
 					String appId = appointmentSplit[0];
 					ArrayList<String> participants = new ArrayList<String>();
 					participants = sc.getInvited(appId);
-					ArrayList<Person> persons = new ArrayList<Person>();
+					HashMap<Person,Boolean>persons = new HashMap<Person,Boolean>();
 					for (String user : participants) {
+						String[] p = user.split("::");
 						for (Person person : this.users) {
-							if (person.getUsername().equals(user)) {
-								persons.add(person);
+							if (person.getUsername().equals(p[0])) {
+								persons.put(person,p[1].equals("NULL") ? null : Boolean.valueOf(p[1]));
 							}
 						}
 					}
@@ -147,7 +149,7 @@ public class Gui extends Application {
 					Appointment avtale = new Appointment(Integer.parseInt(appId), host, appointmentSplit[2], appointmentSplit[3],appointmentSplit[4].equals("NULL") ? 0 : Integer.parseInt(appointmentSplit[4]), appointmentSplit[5],appointmentSplit[6].substring(0,appointmentSplit[6].length()-3),appointmentSplit[7].substring(0,appointmentSplit[7].length()-3), persons);
 					thisAppointments.add(avtale);
 					host.addAppointment(avtale);
-					for (Person person : persons) {
+					for (Person person : new ArrayList<Person>(persons.keySet())) {
 						person.addAppointment(avtale);
 					}
 				}
