@@ -120,6 +120,18 @@ public class SCore {
 		}
 	}
 	
+	public ArrayList<List<Object>> getInvitations(String brukernavn){
+		ResultSet rs;
+		try {
+			rs = dbc.executeSQL("SELECT * FROM bruker_has_avtale WHERE bruker_brukernavn = '"+brukernavn+"'");
+			return resToList(rs);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public void setStatus(String bruker, int id, Boolean status){
 		//Setter invitasjon status til 'bruker' til 'status'
 		try {

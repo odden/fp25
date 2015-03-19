@@ -60,6 +60,9 @@ public class PConnector {
 		}else if(requestList[0].equals("getAppointments")){
 			response = getAppointments(requestList[1]);
 			return response;
+		}else if(requestList[0].equals("getInvitations")){
+			response = getInvitations(requestList[1]);
+			return response;
 		}else if (requestList[0].equals("getUsers")){
 			return getUsers();
 		}else if(requestList[0].equals("invite")){
@@ -145,6 +148,10 @@ public class PConnector {
 	private ArrayList<String> getAppointments(String user){
 		ArrayList<List<Object>> appointments = sc.getAppointments(user);
 		return convertToList(appointments);
+	}
+	private ArrayList<String> getInvitations(String user){
+		ArrayList<List<Object>> invitations = sc.getInvitations(user);
+		return convertToList(invitations);
 	}
 	
 	private boolean invite(String[] request){

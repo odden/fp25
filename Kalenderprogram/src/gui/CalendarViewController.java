@@ -846,8 +846,16 @@ public class CalendarViewController {
 		
 	}
 		
-	
+	public void runAlarm(Appointment appointment, int timer) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Møte!!");
+		alert.setHeaderText("Ditt møte: "+appointment.getTitle()+" begynner om "+timer+" minutter.");
+		alert.setContentText("Husk husk!!!");
 
+		alert.showAndWait();
+	}
+	
+	
 	public void initData(Stage stage, Gui gui, ArrayList<Person> users, Person me) {
 		CalendarViewController.stage = stage;
 		this.me = me;

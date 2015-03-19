@@ -122,7 +122,7 @@ public class Appointment {
 	}
 	
 	public String getWhen(){
-		return date.toString()+" "+start;
+		return date.toString()+" "+start+":00";
 	}
 	
 }

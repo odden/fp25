@@ -1,5 +1,7 @@
 package core;
 
+import gui.Gui;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,16 +13,18 @@ import java.util.TimerTask;
 public class Invitation extends TimerTask {
 	private Person me;
 	private Appointment appointment;
-	
+	private Gui gui;
 	boolean svar;
 	boolean visibility;
 	private Date alarm;
-	public Invitation(Person p,Appointment a, int timer, boolean svar, boolean visibility){
+	int timer;
+	public Invitation(Person p,Appointment a,boolean svar,int timer, boolean visibility, Gui gui){
 		me = p;
+		this.timer = timer;
 		appointment = a;
 		this.svar = svar;
 		this.visibility = visibility;
-		
+		this.gui = gui;
 		
 		try {
 			if (timer != 0){
@@ -40,7 +44,7 @@ public class Invitation extends TimerTask {
 
 	@Override
 	public void run() {
-		me.runAlarm(appointment);
+		gui.runAlarm(appointment,timer);
 	}
 	
 }

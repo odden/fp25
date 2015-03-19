@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import core.Invitation;
 import core.Person;
 import core.Appointment;
 import core.SConnector;
@@ -24,8 +26,10 @@ public class Gui extends Application {
 	private static Stage stage;
 	Parent root;
 	private LoggInnController logIn;
+	private CalendarViewController cw;
 	private Person user;
 	private ArrayList<Person> users;
+	private ArrayList<Appointment> thisAppointments = new ArrayList<Appointment>();
 	public SConnector sc;
 
 	public void init() {
@@ -50,9 +54,9 @@ public class Gui extends Application {
 				logIn = loader.getController();
 				logIn.initData(stage, this);
 			} else if (fxml.equals("CalenderView.fxml")) {
-				final CalendarViewController controller = loader
+				cw = loader
 						.getController();
-				controller.initData(stage, this,users , user);
+				cw.initData(stage, this,users , user);
 			}
 			stage.show();
 		} catch (IOException e) {
@@ -102,6 +106,7 @@ public class Gui extends Application {
 		}
 		else{
 			this.user = new Person(response.split("::")[0],response.split("::")[1],response.split("::")[2],response.split("::")[3]);
+			
 			this.user.setVarsler(new ArrayList<String>(Arrays.asList(response.split("::")[4].split(";"))));
 			ArrayList<String> users = sc.getUsers();
 			this.users.add(user);
@@ -117,6 +122,7 @@ public class Gui extends Application {
 				}
 			}
 			ArrayList<String> appointments = sc.getAllAppointments();
+			
 			if(appointments !=null && !appointments.get(0).equals("")){
 				
 				for (String appointment : appointments) {
@@ -139,12 +145,28 @@ public class Gui extends Application {
 						}
 					}
 					Appointment avtale = new Appointment(Integer.parseInt(appId), host, appointmentSplit[2], appointmentSplit[3],appointmentSplit[4].equals("NULL") ? 0 : Integer.parseInt(appointmentSplit[4]), appointmentSplit[5],appointmentSplit[6].substring(0,appointmentSplit[6].length()-3),appointmentSplit[7].substring(0,appointmentSplit[7].length()-3), persons);
+					thisAppointments.add(avtale);
 					host.addAppointment(avtale);
 					for (Person person : persons) {
 						person.addAppointment(avtale);
 					}
 				}
 			}
+			
+			
+			ArrayList<String> invitations = sc.getInvitations(user.getUsername());
+			if (invitations != null && !invitations.get(0).equals("")){
+				for (String s: invitations){
+					String[] invitation = s.split("::");
+					for (Appointment  a: thisAppointments) {
+						if (a.getId()==Integer.parseInt(invitation[1])) {
+							Invitation i = new Invitation(this.user,a,Boolean.valueOf(invitation[2]),Integer.parseInt(invitation[3]),Boolean.valueOf(invitation[4]),this);
+							user.addInvitation(i);
+						}
+					}
+				}
+			}
+			
 			switchSceneContent("CalenderView.fxml");
 			return "Ok";
 			}
@@ -209,5 +231,16 @@ public class Gui extends Application {
 
 	public static void main(String args[]) {
 		launch();
+	}
+	public void runAlarm(Appointment appointment, int timer) {
+		Platform.runLater(new Runnable(){
+
+			@Override
+			public void run() {
+				cw.runAlarm(appointment, timer);
+				
+			}
+			
+		});
 	}
 }

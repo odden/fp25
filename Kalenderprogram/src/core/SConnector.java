@@ -41,6 +41,11 @@ public class SConnector {
 		String response = connectToServer(message);
 		return convert(response);
 	}
+	public ArrayList<String> getInvitations(String user){
+		String message = "getInvitations::" + user;
+		String response = connectToServer(message);
+		return convert(response);
+	}
 	
 	public ArrayList<String> getAllAppointments(){
 		String message = "getAllAppointments::";

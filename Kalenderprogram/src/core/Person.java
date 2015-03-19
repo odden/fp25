@@ -8,7 +8,7 @@ public class Person {
 	private String name;
 	private String email;
 	private String phoneNumber;
-	private ArrayList<Invitation> avtaler = new ArrayList<Invitation>();
+	private ArrayList<Invitation> invitations = new ArrayList<Invitation>();
 	private ArrayList<Appointment> myAppointments = new ArrayList<Appointment>();
 	private ArrayList<String> varsler = new ArrayList<String>();
 	
@@ -20,20 +20,14 @@ public class Person {
 		setPhoneNumber(phoneNumber);
 	}
 	//avtaler
-	public ArrayList<Appointment> getAvtaler() {
-		ArrayList<Appointment> a=new ArrayList<Appointment>();
-		for (Invitation i:avtaler){
-			a.add(i.getAppointment());
-		}
-		return a;
-	}
+
 	
-	public void addAvtale(Invitation avtale) {
-		avtaler.add(avtale);
+	public void addInvitation(Invitation i){
+		invitations.add(i);
 	}
 	
 	public boolean hasAvtale() {
-		if(avtaler.isEmpty()){ 
+		if(myAppointments.isEmpty()){ 
 			return false;
 		} else {
 			return true;
@@ -79,8 +73,10 @@ public class Person {
 		return username;
 	}
 	public void runAlarm(Appointment appointment) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("ALARMALARMALARMALARMALARMALARM");
+		System.out.println("ALARMALARMALARMALARMALARMALARM");
+		System.out.println("ALARMALARMALARMALARMALARMALARM");
+		System.out.println("ALARMALARMALARMALARMALARMALARM");
 	}
 	public ArrayList<Appointment> getMyAppointments() {
 		return myAppointments;
@@ -101,6 +97,16 @@ public class Person {
 	}
 	public void setVarsler(ArrayList<String> varsler) {
 		this.varsler = varsler;
+	}
+
+
+	public ArrayList<Invitation> getInvitations() {
+		return invitations;
+	}
+
+
+	public void setInvitations(ArrayList<Invitation> invitations) {
+		this.invitations = invitations;
 	}
 	
 }
