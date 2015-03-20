@@ -626,6 +626,9 @@ public class CalendarViewController {
 				romCBM.getSelectionModel().selectFirst();;
 			}
 			if(mote.getHost().equals(me)) {
+				finnRomM.setDisable(false);
+				antallM.setDisable(false);
+				romCBM.setDisable(false);
 				alarm.setVisible(false);
 				alarmText.setVisible(false);
 				notHostValg.setVisible(false);
@@ -675,6 +678,9 @@ public class CalendarViewController {
 				inviterEkstraPerson.getItems().clear();
 				inviterEkstraPerson.getItems().addAll(ikkeInvitert);
 			} else {
+				finnRomM.setDisable(true);
+				antallM.setDisable(true);
+				romCBM.setDisable(true);
 				alarm.setVisible(true);
 				alarmText.setVisible(true);
 				velgStedM.setDisable(true);
