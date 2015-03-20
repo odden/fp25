@@ -79,6 +79,10 @@ public class SConnector {
 		String message = "setStatus" + "::" + user + "::" +id+ "::" + status.toString();
 		connectToServer(message);
 	}
+	public void setAlarm(String user, int id, int alarm){
+		String message = "setAlarm" + "::" + user + "::" +id+ "::" + alarm;
+		connectToServer(message);
+	}
 	
 	public ArrayList<String> getRoom(int size,String date, String start, String slutt){
 		String message = "getRoom::" + Integer.toString(size) + "::" + date + "::" + start + "::" + slutt;
