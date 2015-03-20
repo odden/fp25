@@ -968,9 +968,10 @@ public class CalendarViewController {
 	        @Override
 	        public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
         		gui.sc.setAlarm(me.getUsername(), moteinnkallinger.getSelectionModel().getSelectedItem().getId(), (alarm.getValue().equals("Ingen") ? "0" : alarm.getValue().toString().substring(0,2)));
-        		
+        		me.getInvitation(moteinnkallinger.getSelectionModel().getSelectedItem()).setAlarm((alarm.getValue().equals("Ingen") ? 0 : Integer.parseInt(alarm.getValue().toString().substring(0,2))));
 	        }
 		};
+		alarm.focusedProperty().addListener(setAlarm);
 	}
 	
 

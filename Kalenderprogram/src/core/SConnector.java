@@ -79,7 +79,7 @@ public class SConnector {
 		String message = "setStatus" + "::" + user + "::" +id+ "::" + status.toString();
 		connectToServer(message);
 	}
-	public void setAlarm(String user, int id, int alarm){
+	public void setAlarm(String user, int id, String alarm){
 		String message = "setAlarm" + "::" + user + "::" +id+ "::" + alarm;
 		connectToServer(message);
 	}
