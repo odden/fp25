@@ -540,6 +540,18 @@ public class CalendarViewController {
 				person.addAppointment(avtale);
 			}
 			avtaleApprove.setText("Avtale '"  + avtale.getTitle() + "' opprettet!" );
+			tittelNH.setText("");
+			beskrivelseNH.setText("");
+			startNH.setText("");
+			sluttNH.setText("");
+			stedNH.setText("");
+			antallNH.setText("");
+			romCBNH.getItems().clear();
+			valgtePersoner.getItems().clear();
+			velgPerson.getItems().clear();
+			for (Person person : this.users) {
+				velgPerson.getItems().add(person);
+			}
 			
 		}
 			
