@@ -105,7 +105,6 @@ public class PConnector {
 	
 	
 	private Boolean setAlarm(String bruker,String id,String alarm) {
-		
 		return sc.setAlarm(bruker, id, alarm);
 	}
 

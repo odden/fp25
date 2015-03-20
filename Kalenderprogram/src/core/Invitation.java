@@ -27,21 +27,13 @@ public class Invitation extends TimerTask {
 		this.visibility = visibility;
 		this.gui = gui;
 		
-		try {
-			if (timer != 0){
-				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				alarm = (df.parse(a.getWhen()));
-				alarm.setTime(alarm.getTime()-(timer*60*1000));
-				if (alarm.after(new Date())){					
-					appAlarm.cancel();
-					this.cancel();
-					appAlarm = new Timer();
-					appAlarm.schedule(this, alarm);
-				}
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		setAlarm(timer);
+	}
+	
+	public Invitation(int timer, Gui g,Appointment a){
+		this.timer = timer;
+		this.gui = g;
+		this.appointment = a;
 	}
 	public Appointment getAppointment() {
 		return appointment;
@@ -63,7 +55,8 @@ public class Invitation extends TimerTask {
 					appAlarm.cancel();
 					this.cancel();
 					appAlarm = new Timer();
-					appAlarm.schedule(this, alarm);
+					Invitation i = new Invitation(timer,gui,this.appointment);
+					appAlarm.schedule(i, alarm);
 				}
 			}
 		} catch (ParseException e) {
