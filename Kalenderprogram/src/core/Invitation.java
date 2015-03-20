@@ -17,6 +17,7 @@ public class Invitation extends TimerTask {
 	boolean svar;
 	boolean visibility;
 	private Date alarm;
+	private Timer appAlarm = new Timer();
 	int timer;
 	public Invitation(Person p,Appointment a,boolean svar,int timer, boolean visibility, Gui gui){
 		me = p;
@@ -32,7 +33,9 @@ public class Invitation extends TimerTask {
 				alarm = (df.parse(a.getWhen()));
 				alarm.setTime(alarm.getTime()-(timer*60*1000));
 				if (alarm.after(new Date())){					
-					Timer appAlarm = new Timer();
+					appAlarm.cancel();
+					this.cancel();
+					appAlarm = new Timer();
 					appAlarm.schedule(this, alarm);
 				}
 			}
@@ -52,11 +55,14 @@ public class Invitation extends TimerTask {
 	public void setAlarm(int timer){
 		try {
 			if (timer != 0){
+				this.timer = timer;
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				alarm = (df.parse(appointment.getWhen()));
 				alarm.setTime(alarm.getTime()-(timer*60*1000));
 				if (alarm.after(new Date())){					
-					Timer appAlarm = new Timer();
+					appAlarm.cancel();
+					this.cancel();
+					appAlarm = new Timer();
 					appAlarm.schedule(this, alarm);
 				}
 			}
