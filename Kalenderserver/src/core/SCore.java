@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 public class SCore {
 	DBConnector dbc;
@@ -88,13 +89,13 @@ public class SCore {
 	}
 
 	
-	public boolean invite(List<String>usernames,String appId){
+	public boolean invite(HashMap<String,Boolean>usernames,String appId){
 		//Inviterer en eller flere brukere til et arrangemen
 		int id = Integer.parseInt(appId);
 		try {
 			if (id != 0){
-				for (String n:usernames){
-						dbc.insertRow("bruker_has_avtale",n,id,"NULL",0,true);
+				for (String n: new ArrayList<String>(usernames.keySet())){
+						dbc.insertRow("bruker_has_avtale",n,id,usernames.get(n) == null ? "NULL":usernames.get(n).toString(),0,true);
 				}
 				return true;
 			}

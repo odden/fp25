@@ -599,7 +599,6 @@ public class CalendarViewController {
 	@FXML private Tab moter;
 	@FXML private Label feedbackLagreEndring;
 	private HashMap<Person,Boolean> parts;
-
 	@FXML
 	public void moteInfoTilView() {
 		resetBoksFarge(tittelM, beskrivelseM, stedM, antallM, startM, sluttM);
@@ -714,7 +713,8 @@ public class CalendarViewController {
 			LocalDate dato = datoM.getValue();
 			String start = startM.getText();
 			String slutt = sluttM.getText();
-			if (gui.tryEditAppointment(avtale, avtale.getId(), this.me, tittel, sted, rom, dato.toString(), start, slutt, personer)) {
+			System.out.println(parts.toString()+"-parts calenderview");
+			if (gui.tryEditAppointment(avtale, avtale.getId(), this.me, tittel, sted, rom, dato.toString(), start, slutt, parts)) {
 				avtale.setDate(dato);
 				if (rom == null) {
 					avtale.setRom(0);
@@ -802,6 +802,7 @@ public class CalendarViewController {
 		skifteStatus(false);
 	}
 	
+	
 	public void skifteStatus(Boolean b){
 		if(!moteinnkallinger.getSelectionModel().isEmpty() && !invitertePersoner.getSelectionModel().isEmpty()) {
 			Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
@@ -840,6 +841,7 @@ public class CalendarViewController {
 	public void inviterEkstraDeltaker(ActionEvent event) {
 		if(!inviterEkstraPerson.getSelectionModel().isEmpty()){
 		invitertePersoner.getItems().add(inviterEkstraPerson.getSelectionModel().getSelectedItem());
+		parts.put(inviterEkstraPerson.getSelectionModel().getSelectedItem(), null);
 		inviterEkstraPerson.getItems().remove(inviterEkstraPerson.getSelectionModel().getSelectedItem());
 		}
 		//Metoden flytter person over til deltaker-ruten 

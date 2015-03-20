@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class PConnector {
@@ -158,11 +159,12 @@ public class PConnector {
 	}
 	
 	private boolean invite(String[] request){
-		List<String> invited = new ArrayList<String>();
+		HashMap<String,Boolean> invited = new HashMap<String,Boolean>();
 		for (int i = 2; i < request.length; i++) {
-			invited.add(request[i]);
+			String[] k = request[i].split(",");
+			invited.put(k[0],k[1].equals("NULL") ? null:Boolean.valueOf(k[1]));
 		}
-		System.out.println(invited);
+		System.out.println(invited.keySet());
 		return sc.invite(invited, request[1]);
 	}
 	

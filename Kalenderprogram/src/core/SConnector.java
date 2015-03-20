@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SConnector {
@@ -65,10 +66,10 @@ public class SConnector {
 		return response;
 	}
 	
-	public String invite(List<String> usernames,String id){
+	public String invite(HashMap<String,Boolean> usernames,String id){
 		String message = "invite" + "::" + id+"::";
-		for (String string : usernames) {
-			message += string + "::";
+		for (String string :  new ArrayList<String>(usernames.keySet())) {
+			message += string+","+usernames.get(string).toString()+ "::";
 		}
 		String response = connectToServer(message.substring(0, message.length() - 2));
 		return response;

@@ -193,13 +193,16 @@ public class Gui extends Application {
 		return id;
 	}
 	
-	public boolean tryEditAppointment(Appointment avtale, int id, Person host, String title, String sted, String rom, String date, String start,String slutt, ArrayList<Person> participants) {
-		ArrayList<String> usernames = new ArrayList<String>();
-		for (Person person : participants) {
+	public boolean tryEditAppointment(Appointment avtale, int id, Person host, String title, String sted, String rom, String date, String start,String slutt, HashMap<Person,Boolean> participants) {
+		HashMap<String,Boolean> usernames = new HashMap<String,Boolean>();
+		System.out.println(participants+"-participants i gui");
+		System.out.println(avtale.getParticipants()+"-allerede inviterte gui");
+		for (Person person : new ArrayList<Person>(participants.keySet())) {
 			if (!avtale.getParticipants().contains(person)) {
-				usernames.add(person.getUsername());
+				usernames.put(person.getUsername(),participants.get(person));
 			}
 		}
+		System.out.println(usernames+"-usernames i gui");
 		boolean result1 = Boolean.valueOf(sc.invite(usernames, Integer.toString(id)));
 		boolean result2 = Boolean.valueOf(sc.editAppointment(id, host.getUsername(), title, sted, rom, date, start, slutt, "endring"));
 		return result1 && result2;
