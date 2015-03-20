@@ -661,6 +661,8 @@ public class CalendarViewController {
 									}
 									setText(item.getName());
 								}
+								else
+									setText("");
 							}
 						};
 						return cell;
@@ -789,8 +791,10 @@ public class CalendarViewController {
 	
 	@FXML
 	public void slettDeltaker(ActionEvent event) {
-		inviterEkstraPerson.getItems().add(invitertePersoner.getSelectionModel().getSelectedItem());
-		invitertePersoner.getItems().remove(invitertePersoner.getSelectionModel().getSelectedItem());
+		if (!moteinnkallinger.getSelectionModel().getSelectedItem().getParticipants().contains(invitertePersoner.getSelectionModel().getSelectedItem())) {
+			inviterEkstraPerson.getItems().add(invitertePersoner.getSelectionModel().getSelectedItem());
+			invitertePersoner.getItems().remove(invitertePersoner.getSelectionModel().getSelectedItem());
+		}
 	}
 	
 	@FXML

@@ -200,6 +200,7 @@ public class Gui extends Application {
 				usernames.add(person.getUsername());
 			}
 		}
+		System.out.println(usernames);
 		boolean result1 = Boolean.valueOf(sc.invite(usernames, Integer.toString(id)));
 		boolean result2 = Boolean.valueOf(sc.editAppointment(id, host.getUsername(), title, sted, rom, date, start, slutt, "endring"));
 		return result1 && result2;
