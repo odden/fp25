@@ -608,6 +608,16 @@ public class CalendarViewController {
 		feedbackLagreEndring.setVisible(false);
 		if(!moteinnkallinger.getSelectionModel().isEmpty()) {
 			Appointment mote = moteinnkallinger.getSelectionModel().getSelectedItem();
+			if(mote.getSted().equals("")){
+				velgStedM.setSelected(false);
+				velgRomM.setSelected(true);
+				romValgt(stedM, velgStedM, antallM, finnRomM, romCBM);
+				
+			} else {
+				velgRomM.setSelected(false);
+				velgStedM.setSelected(true);
+				stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
+			}
 			ArrayList<Person> ikkeInvitert = users;
 			sluttM.setText(mote.getSlutt());
 			startM.setText(mote.getStart());
@@ -694,16 +704,6 @@ public class CalendarViewController {
 				startM.setDisable(true);
 				stedM.setDisable(true);
 				
-			}
-			if(mote.getSted().equals("")){
-				velgStedM.setSelected(false);
-				velgRomM.setSelected(true);
-				romValgt(stedM, velgStedM, antallM, finnRomM, romCBM);
-				
-			} else {
-				velgRomM.setSelected(false);
-				velgStedM.setSelected(true);
-				stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
 			}
 			
 		}
