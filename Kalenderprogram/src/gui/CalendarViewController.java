@@ -638,7 +638,7 @@ public class CalendarViewController {
 				velgRomM.setDisable(false);
 				velgStedM.setDisable(false);
 				invitertePersoner.getItems().clear();
-				parts = mote.getInvited();
+				parts = new HashMap<Person,Boolean>(mote.getInvited());
 				for (Person person : new ArrayList<Person>(parts.keySet())) {
 					invitertePersoner.getItems().add(person);
 					ikkeInvitert.remove(person);

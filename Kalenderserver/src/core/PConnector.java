@@ -64,6 +64,9 @@ public class PConnector {
 		}else if(requestList[0].equals("getInvitations")){
 			response = getInvitations(requestList[1]);
 			return response;
+		}else if(requestList[0].equals("setAlarm")){
+			response.add(String.valueOf(setAlarm(requestList[1],requestList[2],requestList[3])));
+			return response;
 		}else if (requestList[0].equals("getUsers")){
 			return getUsers();
 		}else if(requestList[0].equals("invite")){
@@ -101,6 +104,11 @@ public class PConnector {
 	}
 	
 	
+	private Boolean setAlarm(String bruker,String id,String alarm) {
+		
+		return sc.setAlarm(bruker, id, alarm);
+	}
+
 	private ArrayList<String> getStatus(String appId) {
 		ArrayList<List<Object>> statuses = sc.getStatus(appId);
 		return convertToList(statuses);
