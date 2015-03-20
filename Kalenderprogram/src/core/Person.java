@@ -99,6 +99,14 @@ public class Person {
 		this.varsler = varsler;
 	}
 
+	public Invitation getInvitation(Appointment a){
+		for (Invitation i:invitations){
+			if (i.getAppointment().getId() == a.getId()){
+				return i;
+			}
+		}
+		return null;
+	}
 
 	public ArrayList<Invitation> getInvitations() {
 		return invitations;
