@@ -49,4 +49,20 @@ public class Invitation extends TimerTask {
 		gui.runAlarm(appointment,timer);
 	}
 	
+	public void setAlarm(int timer){
+		try {
+			if (timer != 0){
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				alarm = (df.parse(appointment.getWhen()));
+				alarm.setTime(alarm.getTime()-(timer*60*1000));
+				if (alarm.after(new Date())){					
+					Timer appAlarm = new Timer();
+					appAlarm.schedule(this, alarm);
+				}
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

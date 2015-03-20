@@ -354,7 +354,7 @@
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
                                  <children>
                                     <TextField fx:id="sluttM" maxWidth="-Infinity" prefHeight="26.0" prefWidth="62.0" promptText="hh:mm" />
-                                    <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="76.0" text="Alarm:  " GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+                                    <Label fx:id="alarmText" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="76.0" text="Alarm:  " GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                                     <ChoiceBox fx:id="alarm" prefHeight="26.0" prefWidth="116.0" GridPane.columnIndex="2" />
                                     <DatePicker fx:id="datoM" prefHeight="26.0" prefWidth="131.0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
                                     <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="16.0" prefWidth="53.0" text="Dato:  " GridPane.columnIndex="2" GridPane.halignment="CENTER" />

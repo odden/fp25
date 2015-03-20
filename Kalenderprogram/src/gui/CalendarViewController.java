@@ -14,6 +14,8 @@ import java.util.Optional;
 
 import core.Appointment;
 import core.Person;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -479,7 +481,7 @@ public class CalendarViewController {
         
         stedValgt(antallM, finnRomM, velgRomM, stedM, romCBM);
         stedValgt(antallNH, finnRomNH, velgRomNH, stedNH, romCBNH);
-        alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","1 time"));
+        alarm.setItems(FXCollections.observableArrayList("Ingen","15 min","30 min","60 min"));
         alarm.getSelectionModel().selectFirst();
 	}
 	
@@ -578,6 +580,7 @@ public class CalendarViewController {
 	@FXML private Tooltip tips;
 	@FXML private ListView<Appointment> moteinnkallinger;
 	@FXML private ChoiceBox alarm;
+	@FXML private Label alarmText;
 	@FXML private TextField sluttM;
 	@FXML private TextField startM;
 	@FXML private TextField tittelM;
@@ -622,7 +625,8 @@ public class CalendarViewController {
 				romCBM.getSelectionModel().selectFirst();;
 			}
 			if(mote.getHost().equals(me)) {
-				
+				alarm.setVisible(false);
+				alarmText.setVisible(false);
 				notHostValg.setVisible(false);
 				hostValg.setVisible(true);
 				beskrivelseM.setDisable(false);
@@ -670,6 +674,8 @@ public class CalendarViewController {
 				inviterEkstraPerson.getItems().clear();
 				inviterEkstraPerson.getItems().addAll(ikkeInvitert);
 			} else {
+				alarm.setVisible(true);
+				alarmText.setVisible(true);
 				velgStedM.setDisable(true);
 				velgRomM.setDisable(true);
 				hostValg.setVisible(false);
@@ -958,6 +964,13 @@ public class CalendarViewController {
 		}
 		this.personerIKalender.add(me);
 		updateAppointments();
+		ChangeListener<Boolean> setAlarm = new ChangeListener<Boolean>() {
+	        @Override
+	        public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldPropertyValue, Boolean newPropertyValue) {
+        		gui.sc.setAlarm(me.getUsername(), moteinnkallinger.getSelectionModel().getSelectedItem().getId(), (alarm.getValue().equals("Ingen") ? "0" : alarm.getValue().toString().substring(0,2)));
+        		
+	        }
+		};
 	}
 	
 
