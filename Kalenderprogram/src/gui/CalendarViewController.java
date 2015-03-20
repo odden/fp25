@@ -565,7 +565,7 @@ public class CalendarViewController {
 	
 	@FXML
 	public void finnRomNH(ActionEvent event) {
-		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH, velgStedNH,velgPerson)) {
+		if (validateAvtale(tittelNH, beskrivelseNH, startNH, sluttNH, stedNH, romCBNH, antallNH, velgStedNH,valgtePersoner)) {
 			
 			ArrayList<String> ledigRom = gui.getRoom(datoNH.getValue()+"", startNH.getText(), sluttNH.getText(), Integer.parseInt(antallNH.getText()));
 		if(!ledigRom.isEmpty()) {
