@@ -392,7 +392,6 @@
                               <Label layoutY="21.0" text="Status:" />
                               <ListView fx:id="inviterEkstraPerson" layoutX="351.0" layoutY="14.0" prefHeight="127.0" prefWidth="159.0" />
                               <Button layoutX="402.0" layoutY="145.0" mnemonicParsing="false" onAction="#inviterEkstraDeltaker" text="Inviter" />
-                              <Button alignment="CENTER" contentDisplay="CENTER" layoutX="119.0" layoutY="145.0" mnemonicParsing="false" onAction="#slettDeltaker" prefHeight="26.0" prefWidth="157.0" text="Slett" textAlignment="CENTER" />
                               <Button alignment="CENTER" contentDisplay="CENTER" layoutX="151.0" layoutY="195.0" mnemonicParsing="false" onAction="#slettMote" prefHeight="26.0" prefWidth="117.0" text="Slett møte" textAlignment="CENTER" />
                               <Label fx:id="feedbackLagreEndring" alignment="CENTER" contentDisplay="CENTER" layoutX="312.0" layoutY="226.0" maxWidth="1.7976931348623157E308" prefHeight="16.0" prefWidth="84.0" text="Suksess!" textAlignment="CENTER" visible="false" />
                               <Button fx:id="btnJa" layoutX="9.0" layoutY="65.0" mnemonicParsing="false" onAction="#siJa" prefHeight="25.0" prefWidth="34.0" text="Ja" />

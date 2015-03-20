@@ -615,6 +615,7 @@ public class CalendarViewController {
 			stedM.setText(mote.getSted());
 			beskrivelseM.setText(mote.getTitle());
 			datoM.setValue(mote.getDate());
+			antallM.setText("");
 			System.out.println(mote.getRom());
 			
 			romCBM.getItems().removeAll(romCBM.getItems());
@@ -724,10 +725,12 @@ public class CalendarViewController {
 			System.out.println(parts.toString()+"-parts calenderview");
 			if (gui.tryEditAppointment(avtale, avtale.getId(), this.me, tittel, sted, rom, dato.toString(), start, slutt, parts)) {
 				avtale.setDate(dato);
-				if (rom == null) {
+				if (velgStedM.isSelected()) {
 					avtale.setRom(0);
-				}else {
+					avtale.setSted(sted);
+				}else if (velgRomM.isSelected()) {
 					avtale.setRom(Integer.parseInt(rom));
+					avtale.setSted("");
 				}
 				for (Person person : personer) {
 					if(!avtale.getParticipants().contains(person)){
@@ -736,7 +739,6 @@ public class CalendarViewController {
 				}
 				avtale.setStart(start);
 				avtale.setSlutt(slutt);
-				avtale.setSted(sted);
 				avtale.setTitle(tittel);
 				moteInfoTilView();
 				feedbackLagreEndring.setVisible(true);
@@ -747,7 +749,9 @@ public class CalendarViewController {
 				}
 			}
 		}
-
+		moteInfoTilView();
+		updateAppointments();
+		moteinnkallinger.getSelectionModel().select(moteinnkallinger.getItems().indexOf(avtale));
 	}
 	
 	@FXML
@@ -795,13 +799,6 @@ public class CalendarViewController {
 		//alle andres kalendere oppdateres  
 	}
 	
-	@FXML
-	public void slettDeltaker(ActionEvent event) {
-		if (!moteinnkallinger.getSelectionModel().getSelectedItem().getParticipants().contains(invitertePersoner.getSelectionModel().getSelectedItem())) {
-			inviterEkstraPerson.getItems().add(invitertePersoner.getSelectionModel().getSelectedItem());
-			invitertePersoner.getItems().remove(invitertePersoner.getSelectionModel().getSelectedItem());
-		}
-	}
 	
 	@FXML
 	public void siJa(ActionEvent event){

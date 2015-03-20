@@ -12,7 +12,7 @@ public class Appointment {
 	private LocalDate date;
 	private String start;
 	private String slutt;
-	private int rom;
+	private Integer rom;
 	private String sted;
 	private String title;
 	private HashMap<Person,Boolean> participants = new HashMap<Person,Boolean>();
@@ -106,7 +106,7 @@ public class Appointment {
 	}
 
 	public int getRom() {
-		return rom;
+		return rom == null ? 0:rom;
 	}
 
 	public void setRom(int rom) {
